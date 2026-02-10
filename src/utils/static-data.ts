@@ -1,0 +1,58 @@
+import { Product } from "./types";
+
+export const PRODUCTS: Product[] = [
+  {
+    id: 1,
+    title: "Sony WH-1000XM5 Wireless Noise Cancelling Headphones",
+    image: "/products/sony-xm5.png",
+    price: 23192,
+    originalPrice: 28990,
+    discountPercent: 20,
+    badgeText: "20% OFF • Today",
+  },
+  {
+    id: 2,
+    title: "Apple iPad 10th Gen (64GB, Wi-Fi)",
+    image: "/products/ipad-10.png",
+    price: 35999,
+    originalPrice: 44900,
+    discountPercent: 20,
+    badgeText: "Hot Deal",
+  },
+  {
+    id: 3,
+    title: "Samsung Galaxy S23 5G (256GB)",
+    image: "/products/samsung-s23.png",
+    price: 64999,
+    originalPrice: 79999,
+    discountPercent: 19,
+    badgeText: "Limited Stock",
+  },
+  {
+    id: 4,
+    title: "Nike Air Zoom Pegasus 40 Running Shoes",
+    image: "/products/nike-pegasus.png",
+    price: 9995,
+    originalPrice: 12995,
+    discountPercent: 23,
+    badgeText: "Best Seller",
+  },
+  {
+    id: 5,
+    title: "Boat Rockerz 550 Bluetooth Headphones",
+    image: "/products/boat-rockerz.png",
+    price: 1799,
+    originalPrice: 2999,
+    discountPercent: 40,
+    badgeText: "Mega Deal",
+  },
+  {
+    id: 6,
+    title: "Mi 108 cm (43 inch) 4K Ultra HD Smart TV",
+    image: "/products/mi-tv.png",
+    price: 24999,
+    originalPrice: 39999,
+    discountPercent: 38,
+    badgeText: "Festival Offer",
+  },
+];
