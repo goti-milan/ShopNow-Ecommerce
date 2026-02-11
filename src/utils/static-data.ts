@@ -46,13 +46,4 @@ export const PRODUCTS: Product[] = [
     discountPercent: 40,
     badgeText: "Mega Deal",
   },
-  {
-    id: 6,
-    title: "Mi 108 cm (43 inch) 4K Ultra HD Smart TV",
-    image: "/products/mi-tv.png",
-    price: 24999,
-    originalPrice: 39999,
-    discountPercent: 38,
-    badgeText: "Festival Offer",
-  },
 ];

@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const CategoryCard = () => {
     return (
-        <div className="group relative h-90 overflow-hidden rounded-2xl bg-black cursor-pointer">
+        <div className="group relative h-90 overflow-hidden rounded-2xl bg-secondary cursor-pointer">
             {/* Image */}
             <Image
                 src="https://picsum.photos/seed/picsum/600/800"
@@ -17,7 +17,7 @@ const CategoryCard = () => {
 
             {/* Content */}
             <div className="absolute bottom-0 p-5 w-full">
-                <p className="text-sm text-gray-200 tracking-wide">
+                <p className="text-sm text-white/80 tracking-wide">
                     Ethnic Wear
                 </p>
 
@@ -25,7 +25,7 @@ const CategoryCard = () => {
                     50–80% OFF
                 </h3>
 
-                <button className="mt-4 inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2 text-sm font-medium text-white transition hover:bg-primary/90">
+                <button className="mt-4 inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2 text-sm font-medium text-primary-foreground transition hover:bg-primary/90">
                     Shop Now
                     <span className="text-base">→</span>
                 </button>

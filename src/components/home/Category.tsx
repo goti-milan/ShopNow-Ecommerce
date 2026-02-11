@@ -18,7 +18,7 @@ export default function Category() {
     });
 
     return (
-        <>
+        <div className="pb-12">
             <SectionHeader
                 title="Shop by Category"
                 subtitle="Browse by product category"
@@ -30,6 +30,6 @@ export default function Category() {
                     </div>
                 ))}
             </div>
-        </>
+        </div>
     );
 }

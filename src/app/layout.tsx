@@ -8,7 +8,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="bg-surface">
+      <body className="bg-ne">
         {/* Header */}
         <header className="bg-white border-b border-border sticky top-0 z-50">
           <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
@@ -77,7 +77,7 @@ export default function RootLayout({
 
         {/* Main Content */}
         <main className="bg-surface min-h-screen">
-          <div className="max-w-7xl mx-auto">
+          <div className=" mx-auto">
             {children}
           </div>
         </main>
