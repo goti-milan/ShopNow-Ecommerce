@@ -3,6 +3,7 @@
 import React from "react"
 import { Heart, MapPin, Package, ShoppingCart, User, Search, Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { useRouter } from "next/navigation"
 import { Input } from "@/components/ui/input"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import {
@@ -27,22 +28,22 @@ import { cn } from "@/lib/utils"
 const navItems = [
   { name: "Home", href: "/" },
   { name: "Shop", href: "/shop", dropdown: true },
-  { name: "Products", href: "/products", dropdown: true },
-  { name: "Categories", href: "/categories", dropdown: true },
-  { name: "Deals", href: "/deals" },
-  { name: "Contact", href: "/contact" },
+  { name: "Categories", href: "/category", dropdown: true },
+  { name: "Flash Sale", href: "/flashsale" },
+  { name: "Contact", href: "/contactus" },
 ]
 
 const shopCategories = [
-  { name: "Electronics", href: "/shop/electronics", description: "Phones, laptops & gadgets" },
-  { name: "Fashion", href: "/shop/fashion", description: "Clothing, shoes & accessories" },
-  { name: "Home & Living", href: "/shop/home", description: "Furniture & decor" },
-  { name: "Beauty", href: "/shop/beauty", description: "Skincare & makeup" },
-  { name: "Sports", href: "/shop/sports", description: "Equipment & gear" },
-  { name: "Books", href: "/shop/books", description: "Books & media" },
+  { name: "Electronics", href: "/category/electronics", description: "Phones, laptops & gadgets" },
+  { name: "Fashion", href: "/category/fashion", description: "Clothing, shoes & accessories" },
+  { name: "Home & Living", href: "/category/home", description: "Furniture & decor" },
+  { name: "Beauty", href: "/category/beauty", description: "Skincare & makeup" },
+  { name: "Sports", href: "/category/sports", description: "Equipment & gear" },
+  { name: "Books", href: "/category/books", description: "Books & media" },
 ]
 
 const Header = () => {
+  const router = useRouter()
   return (
     <header className="sticky top-0 z-50 w-full bg-white border-b border-border">
       {/* Top Bar */}
@@ -130,18 +131,32 @@ const Header = () => {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-56">
-                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                <DropdownMenuLabel>
+                  <a href="/account" className="hover:text-primary transition-colors cursor-pointer">My Account</a>
+                </DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem>
-                  <Package className="mr-2 h-4 w-4" />
-                  My Orders
+                <DropdownMenuItem asChild>
+                  <a href="/account" className="cursor-pointer">
+                    <User className="mr-2 h-4 w-4" />
+                    Dashboard
+                  </a>
                 </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Heart className="mr-2 h-4 w-4" />
-                  Wishlist
+                <DropdownMenuItem asChild>
+                  <a href="/account/orders" className="cursor-pointer">
+                    <Package className="mr-2 h-4 w-4" />
+                    My Orders
+                  </a>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <a href="/wishlist" className="cursor-pointer">
+                    <Heart className="mr-2 h-4 w-4" />
+                    Wishlist
+                  </a>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem>Sign In</DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <a href="/auth" className="cursor-pointer">Sign In</a>
+                </DropdownMenuItem>
                 <DropdownMenuItem>Create Account</DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -159,7 +174,12 @@ const Header = () => {
             </Button>
 
             {/* Cart */}
-            <Button variant="ghost" size="icon" className="relative text-text-secondary hover:text-primary hover:bg-primary/10">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="relative text-text-secondary hover:text-primary hover:bg-primary/10"
+              onClick={() => router.push("/cart")}
+            >
               <ShoppingCart className="h-5 w-5" />
               <Badge
                 variant="default"

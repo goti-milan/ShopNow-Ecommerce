@@ -4,11 +4,13 @@ import CollectionGrid from "@/components/home/CollectionGrid";
 import DealOfWeek from "@/components/home/DealofWeek";
 import ServicesSection from "@/components/home/ServiceSection";
 import TrendingProduct from "@/components/home/TrendingProduct";
+import Ticker from "@/components/home/Ticker";
 
 export default function Home() {
   return (
     <>
       <Banner />
+      <Ticker />
       <CollectionGrid />
       <Category />
       <TrendingProduct />
