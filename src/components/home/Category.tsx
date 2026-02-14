@@ -4,6 +4,7 @@ import { useKeenSlider } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
 import CategoryCard from "../common/CategoryCard";
 import SectionHeader from "../common/SectionHeader";
+import { CATEGORIES } from "@/utils/static-data";
 
 export default function Category() {
     const [sliderRef] = useKeenSlider<HTMLDivElement>({
@@ -24,12 +25,18 @@ export default function Category() {
                 subtitle="Browse by product category"
             />
             <div ref={sliderRef} className="keen-slider">
-                {Array.from({ length: 10 }).map((_, index) => (
+                {CATEGORIES.map((cat, index) => (
                     <div key={index} className="keen-slider__slide px-2">
-                        <CategoryCard />
+                        <CategoryCard
+                            title={cat.name}
+                            discount={cat.discount}
+                            image={cat.image}
+                            slug={cat.slug}
+                        />
                     </div>
                 ))}
             </div>
         </div>
     );
 }
+

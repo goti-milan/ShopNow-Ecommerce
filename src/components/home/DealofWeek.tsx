@@ -50,7 +50,7 @@ export default function DealOfWeek() {
                     <div className="relative h-[500px] lg:h-[700px] w-full flex items-center justify-center bg-white/10 backdrop-blur-sm rounded-3xl overflow-hidden group border border-white/20">
                         <div className="absolute inset-0 bg-white/5 rounded-full blur-3xl transform scale-75 animate-pulse"></div>
                         <Image
-                            src="/product.png"
+                            src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
                             alt="Premium Headphones"
                             fill
                             className="object-contain p-12 transition-transform duration-700 ease-out group-hover:scale-105 z-10 drop-shadow-2xl"

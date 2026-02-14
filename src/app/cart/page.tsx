@@ -12,14 +12,14 @@ export default function CartPage() {
         {
             id: 1,
             title: "Sony WH-1000XM5 Wireless Noise Cancelling Headphones",
-            image: "https://picsum.photos/seed/picsum/200/200",
+            image: "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
             price: 23192,
             quantity: 1,
         },
         {
             id: 2,
             title: "Apple iPad 10th Gen (64GB, Wi-Fi)",
-            image: "https://picsum.photos/seed/ipad/200/200",
+            image: "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
             price: 35999,
             quantity: 1,
         },

@@ -1,12 +1,20 @@
 import Image from "next/image";
+import Link from "next/link";
 
-const CategoryCard = () => {
+type CategoryCardProps = {
+    title: string;
+    discount: string;
+    image: string;
+    slug: string;
+};
+
+const CategoryCard = ({ title, discount, image, slug }: CategoryCardProps) => {
     return (
-        <div className="group relative h-90 overflow-hidden rounded-2xl bg-secondary cursor-pointer">
+        <Link href={`/category/${slug}`} className="group relative h-90 overflow-hidden rounded-2xl bg-secondary cursor-pointer block">
             {/* Image */}
             <Image
-                src="https://picsum.photos/seed/picsum/600/800"
-                alt="Ethnic Wear"
+                src={image}
+                alt={title}
                 fill
                 sizes="(max-width: 768px) 100vw, 33vw"
                 className="object-cover transition-transform duration-500 group-hover:scale-105"
@@ -18,20 +26,21 @@ const CategoryCard = () => {
             {/* Content */}
             <div className="absolute bottom-0 p-5 w-full">
                 <p className="text-sm text-white/80 tracking-wide">
-                    Ethnic Wear
+                    {title}
                 </p>
 
                 <h3 className="mt-1 text-2xl font-semibold text-white leading-tight">
-                    50–80% OFF
+                    {discount}
                 </h3>
 
-                <button className="mt-4 inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2 text-sm font-medium text-primary-foreground transition hover:bg-primary/90">
+                <div className="mt-4 inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2 text-sm font-medium text-primary-foreground transition hover:bg-primary/90">
                     Shop Now
                     <span className="text-base">→</span>
-                </button>
+                </div>
             </div>
-        </div>
+        </Link>
     );
 };
 
 export default CategoryCard;
+

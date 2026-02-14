@@ -1,7 +1,7 @@
 "use client"
 
 import React from "react"
-import { Heart, MapPin, Package, ShoppingCart, User, Search, Menu, X } from "lucide-react"
+import { Heart, MapPin, Package, ShoppingCart, User, Search, Menu, X, Bell, Calendar } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useRouter } from "next/navigation"
 import { Input } from "@/components/ui/input"
@@ -23,6 +23,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { cn } from "@/lib/utils"
+import Link from "next/link"
 
 // E-commerce menu items
 const navItems = [
@@ -63,7 +64,7 @@ const Header = () => {
 
           {/* LEFT: Logo */}
           <div className="flex items-center gap-4">
-            <a href="#" className="flex items-center gap-2">
+            <Link href="/" className="flex items-center gap-2">
               <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center text-white font-bold text-xl">
                 🛒
               </div>
@@ -71,7 +72,7 @@ const Header = () => {
                 <span className="text-xl font-bold text-text-primary">ShopNow</span>
                 <p className="text-xs text-text-muted -mt-1">Your Store</p>
               </div>
-            </a>
+            </Link>
           </div>
 
           {/* CENTER: Search */}
@@ -122,7 +123,7 @@ const Header = () => {
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" size="sm" className="gap-2 text-text-secondary hover:text-text-primary hover:bg-surface-hover">
                   <Avatar className="h-8 w-8">
-                    <AvatarImage src="" alt="User" />
+                    <AvatarImage src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="User" />
                     <AvatarFallback className="bg-primary/10 text-primary text-sm">
                       <User className="h-4 w-4" />
                     </AvatarFallback>
@@ -160,6 +161,24 @@ const Header = () => {
                 <DropdownMenuItem>Create Account</DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
+
+            {/* Notification */}
+            <Button variant="ghost" size="icon" className="relative text-text-secondary hover:text-primary hover:bg-primary/10">
+              <Bell className="h-5 w-5" />
+              <Badge
+                variant="destructive"
+                className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 text-[10px] bg-error"
+              >
+                3
+              </Badge>
+              <span className="sr-only">Notifications</span>
+            </Button>
+
+            {/* Booking */}
+            <Button variant="ghost" size="icon" className="text-text-secondary hover:text-primary hover:bg-primary/10">
+              <Calendar className="h-5 w-5" />
+              <span className="sr-only">Booking</span>
+            </Button>
 
             {/* Wishlist */}
             <Button variant="ghost" size="icon" className="relative text-text-secondary hover:text-error hover:bg-error/10">
@@ -218,13 +237,13 @@ const Header = () => {
 
               <nav className="flex items-center gap-1 ml-4 border-l border-border pl-4">
                 {navItems.map((item) => (
-                  <a
+                  <Link
                     key={item.name}
                     href={item.href}
                     className="px-3 py-1.5 text-sm font-medium text-text-secondary hover:text-primary transition-colors"
                   >
                     {item.name}
-                  </a>
+                  </Link>
                 ))}
               </nav>
             </nav>

@@ -7,10 +7,10 @@ import Image from "next/image";
 import Link from "next/link";
 
 const shops = [
-  { id: 1, name: "Tech Haven", category: "Electronics", rating: 4.8, image: "https://picsum.photos/seed/shop1/400/300" },
-  { id: 2, name: "Style Studio", category: "Fashion", rating: 4.5, image: "https://picsum.photos/seed/shop2/400/300" },
-  { id: 3, name: "Green Living", category: "Home & Garden", rating: 4.9, image: "https://picsum.photos/seed/shop3/400/300" },
-  { id: 4, name: "Sports Gear Pro", category: "Sports", rating: 4.6, image: "https://picsum.photos/seed/shop4/400/300" },
+  { id: 1, name: "Tech Haven", category: "Electronics", rating: 4.8, image: "https://images.unsplash.com/photo-1550009158-9ebf69173e03?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" },
+  { id: 2, name: "Style Studio", category: "Fashion", rating: 4.5, image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" },
+  { id: 3, name: "Green Living", category: "Home & Garden", rating: 4.9, image: "https://images.unsplash.com/photo-1616046229478-9901c5536a45?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" },
+  { id: 4, name: "Sports Gear Pro", category: "Sports", rating: 4.6, image: "https://images.unsplash.com/photo-1556817411-31ae08ee1b75?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" },
 ];
 
 export default function MarketClient() {

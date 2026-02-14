@@ -44,6 +44,11 @@ export default function FlashSalePage() {
                     <div className="flex justify-center gap-4">
                         <div className="bg-white/20 backdrop-blur-sm rounded-lg p-3 min-w-[80px]">
                             <div className="text-3xl font-bold">{timeLeft.hours.toString().padStart(2, '0')}</div>
+                            <div className="text-xs uppercase">Days</div>
+                        </div>
+                        <div className="text-4xl font-bold self-center">:</div>
+                        <div className="bg-white/20 backdrop-blur-sm rounded-lg p-3 min-w-[80px]">
+                            <div className="text-3xl font-bold">{timeLeft.hours.toString().padStart(2, '0')}</div>
                             <div className="text-xs uppercase">Hours</div>
                         </div>
                         <div className="text-4xl font-bold self-center">:</div>
