@@ -14,7 +14,7 @@ export default function TrendingProduct() {
             <div className="max-w-7xl w-full mx-auto grid grid-cols-5 grid-rows-2 gap-8 mt-6 my-4">
                 {[...PRODUCTS, ...PRODUCTS].map((product) => (
                     <div key={product.id} className="keen-slider__slide">
-                        <ProductCard item={product} />
+                        <ProductCard item={product} showActions={false} />
                     </div>
                 ))}
             </div>

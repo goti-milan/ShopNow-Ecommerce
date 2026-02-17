@@ -1,5 +1,5 @@
 import React from 'react'
-import StoreClient from './MarketClient'
+import StoreClient from './StoreClient'
 
 const page = () => {
   return (

@@ -1,4 +1,5 @@
 
+
 export type Product = {
   id: number;
   title: string;
@@ -8,3 +9,13 @@ export type Product = {
   discountPercent?: number;
   badgeText?: string;
 };
+
+export type GalleryItem = {
+  id: number;
+  title: string;
+  category: string;
+  image: string;
+  type: 'product' | 'service';
+  description?: string;
+};
+

@@ -5,7 +5,9 @@ import Image from "next/image";
 import { Heart } from "lucide-react";
 import Link from "next/link";
 
-const ProductCard = ({ item }: { item: Product }) => {
+import { Button } from "../ui/button";
+
+const ProductCard = ({ item, showActions = true }: { item: Product; showActions?: boolean }) => {
     const { id, badgeText, title, price, originalPrice, discountPercent, image } = item
     return (
         <Link href={`/product/${id}`} className="group w-full max-w-60 rounded-xl bg-card transition-all duration-300 ease-out hover:shadow-hover hover:-translate-y-1 overflow-hidden border border-transparent hover:border-border block">
@@ -31,7 +33,7 @@ const ProductCard = ({ item }: { item: Product }) => {
             </div>
 
             {/* Content */}
-            <div className="p-4 space-y-2">
+            <div className="p-4 space-y-3">
                 <h4 className="line-clamp-2 h-10 text-sm font-medium text-foreground group-hover:text-primary transition-colors">
                     {title}
                 </h4>
@@ -60,6 +62,27 @@ const ProductCard = ({ item }: { item: Product }) => {
                         )}
                     </div>
                 </div>
+
+                {showActions && (
+                    <div className="flex flex-col gap-2 pt-1">
+                        <Button
+                            variant="outline"
+                            size="sm"
+                            className="w-full text-xs font-semibold rounded-lg h-9"
+                            onClick={(e) => { e.preventDefault(); e.stopPropagation(); }}
+                        >
+                            Add to Cart
+                        </Button>
+                        <Button
+                            variant="primary"
+                            size="sm"
+                            className="w-full text-xs font-semibold rounded-lg h-9 shadow-sm"
+                            onClick={(e) => { e.preventDefault(); e.stopPropagation(); }}
+                        >
+                            Buy Now
+                        </Button>
+                    </div>
+                )}
             </div>
         </Link>
     );

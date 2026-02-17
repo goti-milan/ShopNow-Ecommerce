@@ -1,4 +1,4 @@
-import { Product } from "./types";
+import { Product, GalleryItem } from "./types";
 import { Laptop, Shirt, Sofa, Sparkles, Trophy, Book } from "lucide-react";
 
 export const CATEGORIES = [
@@ -84,3 +84,69 @@ export const PRODUCTS: Product[] = [
   },
 ];
 
+export const GALLERY_ITEMS: GalleryItem[] = [
+  {
+    id: 1,
+    title: "Premium Wireless Headphones",
+    category: "Electronics",
+    image: "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    type: "product",
+    description: "Experience high-fidelity sound with our latest noise-cancelling headphones."
+  },
+  {
+    id: 2,
+    title: "Eco-Friendly Yoga Mat",
+    category: "Fitness",
+    image: "https://images.unsplash.com/photo-1592432676557-0b1a0e1c4424?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    type: "product",
+    description: "A sustainable choice for your daily yoga practice."
+  },
+  {
+    id: 3,
+    title: "Professional Photography",
+    category: "Media",
+    image: "https://images.unsplash.com/photo-1542038784456-1ea8e935640e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    type: "service",
+    description: "Capturing your moments with professional precision and creativity."
+  },
+  {
+    id: 4,
+    title: "Web Design & Development",
+    category: "Tech",
+    image: "https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    type: "service",
+    description: "Building modern, responsive, and user-friendly websites for your business."
+  },
+  {
+    id: 5,
+    title: "Interior Design Consultation",
+    category: "Home",
+    image: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    type: "service",
+    description: "Transform your living space with our expert interior design advice."
+  },
+  {
+    id: 6,
+    title: "Organic Skincare Set",
+    category: "Beauty",
+    image: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    type: "product",
+    description: "Nurture your skin with our all-natural, organic skincare collection."
+  },
+  {
+    id: 7,
+    title: "Smart Watch Series 5",
+    category: "Electronics",
+    image: "https://images.unsplash.com/photo-1544117518-33bcda8669b9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    type: "product",
+    description: "Track your fitness and stay connected with the latest smart watch tech."
+  },
+  {
+    id: 8,
+    title: "Gourmet Catering Service",
+    category: "Food",
+    image: "https://images.unsplash.com/photo-1555244162-803834f70033?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    type: "service",
+    description: "Delicious and elegantly presented food for your special events."
+  }
+];

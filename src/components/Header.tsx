@@ -32,6 +32,8 @@ const navItems = [
   { name: "Categories", href: "/category", dropdown: true },
   { name: "Flash Sale", href: "/flashsale" },
   { name: "Contact", href: "/contactus" },
+  { name: "Reel", href: "/reel" },
+
 ]
 
 const shopCategories = [
@@ -53,7 +55,7 @@ const Header = () => {
           <p className="hidden sm:block">Free shipping on orders over $50 🚚</p>
           <div className="flex items-center gap-4 ml-auto">
             <a href="#" className="hover:text-primary-light transition-colors">Help</a>
-            <a href="#" className="hover:text-primary-light transition-colors">Track Order</a>
+            <Link href="/track-order" className="hover:text-primary-light transition-colors">Track Order</Link>
           </div>
         </div>
       </div>
@@ -340,10 +342,10 @@ const Header = () => {
 
             {/* Quick Links */}
             <div className="hidden lg:flex items-center gap-4 text-sm">
-              <a href="#" className="text-text-secondary hover:text-primary transition-colors">
+              <Link href="/track-order" className="text-text-secondary hover:text-primary transition-colors">
                 <Package className="h-4 w-4 inline mr-1" />
                 Track Order
-              </a>
+              </Link>
               <a href="#" className="text-text-secondary hover:text-primary transition-colors">
                 Sell on ShopNow
               </a>
