@@ -20,7 +20,7 @@ export function GalleryFilters({ currentFilter, onFilterChange }: GalleryFilters
             {filters.map((filter) => (
                 <Button
                     key={filter.value}
-                    variant={currentFilter === filter.value ? "default" : "outline"}
+                    variant={currentFilter === filter.value ? "primary" : "outline"}
                     onClick={() => onFilterChange(filter.value)}
                     className={cn(
                         "rounded-full px-6 transition-all",
