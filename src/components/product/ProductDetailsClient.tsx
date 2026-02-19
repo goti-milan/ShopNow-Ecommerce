@@ -8,6 +8,10 @@ import { QuantitySelector } from "@/components/product/QuantitySelector";
 import { ActionButtons } from "@/components/product/ActionButtons";
 import { ProductTabs } from "@/components/product/ProductTabs";
 import { RelatedProducts } from "@/components/product/RelatedProducts";
+import { useCart } from "@/context/CartContext";
+import { useWishlist } from "@/context/WishlistContext";
+import { cn } from "@/lib/utils";
+import { useRouter } from "next/navigation";
 
 interface ProductDetailsClientProps {
     product: Product;
@@ -16,7 +20,12 @@ interface ProductDetailsClientProps {
 
 export default function ProductDetailsClient({ product, relatedProducts }: ProductDetailsClientProps) {
     const [quantity, setQuantity] = useState(1);
-    const [isWishlisted, setIsWishlisted] = useState(false);
+    const [selectedColor, setSelectedColor] = useState("black");
+    const { addItem } = useCart();
+    const { isInWishlist, toggleItem } = useWishlist();
+    const router = useRouter();
+
+    const isWishlisted = isInWishlist(product.id);
 
     // Mock specifications
     const specifications = {
@@ -26,6 +35,22 @@ export default function ProductDetailsClient({ product, relatedProducts }: Produ
         "Warranty": "1 Year Manufacturer",
         "Connection": "Wireless / USB-C",
         "Color": "Obsidian Black"
+    };
+
+    const handleAddToCart = () => {
+        // Add the product multiple times based on quantity
+        for (let i = 0; i < quantity; i++) {
+            addItem(product);
+        }
+    };
+
+    const handleBuyNow = () => {
+        handleAddToCart();
+        router.push("/cart");
+    };
+
+    const handleWishlist = () => {
+        toggleItem(product);
     };
 
     return (
@@ -62,6 +87,33 @@ export default function ProductDetailsClient({ product, relatedProducts }: Produ
                             description="Experience the pinnacle of innovation and design. This premium product is crafted with precision to provide you with best-in-class performance and an unparalleled user experience. Every detail from the materials to the finish has been meticulously considered."
                         />
 
+                        <div className="space-y-3">
+                            <div className="flex items-center justify-between">
+                                <span className="text-[10px] font-bold uppercase text-slate-900">Color</span>
+                                <button className="text-[10px] font-bold text-[#3b82f6] hover:underline uppercase">View All</button>
+                            </div>
+                            <div className="flex gap-3">
+                                <button
+                                    onClick={() => setSelectedColor("black")}
+                                    className={cn(
+                                        "w-10 h-10 rounded-full border-2 p-0.5 transition-all",
+                                        selectedColor === "black" ? "border-slate-900" : "border-transparent"
+                                    )}
+                                >
+                                    <div className="w-full h-full rounded-full bg-black ring-2 ring-white" />
+                                </button>
+                                <button
+                                    onClick={() => setSelectedColor("white")}
+                                    className={cn(
+                                        "w-10 h-10 rounded-full border-2 p-0.5 transition-all",
+                                        selectedColor === "white" ? "border-slate-900" : "border-transparent"
+                                    )}
+                                >
+                                    <div className="w-full h-full rounded-full bg-slate-200 ring-2 ring-white" />
+                                </button>
+                            </div>
+                        </div>
+
                         <div className="mt-12 space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
                             <div className="flex flex-col gap-3">
                                 <span className="text-xs font-black text-slate-900 uppercase tracking-widest">Select Quantity</span>
@@ -74,10 +126,18 @@ export default function ProductDetailsClient({ product, relatedProducts }: Produ
 
                             <ActionButtons
                                 isWishlisted={isWishlisted}
-                                onWishlist={() => setIsWishlisted(!isWishlisted)}
-                                onAddToCart={() => console.log(`Added ${quantity} to cart`)}
-                                onBuyNow={() => console.log("Proceeding to checkout")}
-                                onShare={() => console.log("Sharing product")}
+                                onWishlist={handleWishlist}
+                                onAddToCart={handleAddToCart}
+                                onBuyNow={handleBuyNow}
+                                onShare={() => {
+                                    if (navigator.share) {
+                                        navigator.share({
+                                            title: product.title,
+                                            text: `Check out this product: ${product.title}`,
+                                            url: window.location.href,
+                                        });
+                                    }
+                                }}
                             />
 
                             {/* Short trust indicators below buttons */}
@@ -96,18 +156,53 @@ export default function ProductDetailsClient({ product, relatedProducts }: Produ
                                 </div>
                             </div>
                         </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 py-8 border-y border-slate-100 my-6">
+                            <div className="flex items-start gap-4 p-4 rounded-2xl bg-slate-50/50 border border-slate-100/50 transition-colors hover:bg-slate-50">
+                                <div className="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center text-2xl">🚚</div>
+                                <div className="flex flex-col">
+                                    <span className="text-sm font-bold text-slate-900">Premium Delivery</span>
+                                    <span className="text-xs text-slate-500 mt-0.5 leading-relaxed">Free express shipping on orders over ₹2,000. Delivered in 2-4 days.</span>
+                                </div>
+                            </div>
+                            <div className="flex items-start gap-4 p-4 rounded-2xl bg-slate-50/50 border border-slate-100/50 transition-colors hover:bg-slate-50">
+                                <div className="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center text-2xl">🔄</div>
+                                <div className="flex flex-col">
+                                    <span className="text-sm font-bold text-slate-900">Hassle-Free Returns</span>
+                                    <span className="text-xs text-slate-500 mt-0.5 leading-relaxed">30-day easy return policy. Guaranteed money back if not satisfied.</span>
+                                </div>
+                            </div>
+                            <div className="flex items-start gap-4 p-4 rounded-2xl bg-slate-50/50 border border-slate-100/50 transition-colors hover:bg-slate-50">
+                                <div className="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center text-2xl">🛡️</div>
+                                <div className="flex flex-col">
+                                    <span className="text-sm font-bold text-slate-900">Secure Checkout</span>
+                                    <span className="text-xs text-slate-500 mt-0.5 leading-relaxed">100% genuine products with SSL encrypted secure payments.</span>
+                                </div>
+                            </div>
+                            <div className="flex items-start gap-4 p-4 rounded-2xl bg-slate-50/50 border border-slate-100/50 transition-colors hover:bg-slate-50">
+                                <div className="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center text-2xl">✨</div>
+                                <div className="flex flex-col">
+                                    <span className="text-sm font-bold text-slate-900">Brand Warranty</span>
+                                    <span className="text-xs text-slate-500 mt-0.5 leading-relaxed">This product comes with a 1-year official manufacturer warranty.</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 {/* Tabs Section */}
-                <ProductTabs
-                    description="This premium product represents the intersection of luxury and technology. Built using high-grade materials and featuring the latest advancements in its field, it offers a seamless experience for both professional and personal use. Its ergonomic design ensures comfort, while its robust build quality guarantees longevity."
-                    specifications={specifications}
-                    reviews={[]}
-                />
-
-                {/* Related Products Section */}
-                <RelatedProducts products={relatedProducts} />
+                <div className="mt-12">
+                    <ProductTabs
+                        description="This premium product represents the intersection of luxury and technology. Built using high-grade materials and featuring the latest advancements in its field, it offers a seamless experience for both professional and personal use. Its ergonomic design ensures comfort, while its robust build quality guarantees longevity."
+                        specifications={specifications}
+                        reviews={[]}
+                    />
+                </div>
+                <div className="mt-20">
+                    <h3 className="text-xl font-black text-slate-900 mb-8 uppercase tracking-tight">Related Products</h3>
+                    {/* Related Products Section */}
+                    <RelatedProducts products={relatedProducts} />
+                </div>
             </div>
         </div>
     );

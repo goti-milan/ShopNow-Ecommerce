@@ -13,98 +13,61 @@ interface ProductTabsProps {
 
 export const ProductTabs = ({ description, specifications, reviews }: ProductTabsProps) => {
     return (
-        <div className="w-full mt-24 bg-white rounded-[3rem] p-8 md:p-12 border border-slate-100 shadow-sm">
+        <div className="w-full mt-4 border border-slate-100 rounded-xl overflow-hidden shadow-sm">
             <Tabs defaultValue="description" className="w-full">
-                <TabsList className="bg-slate-50 p-2 rounded-2xl mb-12 flex w-fit max-w-full overflow-x-auto no-scrollbar border border-slate-100">
-                    <TabsTrigger value="description" className="rounded-xl px-10 py-3.5 data-[state=active]:bg-white data-[state=active]:text-primary data-[state=active]:shadow-sm transition-all duration-300 font-bold text-slate-500">
+                <TabsList className="bg-white p-0 rounded-none flex w-full h-auto border-b border-slate-100">
+                    <TabsTrigger
+                        value="description"
+                        className="flex-1 py-3 text-[10px] font-bold uppercase tracking-tight data-[state=active]:text-[#f36f21] data-[state=active]:border-b-2 data-[state=active]:border-[#f36f21] rounded-none bg-transparent"
+                    >
                         Description
                     </TabsTrigger>
-                    <TabsTrigger value="specifications" className="rounded-xl px-10 py-3.5 data-[state=active]:bg-white data-[state=active]:text-primary data-[state=active]:shadow-sm transition-all duration-300 font-bold text-slate-500">
+                    <TabsTrigger
+                        value="specifications"
+                        className="flex-1 py-3 text-[10px] font-bold uppercase tracking-tight data-[state=active]:text-[#f36f21] data-[state=active]:border-b-2 data-[state=active]:border-[#f36f21] rounded-none bg-transparent"
+                    >
                         Specifications
                     </TabsTrigger>
-                    <TabsTrigger value="reviews" className="rounded-xl px-10 py-3.5 data-[state=active]:bg-white data-[state=active]:text-primary data-[state=active]:shadow-sm transition-all duration-300 font-bold text-slate-500">
-                        Reviews ({reviews.length || 3})
+                    <TabsTrigger
+                        value="reviews"
+                        className="flex-1 py-3 text-[10px] font-bold uppercase tracking-tight data-[state=active]:text-[#f36f21] data-[state=active]:border-b-2 data-[state=active]:border-[#f36f21] rounded-none bg-transparent"
+                    >
+                        Reviews ({reviews.length || 5134})
                     </TabsTrigger>
                 </TabsList>
 
-                <TabsContent value="description" className="space-y-8 focus-visible:outline-none animate-in fade-in slide-in-from-bottom-2 duration-500">
-                    <div className="max-w-4xl">
-                        <h3 className="text-2xl font-extrabold text-slate-900 mb-6">Product Experience</h3>
-                        <p className="text-slate-600 leading-loose text-lg">
-                            {description || "Discover a new level of excellence with this meticulously crafted product. Designed for those who demand the best, it combines form and function in a way that feels both timeless and innovative."}
+                <div className="p-4">
+                    <TabsContent value="description" className="focus-visible:outline-none">
+                        <p className="text-xs text-slate-600 leading-normal">
+                            {description || "Premium noise-cancelling wireless headphones with LDAC and 30-hour battery."}
                         </p>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10">
-                            <div className="p-6 rounded-3xl bg-slate-50 border border-slate-100">
-                                <h4 className="font-bold text-slate-900 mb-2">Key Highlights</h4>
-                                <ul className="space-y-2 text-slate-600">
-                                    <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-primary" /> Premium build quality</li>
-                                    <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-primary" /> Ergonomic design focus</li>
-                                    <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-primary" /> Industry-leading performance</li>
-                                </ul>
-                            </div>
-                            <div className="p-6 rounded-3xl bg-slate-50 border border-slate-100">
-                                <h4 className="font-bold text-slate-900 mb-2">Inside the Box</h4>
-                                <ul className="space-y-2 text-slate-600">
-                                    <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-primary" /> 1x Main Unit</li>
-                                    <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-primary" /> Premium Charging Cable</li>
-                                    <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-primary" /> Quick Start Guide</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
                 </TabsContent>
 
-                <TabsContent value="specifications" className="focus-visible:outline-none animate-in fade-in slide-in-from-bottom-2 duration-500">
-                    <div className="max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-2">
+                <TabsContent value="specifications" className="focus-visible:outline-none">
+                    <div className="space-y-2">
                         {Object.entries(specifications).map(([key, value]) => (
-                            <div key={key} className="flex justify-between py-4 border-b border-slate-100">
-                                <span className="font-bold text-slate-500">{key}</span>
-                                <span className="text-slate-900 font-semibold">{value}</span>
+                            <div key={key} className="flex justify-between py-1 border-b border-slate-50 text-[10px]">
+                                <span className="text-slate-500">{key}</span>
+                                <span className="text-slate-900 font-bold">{value}</span>
                             </div>
                         ))}
-                        {Object.keys(specifications).length === 0 && (
-                            <p className="text-slate-500 italic">Advanced technical specifications available upon request.</p>
-                        )}
-                    </div>
-                </TabsContent>
+                   </div>
+               </TabsContent>
 
-                <TabsContent value="reviews" className="focus-visible:outline-none animate-in fade-in slide-in-from-bottom-2 duration-500">
-                    <div className="space-y-12">
-                        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
-                            <div>
-                                <h3 className="text-2xl font-extrabold text-slate-900 mb-1">Customer Reviews</h3>
-                                <p className="text-slate-500">Join over 1,000 satisfied customers</p>
-                            </div>
-                            <Button className="rounded-2xl px-8 font-bold shadow-lg shadow-primary/20">Write a Review</Button>
-                        </div>
-
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <TabsContent value="reviews" className="focus-visible:outline-none">
+                        <div className="space-y-4">
                             {[1, 2, 3].map((i) => (
-                                <div key={i} className="bg-slate-50/50 rounded-[2rem] p-8 border border-slate-100 transition-all hover:bg-white hover:shadow-xl hover:shadow-slate-200/50 group">
-                                    <div className="flex items-center gap-4 mb-6">
-                                        <div className="w-14 h-14 bg-white rounded-2xl shadow-sm flex items-center justify-center font-bold text-primary border border-slate-100 group-hover:scale-110 transition-transform">
-                                            {i === 1 ? 'AS' : i === 2 ? 'MK' : 'RV'}
-                                        </div>
-                                        <div>
-                                            <h4 className="font-bold text-slate-900">{i === 1 ? 'Arjun Sharma' : i === 2 ? 'Meera Kapoor' : 'Rahul Verma'}</h4>
-                                            <div className="flex text-yellow-400 text-xs mt-0.5">★★★★★</div>
-                                        </div>
+                                <div key={i} className="space-y-1">
+                                    <div className="flex items-center gap-2">
+                                        <span className="text-[10px] font-bold text-slate-900">User {i}</span>
+                                        <div className="bg-green-600 text-[8px] text-white px-1 rounded font-bold">5.0 ★</div>
                                     </div>
-                                    <p className="text-slate-600 italic leading-relaxed">
-                                        "{i === 1
-                                            ? "The quality is unmatched for this price. Truly a premium experience from unboxing to daily use."
-                                            : i === 2
-                                                ? "Stunning design and works flawlessly. Fast delivery and great customer support!"
-                                                : "A must-have! I've tried many similar products but this one stands out in every category."}"
-                                    </p>
-                                    <div className="mt-6 pt-6 border-t border-slate-100 text-xs text-slate-400 font-medium">
-                                        Verified Purchase • {i} week{i > 1 ? 's' : ''} ago
-                                    </div>
+                                    <p className="text-[10px] text-slate-600 italic">"Great product, highly recommended!"</p>
                                 </div>
                             ))}
                         </div>
-                    </div>
-                </TabsContent>
+                    </TabsContent>
+                </div>
             </Tabs>
         </div>
     );

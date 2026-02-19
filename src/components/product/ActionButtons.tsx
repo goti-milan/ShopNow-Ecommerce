@@ -21,47 +21,42 @@ export const ActionButtons = ({
 }: ActionButtonsProps) => {
     return (
         <div className="flex flex-col gap-4 w-full">
-            <div className="flex flex-col sm:flex-row gap-4 w-full">
+            <div className="grid grid-cols-2 gap-4 w-full">
                 <Button
-                    className="flex-1 h-14 text-lg font-bold rounded-2xl bg-primary hover:bg-primary/90 shadow-xl shadow-primary/20 transition-all duration-300 active:scale-[0.98] px-8"
+                    className="h-12 text-sm font-bold rounded-lg bg-[#f97316]/10 text-[#f97316] hover:bg-[#f97316]/20 border border-[#f97316]/20 transition-all active:scale-[0.98]"
                     onClick={onAddToCart}
                 >
-                    <ShoppingCart className="mr-3 h-5 w-5" />
                     Add to Cart
                 </Button>
 
-                <div className="flex gap-4 sm:flex-initial">
-                    <Button
-                        variant="outline"
-                        size="icon"
-                        className={cn(
-                            "h-14 w-14 rounded-2xl border-2 transition-all duration-300 flex-1 sm:flex-none",
-                            isWishlisted
-                                ? "border-red-500 bg-red-50 text-red-500 hover:bg-red-100 shadow-sm"
-                                : "border-slate-200 hover:border-red-500 hover:bg-red-50 hover:text-red-500"
-                        )}
-                        onClick={onWishlist}
-                    >
-                        <Heart className={cn("h-6 w-6 transition-transform duration-300", isWishlisted && "fill-current scale-110")} />
-                    </Button>
-                    <Button
-                        variant="outline"
-                        size="icon"
-                        className="h-14 w-14 rounded-2xl border-2 border-slate-200 hover:border-primary hover:bg-primary/5 hover:text-primary transition-all duration-300 flex-1 sm:flex-none"
-                        onClick={onShare}
-                    >
-                        <Share2 className="h-6 w-6" />
-                    </Button>
-                </div>
+                <Button
+                    className="h-12 text-sm font-bold rounded-lg bg-[#f97316] text-white hover:bg-[#f97316]/90 shadow-md shadow-orange-200 transition-all active:scale-[0.98]"
+                    onClick={onBuyNow}
+                >
+                    Buy Now
+                </Button>
             </div>
 
-            <Button
-                variant="secondary"
-                className="w-full h-14 text-lg font-bold rounded-2xl bg-slate-900 text-white hover:bg-slate-800 shadow-xl shadow-slate-200 transition-all duration-300 active:scale-[0.98]"
-                onClick={onBuyNow}
-            >
-                Buy Now
-            </Button>
+            <div className="flex items-center justify-between pt-2">
+                <button
+                    onClick={onWishlist}
+                    className={cn(
+                        "flex items-center gap-2 text-[10px] font-bold uppercase transition-colors",
+                        isWishlisted ? "text-red-500" : "text-slate-400 hover:text-red-500"
+                    )}
+                >
+                    <Heart className={cn("w-3 h-3", isWishlisted && "fill-current")} />
+                    Wishlist
+                </button>
+                <button
+                    onClick={onShare}
+                    className="flex items-center gap-2 text-[10px] font-bold uppercase text-slate-400 hover:text-slate-600 transition-colors"
+                >
+                    <Share2 className="w-3 h-3" />
+                    Share
+                </button>
+            </div>
         </div>
     );
 };
+

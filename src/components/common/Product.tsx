@@ -2,13 +2,45 @@
 
 import { Product } from "@/utils/types";
 import Image from "next/image";
-import { Heart } from "lucide-react";
+import { Heart, ShoppingCart, Loader2 } from "lucide-react";
 import Link from "next/link";
 
 import { Button } from "../ui/button";
+import { useCart } from "@/context/CartContext";
+import { useWishlist } from "@/context/WishlistContext";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 const ProductCard = ({ item, showActions = true }: { item: Product; showActions?: boolean }) => {
-    const { id, badgeText, title, price, originalPrice, discountPercent, image } = item
+    const { id, badgeText, title, price, originalPrice, discountPercent, image } = item;
+    const { addItem } = useCart();
+    const { isInWishlist, toggleItem } = useWishlist();
+    const [isAddingToCart, setIsAddingToCart] = useState(false);
+    const router = useRouter();
+
+    const inWishlist = isInWishlist(id);
+
+    const handleAddToCart = (e: React.MouseEvent) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setIsAddingToCart(true);
+        addItem(item);
+        setTimeout(() => setIsAddingToCart(false), 500);
+    };
+
+    const handleBuyNow = (e: React.MouseEvent) => {
+        e.preventDefault();
+        e.stopPropagation();
+        addItem(item);
+        router.push("/cart");
+    };
+
+    const handleWishlist = (e: React.MouseEvent) => {
+        e.preventDefault();
+        e.stopPropagation();
+        toggleItem(item);
+    };
+
     return (
         <Link href={`/product/${id}`} className="group w-full max-w-60 rounded-xl bg-card transition-all duration-300 ease-out hover:shadow-hover hover:-translate-y-1 overflow-hidden border border-transparent hover:border-border block">
             {/* Image Wrapper */}
@@ -20,8 +52,11 @@ const ProductCard = ({ item, showActions = true }: { item: Product; showActions?
                 )}
 
                 {/* Wishlist Button */}
-                <button className="absolute right-2 top-2 z-10 rounded-full bg-white/80 p-1.5 text-muted-foreground backdrop-blur-sm transition-colors hover:bg-white hover:text-red-500 shadow-sm" onClick={(e) => { e.preventDefault(); e.stopPropagation(); }}>
-                    <Heart className="h-4 w-4" />
+                <button
+                    className={`absolute right-2 top-2 z-10 rounded-full bg-white/80 p-1.5 backdrop-blur-sm transition-colors shadow-sm ${inWishlist ? 'text-red-500 hover:text-red-600' : 'text-muted-foreground hover:text-red-500 hover:bg-white'}`}
+                    onClick={handleWishlist}
+                >
+                    <Heart className={`h-4 w-4 ${inWishlist ? 'fill-current' : ''}`} />
                 </button>
 
                 <Image
@@ -69,15 +104,26 @@ const ProductCard = ({ item, showActions = true }: { item: Product; showActions?
                             variant="outline"
                             size="sm"
                             className="w-full text-xs font-semibold rounded-lg h-9"
-                            onClick={(e) => { e.preventDefault(); e.stopPropagation(); }}
+                            onClick={handleAddToCart}
+                            disabled={isAddingToCart}
                         >
-                            Add to Cart
+                            {isAddingToCart ? (
+                                <>
+                                    <Loader2 className="w-4 h-4 mr-1 animate-spin" />
+                                    Added!
+                                </>
+                            ) : (
+                                <>
+                                    <ShoppingCart className="w-4 h-4 mr-1" />
+                                    Add to Cart
+                                </>
+                            )}
                         </Button>
                         <Button
                             variant="primary"
                             size="sm"
                             className="w-full text-xs font-semibold rounded-lg h-9 shadow-sm"
-                            onClick={(e) => { e.preventDefault(); e.stopPropagation(); }}
+                            onClick={handleBuyNow}
                         >
                             Buy Now
                         </Button>

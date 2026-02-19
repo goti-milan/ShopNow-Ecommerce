@@ -2,15 +2,14 @@
 
 import ProductCard from "@/components/common/Product";
 import { Button } from "@/components/ui/button";
-import { PRODUCTS } from "@/utils/static-data";
-import { Heart } from "lucide-react";
+import { useWishlist } from "@/context/WishlistContext";
+import { Heart, ShoppingBag } from "lucide-react";
 import Link from "next/link";
 
 export default function WishlistPage() {
-    // Simulating a wishlist with some items from static data
-    const wishlistItems = PRODUCTS.slice(0, 3);
+    const { items, removeItem, totalItems } = useWishlist();
 
-    if (wishlistItems.length === 0) {
+    if (items.length === 0) {
         return (
             <div className="container mx-auto px-4 py-20 text-center">
                 <div className="w-20 h-20 bg-muted rounded-full flex items-center justify-center mx-auto mb-6">
@@ -21,7 +20,10 @@ export default function WishlistPage() {
                     Save items you love to your wishlist and review them later.
                 </p>
                 <Link href="/shop">
-                    <Button size="lg">Start Shopping</Button>
+                    <Button size="lg" className="gap-2">
+                        <ShoppingBag className="w-4 h-4" />
+                        Start Shopping
+                    </Button>
                 </Link>
             </div>
         );
@@ -29,18 +31,24 @@ export default function WishlistPage() {
 
     return (
         <div className="container mx-auto px-4 py-8">
-            <h1 className="text-3xl font-bold mb-8">My Wishlist ({wishlistItems.length})</h1>
+            <div className="flex items-center justify-between mb-8">
+                <div>
+                    <h1 className="text-3xl font-bold">My Wishlist ({totalItems})</h1>
+                    <p className="text-muted-foreground mt-1">Items you've saved for later</p>
+                </div>
+                <Link href="/shop">
+                    <Button variant="outline">Continue Shopping</Button>
+                </Link>
+            </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-                {wishlistItems.map((product) => (
+                {items.map((product) => (
                     <div key={product.id} className="relative group">
                         <ProductCard item={product} />
-                        <button className="absolute top-2 right-2 p-2 bg-white/80 rounded-full text-destructive hover:bg-white transition-colors shadow-sm opacity-0 group-hover:opacity-100">
-                            <Heart className="w-5 h-5 fill-current" />
-                        </button>
                     </div>
                 ))}
             </div>
         </div>
     );
 }
+

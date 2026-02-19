@@ -3,8 +3,8 @@ import { PRODUCTS } from "@/utils/static-data";
 import { notFound } from "next/navigation";
 
 // This is a dynamic route for categories
-export default function CategorySlugPage({ params }: { params: { slug: string } }) {
-    const { slug } = params;
+export default async function CategorySlugPage({ params }: { params: Promise<{ slug: string }> }) {
+    const { slug } = await params;
 
     // Basic validation/simulation
     const validCategories = ["electronics", "fashion", "home", "beauty", "sports", "books"];

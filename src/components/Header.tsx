@@ -1,7 +1,7 @@
 "use client"
 
-import React from "react"
-import { Heart, MapPin, Package, ShoppingCart, User, Search, Menu, X, Bell, Calendar } from "lucide-react"
+import React, { useState } from "react"
+import { Heart, MapPin, Package, ShoppingCart, User, Search, Menu, Bell, Calendar } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useRouter } from "next/navigation"
 import { Input } from "@/components/ui/input"
@@ -22,18 +22,19 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { cn } from "@/lib/utils"
 import Link from "next/link"
+import { useCart } from "@/context/CartContext"
+import { useWishlist } from "@/context/WishlistContext"
+import { PRODUCTS } from "@/utils/static-data"
 
 // E-commerce menu items
 const navItems = [
   { name: "Home", href: "/" },
-  { name: "Shop", href: "/shop", dropdown: true },
-  { name: "Categories", href: "/category", dropdown: true },
+  { name: "Shop", href: "/shop" },
+  { name: "Categories", href: "/category" },
   { name: "Flash Sale", href: "/flashsale" },
   { name: "Contact", href: "/contactus" },
-  { name: "Reel", href: "/reel" },
-
+  { name: "Reels", href: "/reels" },
 ]
 
 const shopCategories = [
@@ -47,6 +48,17 @@ const shopCategories = [
 
 const Header = () => {
   const router = useRouter()
+  const { totalItems: cartCount } = useCart()
+  const { totalItems: wishlistCount } = useWishlist()
+  const [searchQuery, setSearchQuery] = useState("")
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (searchQuery.trim()) {
+      router.push(`/shop?search=${encodeURIComponent(searchQuery.trim())}`)
+    }
+  }
+
   return (
     <header className="sticky top-0 z-50 w-full bg-white border-b border-border">
       {/* Top Bar */}
@@ -54,7 +66,7 @@ const Header = () => {
         <div className="container mx-auto px-4 flex items-center justify-between">
           <p className="hidden sm:block">Free shipping on orders over $50 🚚</p>
           <div className="flex items-center gap-4 ml-auto">
-            <a href="#" className="hover:text-primary-light transition-colors">Help</a>
+            <Link href="/faq" className="hover:text-primary-light transition-colors">Help</Link>
             <Link href="/track-order" className="hover:text-primary-light transition-colors">Track Order</Link>
           </div>
         </div>
@@ -71,36 +83,39 @@ const Header = () => {
                 🛒
               </div>
               <div className="hidden sm:block">
-                <span className="text-xl font-bold text-text-primary">ShopNow</span>
-                <p className="text-xs text-text-muted -mt-1">Your Store</p>
+                <span className="text-xl font-bold text-primary">ShopNow</span>
+                <p className="text-xs text-muted-foreground -mt-1">Your Store</p>
               </div>
             </Link>
           </div>
 
           {/* CENTER: Search */}
-          <div className="flex-1 max-w-xl hidden md:block">
+          <form onSubmit={handleSearch} className="flex-1 max-w-xl hidden md:block">
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-text-muted" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <Input
                 type="search"
                 placeholder="Search products, brands, categories..."
-                className="w-full pl-10 pr-4 bg-bg-secondary border border-border focus:border-primary focus:ring-1 focus:ring-primary"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full pl-10 pr-4 bg-muted/50 border-input focus:border-primary focus:ring-1 focus:ring-primary"
               />
               <Button
+                type="submit"
                 size="sm"
-                className="absolute right-1 top-1/2 -translate-y-1/2 h-8 bg-primary hover:bg-primary-dark"
+                className="absolute right-1 top-1/2 -translate-y-1/2 h-8 bg-primary hover:bg-primary/90"
               >
                 Search
               </Button>
             </div>
-          </div>
+          </form>
 
           {/* RIGHT: Actions */}
           <div className="flex items-center gap-2">
             {/* Location */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="sm" className="hidden lg:flex gap-2 text-text-secondary hover:text-text-primary hover:bg-surface-hover">
+                <Button variant="ghost" size="sm" className="hidden lg:flex gap-2 text-muted-foreground hover:text-foreground hover:bg-muted">
                   <MapPin className="h-4 w-4 text-primary" />
                   <span className="text-sm">Location</span>
                 </Button>
@@ -123,7 +138,7 @@ const Header = () => {
             {/* Account */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="sm" className="gap-2 text-text-secondary hover:text-text-primary hover:bg-surface-hover">
+                <Button variant="ghost" size="sm" className="gap-2 text-muted-foreground hover:text-foreground hover:bg-muted">
                   <Avatar className="h-8 w-8">
                     <AvatarImage src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="User" />
                     <AvatarFallback className="bg-primary/10 text-primary text-sm">
@@ -135,41 +150,41 @@ const Header = () => {
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-56">
                 <DropdownMenuLabel>
-                  <a href="/account" className="hover:text-primary transition-colors cursor-pointer">My Account</a>
+                  <Link href="/account" className="hover:text-primary transition-colors cursor-pointer">My Account</Link>
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem asChild>
-                  <a href="/account" className="cursor-pointer">
+                  <Link href="/account" className="cursor-pointer">
                     <User className="mr-2 h-4 w-4" />
                     Dashboard
-                  </a>
+                  </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <a href="/account/orders" className="cursor-pointer">
+                  <Link href="/account/orders" className="cursor-pointer">
                     <Package className="mr-2 h-4 w-4" />
                     My Orders
-                  </a>
+                  </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <a href="/wishlist" className="cursor-pointer">
+                  <Link href="/wishlist" className="cursor-pointer">
                     <Heart className="mr-2 h-4 w-4" />
                     Wishlist
-                  </a>
+                  </Link>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem asChild>
-                  <a href="/auth" className="cursor-pointer">Sign In</a>
+                  <Link href="/auth" className="cursor-pointer">Sign In</Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem>Create Account</DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
 
             {/* Notification */}
-            <Button variant="ghost" size="icon" className="relative text-text-secondary hover:text-primary hover:bg-primary/10">
+            <Button variant="ghost" size="icon" className="relative text-muted-foreground hover:text-primary hover:bg-primary/10">
               <Bell className="h-5 w-5" />
               <Badge
                 variant="destructive"
-                className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 text-[10px] bg-error"
+                className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 text-[10px]"
               >
                 3
               </Badge>
@@ -177,20 +192,27 @@ const Header = () => {
             </Button>
 
             {/* Booking */}
-            <Button variant="ghost" size="icon" className="text-text-secondary hover:text-primary hover:bg-primary/10">
+            <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-primary hover:bg-primary/10">
               <Calendar className="h-5 w-5" />
               <span className="sr-only">Booking</span>
             </Button>
 
             {/* Wishlist */}
-            <Button variant="ghost" size="icon" className="relative text-text-secondary hover:text-error hover:bg-error/10">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="relative text-muted-foreground hover:text-red-500 hover:bg-red-50"
+              onClick={() => router.push("/wishlist")}
+            >
               <Heart className="h-5 w-5" />
-              <Badge
-                variant="destructive"
-                className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 text-[10px] bg-error"
-              >
-                2
-              </Badge>
+              {wishlistCount > 0 && (
+                <Badge
+                  variant="destructive"
+                  className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 text-[10px] bg-red-500"
+                >
+                  {wishlistCount}
+                </Badge>
+              )}
               <span className="sr-only">Wishlist</span>
             </Button>
 
@@ -198,16 +220,17 @@ const Header = () => {
             <Button
               variant="ghost"
               size="icon"
-              className="relative text-text-secondary hover:text-primary hover:bg-primary/10"
+              className="relative text-muted-foreground hover:text-primary hover:bg-primary/10"
               onClick={() => router.push("/cart")}
             >
               <ShoppingCart className="h-5 w-5" />
-              <Badge
-                variant="default"
-                className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 text-[10px] bg-primary"
-              >
-                5
-              </Badge>
+              {cartCount > 0 && (
+                <Badge
+                  className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 text-[10px] bg-primary"
+                >
+                  {cartCount}
+                </Badge>
+              )}
               <span className="sr-only">Cart</span>
             </Button>
           </div>
@@ -215,23 +238,25 @@ const Header = () => {
       </div>
 
       {/* Navigation Bar */}
-      <div className="border-t border-border bg-bg-secondary">
+      <div className="border-t border-border bg-muted/50">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between">
             {/* Desktop Navigation */}
             <nav className="hidden lg:flex items-center gap-1 h-10">
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="sm" className="gap-1 text-text-secondary hover:text-primary font-medium">
+                  <Button variant="ghost" size="sm" className="gap-1 text-muted-foreground hover:text-primary font-medium">
                     <Menu className="h-4 w-4" />
                     All Categories
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="start" className="w-64">
                   {shopCategories.map((category) => (
-                    <DropdownMenuItem key={category.name} className="flex flex-col items-start py-3">
-                      <span className="font-medium">{category.name}</span>
-                      <span className="text-xs text-text-muted">{category.description}</span>
+                    <DropdownMenuItem key={category.name} asChild>
+                      <Link href={category.href} className="flex flex-col items-start py-3 cursor-pointer">
+                        <span className="font-medium">{category.name}</span>
+                        <span className="text-xs text-muted-foreground">{category.description}</span>
+                      </Link>
                     </DropdownMenuItem>
                   ))}
                 </DropdownMenuContent>
@@ -242,7 +267,7 @@ const Header = () => {
                   <Link
                     key={item.name}
                     href={item.href}
-                    className="px-3 py-1.5 text-sm font-medium text-text-secondary hover:text-primary transition-colors"
+                    className="px-3 py-1.5 text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
                   >
                     {item.name}
                   </Link>
@@ -253,14 +278,14 @@ const Header = () => {
             {/* Mobile & Tablet Right Side */}
             <div className="flex items-center gap-2 lg:hidden">
               {/* Mobile Search Toggle */}
-              <Button variant="ghost" size="icon" className="text-text-secondary">
+              <Button variant="ghost" size="icon" className="text-muted-foreground">
                 <Search className="h-5 w-5" />
               </Button>
 
               {/* Mobile Menu */}
               <Sheet>
                 <SheetTrigger asChild>
-                  <Button variant="ghost" size="icon" className="text-text-secondary">
+                  <Button variant="ghost" size="icon" className="text-muted-foreground">
                     <Menu className="h-5 w-5" />
                   </Button>
                 </SheetTrigger>
@@ -275,51 +300,50 @@ const Header = () => {
                   </SheetHeader>
 
                   {/* Mobile Search */}
-                  <div className="mt-4">
+                  <form onSubmit={handleSearch} className="mt-4">
                     <div className="relative">
-                      <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-text-muted" />
+                      <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                       <Input
                         type="search"
                         placeholder="Search products..."
-                        className="w-full pl-10 bg-bg-secondary"
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        className="w-full pl-10 bg-muted/50"
                       />
                     </div>
-                  </div>
+                  </form>
 
                   {/* Mobile Navigation */}
                   <nav className="mt-6 space-y-1">
                     {navItems.map((item) => (
-                      <a
+                      <Link
                         key={item.name}
                         href={item.href}
-                        className="flex items-center justify-between px-3 py-2.5 text-sm font-medium text-text-secondary hover:text-primary hover:bg-surface-hover rounded-md transition-colors"
+                        className="flex items-center justify-between px-3 py-2.5 text-sm font-medium text-muted-foreground hover:text-primary hover:bg-muted rounded-md transition-colors"
                       >
                         {item.name}
-                        {item.dropdown && (
-                          <span className="text-text-muted">›</span>
-                        )}
-                      </a>
+                      </Link>
                     ))}
                   </nav>
 
                   {/* Mobile Categories */}
-                  <div className="mt-6 pt-6 border-t border-border">
-                    <h3 className="text-sm font-semibold text-text-primary mb-3">Categories</h3>
+                  <div className="mt-6 pt-6 border-t">
+                    <h3 className="text-sm font-semibold mb-3">Categories</h3>
                     <div className="grid grid-cols-2 gap-2">
                       {shopCategories.map((cat) => (
-                        <a
+                        <Link
                           key={cat.name}
                           href={cat.href}
-                          className="px-3 py-2 text-sm text-text-secondary bg-bg-secondary rounded-md hover:text-primary transition-colors"
+                          className="px-3 py-2 text-sm text-muted-foreground bg-muted/50 rounded-md hover:text-primary transition-colors"
                         >
                           {cat.name}
-                        </a>
+                        </Link>
                       ))}
                     </div>
                   </div>
 
                   {/* Mobile Account */}
-                  <div className="mt-6 pt-6 border-t border-border">
+                  <div className="mt-6 pt-6 border-t">
                     <div className="flex items-center gap-3 px-3">
                       <Avatar className="h-10 w-10">
                         <AvatarFallback className="bg-primary/10 text-primary">
@@ -327,13 +351,17 @@ const Header = () => {
                         </AvatarFallback>
                       </Avatar>
                       <div>
-                        <p className="text-sm font-medium text-text-primary">Guest User</p>
-                        <p className="text-xs text-text-muted">Sign in for better experience</p>
+                        <p className="text-sm font-medium">Guest User</p>
+                        <p className="text-xs text-muted-foreground">Sign in for better experience</p>
                       </div>
                     </div>
                     <div className="mt-4 flex gap-2">
-                      <Button variant="outline" size="sm" className="flex-1">Sign In</Button>
-                      <Button size="sm" className="flex-1 bg-primary hover:bg-primary-dark">Join Now</Button>
+                      <Link href="/auth">
+                        <Button variant="outline" size="sm" className="flex-1">Sign In</Button>
+                      </Link>
+                      <Link href="/auth">
+                        <Button size="sm" className="flex-1 bg-primary hover:bg-primary/90">Join Now</Button>
+                      </Link>
                     </div>
                   </div>
                 </SheetContent>
@@ -342,13 +370,13 @@ const Header = () => {
 
             {/* Quick Links */}
             <div className="hidden lg:flex items-center gap-4 text-sm">
-              <Link href="/track-order" className="text-text-secondary hover:text-primary transition-colors">
+              <Link href="/track-order" className="text-muted-foreground hover:text-primary transition-colors">
                 <Package className="h-4 w-4 inline mr-1" />
                 Track Order
               </Link>
-              <a href="#" className="text-text-secondary hover:text-primary transition-colors">
+              <Link href="/store" className="text-muted-foreground hover:text-primary transition-colors">
                 Sell on ShopNow
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -358,3 +386,4 @@ const Header = () => {
 }
 
 export default Header
+

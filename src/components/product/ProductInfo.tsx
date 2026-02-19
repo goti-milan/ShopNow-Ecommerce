@@ -83,37 +83,6 @@ export const ProductInfo = ({
                 {description || "Elevate your lifestyle with our premium product, designed for durability and world-class performance. A perfect blend of aesthetics and functionality that stands out in every detail."}
             </p>
 
-            {/* Delivery & Return Info */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 py-8 border-y border-slate-100 my-6">
-                <div className="flex items-start gap-4 p-4 rounded-2xl bg-slate-50/50 border border-slate-100/50 transition-colors hover:bg-slate-50">
-                    <div className="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center text-2xl">🚚</div>
-                    <div className="flex flex-col">
-                        <span className="text-sm font-bold text-slate-900">Premium Delivery</span>
-                        <span className="text-xs text-slate-500 mt-0.5 leading-relaxed">Free express shipping on orders over ₹2,000. Delivered in 2-4 days.</span>
-                    </div>
-                </div>
-                <div className="flex items-start gap-4 p-4 rounded-2xl bg-slate-50/50 border border-slate-100/50 transition-colors hover:bg-slate-50">
-                    <div className="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center text-2xl">🔄</div>
-                    <div className="flex flex-col">
-                        <span className="text-sm font-bold text-slate-900">Hassle-Free Returns</span>
-                        <span className="text-xs text-slate-500 mt-0.5 leading-relaxed">30-day easy return policy. Guaranteed money back if not satisfied.</span>
-                    </div>
-                </div>
-                <div className="flex items-start gap-4 p-4 rounded-2xl bg-slate-50/50 border border-slate-100/50 transition-colors hover:bg-slate-50">
-                    <div className="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center text-2xl">🛡️</div>
-                    <div className="flex flex-col">
-                        <span className="text-sm font-bold text-slate-900">Secure Checkout</span>
-                        <span className="text-xs text-slate-500 mt-0.5 leading-relaxed">100% genuine products with SSL encrypted secure payments.</span>
-                    </div>
-                </div>
-                <div className="flex items-start gap-4 p-4 rounded-2xl bg-slate-50/50 border border-slate-100/50 transition-colors hover:bg-slate-50">
-                    <div className="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center text-2xl">✨</div>
-                    <div className="flex flex-col">
-                        <span className="text-sm font-bold text-slate-900">Brand Warranty</span>
-                        <span className="text-xs text-slate-500 mt-0.5 leading-relaxed">This product comes with a 1-year official manufacturer warranty.</span>
-                    </div>
-                </div>
-            </div>
         </div>
     );
 };
