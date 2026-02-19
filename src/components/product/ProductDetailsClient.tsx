@@ -62,7 +62,7 @@ export default function ProductDetailsClient({ product, relatedProducts }: Produ
                     <span>/</span>
                     <a href="/shop" className="hover:text-primary transition-colors">Store</a>
                     <span>/</span>
-                    <span className="text-slate-900 truncate max-w-[200px]">{product.title}</span>
+                    <span className="text-slate-900 truncate max-w-50">{product.title}</span>
                 </nav>
             </div>
 

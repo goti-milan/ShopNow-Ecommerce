@@ -5,9 +5,11 @@ import { Button } from "@/components/ui/button";
 import { PRODUCTS } from "@/utils/static-data";
 import { Filter, Search, X } from "lucide-react";
 import { useSearchParams, useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 
-export default function ShopPage() {
+export const dynamic = 'force-dynamic';
+
+function ShopContent() {
     const searchParams = useSearchParams();
     const router = useRouter();
     const initialSearch = searchParams.get("search") || "";
@@ -22,7 +24,6 @@ export default function ShopPage() {
         if (initialSearch) {
             const query = initialSearch.toLowerCase();
             products = products.filter(product =>
-                product.title.toLowerCase().includes(query) ||
                 product.title.toLowerCase().includes(query)
             );
         }
@@ -127,6 +128,27 @@ export default function ShopPage() {
                 </div>
             )}
         </div>
+    );
+}
+
+export default function ShopPage() {
+    return (
+        <Suspense fallback={
+            <div className="container mx-auto px-4 py-8">
+                <div className="animate-pulse">
+                    <div className="h-10 w-64 bg-muted rounded mb-4"></div>
+                    <div className="h-6 w-32 bg-muted rounded mb-8"></div>
+                    <div className="h-10 w-full max-w-xl bg-muted rounded mb-12"></div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+                        {[...Array(10)].map((_, i) => (
+                            <div key={i} className="h-80 bg-muted rounded"></div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        }>
+            <ShopContent />
+        </Suspense>
     );
 }
 
