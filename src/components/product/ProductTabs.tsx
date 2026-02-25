@@ -5,10 +5,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 interface ProductTabsProps {
     description: string;
     specifications: Record<string, string>;
-    reviews: any[];
 }
 
-export const ProductTabs = ({ description, specifications, reviews }: ProductTabsProps) => {
+export const ProductTabs = ({ description, specifications }: ProductTabsProps) => {
     return (
         <div className="w-full mt-24 bg-white rounded-[3rem] p-8 md:p-12 border border-slate-100 shadow-sm">
             <Tabs defaultValue="description" className="w-full">
@@ -18,9 +17,6 @@ export const ProductTabs = ({ description, specifications, reviews }: ProductTab
                     </TabsTrigger>
                     <TabsTrigger value="specifications" className="rounded-xl px-10 py-3.5 data-[state=active]:bg-white data-[state=active]:text-primary data-[state=active]:shadow-sm transition-all duration-300 font-bold text-slate-500">
                         Specifications
-                    </TabsTrigger>
-                    <TabsTrigger value="reviews" className="rounded-xl px-10 py-3.5 data-[state=active]:bg-white data-[state=active]:text-primary data-[state=active]:shadow-sm transition-all duration-300 font-bold text-slate-500">
-                        Reviews ({reviews.length || 3})
                     </TabsTrigger>
                 </TabsList>
 
@@ -34,26 +30,13 @@ export const ProductTabs = ({ description, specifications, reviews }: ProductTab
                 </TabsContent>
 
                 <TabsContent value="specifications" className="focus-visible:outline-none">
-                    <div className="space-y-2">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4">
                         {Object.entries(specifications).map(([key, value]) => (
-                            <div key={key} className="flex justify-between py-1 border-b border-slate-50 text-[10px]">
-                                <span className="text-slate-500">{key}</span>
+                            <div key={key} className="flex justify-between py-3 border-b border-slate-50 text-sm">
+                                <span className="text-slate-500 font-medium">{key}</span>
                                 <span className="text-slate-900 font-bold">{value}</span>
                             </div>
                         ))}
-                   </div>
-               </TabsContent>
-
-                <TabsContent value="reviews" className="focus-visible:outline-none">
-                        <div className="space-y-4">
-                            {[1, 2, 3].map((i) => (
-                                <div key={i} className="space-y-1">
-                                    <div className="flex items-center gap-2">
-                                        <span className="text-[10px] font-bold text-slate-900">User {i}</span>
-                                        <div className="bg-green-600 text-[8px] text-white px-1 rounded font-bold">5.0 ★</div>
-                                    </div>
-                                </div>
-                            ))}
                     </div>
                 </TabsContent>
             </Tabs>

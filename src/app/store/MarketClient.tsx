@@ -43,7 +43,7 @@ export default function MarketClient() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {shops.map((shop) => (
-          <Link key={shop.id} href={`/store`} className="group border rounded-xl overflow-hidden hover:shadow-lg transition-all">
+          <Link key={shop.id} href={`/store/${shop.id}`} className="group border rounded-xl overflow-hidden hover:shadow-lg transition-all">
             <div className="relative h-40 bg-muted">
               <Image
                 src={shop.image}

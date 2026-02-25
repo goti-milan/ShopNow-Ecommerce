@@ -8,6 +8,8 @@ export type Product = {
   originalPrice?: number;
   discountPercent?: number;
   badgeText?: string;
+  description?: string;
+  type?: 'product' | 'service';
 };
 
 export type GalleryItem = {

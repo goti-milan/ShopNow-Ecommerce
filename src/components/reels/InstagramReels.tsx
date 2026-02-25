@@ -10,7 +10,6 @@ import {
     VolumeX,
     Play,
     Pause,
-    UserPlus,
     ChevronRight,
     Home,
     Search,
@@ -18,7 +17,6 @@ import {
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Badge } from "@/components/ui/badge"
 
 export interface Reel {
     id: number
@@ -150,11 +148,14 @@ function ReelVideo({
         if (videoRef.current) {
             if (isActive) {
                 videoRef.current.play().catch(() => { })
+                // eslint-disable-next-line react-hooks/set-state-in-effect
                 setIsPlaying(true)
             } else {
                 videoRef.current.pause()
                 videoRef.current.currentTime = 0
+                // eslint-disable-next-line react-hooks/set-state-in-effect
                 setIsPlaying(false)
+                // eslint-disable-next-line react-hooks/set-state-in-effect
                 setProgress(0)
             }
         }

@@ -7,7 +7,7 @@ import { Heart, ShoppingBag } from "lucide-react";
 import Link from "next/link";
 
 export default function WishlistPage() {
-    const { items, removeItem, totalItems } = useWishlist();
+    const { items, totalItems } = useWishlist();
 
     if (items.length === 0) {
         return (
@@ -34,7 +34,7 @@ export default function WishlistPage() {
             <div className="flex items-center justify-between mb-8">
                 <div>
                     <h1 className="text-3xl font-bold">My Wishlist ({totalItems})</h1>
-                    <p className="text-muted-foreground mt-1">Items you've saved for later</p>
+                    <p className="text-muted-foreground mt-1">Items you&apos;ve saved for later</p>
                 </div>
                 <Link href="/shop">
                     <Button variant="outline">Continue Shopping</Button>

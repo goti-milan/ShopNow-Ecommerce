@@ -42,7 +42,7 @@ export const RelatedProducts = ({ products }: RelatedProductsProps) => {
             <div ref={sliderRef} className="keen-slider mt-12 !overflow-visible">
                 {products.map((item) => (
                     <div key={item.id} className="keen-slider__slide pb-4 h-full">
-                        <div className="h-full flex justify-center transition-all hover:-translate-y-2 duration-300">
+                        <div className="h-full flex justify-center transition-all duration-300">
                             <ProductCard item={item} />
                         </div>
                     </div>

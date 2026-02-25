@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { PRODUCTS } from "@/utils/static-data";
 import { Filter, Search, X } from "lucide-react";
 import { useSearchParams, useRouter } from "next/navigation";
-import { useState, useEffect, Suspense } from "react";
+import { useState, Suspense, useMemo } from "react";
 
 export const dynamic = 'force-dynamic';
 
@@ -15,9 +15,7 @@ function ShopContent() {
     const initialSearch = searchParams.get("search") || "";
 
     const [searchQuery, setSearchQuery] = useState(initialSearch);
-    const [filteredProducts, setFilteredProducts] = useState(PRODUCTS);
-
-    useEffect(() => {
+    const filteredProducts = useMemo(() => {
         let products = [...PRODUCTS];
 
         // Filter by search query
@@ -28,7 +26,7 @@ function ShopContent() {
             );
         }
 
-        setFilteredProducts(products);
+        return products;
     }, [initialSearch]);
 
     const handleSearch = (e: React.FormEvent) => {

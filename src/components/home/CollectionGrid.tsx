@@ -19,7 +19,7 @@ export default function CollectionGrid() {
             <h2 className="text-3xl lg:text-4xl font-bold text-white tracking-wide mb-2 drop-shadow-md">
               WOMEN COLLECTION
             </h2>
-            <p className="text-white/90 mb-6 max-w-sm drop-shadow-sm">Discover the latest trends in women's fashion.</p>
+            <p className="text-white/90 mb-6 max-w-sm drop-shadow-sm">Discover the latest trends in women&apos;s fashion.</p>
             <div className="rounded-full bg-white px-8 py-3 text-sm font-bold text-black hover:bg-gray-100 transition-all shadow-lg">
               Shop Now
             </div>

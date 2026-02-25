@@ -7,11 +7,25 @@ import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Label } from "@/components/ui/label"
 
+interface TimelineStep {
+    status: string;
+    date: string;
+    completed: boolean;
+}
+
+interface TrackingData {
+    orderId: string;
+    status: string;
+    estimatedDelivery: string;
+    currentLocation: string;
+    timeline: TimelineStep[];
+}
+
 export default function TrackOrderPage() {
     const [orderId, setOrderId] = useState("")
     const [emailOrPhone, setEmailOrPhone] = useState("")
     const [isTracking, setIsTracking] = useState(false)
-    const [trackingData, setTrackingData] = useState<any>(null)
+    const [trackingData, setTrackingData] = useState<TrackingData | null>(null)
 
     const handleTrack = (e: React.FormEvent) => {
         e.preventDefault()
@@ -119,7 +133,7 @@ export default function TrackOrderPage() {
                         <div className="md:col-span-2 space-y-4">
                             <h3 className="text-xl font-bold text-text-primary">Shipment Timeline</h3>
                             <div className="space-y-8 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-primary before:via-border before:to-border">
-                                {trackingData.timeline.map((step: any, index: number) => (
+                                {trackingData.timeline.map((step, index) => (
                                     <div key={index} className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
                                         <div className="flex items-center justify-center w-10 h-10 rounded-full border border-white bg-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
                                             {step.completed ? (
@@ -179,19 +193,19 @@ export default function TrackOrderPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div>
                         <h4 className="font-bold mb-2">When will my order ship?</h4>
-                        <p className="text-sm text-text-muted">Orders are typically processed within 1-2 business days. You'll receive an email with your tracking number once it's on its way.</p>
+                        <p className="text-sm text-text-muted">Orders are typically processed within 1-2 business days. You&apos;ll receive an email with your tracking number once it&apos;s on its way.</p>
                     </div>
                     <div>
                         <h4 className="font-bold mb-2">Can I change my delivery address?</h4>
-                        <p className="text-sm text-text-muted">If your order hasn't shipped yet, we might be able to update it. Please contact support as soon as possible.</p>
+                        <p className="text-sm text-text-muted">If your order hasn&apos;t shipped yet, we might be able to update it. Please contact support as soon as possible.</p>
                     </div>
                     <div>
-                        <h4 className="font-bold mb-2">My tracking hasn't updated in days.</h4>
-                        <p className="text-sm text-text-muted">Tracking information may not update every day as the package moves between hubs. If it hasn't moved in more than 5 days, please contact us.</p>
+                        <h4 className="font-bold mb-2">My tracking hasn&apos;t updated in days.</h4>
+                        <p className="text-sm text-text-muted">Tracking information may not update every day as the package moves between hubs. If it hasn&apos;t moved in more than 5 days, please contact us.</p>
                     </div>
                     <div>
                         <h4 className="font-bold mb-2">What if my package is lost?</h4>
-                        <p className="text-sm text-text-muted">If your package is marked as delivered but you haven't received it, or if it's significantly delayed, we'll open an investigation with the carrier.</p>
+                        <p className="text-sm text-text-muted">If your package is marked as delivered but you haven&apos;t received it, or if it&apos;s significantly delayed, we&apos;ll open an investigation with the carrier.</p>
                     </div>
                 </div>
             </div>

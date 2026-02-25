@@ -26,6 +26,7 @@ export function WishlistProvider({ children }: { children: ReactNode }) {
         const savedWishlist = localStorage.getItem(WISHLIST_STORAGE_KEY);
         if (savedWishlist) {
             try {
+                // eslint-disable-next-line react-hooks/set-state-in-effect
                 setItems(JSON.parse(savedWishlist));
             } catch (e) {
                 console.error("Failed to parse wishlist from localStorage:", e);

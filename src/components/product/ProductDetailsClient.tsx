@@ -5,13 +5,19 @@ import { Product } from "@/utils/types";
 import { ImageGallery } from "@/components/product/ImageGallery";
 import { ProductInfo } from "@/components/product/ProductInfo";
 import { QuantitySelector } from "@/components/product/QuantitySelector";
-import { ActionButtons } from "@/components/product/ActionButtons";
 import { ProductTabs } from "@/components/product/ProductTabs";
 import { RelatedProducts } from "@/components/product/RelatedProducts";
 import { useCart } from "@/context/CartContext";
 import { useWishlist } from "@/context/WishlistContext";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
+import { Breadcrumb } from "@/components/common/Breadcrumb";
+import { ProductReviews } from "@/components/product/ProductReviews";
+import { BuyBox } from "./BuyBox";
+import { SellerInfo } from "./SellerInfo";
+import { SimilarProductsList } from "./SimilarProductsList";
+import { Badge } from "@/components/ui/badge";
+import Image from "next/image";
 
 interface ProductDetailsClientProps {
     product: Product;
@@ -20,28 +26,22 @@ interface ProductDetailsClientProps {
 
 export default function ProductDetailsClient({ product, relatedProducts }: ProductDetailsClientProps) {
     const [quantity, setQuantity] = useState(1);
-    const [selectedColor, setSelectedColor] = useState("black");
+    const [selectedColor, setSelectedColor] = useState("spaceblack");
+    const [selectedStorage, setSelectedStorage] = useState("256GB");
     const { addItem } = useCart();
-    const { isInWishlist, toggleItem } = useWishlist();
     const router = useRouter();
 
-    const isWishlisted = isInWishlist(product.id);
+    const colors = [
+        { id: "spaceblack", name: "Space Black", color: "bg-[#2c2c2e]", image: "https://picsum.photos/seed/iphone-black/100/100" },
+        { id: "gold", name: "Gold", color: "bg-[#f5e3ce]", image: "https://picsum.photos/seed/iphone-gold/100/100" },
+        { id: "silver", name: "Silver", color: "bg-[#f1f1f2]", image: "https://picsum.photos/seed/iphone-silver/100/100" },
+        { id: "deeppurple", name: "Deep Purple", color: "bg-[#4e465a]", image: "https://picsum.photos/seed/iphone-purple/100/100" },
+    ];
 
-    // Mock specifications
-    const specifications = {
-        "Material": "Premium Composite",
-        "Weight": "250g",
-        "Dimensions": "10 x 5 x 2 inches",
-        "Warranty": "1 Year Manufacturer",
-        "Connection": "Wireless / USB-C",
-        "Color": "Obsidian Black"
-    };
+    const storageOptions = ["128 GB", "256 GB", "512 GB", "1 TB"];
 
     const handleAddToCart = () => {
-        // Add the product multiple times based on quantity
-        for (let i = 0; i < quantity; i++) {
-            addItem(product);
-        }
+        addItem(product);
     };
 
     const handleBuyNow = () => {
@@ -49,159 +49,140 @@ export default function ProductDetailsClient({ product, relatedProducts }: Produ
         router.push("/cart");
     };
 
-    const handleWishlist = () => {
-        toggleItem(product);
-    };
+    const breadcrumbItems = [
+        { label: "Home", href: "/" },
+        { label: "Electronics", href: "/category/electronics" },
+        { label: "Smartphones", href: "/category/smartphones" },
+        { label: product.title }
+    ];
 
     return (
-        <div className="bg-white min-h-screen">
-            {/* Minimal Breadcrumb */}
-            <div className="container mx-auto px-4 pt-8 md:pt-12">
-                <nav className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-slate-400 mb-8">
-                    <a href="/" className="hover:text-primary transition-colors">Home</a>
-                    <span>/</span>
-                    <a href="/shop" className="hover:text-primary transition-colors">Store</a>
-                    <span>/</span>
-                    <span className="text-slate-900 truncate max-w-50">{product.title}</span>
-                </nav>
+        <div className="bg-[#f8fafc] min-h-screen relative z-0">
+            {/* Breadcrumb */}
+            <div className="container mx-auto px-4 pt-6 relative z-40">
+                <Breadcrumb items={breadcrumbItems} className="mb-6" />
             </div>
 
-            <div className="container mx-auto px-4 pb-20 max-w-7xl">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 xl:gap-24 items-start">
-                    {/* Left Section: Image Gallery */}
-                    <div className="w-full lg:sticky lg:top-32">
-                        <ImageGallery
-                            images={[product.image, "https://picsum.photos/seed/tech/800/800", "https://picsum.photos/seed/gadget/800/800"]}
-                            title={product.title}
-                        />
+            <div className="container mx-auto px-4 pb-20 max-w-screen-2xl">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+                    {/* Column 1: Image Gallery (lg:span-4) */}
+                    <div className="lg:col-span-4 bg-white p-6 rounded-[40px] border border-slate-100 shadow-sm lg:sticky lg:top-24 z-20">
+                        <div className="relative">
+                            <div className="absolute top-0 left-0 z-30">
+                                <Badge className="bg-green-600 text-white border-none px-3 py-1 font-black text-[10px] uppercase rounded-tl-[30px] rounded-br-[20px]">Sale</Badge>
+                            </div>
+                            <ImageGallery
+                                images={[product.image, "https://picsum.photos/seed/iphone1/800/800", "https://picsum.photos/seed/iphone2/800/800", "https://picsum.photos/seed/iphone3/800/800"]}
+                                title={product.title}
+                            />
+                        </div>
+                        <div className="flex items-center justify-center gap-4 mt-8">
+                            <button className="flex items-center gap-2 px-6 py-2 rounded-full border border-slate-100 bg-slate-50 text-[10px] font-black uppercase tracking-widest text-slate-600 hover:bg-slate-100 transition-colors">
+                                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+                                Zoom
+                            </button>
+                            <button className="flex items-center gap-2 px-6 py-2 rounded-full border border-slate-100 bg-slate-50 text-[10px] font-black uppercase tracking-widest text-slate-600 hover:bg-slate-100 transition-colors">
+                                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5" /></svg>
+                                View in 3D
+                            </button>
+                        </div>
                     </div>
 
-                    {/* Right Section: Product Info & Actions */}
-                    <div className="flex flex-col pt-4 lg:pt-0">
+                    {/* Column 2: Product Info & Variants (lg:span-5) */}
+                    <div className="lg:col-span-5 flex flex-col gap-8 bg-white p-8 rounded-[40px] border border-slate-100 shadow-sm">
                         <ProductInfo
                             title={product.title}
                             price={product.price}
                             originalPrice={product.originalPrice}
                             discountPercent={product.discountPercent}
-                            badgeText={product.badgeText}
-                            description="Experience the pinnacle of innovation and design. This premium product is crafted with precision to provide you with best-in-class performance and an unparalleled user experience. Every detail from the materials to the finish has been meticulously considered."
+                            description={product.description || ""}
                         />
 
-                        <div className="space-y-3">
+                        {/* Variants: Color */}
+                        <div className="space-y-4 pt-6 border-t border-slate-50">
                             <div className="flex items-center justify-between">
-                                <span className="text-[10px] font-bold uppercase text-slate-900">Color</span>
-                                <button className="text-[10px] font-bold text-[#3b82f6] hover:underline uppercase">View All</button>
+                                <span className="text-[10px] font-black uppercase tracking-widest text-slate-900">Color Variants:</span>
+                                <button className="text-[10px] font-black text-blue-500 uppercase hover:underline">View All</button>
                             </div>
-                            <div className="flex gap-3">
-                                <button
-                                    onClick={() => setSelectedColor("black")}
-                                    className={cn(
-                                        "w-10 h-10 rounded-full border-2 p-0.5 transition-all",
-                                        selectedColor === "black" ? "border-slate-900" : "border-transparent"
-                                    )}
-                                >
-                                    <div className="w-full h-full rounded-full bg-black ring-2 ring-white" />
-                                </button>
-                                <button
-                                    onClick={() => setSelectedColor("white")}
-                                    className={cn(
-                                        "w-10 h-10 rounded-full border-2 p-0.5 transition-all",
-                                        selectedColor === "white" ? "border-slate-900" : "border-transparent"
-                                    )}
-                                >
-                                    <div className="w-full h-full rounded-full bg-slate-200 ring-2 ring-white" />
-                                </button>
+                            <div className="grid grid-cols-4 gap-3">
+                                {colors.map((color) => (
+                                    <button
+                                        key={color.id}
+                                        onClick={() => setSelectedColor(color.id)}
+                                        className={cn(
+                                            "flex flex-col items-center gap-2 p-2 rounded-2xl border transition-all",
+                                            selectedColor === color.id ? "border-orange-500 bg-orange-50/30" : "border-slate-100 hover:border-slate-200"
+                                        )}
+                                    >
+                                        <div className="w-12 h-12 relative rounded-xl overflow-hidden bg-slate-50">
+                                            <Image src={color.image} alt={color.name} fill className="object-contain p-1" />
+                                        </div>
+                                        <span className="text-[9px] font-black text-slate-600 uppercase tracking-tighter">{color.name}</span>
+                                    </button>
+                                ))}
                             </div>
                         </div>
 
-                        <div className="mt-12 space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
-                            <div className="flex flex-col gap-3">
-                                <span className="text-xs font-black text-slate-900 uppercase tracking-widest">Select Quantity</span>
-                                <QuantitySelector
-                                    quantity={quantity}
-                                    onChange={setQuantity}
-                                    maxStock={10}
-                                />
-                            </div>
-
-                            <ActionButtons
-                                isWishlisted={isWishlisted}
-                                onWishlist={handleWishlist}
-                                onAddToCart={handleAddToCart}
-                                onBuyNow={handleBuyNow}
-                                onShare={() => {
-                                    if (navigator.share) {
-                                        navigator.share({
-                                            title: product.title,
-                                            text: `Check out this product: ${product.title}`,
-                                            url: window.location.href,
-                                        });
-                                    }
-                                }}
-                            />
-
-                            {/* Short trust indicators below buttons */}
-                            <div className="flex items-center justify-center gap-6 py-4 px-6 bg-slate-50 rounded-2xl border border-slate-100">
-                                <div className="flex items-center gap-2 grayscale opacity-60">
-                                    <div className="w-6 h-6 bg-slate-200 rounded-full" />
-                                    <span className="text-[10px] font-bold uppercase tracking-tighter">Safe Payment</span>
-                                </div>
-                                <div className="flex items-center gap-2 grayscale opacity-60">
-                                    <div className="w-6 h-6 bg-slate-200 rounded-full" />
-                                    <span className="text-[10px] font-bold uppercase tracking-tighter">Verified Brand</span>
-                                </div>
-                                <div className="flex items-center gap-2 grayscale opacity-60">
-                                    <div className="w-6 h-6 bg-slate-200 rounded-full" />
-                                    <span className="text-[10px] font-bold uppercase tracking-tighter">Eco-Friendly</span>
-                                </div>
+                        {/* Variants: Storage */}
+                        <div className="space-y-4 pt-6 border-t border-slate-50">
+                            <span className="text-[10px] font-black uppercase tracking-widest text-slate-900">Storage Variants:</span>
+                            <div className="flex flex-wrap gap-2">
+                                {storageOptions.map((storage) => (
+                                    <button
+                                        key={storage}
+                                        onClick={() => setSelectedStorage(storage)}
+                                        className={cn(
+                                            "px-6 py-3 rounded-xl border text-xs font-black uppercase tracking-tighter transition-all",
+                                            selectedStorage === storage ? "border-orange-500 bg-orange-50/50 text-orange-600" : "border-slate-100 text-slate-400 hover:border-slate-300"
+                                        )}
+                                    >
+                                        {storage}
+                                    </button>
+                                ))}
                             </div>
                         </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 py-8 border-y border-slate-100 my-6">
-                            <div className="flex items-start gap-4 p-4 rounded-2xl bg-slate-50/50 border border-slate-100/50 transition-colors hover:bg-slate-50">
-                                <div className="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center text-2xl">🚚</div>
-                                <div className="flex flex-col">
-                                    <span className="text-sm font-bold text-slate-900">Premium Delivery</span>
-                                    <span className="text-xs text-slate-500 mt-0.5 leading-relaxed">Free express shipping on orders over ₹2,000. Delivered in 2-4 days.</span>
-                                </div>
-                            </div>
-                            <div className="flex items-start gap-4 p-4 rounded-2xl bg-slate-50/50 border border-slate-100/50 transition-colors hover:bg-slate-50">
-                                <div className="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center text-2xl">🔄</div>
-                                <div className="flex flex-col">
-                                    <span className="text-sm font-bold text-slate-900">Hassle-Free Returns</span>
-                                    <span className="text-xs text-slate-500 mt-0.5 leading-relaxed">30-day easy return policy. Guaranteed money back if not satisfied.</span>
-                                </div>
-                            </div>
-                            <div className="flex items-start gap-4 p-4 rounded-2xl bg-slate-50/50 border border-slate-100/50 transition-colors hover:bg-slate-50">
-                                <div className="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center text-2xl">🛡️</div>
-                                <div className="flex flex-col">
-                                    <span className="text-sm font-bold text-slate-900">Secure Checkout</span>
-                                    <span className="text-xs text-slate-500 mt-0.5 leading-relaxed">100% genuine products with SSL encrypted secure payments.</span>
-                                </div>
-                            </div>
-                            <div className="flex items-start gap-4 p-4 rounded-2xl bg-slate-50/50 border border-slate-100/50 transition-colors hover:bg-slate-50">
-                                <div className="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center text-2xl">✨</div>
-                                <div className="flex flex-col">
-                                    <span className="text-sm font-bold text-slate-900">Brand Warranty</span>
-                                    <span className="text-xs text-slate-500 mt-0.5 leading-relaxed">This product comes with a 1-year official manufacturer warranty.</span>
-                                </div>
-                            </div>
-                        </div>
+                        <SimilarProductsList products={relatedProducts} />
+                    </div>
+
+                    {/* Column 3: Buy Box & Seller Info (lg:span-3) */}
+                    <div className="lg:col-span-3 space-y-6">
+                        <BuyBox
+                            price={product.price}
+                            onAddToCart={handleAddToCart}
+                            onBuyNow={handleBuyNow}
+                        />
+                        {/* <SellerInfo /> */}
                     </div>
                 </div>
 
-                {/* Tabs Section */}
-                <div className="mt-12">
-                    <ProductTabs
-                        description="This premium product represents the intersection of luxury and technology. Built using high-grade materials and featuring the latest advancements in its field, it offers a seamless experience for both professional and personal use. Its ergonomic design ensures comfort, while its robust build quality guarantees longevity."
-                        specifications={specifications}
-                        reviews={[]}
-                    />
-                </div>
-                <div className="mt-20">
-                    <h3 className="text-xl font-black text-slate-900 mb-8 uppercase tracking-tight">Related Products</h3>
-                    {/* Related Products Section */}
-                    <RelatedProducts products={relatedProducts} />
+                {/* Bottom Sections */}
+                <div className="mt-12 space-y-12">
+                    {/* Tabs Section */}
+                    <div className="bg-white rounded-[40px] p-8 border border-slate-100 shadow-sm">
+                        <ProductTabs
+                            description={product.description || ""}
+                            specifications={{
+                                "Material": "Premium Composite",
+                                "Weight": "250g",
+                                "Dimensions": "10 x 5 x 2 inches",
+                                "Warranty": "1 Year Manufacturer",
+                                "Connection": "Wireless / USB-C",
+                                "Color": "Obsidian Black"
+                            }}
+                        />
+                    </div>
+
+                    {/* Reviews Section */}
+                    <div className="bg-white rounded-[40px] p-8 border border-slate-100 shadow-sm">
+                        <ProductReviews />
+                    </div>
+
+                    {/* Full Width Related Products */}
+                    <div className="mt-20">
+                        <RelatedProducts products={relatedProducts} />
+                    </div>
                 </div>
             </div>
         </div>

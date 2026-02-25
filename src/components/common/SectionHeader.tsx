@@ -1,10 +1,10 @@
 import React from 'react'
 
 type Props = {
-  title?: String
-  subtitle?: String
-  titleClass?: String
-  suntitleClass?: String
+  title?: string
+  subtitle?: string
+  titleClass?: string
+  suntitleClass?: string
 }
 
 const SectionHeader = ({ title, subtitle, titleClass, suntitleClass }: Props) => {

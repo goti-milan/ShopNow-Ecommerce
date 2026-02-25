@@ -42,7 +42,7 @@ const ProductCard = ({ item, showActions = true }: { item: Product; showActions?
     };
 
     return (
-        <Link href={`/product/${id}`} className="group w-full max-w-60 rounded-xl bg-card transition-all duration-300 ease-out hover:shadow-hover hover:-translate-y-1 overflow-hidden border border-transparent hover:border-border block">
+        <Link href={`/product/${id}`} className="group w-full max-w-60 rounded-xl bg-card transition-all duration-300 ease-out hover:shadow-hover overflow-hidden border border-transparent hover:border-border block">
             {/* Image Wrapper */}
             <div className="relative flex h-[240px] items-center justify-center bg-transparent overflow-hidden">
                 {badgeText && (
