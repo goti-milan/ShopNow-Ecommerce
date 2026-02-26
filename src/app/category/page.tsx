@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import { ArrowRight, Laptop, Shirt, Sofa, Sparkles, Trophy, Book } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";

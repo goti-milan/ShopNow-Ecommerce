@@ -1,5 +1,4 @@
 
-
 export type Product = {
   id: number;
   title: string;
@@ -10,6 +9,13 @@ export type Product = {
   badgeText?: string;
   description?: string;
   type?: 'product' | 'service';
+  // Service booking metadata
+  bookingDate?: string;
+  bookingTime?: string;
+  provider?: string;
+  providerAvatar?: string;
+  duration?: string;
+  bookingNotes?: string;
 };
 
 export type GalleryItem = {

@@ -1,13 +1,11 @@
 import ProductCard from "@/components/common/Product";
 import { PRODUCTS } from "@/utils/static-data";
-import { notFound } from "next/navigation";
 
 // This is a dynamic route for categories
 export default async function CategorySlugPage({ params }: { params: Promise<{ slug: string }> }) {
     const { slug } = await params;
 
     // Basic validation/simulation
-    const validCategories = ["electronics", "fashion", "home", "beauty", "sports", "books"];
 
     // In a real app, you'd fetch data based on slug. 
     // For now, we'll just capitalise it for the title.

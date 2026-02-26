@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
+import { createPortal } from "react-dom";
 import Image from "next/image";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -22,6 +23,12 @@ export function ProductImageModal({
 }: ProductImageModalProps) {
     const [selectedIndex, setSelectedIndex] = useState(initialIndex);
     const [isLoaded, setIsLoaded] = useState(false);
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
+        setMounted(true);
+    }, []);
 
     // Reset state when modal opens
     useEffect(() => {
@@ -70,12 +77,12 @@ export function ProductImageModal({
         return () => window.removeEventListener("keydown", handleKeyDown);
     }, [isOpen, onClose, goToPrevious, goToNext]);
 
-    if (!isOpen) return null;
+    if (!isOpen || !mounted) return null;
 
-    return (
-        <div className="fixed inset-0 z-[9999] flex flex-col bg-black/95 backdrop-blur-md">
+    return createPortal(
+        <div className="fixed inset-0 z-[10000] flex flex-col bg-black/95 backdrop-blur-md">
             {/* Header: Title and Close */}
-            <div className="flex items-center justify-between p-4 md:p-6 text-white border-b border-white/10">
+            <div className="flex items-center justify-between p-4 md:p-6 text-white border-b border-white/10 relative z-[10001]">
                 <h2 className="text-lg md:text-xl font-medium truncate pr-8">{title}</h2>
                 <button
                     onClick={onClose}
@@ -87,7 +94,7 @@ export function ProductImageModal({
             </div>
 
             {/* Main Content: Large Image and Navigation */}
-            <div className="relative flex-1 flex items-center justify-center p-4 md:p-8 overflow-hidden">
+            <div className="relative flex-1 flex items-center justify-center p-4 md:p-8 overflow-hidden z-[10001]">
                 {/* Previous Button */}
                 <button
                     onClick={goToPrevious}
@@ -137,7 +144,7 @@ export function ProductImageModal({
             </div>
 
             {/* Footer: Thumbnails */}
-            <div className="h-24 md:h-32 bg-black/40 border-t border-white/10 p-4 md:p-6 flex items-center justify-center gap-2 md:gap-4 overflow-x-auto no-scrollbar">
+            <div className="h-24 md:h-32 bg-black/40 border-t border-white/10 p-4 md:p-6 flex items-center justify-center gap-2 md:gap-4 overflow-x-auto no-scrollbar relative z-[10001]">
                 {galleryImages.map((img, index) => (
                     <button
                         key={index}
@@ -163,7 +170,8 @@ export function ProductImageModal({
                     </button>
                 ))}
             </div>
-        </div>
+        </div>,
+        document.body
     );
 }
 

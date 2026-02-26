@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState } from "react"
-import { Package, Search, MapPin, Truck, CheckCircle2, AlertCircle } from "lucide-react"
+import { Package, Search, MapPin, Truck, CheckCircle2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"

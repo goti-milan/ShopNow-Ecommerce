@@ -3,7 +3,7 @@
 import ProductCard from "@/components/common/Product";
 import { Button } from "@/components/ui/button";
 import { PRODUCTS } from "@/utils/static-data";
-import { MapPin, Star, UserPlus, Verified } from "lucide-react";
+import { MapPin, Star, Verified } from "lucide-react";
 import Image from "next/image";
 
 export default function StoreClient() {

@@ -1,9 +1,8 @@
 "use client";
 
 import ProductCard from "@/components/common/Product";
-import { Button } from "@/components/ui/button";
 import { PRODUCTS } from "@/utils/static-data";
-import { Clock, Zap } from "lucide-react";
+import { Zap } from "lucide-react";
 import { useEffect, useState } from "react";
 
 export default function FlashSalePage() {

@@ -10,8 +10,10 @@ export interface CartItem extends Product {
 interface CartContextType {
     items: CartItem[];
     addItem: (product: Product) => void;
+    addServiceItem: (product: Product) => void;
     removeItem: (productId: number) => void;
     updateQuantity: (productId: number, quantity: number) => void;
+    rescheduleItem: (productId: number, date: string, time: string) => void;
     clearCart: () => void;
     totalItems: number;
     totalPrice: number;
@@ -60,6 +62,14 @@ export function CartProvider({ children }: { children: ReactNode }) {
         });
     };
 
+    const addServiceItem = (product: Product) => {
+        setItems((prev) => {
+            // Each booking is unique; always add as new entry with a unique id
+            const uniqueId = Date.now();
+            return [...prev, { ...product, id: uniqueId, quantity: 1, type: 'service' }];
+        });
+    };
+
     const removeItem = (productId: number) => {
         setItems((prev) => prev.filter((item) => item.id !== productId));
     };
@@ -72,6 +82,16 @@ export function CartProvider({ children }: { children: ReactNode }) {
         setItems((prev) =>
             prev.map((item) =>
                 item.id === productId ? { ...item, quantity } : item
+            )
+        );
+    };
+
+    const rescheduleItem = (productId: number, date: string, time: string) => {
+        setItems((prev) =>
+            prev.map((item) =>
+                item.id === productId
+                    ? { ...item, bookingDate: date, bookingTime: time }
+                    : item
             )
         );
     };
@@ -91,8 +111,10 @@ export function CartProvider({ children }: { children: ReactNode }) {
             value={{
                 items,
                 addItem,
+                addServiceItem,
                 removeItem,
                 updateQuantity,
+                rescheduleItem,
                 clearCart,
                 totalItems,
                 totalPrice,

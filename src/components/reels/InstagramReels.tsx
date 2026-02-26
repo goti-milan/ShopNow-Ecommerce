@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useRef, useEffect, useCallback } from "react"
+import { useRouter } from "next/navigation"
 import {
     Heart,
     MessageCircle,
@@ -13,7 +14,8 @@ import {
     ChevronRight,
     Home,
     Search,
-    PlusSquare
+    PlusSquare,
+    X
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
@@ -399,6 +401,15 @@ interface InstagramReelsProps {
 }
 
 export default function InstagramReels({ initialReels = reelsData, onClose }: InstagramReelsProps) {
+    const router = useRouter()
+
+    const handleClose = () => {
+        if (onClose) {
+            onClose()
+        } else {
+            router.back()
+        }
+    }
     const [reels, setReels] = useState<Reel[]>(initialReels)
     const [currentIndex, setCurrentIndex] = useState(0)
     const [isTransitioning, setIsTransitioning] = useState(false)
@@ -569,8 +580,17 @@ export default function InstagramReels({ initialReels = reelsData, onClose }: In
                     </Button>
                 </div>
 
+                {/* Close Button */}
+                <button
+                    onClick={(e) => { e.stopPropagation(); handleClose() }}
+                    className="absolute top-4 right-4 z-10 flex items-center justify-center w-9 h-9 rounded-full bg-black/50 hover:bg-black/80 text-white backdrop-blur-sm transition-all duration-200 hover:scale-105"
+                    aria-label="Close reels"
+                >
+                    <X className="h-5 w-5" />
+                </button>
+
                 {/* Reel Counter */}
-                <div className="absolute top-4 right-4 text-white text-sm font-medium bg-black/30 px-3 py-1 rounded-full">
+                <div className="absolute top-4 right-16 text-white text-sm font-medium bg-black/30 px-3 py-1 rounded-full">
                     {currentIndex + 1} / {reels.length}
                 </div>
             </div>

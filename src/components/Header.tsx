@@ -31,8 +31,11 @@ import { PRODUCTS } from "@/utils/static-data"
 const navItems = [
   { name: "Home", href: "/" },
   { name: "Shop", href: "/shop" },
+  { name: "Stores", href: "/store" },
   { name: "Categories", href: "/category" },
   { name: "Flash Sale", href: "/flashsale" },
+  { name: "News", href: "/news" },
+  { name: "Booking", href: "/booking" },
   { name: "Contact", href: "/contactus" },
   { name: "Reels", href: "/reels" },
 ]
