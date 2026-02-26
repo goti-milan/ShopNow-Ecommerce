@@ -10,13 +10,10 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
         notFound();
     }
 
-    const relatedProducts = PRODUCTS.filter((p) => p.id !== product.id).slice(0, 5);
-
     return (
         <main className="bg-background min-h-screen">
             <ProductDetailsClient
                 product={product}
-                relatedProducts={relatedProducts}
             />
         </main>
     );

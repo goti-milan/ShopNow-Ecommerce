@@ -23,7 +23,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { useCart, CartItem } from "@/context/CartContext";
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { PRODUCTS } from "@/utils/static-data";
@@ -31,6 +31,14 @@ import { Badge } from "@/components/ui/badge";
 import { QuantitySelector } from "@/components/product/QuantitySelector";
 
 export default function CartPage() {
+    return (
+        <Suspense fallback={<div className="min-h-screen bg-[#f1f3f6] flex items-center justify-center">Loading...</div>}>
+            <CartContent />
+        </Suspense>
+    );
+}
+
+function CartContent() {
     const { items, addItem, updateQuantity, removeItem, rescheduleItem } = useCart();
     const searchParams = useSearchParams();
     const [couponCode, setCouponCode] = useState("");

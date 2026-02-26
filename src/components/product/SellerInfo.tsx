@@ -2,7 +2,7 @@
 
 import { Star, MessageSquare, Store, ShieldCheck, Package, Phone, Mail, Truck } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import Image from "next/image";
+
 
 export const SellerInfo = () => {
     return (
