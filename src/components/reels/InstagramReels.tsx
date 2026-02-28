@@ -11,14 +11,11 @@ import {
     VolumeX,
     Play,
     Pause,
-    ChevronRight,
-    Home,
-    Search,
-    PlusSquare,
-    X
+    MoreHorizontal
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Input } from "@/components/ui/input"
 
 export interface Reel {
     id: number
@@ -124,21 +121,11 @@ export const reelsData: Reel[] = [
 interface ReelVideoProps {
     reel: Reel
     isActive: boolean
-    onLike: (id: number) => void
-    onSave: (id: number) => void
-    onFollow: (id: number) => void
-    onShare: (id: number) => void
-    onComment: (id: number) => void
 }
 
 function ReelVideo({
     reel,
-    isActive,
-    onLike,
-    onSave,
-    onFollow,
-    onShare,
-    onComment
+    isActive
 }: ReelVideoProps) {
     const videoRef = useRef<HTMLVideoElement>(null)
     const [isPlaying, setIsPlaying] = useState(false)
@@ -196,14 +183,6 @@ function ReelVideo({
         }
     }
 
-    const formatNumber = (num: number): string => {
-        if (num >= 1000000) {
-            return (num / 1000000).toFixed(1) + 'M'
-        } else if (num >= 1000) {
-            return (num / 1000).toFixed(1) + 'K'
-        }
-        return num.toString()
-    }
 
     return (
         <div
@@ -255,141 +234,17 @@ function ReelVideo({
                 </div>
             </div>
 
-            {/* Top Section - Username & Follow */}
-            <div className="absolute top-4 left-0 right-0 px-4 flex items-center justify-between">
-                {/* Username */}
-                <div className="flex items-center gap-2">
-                    <Button
-                        variant="ghost"
-                        className="text-white hover:bg-white/10 p-0 h-auto"
-                        onClick={(e) => {
-                            e.stopPropagation()
-                        }}
-                    >
-                        <span className="font-semibold text-sm">@{reel.username}</span>
-                    </Button>
-                    {!reel.isFollowing && (
-                        <Button
-                            variant="ghost"
-                            size="sm"
-                            className="text-white bg-white/20 hover:bg-white/30 px-2 py-0.5 h-6 text-xs rounded-full"
-                            onClick={(e) => {
-                                e.stopPropagation()
-                                onFollow(reel.id)
-                            }}
-                        >
-                            Follow
-                        </Button>
-                    )}
-                </div>
-
+            {/* Actions & Utilities Overlay */}
+            <div className="absolute top-4 right-4 flex flex-col gap-2">
                 {/* Sound/Mute Button */}
                 <Button
                     variant="ghost"
                     size="icon"
-                    className="text-white hover:bg-white/20 h-8 w-8"
+                    className="text-white bg-black/20 hover:bg-black/40 h-10 w-10 rounded-full backdrop-blur-sm shadow-sm"
                     onClick={toggleMute}
                 >
                     {isMuted ? <VolumeX className="h-5 w-5" /> : <Volume2 className="h-5 w-5" />}
                 </Button>
-            </div>
-
-            {/* Bottom Section - Info & Actions */}
-            <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 via-black/40 to-transparent">
-                {/* User Info */}
-                <div className="flex items-center gap-3 mb-3">
-                    <Avatar className="w-10 h-10 border-2 border-white">
-                        <AvatarImage src={reel.userAvatar} alt={reel.username} />
-                        <AvatarFallback className="bg-primary">U</AvatarFallback>
-                    </Avatar>
-                    <div className="flex-1">
-                        <div className="flex items-center gap-2">
-                            <span className="font-semibold text-white text-sm">{reel.username}</span>
-                            {reel.isFollowing && (
-                                <span className="text-white/60 text-xs">• Following</span>
-                            )}
-                        </div>
-                        <span className="text-white/80 text-xs">{reel.views} views</span>
-                    </div>
-                </div>
-
-                {/* Caption */}
-                <p className="text-white text-sm mb-2 line-clamp-2">
-                    {reel.caption}
-                </p>
-
-                {/* Music - Scrolling Text */}
-                <div className="flex items-center gap-2 text-white/80 text-xs mb-4 overflow-hidden">
-                    <div className="w-4 h-4 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
-                        <div className="w-1.5 h-1.5 bg-white rounded-full" />
-                    </div>
-                    <div className="overflow-hidden whitespace-nowrap">
-                        <span className="animate-marquee inline-block">
-                            🎵 {reel.music}
-                        </span>
-                    </div>
-                </div>
-
-                {/* Actions Row */}
-                <div className="flex items-center justify-between">
-                    {/* Left - Actions */}
-                    <div className="flex items-center gap-1">
-                        {/* Like Button */}
-                        <Button
-                            variant="ghost"
-                            size="icon"
-                            className={`h-10 w-10 rounded-full hover:bg-white/10 ${reel.isLiked ? 'text-red-500' : 'text-white'}`}
-                            onClick={(e) => {
-                                e.stopPropagation()
-                                onLike(reel.id)
-                            }}
-                        >
-                            <Heart className={`h-6 w-6 ${reel.isLiked ? 'fill-current' : ''}`} />
-                        </Button>
-                        <span className="text-white text-xs font-medium -mt-2">{formatNumber(reel.likes)}</span>
-
-                        {/* Comment Button */}
-                        <Button
-                            variant="ghost"
-                            size="icon"
-                            className="h-10 w-10 rounded-full hover:bg-white/10 text-white ml-2"
-                            onClick={(e) => {
-                                e.stopPropagation()
-                                onComment(reel.id)
-                            }}
-                        >
-                            <MessageCircle className="h-6 w-6" />
-                        </Button>
-                        <span className="text-white text-xs font-medium -mt-2">{formatNumber(reel.comments)}</span>
-
-                        {/* Share Button */}
-                        <Button
-                            variant="ghost"
-                            size="icon"
-                            className="h-10 w-10 rounded-full hover:bg-white/10 text-white ml-2"
-                            onClick={(e) => {
-                                e.stopPropagation()
-                                onShare(reel.id)
-                            }}
-                        >
-                            <Send className="h-6 w-6" />
-                        </Button>
-                        <span className="text-white text-xs font-medium -mt-2">{formatNumber(reel.shares)}</span>
-                    </div>
-
-                    {/* Save Button */}
-                    <Button
-                        variant="ghost"
-                        size="icon"
-                        className={`h-10 w-10 rounded-full hover:bg-white/10 ${reel.isSaved ? 'text-yellow-400' : 'text-white'}`}
-                        onClick={(e) => {
-                            e.stopPropagation()
-                            onSave(reel.id)
-                        }}
-                    >
-                        <Bookmark className={`h-6 w-6 ${reel.isSaved ? 'fill-current' : ''}`} />
-                    </Button>
-                </div>
             </div>
         </div>
     )
@@ -403,21 +258,58 @@ interface InstagramReelsProps {
 export default function InstagramReels({ initialReels = reelsData, onClose }: InstagramReelsProps) {
     const router = useRouter()
 
-    const handleClose = () => {
-        if (onClose) {
-            onClose()
-        } else {
-            router.back()
-        }
-    }
     const [reels, setReels] = useState<Reel[]>(initialReels)
     const [currentIndex, setCurrentIndex] = useState(0)
-    const [isTransitioning, setIsTransitioning] = useState(false)
     const containerRef = useRef<HTMLDivElement>(null)
-    const touchStartY = useRef(0)
-    const touchEndY = useRef(0)
+    const videoContainerRefs = useRef<(HTMLDivElement | null)[]>([])
 
     const currentReel = reels[currentIndex]
+
+    // Set up Intersection Observer to update currentIndex when scrolling
+    useEffect(() => {
+        const currentContainer = containerRef.current
+        const observerOptions = {
+            root: currentContainer,
+            threshold: 0.6,
+        }
+
+        const observerCallback = (entries: IntersectionObserverEntry[]) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    const index = Number(entry.target.getAttribute("data-index"))
+                    if (!isNaN(index)) {
+                        setCurrentIndex(index)
+                    }
+                }
+            })
+        }
+
+        const observer = new IntersectionObserver(observerCallback, observerOptions)
+
+        videoContainerRefs.current.forEach((ref) => {
+            if (ref) observer.observe(ref)
+        })
+
+        // Keyboard navigation
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === "ArrowDown") {
+                e.preventDefault()
+                const nextIndex = Math.min(currentIndex + 1, reels.length - 1)
+                videoContainerRefs.current[nextIndex]?.scrollIntoView({ behavior: "smooth" })
+            } else if (e.key === "ArrowUp") {
+                e.preventDefault()
+                const prevIndex = Math.max(currentIndex - 1, 0)
+                videoContainerRefs.current[prevIndex]?.scrollIntoView({ behavior: "smooth" })
+            }
+        }
+
+        window.addEventListener("keydown", handleKeyDown)
+
+        return () => {
+            observer.disconnect()
+            window.removeEventListener("keydown", handleKeyDown)
+        }
+    }, [reels.length, currentIndex])
 
     const handleLike = useCallback((id: number) => {
         setReels(prev => prev.map(reel => {
@@ -467,210 +359,179 @@ export default function InstagramReels({ initialReels = reelsData, onClose }: In
         // Implement comments functionality
     }, [])
 
-    const goToNext = useCallback(() => {
-        if (currentIndex < reels.length - 1 && !isTransitioning) {
-            setIsTransitioning(true)
-            setCurrentIndex(prev => prev + 1)
-            setTimeout(() => setIsTransitioning(false), 300)
-        }
-    }, [currentIndex, reels.length, isTransitioning])
-
-    const goToPrevious = useCallback(() => {
-        if (currentIndex > 0 && !isTransitioning) {
-            setIsTransitioning(true)
-            setCurrentIndex(prev => prev - 1)
-            setTimeout(() => setIsTransitioning(false), 300)
-        }
-    }, [currentIndex, isTransitioning])
-
-    // Handle touch events for swipe navigation
-    const handleTouchStart = (e: React.TouchEvent) => {
-        touchStartY.current = e.touches[0].clientY
-    }
-
-    const handleTouchMove = (e: React.TouchEvent) => {
-        touchEndY.current = e.touches[0].clientY
-    }
-
-    const handleTouchEnd = () => {
-        const diff = touchStartY.current - touchEndY.current
-        const threshold = 50
-
-        if (Math.abs(diff) > threshold) {
-            if (diff > 0) {
-                // Swipe up - next reel
-                goToNext()
-            } else {
-                // Swipe down - previous reel
-                goToPrevious()
-            }
-        }
-
-        touchStartY.current = 0
-        touchEndY.current = 0
-    }
-
-    // Handle keyboard navigation
-    useEffect(() => {
-        const handleKeyDown = (e: KeyboardEvent) => {
-            if (e.key === 'ArrowUp') {
-                goToPrevious()
-            } else if (e.key === 'ArrowDown') {
-                goToNext()
-            }
-        }
-
-        window.addEventListener('keydown', handleKeyDown)
-        return () => window.removeEventListener('keydown', handleKeyDown)
-    }, [goToNext, goToPrevious])
-
-    // Reset video progress when changing reels
-    useEffect(() => {
-        const video = containerRef.current?.querySelector('video')
-        if (video) {
-            video.currentTime = 0
-        }
-    }, [currentIndex])
 
     return (
-        <div className="fixed inset-0 bg-black z-50 flex">
-            {/* Main Reels Area */}
-            <div
-                ref={containerRef}
-                className="flex-1 relative"
-                onTouchStart={handleTouchStart}
-                onTouchMove={handleTouchMove}
-                onTouchEnd={handleTouchEnd}
-            >
-                {/* Current Reel */}
-                <div className={`w-full h-full transition-opacity duration-300 ${isTransitioning ? 'opacity-50' : 'opacity-100'}`}>
-                    <ReelVideo
-                        key={currentReel.id}
-                        reel={currentReel}
-                        isActive={!isTransitioning}
-                        onLike={handleLike}
-                        onSave={handleSave}
-                        onFollow={handleFollow}
-                        onShare={handleShare}
-                        onComment={handleComment}
-                    />
-                </div>
-
-                {/* Navigation Arrows - Desktop */}
-                <div className="absolute top-1/2 left-4 -translate-y-1/2 hidden md:flex">
-                    <Button
-                        variant="ghost"
-                        size="icon"
-                        className={`h-12 w-12 rounded-full bg-black/30 hover:bg-black/50 text-white ${currentIndex === 0 ? 'opacity-30 cursor-not-allowed' : ''}`}
-                        onClick={goToPrevious}
-                        disabled={currentIndex === 0}
+        <div className="flex-1 bg-background">
+            <div className="container mx-auto px-4 py-8">
+                <div className="flex flex-col lg:flex-row gap-8 items-start justify-center max-w-6xl mx-auto h-[calc(100vh-160px)] min-h-[600px]">
+                    {/* Video Column - Scroll Area */}
+                    <div
+                        ref={containerRef}
+                        className="w-full lg:w-[450px] h-full overflow-y-auto snap-y snap-mandatory no-scrollbar rounded-xl shadow-2xl bg-black shrink-0 relative"
                     >
-                        <ChevronRight className="h-6 w-6 rotate-180" />
-                    </Button>
+                        {reels.map((reel, index) => (
+                            <div
+                                key={reel.id}
+                                data-index={index}
+                                ref={(el) => { videoContainerRefs.current[index] = el }}
+                                className="w-full h-full snap-start shrink-0 relative"
+                            >
+                                <ReelVideo
+                                    reel={reel}
+                                    isActive={currentIndex === index}
+                                />
+
+                                {/* Mobile Metadata Overlay (Hidden on Desktop) */}
+                                <div className="lg:hidden absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent text-white pointer-events-none">
+                                    <div className="flex items-center gap-2 mb-2">
+                                        <Avatar className="h-8 w-8 border border-white">
+                                            <AvatarImage src={reel.userAvatar} />
+                                            <AvatarFallback>{reel.username[0]}</AvatarFallback>
+                                        </Avatar>
+                                        <span className="font-semibold text-sm">@{reel.username}</span>
+                                    </div>
+                                    <p className="text-sm line-clamp-2">{reel.caption}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Comments & Info Column - Sticky behavior via parent flex-start */}
+                    <div className="hidden lg:flex flex-1 w-full bg-white rounded-xl border border-border shadow-sm flex-col h-full lg:h-[800px] overflow-hidden sticky top-24">
+                        {/* Author Header */}
+                        <div className="p-4 border-b border-border flex items-center justify-between">
+                            <div className="flex items-center gap-3">
+                                <Avatar className="h-10 w-10 border border-primary/20">
+                                    <AvatarImage src={currentReel.userAvatar} alt={currentReel.username} />
+                                    <AvatarFallback>{currentReel.username[0].toUpperCase()}</AvatarFallback>
+                                </Avatar>
+                                <div className="flex flex-col">
+                                    <span className="font-semibold text-sm">@{currentReel.username}</span>
+                                    <span className="text-xs text-muted-foreground flex items-center gap-1">
+                                        <Music2Icon className="h-3 w-3" />
+                                        {currentReel.music}
+                                    </span>
+                                </div>
+                            </div>
+                            <div className="flex items-center gap-2">
+                                <Button
+                                    variant={currentReel.isFollowing ? "outline" : "primary"}
+                                    size="sm"
+                                    className={`h-8 rounded-full text-xs font-semibold ${!currentReel.isFollowing ? 'bg-primary text-white hover:bg-primary/90' : ''}`}
+                                    onClick={() => handleFollow(currentReel.id)}
+                                >
+                                    {currentReel.isFollowing ? "Following" : "Follow"}
+                                </Button>
+                                <Button variant="ghost" size="icon" className="h-8 w-8">
+                                    <MoreHorizontal className="h-4 w-4" />
+                                </Button>
+                            </div>
+                        </div>
+
+                        {/* Description and Comments Scroll Area */}
+                        <div className="flex-1 overflow-y-auto p-4 space-y-6">
+                            {/* Description/Caption */}
+                            <div className="flex gap-3">
+                                <Avatar className="h-8 w-8 shrink-0">
+                                    <AvatarImage src={currentReel.userAvatar} />
+                                    <AvatarFallback>{currentReel.username[0].toUpperCase()}</AvatarFallback>
+                                </Avatar>
+                                <div className="flex flex-col gap-1">
+                                    <div className="flex items-center gap-2">
+                                        <span className="font-semibold text-sm">@{currentReel.username}</span>
+                                        <span className="text-[10px] text-muted-foreground bg-muted px-1.5 py-0.5 rounded uppercase font-bold">Author</span>
+                                    </div>
+                                    <p className="text-sm leading-relaxed">{currentReel.caption}</p>
+                                    <span className="text-[10px] text-muted-foreground mt-1">2h ago</span>
+                                </div>
+                            </div>
+
+                            <div className="border-t border-border/50 my-4" />
+
+                            {/* Placeholder for Comments - Relative to active reel */}
+                            <div className="flex flex-col items-center justify-center py-20 opacity-40">
+                                <MessageCircle className="h-12 w-12 mb-3" />
+                                <p className="text-sm font-medium">Comments for @{currentReel.username}</p>
+                                <p className="text-xs">No comments yet. Start the conversation!</p>
+                            </div>
+                        </div>
+
+                        {/* Actions & Metrics */}
+                        <div className="p-4 border-t border-border bg-muted/5">
+                            <div className="flex items-center justify-between mb-4">
+                                <div className="flex items-center gap-4">
+                                    <Button
+                                        variant="ghost"
+                                        size="icon"
+                                        className={`h-10 w-10 hover:bg-primary/10 ${currentReel.isLiked ? 'text-red-500 hover:text-red-600' : 'text-foreground hover:text-primary'}`}
+                                        onClick={() => handleLike(currentReel.id)}
+                                    >
+                                        <Heart className={`h-6 w-6 ${currentReel.isLiked ? 'fill-current' : ''}`} />
+                                    </Button>
+                                    <Button variant="ghost" size="icon" className="h-10 w-10 hover:bg-primary/10 hover:text-primary">
+                                        <MessageCircle className="h-6 w-6" />
+                                    </Button>
+                                    <Button variant="ghost" size="icon" className="h-10 w-10 hover:bg-primary/10 hover:text-primary">
+                                        <Send className="h-6 w-6" />
+                                    </Button>
+                                </div>
+                                <Button
+                                    variant="ghost"
+                                    size="icon"
+                                    className={`h-10 w-10 hover:bg-primary/10 ${currentReel.isSaved ? 'text-yellow-500 hover:text-yellow-600' : 'text-foreground hover:text-primary'}`}
+                                    onClick={() => handleSave(currentReel.id)}
+                                >
+                                    <Bookmark className={`h-6 w-6 ${currentReel.isSaved ? 'fill-current' : ''}`} />
+                                </Button>
+                            </div>
+                            <div className="flex flex-col gap-0.5">
+                                <p className="font-bold text-sm">{currentReel.likes.toLocaleString()} likes</p>
+                                <p className="text-[10px] text-muted-foreground uppercase tracking-widest font-medium">
+                                    {currentReel.views} views • February 28, 2026
+                                </p>
+                            </div>
+                        </div>
+
+                        {/* Comment Input */}
+                        <div className="p-4 border-t border-border">
+                            <div className="flex items-center gap-2">
+                                <Input
+                                    placeholder="Add a comment..."
+                                    className="border-none shadow-none focus-visible:ring-0 p-0 text-sm h-auto"
+                                />
+                                <Button
+                                    variant="ghost"
+                                    className="text-primary hover:bg-transparent font-bold text-sm h-auto p-0 ml-2"
+                                >
+                                    Post
+                                </Button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div className="absolute top-1/2 right-4 -translate-y-1/2 hidden md:flex">
-                    <Button
-                        variant="ghost"
-                        size="icon"
-                        className={`h-12 w-12 rounded-full bg-black/30 hover:bg-black/50 text-white ${currentIndex === reels.length - 1 ? 'opacity-30 cursor-not-allowed' : ''}`}
-                        onClick={goToNext}
-                        disabled={currentIndex === reels.length - 1}
-                    >
-                        <ChevronRight className="h-6 w-6" />
-                    </Button>
-                </div>
 
-                {/* Close Button */}
-                <button
-                    onClick={(e) => { e.stopPropagation(); handleClose() }}
-                    className="absolute top-4 right-4 z-10 flex items-center justify-center w-9 h-9 rounded-full bg-black/50 hover:bg-black/80 text-white backdrop-blur-sm transition-all duration-200 hover:scale-105"
-                    aria-label="Close reels"
-                >
-                    <X className="h-5 w-5" />
-                </button>
-
-                {/* Reel Counter */}
-                <div className="absolute top-4 right-16 text-white text-sm font-medium bg-black/30 px-3 py-1 rounded-full">
-                    {currentIndex + 1} / {reels.length}
-                </div>
-            </div>
-
-            {/* Side Navigation - Instagram Style */}
-            <div className="hidden md:flex flex-col items-center gap-6 py-8 px-4 bg-black/90 w-20">
-                {/* Home */}
-                <Button
-                    variant="ghost"
-                    size="icon"
-                    className="text-white hover:bg-white/10 h-12 w-12"
-                    onClick={onClose}
-                >
-                    <Home className="h-6 w-6" />
-                </Button>
-
-                {/* Search (placeholder) */}
-                <Button
-                    variant="ghost"
-                    size="icon"
-                    className="text-white hover:bg-white/10 h-12 w-12"
-                >
-                    <Search className="h-6 w-6" />
-                </Button>
-
-                {/* Create/Reels (placeholder) */}
-                <Button
-                    variant="ghost"
-                    size="icon"
-                    className="text-white hover:bg-white/10 h-12 w-12"
-                >
-                    <PlusSquare className="h-6 w-6" />
-                </Button>
-
-                {/* Shop (placeholder) */}
-                <Button
-                    variant="ghost"
-                    size="icon"
-                    className="text-white hover:bg-white/10 h-12 w-12"
-                >
-                    <svg className="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
-                        <line x1="3" y1="6" x2="21" y2="6" />
-                        <path d="M16 10a4 4 0 0 1-8 0" />
-                    </svg>
-                </Button>
-
-                {/* Profile Avatar */}
-                <div className="mt-auto">
-                    <Avatar className="w-10 h-10 border-2 border-white cursor-pointer hover:opacity-80">
-                        <AvatarImage src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=faces" alt="Profile" />
-                        <AvatarFallback className="bg-primary">P</AvatarFallback>
-                    </Avatar>
-                </div>
-            </div>
-
-            {/* Mobile Bottom Navigation */}
-            <div className="md:hidden fixed bottom-0 left-0 right-0 bg-black/90 flex items-center justify-around py-3 px-6">
-                <Button variant="ghost" size="icon" className="text-white" onClick={onClose}>
-                    <Home className="h-6 w-6" />
-                </Button>
-                <Button variant="ghost" size="icon" className="text-white">
-                    <Search className="h-6 w-6" />
-                </Button>
-                <Button variant="ghost" size="icon" className="text-white">
-                    <PlusSquare className="h-6 w-6" />
-                </Button>
-                <Button variant="ghost" size="icon" className="text-white">
-                    <svg className="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
-                        <line x1="3" y1="6" x2="21" y2="6" />
-                        <path d="M16 10a4 4 0 0 1-8 0" />
-                    </svg>
-                </Button>
-                <Avatar className="w-8 h-8 border-2 border-white cursor-pointer">
-                    <AvatarImage src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=faces" alt="Profile" />
-                    <AvatarFallback className="bg-primary text-xs">P</AvatarFallback>
-                </Avatar>
             </div>
         </div>
+    )
+}
+
+function Music2Icon(props: React.SVGProps<SVGSVGElement>) {
+    return (
+        <svg
+            {...props}
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+        >
+            <circle cx="8" cy="18" r="4" />
+            <path d="M12 18V2l7 4" />
+        </svg>
     )
 }
 
