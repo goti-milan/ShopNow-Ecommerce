@@ -30,14 +30,17 @@ import { PRODUCTS } from "@/utils/static-data"
 // E-commerce menu items
 const navItems = [
   { name: "Home", href: "/" },
-  { name: "Shop", href: "/shop" },
-  { name: "Stores", href: "/store" },
+  { name: "Shopping", href: "/shop" },
+  { name: "Market", href: "/market" },
+  { name: "Store", href: "/store" },
+  { name: "Chat", href: "/chat" },
+  { name: "News", href: "/news" },
+  { name: "Reels", href: "/reels" },
+  { name: "Video", href: "/video" },
+  { name: "Live", href: "/live" },
+  { name: "Booking", href: "/booking" },
   { name: "Categories", href: "/category" },
   { name: "Flash Sale", href: "/flashsale" },
-  { name: "News", href: "/news" },
-  { name: "Booking", href: "/booking" },
-  { name: "Contact", href: "/contactus" },
-  { name: "Reels", href: "/reels" },
 ]
 
 const shopCategories = [
