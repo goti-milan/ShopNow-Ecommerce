@@ -12,11 +12,9 @@ import {
     MoreVertical,
     Phone,
     Video,
-    ArrowLeft,
     Check,
     CheckCheck,
-    Image,
-    File,
+    Image as ImageIcon,
     Mic
 } from "lucide-react"
 
@@ -128,8 +126,8 @@ export default function PersonalChat() {
                             <div>
                                 <div
                                     className={`px-4 py-2 rounded-2xl ${message.isMine
-                                            ? "bg-primary text-primary-foreground rounded-br-sm"
-                                            : "bg-muted rounded-bl-sm"
+                                        ? "bg-primary text-primary-foreground rounded-br-sm"
+                                        : "bg-muted rounded-bl-sm"
                                         }`}
                                 >
                                     <p className="text-sm">{message.content}</p>
@@ -158,7 +156,7 @@ export default function PersonalChat() {
                 <div className="flex items-end gap-2">
                     <div className="flex-1 flex items-center gap-2 bg-muted/50 rounded-full px-4 py-2">
                         <Button variant="ghost" size="icon" className="shrink-0 rounded-full">
-                            <Image className="h-5 w-5" />
+                            <ImageIcon className="h-5 w-5" />
                         </Button>
                         <Button variant="ghost" size="icon" className="shrink-0 rounded-full">
                             <Paperclip className="h-5 w-5" />

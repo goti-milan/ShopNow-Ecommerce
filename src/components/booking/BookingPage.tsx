@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from "react"
 import { useRouter } from "next/navigation"
+import Image from "next/image"
 import { useCart } from "@/context/CartContext"
 import {
     Search,
@@ -417,9 +418,11 @@ function ServiceCard({ service, onBook }: { service: Service; onBook: (s: Servic
         <div className="group bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col">
             {/* Image */}
             <div className="relative h-44 overflow-hidden">
-                <img
+                <Image
                     src={service.image}
                     alt={service.name}
+                    width={600}
+                    height={400}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
@@ -438,7 +441,7 @@ function ServiceCard({ service, onBook }: { service: Service; onBook: (s: Servic
             <div className="p-4 flex flex-col flex-1 gap-3">
                 {/* Provider */}
                 <div className="flex items-center gap-2">
-                    <img src={service.providerAvatar} alt={service.provider} className="w-7 h-7 rounded-full object-cover ring-2 ring-white shadow" />
+                    <Image src={service.providerAvatar} alt={service.provider} width={28} height={28} className="w-7 h-7 rounded-full object-cover ring-2 ring-white shadow" />
                     <span className="text-xs text-gray-500 font-medium">{service.provider}</span>
                 </div>
 
@@ -524,7 +527,7 @@ function BookingModal({
                 {/* Header */}
                 <div className="flex items-start justify-between p-5 border-b">
                     <div className="flex items-center gap-3">
-                        <img src={service.image} alt={service.name} className="w-14 h-14 rounded-xl object-cover" />
+                        <Image src={service.image} alt={service.name} width={56} height={56} className="w-14 h-14 rounded-xl object-cover" />
                         <div>
                             <h2 className="font-bold text-gray-900">{service.name}</h2>
                             <p className="text-sm text-gray-500">{service.provider}</p>

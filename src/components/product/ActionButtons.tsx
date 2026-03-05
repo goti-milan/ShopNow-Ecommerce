@@ -1,6 +1,6 @@
 "use client";
 
-import { ShoppingCart, Heart, Share2 } from "lucide-react";
+import { Heart, Share2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 

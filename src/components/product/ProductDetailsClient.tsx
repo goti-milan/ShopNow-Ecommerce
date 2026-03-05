@@ -44,7 +44,7 @@ export default function ProductDetailsClient({ product }: { product: Product }) 
     };
 
     useEffect(() => {
-        // eslint-disable-next-line react-hooks/set-state-in-effect
+         
         setMounted(true);
     }, []);
 

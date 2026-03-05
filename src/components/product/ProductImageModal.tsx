@@ -26,16 +26,16 @@ export function ProductImageModal({
     const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
-        // eslint-disable-next-line react-hooks/set-state-in-effect
+         
         setMounted(true);
     }, []);
 
     // Reset state when modal opens
     useEffect(() => {
         if (isOpen) {
-            // eslint-disable-next-line react-hooks/set-state-in-effect
+             
             setIsLoaded(false);
-            // eslint-disable-next-line react-hooks/set-state-in-effect
+             
             setSelectedIndex(initialIndex);
             document.body.style.overflow = "hidden";
         } else {

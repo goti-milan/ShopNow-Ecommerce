@@ -8,6 +8,11 @@ export type Product = {
   discountPercent?: number;
   badgeText?: string;
   description?: string;
+  category?: string;
+  rating?: number;
+  reviews?: number;
+  brand?: string;
+  stock?: number;
   type?: 'product' | 'service';
   // Service booking metadata
   bookingDate?: string;

@@ -10,8 +10,9 @@ import { useCart } from "@/context/CartContext";
 import { useWishlist } from "@/context/WishlistContext";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { cn } from "@/lib/utils";
 
-const ProductCard = ({ item, showActions = true }: { item: Product; showActions?: boolean }) => {
+const ProductCard = ({ item, showActions = true, className }: { item: Product; showActions?: boolean; className?: string }) => {
     const { id, badgeText, title, price, originalPrice, discountPercent, image } = item;
     const { addItem } = useCart();
     const { isInWishlist, toggleItem } = useWishlist();
@@ -42,7 +43,13 @@ const ProductCard = ({ item, showActions = true }: { item: Product; showActions?
     };
 
     return (
-        <Link href={`/product/${id}`} className="group w-full max-w-60 rounded-xl bg-card transition-all duration-300 ease-out hover:shadow-hover overflow-hidden border border-transparent hover:border-border block">
+        <Link
+            href={`/product/${id}`}
+            className={cn(
+                "group w-full rounded-xl bg-card transition-all duration-300 ease-out hover:shadow-hover overflow-hidden border border-transparent hover:border-border block",
+                className
+            )}
+        >
             {/* Image Wrapper */}
             <div className="relative flex h-[240px] items-center justify-center bg-transparent overflow-hidden">
                 {badgeText && (

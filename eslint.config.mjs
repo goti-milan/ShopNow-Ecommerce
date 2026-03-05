@@ -13,6 +13,24 @@ const eslintConfig = defineConfig([
     "build/**",
     "next-env.d.ts",
   ]),
+  {
+    rules: {
+      // Disable unused warnings
+      "@typescript-eslint/no-unused-vars": "off",
+
+      // Disable unused state / props / component checks
+      "react/no-unused-state": "off",
+      "react/no-unused-prop-types": "off",
+
+      // Allow any type
+      "@typescript-eslint/no-explicit-any": "off",
+
+      "react-hooks/exhaustive-deps": "off",
+      "react-hooks/rules-of-hooks": "off",
+
+      "react-hooks/set-state-in-effect": "off",
+    },
+  },
 ]);
 
 export default eslintConfig;

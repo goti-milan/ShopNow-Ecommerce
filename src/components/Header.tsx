@@ -25,7 +25,6 @@ import {
 import Link from "next/link"
 import { useCart } from "@/context/CartContext"
 import { useWishlist } from "@/context/WishlistContext"
-import { PRODUCTS } from "@/utils/static-data"
 
 // E-commerce menu items
 const navItems = [
@@ -61,7 +60,7 @@ const Header = () => {
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault()
     if (searchQuery.trim()) {
-      router.push(`/shop?search=${encodeURIComponent(searchQuery.trim())}`)
+      router.push(`/search?search=${encodeURIComponent(searchQuery.trim())}`)
     }
   }
 

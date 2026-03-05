@@ -137,14 +137,14 @@ function ReelVideo({
         if (videoRef.current) {
             if (isActive) {
                 videoRef.current.play().catch(() => { })
-                // eslint-disable-next-line react-hooks/set-state-in-effect
+                 
                 setIsPlaying(true)
             } else {
                 videoRef.current.pause()
                 videoRef.current.currentTime = 0
-                // eslint-disable-next-line react-hooks/set-state-in-effect
+                 
                 setIsPlaying(false)
-                // eslint-disable-next-line react-hooks/set-state-in-effect
+                 
                 setProgress(0)
             }
         }

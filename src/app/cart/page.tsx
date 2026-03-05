@@ -14,7 +14,6 @@ import {
     Star,
     Calendar,
     Clock,
-    MapPin,
     Check,
     CalendarDays,
     User2,
@@ -25,7 +24,7 @@ import Link from "next/link";
 import { useCart, CartItem } from "@/context/CartContext";
 import { useState, useMemo, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { PRODUCTS } from "@/utils/static-data";
 import { Badge } from "@/components/ui/badge";
 import { QuantitySelector } from "@/components/product/QuantitySelector";
@@ -53,7 +52,7 @@ function CartContent() {
         if (items.length > 0 && !hasInitializedSelection) {
             // eslint-disable-next-line react-hooks/set-state-in-effect
             setSelectedIds(new Set(items.map(item => item.id)));
-            // eslint-disable-next-line react-hooks/set-state-in-effect
+
             setHasInitializedSelection(true);
         }
     }, [items, hasInitializedSelection]);
@@ -368,9 +367,11 @@ function CartContent() {
                                     <div className="absolute top-0 right-0 w-32 h-32 bg-[#f47424]/20 rounded-full -translate-y-1/2 translate-x-1/2 blur-2xl group-hover:bg-[#f47424]/30 transition-all duration-700" />
                                 </div>
 
-                                <Button className="w-full bg-[#f47424] hover:bg-[#e0661e] text-white py-8 text-xl font-black rounded-2xl shadow-xl shadow-orange-100 transition-all transform hover:-translate-y-1 active:scale-95 uppercase tracking-tighter">
-                                    {activeTab === "service-cart" ? "Schedule & Pay" : "Proceed to Checkout"}
-                                </Button>
+                                <Link href="/order-confirmation?status=success">
+                                    <Button className="w-full bg-[#f47424] hover:bg-[#e0661e] text-white py-8 text-xl font-black rounded-2xl shadow-xl shadow-orange-100 transition-all transform hover:-translate-y-1 active:scale-95 uppercase tracking-tighter">
+                                        {activeTab === "service-cart" ? "Schedule & Pay" : "Proceed to Checkout"}
+                                    </Button>
+                                </Link>
 
                                 <div className="flex justify-center gap-6 pt-2 grayscale opacity-50 contrast-125">
                                     <Image src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" width={40} height={25} style={{ height: 'auto' }} />
