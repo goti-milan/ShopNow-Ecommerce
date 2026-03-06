@@ -2,7 +2,7 @@
 
 import ProductCard from "../common/Product";
 import { PRODUCTS } from "@/utils/static-data";
-import { Star, ChevronLeft, ChevronRight } from "lucide-react";
+import { Star, ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 import { useRef } from "react";
 import { Button } from "../ui/button";
 
@@ -18,46 +18,57 @@ export default function FeaturedProducts() {
     };
 
     return (
-        <section className="py-16 bg-[#f8f9fa] overflow-hidden">
+        <section className="py-16 bg-muted/30 overflow-hidden">
             <div className="container mx-auto px-4 max-w-7xl">
+                {/* Section Header */}
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
-                    <div className="space-y-4">
+                    <div className="space-y-2">
                         <div className="flex items-center gap-2">
-                            <Star className="w-5 h-5 text-amber-500 fill-amber-500" />
-                            <span className="text-amber-500 font-bold tracking-widest uppercase text-xs">Handpicked for you</span>
+                            <Star className="w-4 h-4 text-primary fill-primary" />
+                            <span className="text-primary font-semibold tracking-widest uppercase text-xs">Handpicked for You</span>
                         </div>
-                        <h2 className="text-4xl md:text-5xl font-black text-gray-900 tracking-tight italic uppercase">Featured Products</h2>
+                        <h2 className="text-3xl md:text-4xl font-bold text-foreground tracking-tight">Featured Products</h2>
+                        <p className="text-muted-foreground text-sm max-w-md">Our editors&apos; top picks — curated to match your taste and lifestyle.</p>
                     </div>
 
-                    <div className="flex items-center gap-2">
-                        <Button
-                            variant="outline"
-                            size="icon"
-                            onClick={() => scroll("left")}
-                            className="rounded-full border-gray-200 hover:border-primary hover:text-primary transition-all"
-                        >
-                            <ChevronLeft className="w-5 h-5" />
-                        </Button>
-                        <Button
-                            variant="outline"
-                            size="icon"
-                            onClick={() => scroll("right")}
-                            className="rounded-full border-gray-200 hover:border-primary hover:text-primary transition-all"
-                        >
-                            <ChevronRight className="w-5 h-5" />
-                        </Button>
+                    <div className="flex items-center gap-3">
+                       
+                        <div className="flex items-center gap-2">
+                            <Button
+                                variant="outline"
+                                size="icon"
+                                onClick={() => scroll("left")}
+                                className="rounded-full border-foreground/20 hover:border-primary hover:text-primary transition-all"
+                            >
+                                <ChevronLeft className="w-5 h-5" />
+                            </Button>
+                            <Button
+                                variant="outline"
+                                size="icon"
+                                onClick={() => scroll("right")}
+                                className="rounded-full border-foreground/20 hover:border-primary hover:text-primary transition-all"
+                            >
+                                <ChevronRight className="w-5 h-5" />
+                            </Button>
+                        </div>
                     </div>
                 </div>
 
                 <div
                     ref={scrollContainerRef}
-                    className="flex gap-8 overflow-x-auto pb-8 snap-x snap-mandatory no-scrollbar -mx-2 px-2"
+                    className="flex gap-6 overflow-x-auto pb-8 snap-x snap-mandatory no-scrollbar -mx-2 px-2"
                 >
                     {PRODUCTS.slice(0, 8).map((product) => (
                         <div key={product.id} className="min-w-[240px] md:min-w-[280px] snap-start transform transition-transform duration-500 hover:-translate-y-2">
                             <ProductCard item={product} />
                         </div>
                     ))}
+                </div>
+
+                <div className="pt-8 flex justify-center">
+                    <Button variant="outline" className="rounded-full px-12 py-6 text-base border-2 border-foreground/10 hover:bg-foreground hover:text-background transition-colors duration-300 gap-2">
+                        View All Featured Products <ArrowRight className="w-4 h-4" />
+                    </Button>
                 </div>
             </div>
         </section>

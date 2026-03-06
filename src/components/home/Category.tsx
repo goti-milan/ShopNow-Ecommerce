@@ -21,8 +21,9 @@ export default function Category() {
     return (
         <div className="pb-12">
             <SectionHeader
-                title="Shop by Category"
-                subtitle="Browse by product category"
+                label="Explore"
+                heading="Shop by Category"
+                description="Browse our wide range of categories to find exactly what you need."
             />
             <div ref={sliderRef} className="keen-slider">
                 {CATEGORIES.map((cat, index) => (

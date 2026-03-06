@@ -1,22 +1,44 @@
 import React from 'react'
 
 type Props = {
+  label?: string        // Small uppercase label above the heading
+  heading?: string      // Main bold heading
+  description?: string  // Optional subtext description
+  align?: 'left' | 'center' | 'right'
+  // Legacy props for backward compatibility
   title?: string
   subtitle?: string
-  titleClass?: string
-  suntitleClass?: string
 }
 
-const SectionHeader = ({ title, subtitle, titleClass, suntitleClass }: Props) => {
+const SectionHeader = ({ label, heading, description, align = 'center', title, subtitle }: Props) => {
+  // Support legacy prop names: title = label, subtitle = heading
+  const resolvedLabel = label || title
+  const resolvedHeading = heading || subtitle
+
+  const alignClass = {
+    left: 'items-start text-left',
+    center: 'items-center text-center',
+    right: 'items-end text-right',
+  }[align]
+
   return (
-    <>
-      {title && <h2 className={` ${titleClass} text-center text-[12px] sm:text-[14px] md:text-[16px] uppercase text-primary tracking-[3px] font-medium mb-2`}>
-        {title}
-      </h2>}
-      {subtitle && <h3 className={` ${suntitleClass} text-center  text-[28px] sm:text-[32px] leading-[100%] md:text-[45px] font-normal text-muted-foreground md:mb-6`}>
-        {subtitle}
-      </h3>}
-    </>
+    <div className={`flex flex-col gap-2 mb-10 ${alignClass}`}>
+      {resolvedLabel && (
+        <span className="text-primary font-semibold tracking-widest uppercase text-xs">
+          {resolvedLabel}
+        </span>
+      )}
+      {resolvedHeading && (
+        <h2 className="text-3xl md:text-4xl font-bold text-foreground tracking-tight">
+          {resolvedHeading}
+        </h2>
+      )}
+      {description && (
+        <p className="text-muted-foreground text-sm max-w-md">
+          {description}
+        </p>
+      )}
+    </div>
   )
 }
 

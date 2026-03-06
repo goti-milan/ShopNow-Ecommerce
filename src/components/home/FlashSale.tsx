@@ -2,7 +2,7 @@
 
 import ProductCard from "../common/Product";
 import { PRODUCTS } from "@/utils/static-data";
-import { Zap, ChevronLeft, ChevronRight } from "lucide-react";
+import { Zap, ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 import { useEffect, useState, useRef } from "react";
 import { Button } from "../ui/button";
 
@@ -37,42 +37,41 @@ export default function FlashSale() {
     return (
         <section className="py-16 bg-white overflow-hidden">
             <div className="container mx-auto px-4 max-w-7xl">
-                {/* Banner from Flash Sale Page */}
-                <div className="bg-gradient-to-r from-orange-500 to-red-600 rounded-[40px] p-8 md:p-12 mb-12 text-white shadow-2xl relative overflow-hidden group">
+                {/* Flash Sale Banner */}
+                <div className="bg-gradient-to-r from-orange-500 to-red-600 rounded-3xl p-8 md:p-12 mb-12 text-white shadow-2xl relative overflow-hidden">
                     <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-10">
-                        <div className="text-center lg:text-left space-y-6">
+                        <div className="text-center lg:text-left space-y-4">
                             <div className="flex items-center justify-center lg:justify-start gap-2">
-                                <Zap className="w-10 h-10 fill-yellow-300 text-yellow-300 animate-pulse" />
-                                <span className="text-xl font-black tracking-[0.2em] uppercase italic">Flash Deals</span>
+                                <Zap className="w-6 h-6 fill-yellow-300 text-yellow-300 animate-pulse" />
+                                <span className="text-yellow-200 font-semibold tracking-widest uppercase text-xs">Limited Time Deal</span>
                             </div>
-                            <h2 className="text-5xl md:text-7xl font-black mb-4 drop-shadow-2xl italic tracking-tighter">
-                                SUPER FLASH SALE
+                            <h2 className="text-4xl md:text-6xl font-bold leading-tight">
+                                Super Flash Sale
                             </h2>
-                            <p className="text-2xl font-bold opacity-90 max-w-xl italic">
+                            <p className="text-lg font-medium opacity-90 max-w-xl">
                                 Up to 70% off on premium products. Hurry up!
                             </p>
-
-                            <Button className="bg-white text-orange-600 hover:bg-gray-100 font-black px-12 py-8 rounded-2xl text-2xl transition-all transform hover:scale-105 active:scale-95 shadow-xl">
-                                SHOP THE SALE
+                            <Button className="bg-white text-orange-600 hover:bg-orange-50 font-bold px-8 py-5 rounded-xl text-base transition-all transform hover:scale-105 active:scale-95 shadow-lg gap-2">
+                                Shop the Sale <ArrowRight className="w-4 h-4" />
                             </Button>
                         </div>
 
-                        <div className="flex flex-col items-center gap-4 bg-black/20 backdrop-blur-xl p-8 rounded-[32px] border border-white/10 shadow-inner">
-                            <p className="text-sm font-black uppercase tracking-widest text-orange-200">Limited Time Remaining</p>
-                            <div className="flex items-center gap-6">
+                        <div className="flex flex-col items-center gap-3 bg-black/20 backdrop-blur-xl p-6 rounded-2xl border border-white/10 shadow-inner">
+                            <p className="text-xs font-semibold uppercase tracking-widest text-orange-200">Limited Time Remaining</p>
+                            <div className="flex items-center gap-4">
                                 <div className="flex flex-col items-center gap-1">
-                                    <div className="text-5xl md:text-6xl font-black italic tracking-tighter">{timeLeft.hours.toString().padStart(2, '0')}</div>
-                                    <div className="text-[10px] font-black uppercase tracking-widest opacity-60">Hours</div>
+                                    <div className="text-4xl md:text-5xl font-bold tracking-tight">{timeLeft.hours.toString().padStart(2, '0')}</div>
+                                    <div className="text-[10px] font-semibold uppercase tracking-widest opacity-70">Hours</div>
                                 </div>
-                                <div className="text-4xl font-black opacity-30">:</div>
+                                <div className="text-3xl font-bold opacity-40">:</div>
                                 <div className="flex flex-col items-center gap-1">
-                                    <div className="text-5xl md:text-6xl font-black italic tracking-tighter">{timeLeft.minutes.toString().padStart(2, '0')}</div>
-                                    <div className="text-[10px] font-black uppercase tracking-widest opacity-60">Mins</div>
+                                    <div className="text-4xl md:text-5xl font-bold tracking-tight">{timeLeft.minutes.toString().padStart(2, '0')}</div>
+                                    <div className="text-[10px] font-semibold uppercase tracking-widest opacity-70">Mins</div>
                                 </div>
-                                <div className="text-4xl font-black opacity-30">:</div>
+                                <div className="text-3xl font-bold opacity-40">:</div>
                                 <div className="flex flex-col items-center gap-1">
-                                    <div className="text-5xl md:text-6xl font-black italic tracking-tighter">{timeLeft.seconds.toString().padStart(2, '0')}</div>
-                                    <div className="text-[10px] font-black uppercase tracking-widest opacity-60">Secs</div>
+                                    <div className="text-4xl md:text-5xl font-bold tracking-tight">{timeLeft.seconds.toString().padStart(2, '0')}</div>
+                                    <div className="text-[10px] font-semibold uppercase tracking-widest opacity-70">Secs</div>
                                 </div>
                             </div>
                         </div>
@@ -83,27 +82,45 @@ export default function FlashSale() {
                     <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-black opacity-20 rounded-full blur-[120px] -mr-60 -mb-60"></div>
                 </div>
 
-                <div className="flex items-center justify-between mb-8">
-                    <h3 className="text-3xl font-black text-gray-900 italic tracking-tighter">FLASH SALE ITEMS</h3>
-                    <div className="flex items-center gap-2">
-                        <Button variant="outline" size="icon" onClick={() => scroll("left")} className="rounded-full">
-                            <ChevronLeft className="w-5 h-5" />
-                        </Button>
-                        <Button variant="outline" size="icon" onClick={() => scroll("right")} className="rounded-full">
-                            <ChevronRight className="w-5 h-5" />
-                        </Button>
+                {/* Section Header */}
+                <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
+                    <div className="space-y-2">
+                        <div className="flex items-center gap-2">
+                            <Zap className="w-4 h-4 text-primary" />
+                            <span className="text-primary font-semibold tracking-widest uppercase text-xs">Flash Deals</span>
+                        </div>
+                        <h2 className="text-3xl md:text-4xl font-bold text-foreground tracking-tight">Flash Sale Items</h2>
+                        <p className="text-muted-foreground text-sm max-w-md">Grab these limited-time deals before they&apos;re gone!</p>
+                    </div>
+
+                    <div className="flex items-center gap-3">
+                        
+                        <div className="flex items-center gap-2">
+                            <Button variant="outline" size="icon" onClick={() => scroll("left")} className="rounded-full border-foreground/20 hover:border-primary hover:text-primary transition-all">
+                                <ChevronLeft className="w-5 h-5" />
+                            </Button>
+                            <Button variant="outline" size="icon" onClick={() => scroll("right")} className="rounded-full border-foreground/20 hover:border-primary hover:text-primary transition-all">
+                                <ChevronRight className="w-5 h-5" />
+                            </Button>
+                        </div>
                     </div>
                 </div>
 
                 <div
                     ref={scrollContainerRef}
-                    className="flex gap-8 overflow-x-auto pb-8 snap-x snap-mandatory no-scrollbar -mx-2 px-2"
+                    className="flex gap-6 overflow-x-auto pb-8 snap-x snap-mandatory no-scrollbar -mx-2 px-2"
                 >
                     {PRODUCTS.map((product) => (
                         <div key={product.id} className="min-w-[240px] md:min-w-[280px] snap-start transform transition-transform duration-500 hover:-translate-y-2">
                             <ProductCard item={{ ...product, badgeText: "FLASH DEAL", discountPercent: 50 }} />
                         </div>
                     ))}
+                </div>
+
+                <div className="pt-8 flex justify-center">
+                    <Button variant="outline" className="rounded-full px-12 py-6 text-base border-2 border-foreground/10 hover:bg-foreground hover:text-background transition-colors duration-300 gap-2">
+                        View All Flash Sale Items <ArrowRight className="w-4 h-4" />
+                    </Button>
                 </div>
             </div>
         </section>

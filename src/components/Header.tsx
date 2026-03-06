@@ -37,7 +37,8 @@ const navItems = [
   { name: "Reels", href: "/reels" },
   { name: "Video", href: "/video" },
   { name: "Live", href: "/live" },
-  { name: "Booking", href: "/booking" },
+  { name: "Services", href: "/booking" },
+  { name: "Wallet", href: "/wallet" },
   { name: "Categories", href: "/category" },
   { name: "Flash Sale", href: "/flashsale" },
 ]
