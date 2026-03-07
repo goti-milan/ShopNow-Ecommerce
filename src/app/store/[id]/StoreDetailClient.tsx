@@ -373,7 +373,7 @@ export default function StoreDetailClient({ storeId }: { storeId: string }) {
                                             <p className="line-clamp-2 text-sm font-semibold text-slate-800">{product.title}</p>
                                             <p className="text-xs text-slate-500">
                                                 <Star className="mr-1 inline h-3.5 w-3.5 fill-amber-400 text-amber-500" />
-                                                {product.rating} ({product.reviews.toLocaleString()})
+                                                {product.rating} ({product?.reviews?.toLocaleString()})
                                             </p>
                                             <div className="flex items-center justify-between gap-2">
                                                 <p className="text-2xl font-bold text-slate-900">${product.price.toLocaleString()}</p>

@@ -397,7 +397,7 @@ function FullscreenReelPlayer({ reels, startIndex, onClose, onLike, onSave, onFo
                         <div className="p-4 border-t border-border">
                             <div className="flex items-center gap-2">
                                 <Input placeholder="Add a comment..." className="text-sm" />
-                                <Button variant="default" size="sm" className="shrink-0">Post</Button>
+                                <Button variant="primary" size="sm" className="shrink-0">Post</Button>
                             </div>
                         </div>
                     </div>
@@ -671,7 +671,7 @@ export default function InstagramReels({ initialReels = reelsData }: InstagramRe
                                 </div>
                                 <div className="flex items-center gap-2">
                                     <Button
-                                        variant={currentReel.isFollowing ? "outline" : "default"}
+                                        variant={currentReel.isFollowing ? "outline" : "primary"}
                                         size="sm"
                                         className="h-8 rounded-full text-xs font-semibold"
                                         onClick={() => handleFollow(currentReel.id)}
