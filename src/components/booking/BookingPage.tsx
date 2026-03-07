@@ -426,42 +426,32 @@ function ServiceCard({ service, onBook }: { service: Service; onBook: (s: Servic
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                <button className="absolute top-2 right-2 text-white hover:text-red-500 transition-colors">
+                    <Heart className="h-5 w-5" />
+                </button>
                 {service.badge && (
-                    <span className={`absolute top-3 left-3 text-white text-xs font-semibold px-2.5 py-1 rounded-full ${service.badgeColor}`}>
+                    <span className={`absolute top-2 left-2 text-white text-xs font-semibold px-2 py-1 rounded-full ${service.badgeColor || 'bg-red-500'}`}>
                         {service.badge}
                     </span>
                 )}
-                <div className="absolute bottom-3 left-3 flex items-center gap-1.5 text-white text-xs">
-                    <Clock className="h-3.5 w-3.5" />
-                    <span>{service.duration}</span>
-                </div>
             </div>
 
-            {/* Body */}
-            <div className="p-4 flex flex-col flex-1 gap-3">
-                {/* Provider */}
-                <div className="flex items-center gap-2">
-                    <Image src={service.providerAvatar} alt={service.provider} width={28} height={28} className="w-7 h-7 rounded-full object-cover ring-2 ring-white shadow" />
-                    <span className="text-xs text-gray-500 font-medium">{service.provider}</span>
+            {/* Content */}
+            <div className="p-4 flex flex-col gap-2">
+                {/* Title */}
+                <div>
+                    <h3 className="font-bold text-gray-900 text-lg leading-tight">{service.provider}</h3>
+                    <p className="text-gray-600 text-sm">{service.name}</p>
                 </div>
 
-                {/* Title & Desc */}
-                <div>
-                    <h3 className="font-bold text-gray-900 text-base leading-tight">{service.name}</h3>
-                    <p className="text-gray-500 text-sm mt-1 line-clamp-2">{service.description}</p>
-                </div>
+                {/* Price */}
+                <p className="text-lg font-semibold text-gray-900">₹{service.price}/hrs</p>
 
                 {/* Rating */}
                 <div className="flex items-center gap-2">
-                    <StarRating rating={service.rating} />
+                    <span className="text-yellow-500">⭐</span>
                     <span className="text-sm font-semibold text-gray-700">{service.rating}</span>
                     <span className="text-xs text-gray-400">({service.reviewCount.toLocaleString()} reviews)</span>
-                </div>
-
-                {/* Location */}
-                <div className="flex items-center gap-1.5 text-xs text-gray-500">
-                    <MapPin className="h-3.5 w-3.5 text-primary shrink-0" />
-                    {service.location}
                 </div>
 
                 {/* Highlights */}
@@ -474,18 +464,28 @@ function ServiceCard({ service, onBook }: { service: Service; onBook: (s: Servic
                     ))}
                 </ul>
 
-                {/* Footer */}
-                <div className="flex items-center justify-between mt-auto pt-3 border-t border-gray-100">
-                    <div>
-                        <span className="text-xs text-gray-400">Starting at</span>
-                        <p className="text-xl font-bold text-gray-900">₹{service.price.toLocaleString()}</p>
-                    </div>
+                {/* Availability */}
+                <div className="flex items-center gap-1.5 text-xs text-gray-600">
+                    <span className="text-green-500">🟢</span>
+                    <span>Available Today • 9 AM – 2 PM</span>
+                </div>
+
+                {/* Distance and Time */}
+                <div className="flex items-center justify-between text-xs text-gray-500">
+                    <span>Distance: 2.1 km</span>
+                    <span>⏱ 2 Hours</span>
+                </div>
+
+                {/* Buttons */}
+                <div className="flex gap-2 mt-2">
                     <button
                         onClick={() => onBook(service)}
-                        className="flex items-center gap-1.5 bg-primary hover:bg-primary/90 text-white text-sm font-semibold px-4 py-2 rounded-xl transition-all duration-200 hover:shadow-md hover:shadow-primary/30 active:scale-95"
+                        className="flex-1 bg-primary hover:bg-primary/90 text-white text-sm font-semibold px-3 py-2 rounded-lg transition-all duration-200"
                     >
                         Book Now
-                        <ChevronRight className="h-4 w-4" />
+                    </button>
+                    <button className="flex-1 border border-gray-300 hover:border-gray-400 text-gray-700 text-sm font-semibold px-3 py-2 rounded-lg transition-all duration-200">
+                        Add to Cart
                     </button>
                 </div>
             </div>
@@ -608,6 +608,190 @@ function BookingModal({
     )
 }
 
+// ─── FILTER SIDEBAR ─────────────────────────────────────────────────────────
+
+function FilterSidebar({
+    priceRange,
+    setPriceRange,
+    minRating,
+    setMinRating,
+    availabilityFilters,
+    setAvailabilityFilters,
+    distance,
+    setDistance,
+    duration,
+    setDuration,
+}: {
+    priceRange: [number, number]
+    setPriceRange: (range: [number, number]) => void
+    minRating: number
+    setMinRating: (rating: number) => void
+    availabilityFilters: string[]
+    setAvailabilityFilters: (filters: string[]) => void
+    distance: number | null
+    setDistance: (d: number | null) => void
+    duration: string | null
+    setDuration: (d: string | null) => void
+}) {
+    const toggleAvailability = (filter: string) => {
+        setAvailabilityFilters(
+            availabilityFilters.includes(filter)
+                ? availabilityFilters.filter(f => f !== filter)
+                : [...availabilityFilters, filter]
+        )
+    }
+
+    return (
+        <div className="w-full lg:w-72 space-y-6">
+            {/* Search */}
+            <div>
+                <div className="relative">
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+                    <input
+                        type="text"
+                        placeholder="Search by Service..."
+                        className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
+                    />
+                </div>
+            </div>
+
+            {/* Categories */}
+            <div>
+                <h3 className="text-sm font-bold text-gray-900 mb-3 flex items-center gap-2">
+                    <span>Categories</span>
+                    <ChevronRight className="h-4 w-4 text-gray-400" />
+                </h3>
+                <div className="space-y-2 pl-2">
+                    {CATEGORIES.slice(1, 7).map(cat => (
+                        <div key={cat.id} className="flex items-center gap-2">
+                            <input type="checkbox" id={cat.id} className="rounded w-4 h-4" />
+                            <label htmlFor={cat.id} className="text-sm text-gray-600 cursor-pointer">
+                                {cat.label}
+                            </label>
+                        </div>
+                    ))}
+                </div>
+            </div>
+
+            {/* Price Range */}
+            <div>
+                <h3 className="text-sm font-bold text-gray-900 mb-3">Price Range</h3>
+                <div className="space-y-3">
+                    <div className="flex items-center gap-2">
+                        <input
+                            type="range"
+                            min="0"
+                            max="10000"
+                            step="100"
+                            value={priceRange[0]}
+                            onChange={e => setPriceRange([parseInt(e.target.value), priceRange[1]])}
+                            className="w-full"
+                        />
+                    </div>
+                    <div className="flex items-center justify-between text-sm">
+                        <span className="text-gray-600">₹{priceRange[0]}</span>
+                        <span className="text-gray-600">₹{priceRange[1]}</span>
+                    </div>
+                </div>
+            </div>
+
+            {/* Rating */}
+            <div>
+                <h3 className="text-sm font-bold text-gray-900 mb-3">Rating</h3>
+                <div className="space-y-2">
+                    {[4, 3, 2, 1].map(rating => (
+                        <div key={rating} className="flex items-center gap-2">
+                            <input
+                                type="radio"
+                                id={`rating-${rating}`}
+                                name="rating"
+                                checked={minRating === rating}
+                                onChange={() => setMinRating(minRating === rating ? 0 : rating)}
+                                className="w-4 h-4"
+                            />
+                            <label htmlFor={`rating-${rating}`} className="flex items-center gap-1 cursor-pointer">
+                                <span className="text-sm text-gray-600">{rating}</span>
+                                <Star className="h-3.5 w-3.5 fill-amber-400 text-amber-400" />
+                                <span className="text-xs text-gray-400">& above</span>
+                            </label>
+                        </div>
+                    ))}
+                </div>
+            </div>
+
+            {/* Availability */}
+            <div>
+                <h3 className="text-sm font-bold text-gray-900 mb-3">Availability</h3>
+                <div className="space-y-2">
+                    {["Available Now", "Available Today", "Tomorrow", "This Week"].map(option => (
+                        <div key={option} className="flex items-center gap-2">
+                            <input
+                                type="checkbox"
+                                id={option}
+                                checked={availabilityFilters.includes(option)}
+                                onChange={() => toggleAvailability(option)}
+                                className="rounded w-4 h-4"
+                            />
+                            <label htmlFor={option} className="text-sm text-gray-600 cursor-pointer">
+                                {option}
+                            </label>
+                        </div>
+                    ))}
+                </div>
+            </div>
+
+            {/* Distance */}
+            <div>
+                <h3 className="text-sm font-bold text-gray-900 mb-3">Distance</h3>
+                <div className="space-y-2">
+                    {[1, 3, 5].map(d => (
+                        <div key={d} className="flex items-center gap-2">
+                            <input
+                                type="radio"
+                                id={`distance-${d}`}
+                                name="distance"
+                                checked={distance === d}
+                                onChange={() => setDistance(distance === d ? null : d)}
+                                className="w-4 h-4"
+                            />
+                            <label htmlFor={`distance-${d}`} className="text-sm text-gray-600 cursor-pointer">
+                                {d} km
+                            </label>
+                        </div>
+                    ))}
+                </div>
+            </div>
+
+            {/* Duration */}
+            <div>
+                <h3 className="text-sm font-bold text-gray-900 mb-3">Duration</h3>
+                <div className="space-y-2">
+                    {["30 min", "1 hour", "2 hours"].map(dur => (
+                        <div key={dur} className="flex items-center gap-2">
+                            <input
+                                type="radio"
+                                id={`duration-${dur}`}
+                                name="duration"
+                                checked={duration === dur}
+                                onChange={() => setDuration(duration === dur ? null : dur)}
+                                className="w-4 h-4"
+                            />
+                            <label htmlFor={`duration-${dur}`} className="text-sm text-gray-600 cursor-pointer">
+                                {dur}
+                            </label>
+                        </div>
+                    ))}
+                </div>
+            </div>
+
+            {/* Apply Filters Button */}
+            <button className="w-full bg-primary hover:bg-primary/90 text-white font-semibold py-3 rounded-xl transition-all duration-200">
+                Apply Filters
+            </button>
+        </div>
+    )
+}
+
 // ─── MAIN PAGE ───────────────────────────────────────────────────────────────
 
 export default function BookingPage() {
@@ -617,6 +801,11 @@ export default function BookingPage() {
     const [search, setSearch] = useState("")
     const [selectedService, setSelectedService] = useState<Service | null>(null)
     const [sortBy, setSortBy] = useState<"rating" | "price_asc" | "price_desc">("rating")
+    const [priceRange, setPriceRange] = useState<[number, number]>([500, 5000])
+    const [minRating, setMinRating] = useState(0)
+    const [availabilityFilters, setAvailabilityFilters] = useState<string[]>([])
+    const [distance, setDistance] = useState<number | null>(null)
+    const [duration, setDuration] = useState<string | null>(null)
 
     const handleConfirmBooking = (
         service: Service,
@@ -643,11 +832,13 @@ export default function BookingPage() {
         let list = SERVICES
         if (activeCategory !== "all") list = list.filter(s => s.category === activeCategory)
         if (search.trim()) list = list.filter(s => s.name.toLowerCase().includes(search.toLowerCase()) || s.category.toLowerCase().includes(search.toLowerCase()))
+        list = list.filter(s => s.price >= priceRange[0] && s.price <= priceRange[1])
+        if (minRating > 0) list = list.filter(s => s.rating >= minRating)
         if (sortBy === "rating") list = [...list].sort((a, b) => b.rating - a.rating)
         if (sortBy === "price_asc") list = [...list].sort((a, b) => a.price - b.price)
         if (sortBy === "price_desc") list = [...list].sort((a, b) => b.price - a.price)
         return list
-    }, [activeCategory, search, sortBy])
+    }, [activeCategory, search, sortBy, priceRange, minRating])
 
     return (
         <div className="min-h-screen bg-gray-50">
@@ -720,42 +911,63 @@ export default function BookingPage() {
 
             {/* Content */}
             <div className="container mx-auto px-4 py-8">
-                {/* Results Row */}
-                <div className="flex items-center justify-between mb-6">
-                    <p className="text-gray-600 text-sm">
-                        <span className="font-semibold text-gray-900">{filtered.length}</span> services found
-                        {activeCategory !== "all" && (
-                            <span> in <span className="text-primary font-medium">{CATEGORIES.find(c => c.id === activeCategory)?.label}</span></span>
-                        )}
-                    </p>
-                    <select
-                        value={sortBy}
-                        onChange={e => setSortBy(e.target.value as typeof sortBy)}
-                        className="text-sm border border-gray-200 rounded-xl px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-primary/30 bg-white"
-                    >
-                        <option value="rating">Sort: Top Rated</option>
-                        <option value="price_asc">Sort: Price ↑</option>
-                        <option value="price_desc">Sort: Price ↓</option>
-                    </select>
-                </div>
+                <div className="flex gap-8">
+                    {/* Sidebar - Hidden on mobile, visible on lg+ */}
+                    <div className="hidden lg:block">
+                        <FilterSidebar
+                            priceRange={priceRange}
+                            setPriceRange={setPriceRange}
+                            minRating={minRating}
+                            setMinRating={setMinRating}
+                            availabilityFilters={availabilityFilters}
+                            setAvailabilityFilters={setAvailabilityFilters}
+                            distance={distance}
+                            setDistance={setDistance}
+                            duration={duration}
+                            setDuration={setDuration}
+                        />
+                    </div>
 
-                {/* Grid */}
-                {filtered.length === 0 ? (
-                    <div className="flex flex-col items-center justify-center py-20 gap-4 text-center">
-                        <Search className="h-12 w-12 text-gray-300" />
-                        <h3 className="text-xl font-semibold text-gray-700">No services found</h3>
-                        <p className="text-gray-400">Try a different keyword or category</p>
-                        <button onClick={() => { setSearch(""); setActiveCategory("all") }} className="px-5 py-2 bg-primary text-white rounded-xl text-sm font-medium hover:bg-primary/90">
-                            Clear Filters
-                        </button>
+                    {/* Main Content */}
+                    <div className="flex-1">
+                        {/* Results Row */}
+                        <div className="flex items-center justify-between mb-6">
+                            <p className="text-gray-600 text-sm">
+                                <span className="font-semibold text-gray-900">{filtered.length}</span> services found
+                                {activeCategory !== "all" && (
+                                    <span> in <span className="text-primary font-medium">{CATEGORIES.find(c => c.id === activeCategory)?.label}</span></span>
+                                )}
+                            </p>
+                            <select
+                                value={sortBy}
+                                onChange={e => setSortBy(e.target.value as typeof sortBy)}
+                                className="text-sm border border-gray-200 rounded-xl px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-primary/30 bg-white"
+                            >
+                                <option value="rating">Sort: Top Rated</option>
+                                <option value="price_asc">Sort: Price ↑</option>
+                                <option value="price_desc">Sort: Price ↓</option>
+                            </select>
+                        </div>
+
+                        {/* Grid */}
+                        {filtered.length === 0 ? (
+                            <div className="flex flex-col items-center justify-center py-20 gap-4 text-center">
+                                <Search className="h-12 w-12 text-gray-300" />
+                                <h3 className="text-xl font-semibold text-gray-700">No services found</h3>
+                                <p className="text-gray-400">Try a different keyword or category</p>
+                                <button onClick={() => { setSearch(""); setActiveCategory("all") }} className="px-5 py-2 bg-primary text-white rounded-xl text-sm font-medium hover:bg-primary/90">
+                                    Clear Filters
+                                </button>
+                            </div>
+                        ) : (
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+                                {filtered.map(service => (
+                                    <ServiceCard key={service.id} service={service} onBook={setSelectedService} />
+                                ))}
+                            </div>
+                        )}
                     </div>
-                ) : (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-                        {filtered.map(service => (
-                            <ServiceCard key={service.id} service={service} onBook={setSelectedService} />
-                        ))}
-                    </div>
-                )}
+                </div>
             </div>
 
             {/* Booking Modal */}

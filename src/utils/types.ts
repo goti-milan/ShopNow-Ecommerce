@@ -21,6 +21,7 @@ export type Product = {
   providerAvatar?: string;
   duration?: string;
   bookingNotes?: string;
+  discount?: any; // For filtering purposes
 };
 
 export type GalleryItem = {
