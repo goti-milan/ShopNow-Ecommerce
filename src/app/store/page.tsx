@@ -1,10 +1,12 @@
-import React from 'react'
-import StoreClient from './MarketClient'
+import { Suspense } from "react";
+import StoreClient from "./MarketClient";
 
 const page = () => {
   return (
-    <StoreClient />
-  )
-}
+    <Suspense fallback={null}>
+      <StoreClient />
+    </Suspense>
+  );
+};
 
-export default page
+export default page;
