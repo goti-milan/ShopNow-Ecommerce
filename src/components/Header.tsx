@@ -39,8 +39,6 @@ const navItems = [
   { name: "Live", href: "/live" },
   { name: "Services", href: "/booking" },
   { name: "Wallet", href: "/wallet" },
-  { name: "Categories", href: "/category" },
-  { name: "Flash Sale", href: "/flashsale" },
 ]
 
 const shopCategories = [

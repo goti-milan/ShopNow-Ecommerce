@@ -397,7 +397,8 @@ export default function MarketClient() {
         <div className="container mx-auto space-y-5 px-4 py-6">
           <section className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
             <div className="space-y-4">
-              <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+              <div className="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
+
                 <div>
                   <button
                     type="button"
@@ -410,7 +411,7 @@ export default function MarketClient() {
                   <p className="mt-1 text-slate-600">Find stores directly from map and distance filters</p>
                 </div>
 
-                <div className="relative w-full lg:w-[360px]">
+                <div className="relative w-full lg:w-[360px] ">
                   <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
                   <Input
                     value={search}
@@ -421,95 +422,64 @@ export default function MarketClient() {
                 </div>
               </div>
 
-              <div className="flex flex-wrap items-center gap-2 rounded-xl bg-slate-100 p-2">
-                <div className="mr-1 flex items-center gap-2 rounded-lg bg-white px-3 py-2 text-sm font-semibold text-slate-700">
-                  <Filter className="h-4 w-4" /> Filter
-                </div>
-
-                {[1, 3, 5, 10].map((distance) => (
-                  <button
-                    key={distance}
-                    type="button"
-                    onClick={() => setMaxDistance(distance)}
-                    className={`rounded-lg border px-5 py-2 text-sm font-semibold ${
-                      maxDistance === distance
-                        ? "border-emerald-600 bg-emerald-600 text-white"
-                        : "border-slate-200 bg-white text-slate-700"
-                    }`}
-                  >
-                    {distance} km
-                  </button>
-                ))}
-
-                <select
-                  className="ml-auto rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm"
-                  value={sortBy}
-                  onChange={(e) => setSortBy(e.target.value)}
-                >
-                  <option value="relevance">Sort: Relevance</option>
-                  <option value="rating">Sort: Top rated</option>
-                  <option value="distance">Sort: Nearest</option>
-                  <option value="name">Sort: Name A-Z</option>
-                </select>
-              </div>
             </div>
           </section>
 
-          <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_420px]">
-            <section className="rounded-2xl border border-slate-200 bg-white p-2 shadow-sm">
-              <div className="relative h-[900px] overflow-hidden rounded-xl">
-                <Image
-                  src="https://images.unsplash.com/photo-1577086664693-894d8405334a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
-                  alt="Store map"
-                  fill
-                  className="object-cover opacity-80"
-                />
-
-                <div className="absolute inset-0 bg-gradient-to-t from-white/25 to-transparent" />
-
-                <div className="absolute left-6 top-6 rounded-full bg-emerald-600 px-4 py-1 text-lg font-bold text-white">
-                  You
+          <div className="grid gap-4 lg:grid-cols-[280px_minmax(0,1fr)]">
+            <aside className="space-y-4">
+              <section className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+                <div className="mb-3 flex items-center justify-between">
+                  <h2 className="text-xl font-bold text-slate-900">Filter Stores</h2>
+                  <span className="text-xs font-semibold text-slate-500">{filteredStores.length} results</span>
                 </div>
 
-                <div className="absolute left-10 top-44 rounded-full border border-emerald-400 bg-emerald-100/90 px-3 py-1 text-sm font-semibold text-emerald-700">
-                  {maxDistance} km radius
-                </div>
-
-                {filteredStores.slice(0, 6).map((store, index) => (
-                  <div
-                    key={store.id}
-                    className="absolute rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-semibold shadow"
-                    style={{
-                      left: `${18 + (index % 3) * 25}%`,
-                      top: `${24 + index * 10}%`,
-                    }}
-                  >
-                    {store.distance}
+                <div className="space-y-3">
+                  <label className="text-sm font-semibold text-slate-700">Distance</label>
+                  <div className="rounded-2xl border border-slate-200 bg-white p-3 shadow-sm">
+                    <div className="relative h-[320px] overflow-hidden rounded-xl bg-slate-100 md:h-[420px]">
+                      <iframe
+                        title="Nearby stores map"
+                        className="h-full w-full"
+                        loading="lazy"
+                        referrerPolicy="no-referrer-when-downgrade"
+                        src={`https://www.openstreetmap.org/export/embed.html?bbox=77.18%2C28.54%2C77.32%2C28.66&layer=mapnik&marker=28.60%2C77.25`}
+                      />
+                    </div>
                   </div>
-                ))}
-              </div>
-            </section>
+                  <div className="flex flex-wrap gap-2">
+                    {[1, 3, 5, 10].map((distance) => (
+                      <button
+                        key={distance}
+                        type="button"
+                        onClick={() => setMaxDistance(distance)}
+                        className={`rounded-lg border px-3 py-1.5 text-xs font-semibold ${maxDistance === distance
+                          ? "border-emerald-600 bg-emerald-600 text-white"
+                          : "border-slate-200 bg-white text-slate-700"
+                          }`}
+                      >
+                        {distance} km
+                      </button>
+                    ))}
+                  </div>
 
-            <section className="space-y-3">
-              <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
-                <h2 className="mb-3 text-4xl font-bold text-slate-900">Nearby Stores</h2>
-                <div className="flex flex-wrap gap-2">
-                  {storeCategories.map((category) => (
-                    <button
-                      key={category}
-                      type="button"
-                      onClick={() => setSelectedCategory(category)}
-                      className={`rounded-lg border px-2.5 py-1 text-xs font-semibold ${
-                        selectedCategory === category
+                  <label className="text-sm font-semibold text-slate-700">Category</label>
+                  <div className="flex flex-wrap gap-2">
+                    {storeCategories.map((category) => (
+                      <button
+                        key={category}
+                        type="button"
+                        onClick={() => setSelectedCategory(category)}
+                        className={`rounded-lg border px-2.5 py-1 text-xs font-semibold ${selectedCategory === category
                           ? "border-emerald-600 bg-emerald-50 text-emerald-700"
                           : "border-slate-200 text-slate-600"
-                      }`}
-                    >
-                      {category}
-                    </button>
-                  ))}
-                </div>
-                <div className="mt-3 flex items-center justify-between gap-3">
+                          }`}
+                      >
+                        {category}
+                      </button>
+                    ))}
+                  </div>
+
+                  <label className="text-sm font-semibold text-slate-700">Minimum Rating</label>
                   <select
                     className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm"
                     value={minRating}
@@ -521,32 +491,47 @@ export default function MarketClient() {
                     <option value={4.5}>4.5+</option>
                   </select>
 
-                  <button
-                    type="button"
-                    onClick={() => setOpenNow((prev) => !prev)}
-                    className={`inline-flex h-10 shrink-0 items-center rounded-full px-3 text-xs font-semibold ${
-                      openNow ? "bg-emerald-100 text-emerald-700" : "bg-slate-100 text-slate-600"
-                    }`}
-                  >
-                    {openNow ? "Open now" : "All hours"}
-                  </button>
-                </div>
-                <p className="mt-3 text-sm font-semibold text-slate-600">
-                  Showing <span className="text-slate-900">{filteredStores.length}</span> stores within {maxDistance} km
-                </p>
-              </div>
+                  <div className="flex items-center justify-between gap-3">
+                    <span className="text-sm font-semibold text-slate-700">Open now</span>
+                    <button
+                      type="button"
+                      onClick={() => setOpenNow((prev) => !prev)}
+                      className={`inline-flex h-9 shrink-0 items-center rounded-full px-3 text-xs font-semibold ${openNow ? "bg-emerald-100 text-emerald-700" : "bg-slate-100 text-slate-600"
+                        }`}
+                    >
+                      {openNow ? "Open now" : "All hours"}
+                    </button>
+                  </div>
 
-              <div className="space-y-3">
+                  <label className="text-sm font-semibold text-slate-700">Sort by</label>
+                  <select
+                    className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm"
+                    value={sortBy}
+                    onChange={(e) => setSortBy(e.target.value)}
+                  >
+                    <option value="relevance">Relevance</option>
+                    <option value="rating">Top rated</option>
+                    <option value="distance">Nearest</option>
+                    <option value="name">Name A-Z</option>
+                  </select>
+
+                  <p className="text-xs text-slate-500">
+                    Showing {filteredStores.length} stores within {maxDistance} km
+                  </p>
+                </div>
+              </section>
+            </aside>
+
+            <section className="space-y-4">
+
+              <div className="grid grid-cols-3 gap-4">
                 {filteredStores.map((store) => (
                   <NearbyStoreRow key={store.id} store={store} />
                 ))}
               </div>
-
-              <Button variant="outline" className="w-full">
-                View Details <ChevronRight className="h-4 w-4" />
-              </Button>
             </section>
           </div>
+
         </div>
       </div>
     );
@@ -556,7 +541,7 @@ export default function MarketClient() {
     <div className="min-h-screen bg-slate-50 pb-10">
       <div className="container mx-auto space-y-5 px-4 py-6">
         <section className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
-          <div className="mb-4 flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+          <div className=" flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
             <div>
               <h1 className="text-4xl font-bold text-slate-900">Store Listings</h1>
               <p className="mt-1 text-lg text-slate-600">Find best stores near you</p>
@@ -566,7 +551,9 @@ export default function MarketClient() {
               <Input placeholder="Search stores, products..." className="h-11 bg-white pl-10" />
             </div>
           </div>
+        </section>
 
+         <section className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
           <div className="grid gap-3 md:grid-cols-4 lg:grid-cols-7">
             {categories.map((item) => (
               <button
@@ -581,106 +568,8 @@ export default function MarketClient() {
           </div>
         </section>
 
-        <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_300px]">
-          <main className="space-y-5">
-            <section className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
-              <div className="mb-3 flex items-center justify-between">
-                <h2 className="text-3xl font-bold text-slate-900">Explore Stores</h2>
-                <Link href="/store?view=all">
-                  <Button variant="outline" size="sm" className="rounded-lg">
-                    View all <ChevronRight className="h-4 w-4" />
-                  </Button>
-                </Link>
-              </div>
-
-              <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-                {exploreStores.map((store) => (
-                  <Link
-                    key={store.id}
-                    href={`/store/${store.id}`}
-                    className="group overflow-hidden rounded-xl border border-slate-200"
-                  >
-                    <div className="relative h-32">
-                      <Image src={store.image} alt={store.name} fill className="object-cover transition group-hover:scale-105" />
-                    </div>
-                    <div className="space-y-2 p-3">
-                      <h3 className="text-lg font-bold text-slate-900">{store.name}</h3>
-                      <div className="flex items-center gap-2 text-sm text-slate-500">
-                        <div className="flex text-amber-500">
-                          {Array.from({ length: 5 }).map((_, idx) => (
-                            <Star key={idx} className="h-4 w-4 fill-amber-400" />
-                          ))}
-                        </div>
-                        <span>{store.stores} stores</span>
-                      </div>
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            </section>
-
-            <section className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
-              <div className="mb-3 flex items-center justify-between">
-                <h2 className="text-3xl font-bold text-slate-900">Popular Stores</h2>
-                <Link href="/store?view=all">
-                  <Button variant="outline" size="sm" className="rounded-lg">
-                    View all <ChevronRight className="h-4 w-4" />
-                  </Button>
-                </Link>
-              </div>
-
-              <div className="grid gap-4 xl:grid-cols-3">
-                {allStores.slice(0, 3).map((store) => (
-                  <StoreListCard key={store.id} store={store} />
-                ))}
-              </div>
-            </section>
-
-            <section className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
-              <div className="mb-4 flex items-center justify-between">
-                <h2 className="text-3xl font-bold text-slate-900">Nearby Stores</h2>
-                <Link href="/store?view=all&sort=distance">
-                  <Button variant="outline" size="sm" className="rounded-lg">
-                    View all <ChevronRight className="h-4 w-4" />
-                  </Button>
-                </Link>
-              </div>
-
-              <div className="grid gap-4 md:grid-cols-[280px_minmax(0,1fr)]">
-                <div className="relative h-72 overflow-hidden rounded-xl">
-                  <Image
-                    src="https://images.unsplash.com/photo-1611765083444-a3ce30f1c885?ixlib=rb-4.0.3&auto=format&fit=crop&w=900&q=80"
-                    alt="Nearby stores map"
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-
-                <div className="space-y-3">
-                  {allStores.slice(6, 9).map((store) => (
-                    <div key={store.id} className="flex flex-col gap-3 rounded-xl border border-slate-200 p-3 md:flex-row md:items-center md:justify-between">
-                      <div>
-                        <h3 className="text-xl font-bold text-slate-900">{store.name}</h3>
-                        <p className="text-sm text-slate-600">
-                          {store.distance} • <span className="font-semibold text-emerald-600">Open</span> • {store.openHours}
-                        </p>
-                      </div>
-                      <div className="flex gap-2">
-                        <Button variant="outline" size="sm">
-                          <Navigation className="h-4 w-4" /> Direction
-                        </Button>
-                        <Button variant="outline" size="sm">
-                          <Phone className="h-4 w-4" /> Call
-                        </Button>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </section>
-          </main>
-
-          <aside className="space-y-4">
+        <div className="flex flex-col gap-6 lg:flex-row">
+          <aside className="space-y-4 lg:w-72">
             <section className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
               <h2 className="mb-3 text-xl font-bold text-slate-900">Filter & Search</h2>
               <div className="space-y-3">
@@ -717,7 +606,6 @@ export default function MarketClient() {
                 </Link>
               </div>
             </section>
-
             <section className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
               <h2 className="mb-3 text-xl font-bold text-slate-900">Top Rated Stores</h2>
               <div className="space-y-3">
@@ -770,6 +658,108 @@ export default function MarketClient() {
               </div>
             </section>
           </aside>
+
+          <div className="flex-1 space-y-5">
+            <main className="space-y-5">
+              <section className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+                <div className="mb-3 flex items-center justify-between">
+                  <h2 className="text-3xl font-bold text-slate-900">Explore Stores</h2>
+                  <Link href="/store?view=all">
+                    <Button variant="outline" size="sm" className="rounded-lg">
+                      View all <ChevronRight className="h-4 w-4" />
+                    </Button>
+                  </Link>
+                </div>
+
+                <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+                  {exploreStores.map((store) => (
+                    <Link
+                      key={store.id}
+                      href={`/store/${store.id}`}
+                      className="group overflow-hidden rounded-xl border border-slate-200"
+                    >
+                      <div className="relative h-32">
+                        <Image src={store.image} alt={store.name} fill className="object-cover transition group-hover:scale-105" />
+                      </div>
+                      <div className="space-y-2 p-3">
+                        <h3 className="text-lg font-bold text-slate-900">{store.name}</h3>
+                        <div className="flex items-center gap-2 text-sm text-slate-500">
+                          <div className="flex text-amber-500">
+                            {Array.from({ length: 5 }).map((_, idx) => (
+                              <Star key={idx} className="h-4 w-4 fill-amber-400" />
+                            ))}
+                          </div>
+                          <span>{store.stores} stores</span>
+                        </div>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </section>
+
+              <section className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+                <div className="mb-3 flex items-center justify-between">
+                  <h2 className="text-3xl font-bold text-slate-900">Popular Stores</h2>
+                  <Link href="/store?view=all">
+                    <Button variant="outline" size="sm" className="rounded-lg">
+                      View all <ChevronRight className="h-4 w-4" />
+                    </Button>
+                  </Link>
+                </div>
+
+                <div className="grid gap-4 xl:grid-cols-3">
+                  {allStores.slice(0, 3).map((store) => (
+                    <StoreListCard key={store.id} store={store} />
+                  ))}
+                </div>
+              </section>
+
+              <section className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+                <div className="mb-4 flex items-center justify-between">
+                  <h2 className="text-3xl font-bold text-slate-900">Nearby Stores</h2>
+                  <Link href="/store?view=all&sort=distance">
+                    <Button variant="outline" size="sm" className="rounded-lg">
+                      View all <ChevronRight className="h-4 w-4" />
+                    </Button>
+                  </Link>
+                </div>
+
+                <div className="grid gap-4 md:grid-cols-[280px_minmax(0,1fr)]">
+                  <div className="relative h-72 overflow-hidden rounded-xl">
+                    <Image
+                      src="https://images.unsplash.com/photo-1611765083444-a3ce30f1c885?ixlib=rb-4.0.3&auto=format&fit=crop&w=900&q=80"
+                      alt="Nearby stores map"
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+
+                  <div className="space-y-3">
+                    {allStores.slice(6, 9).map((store) => (
+                      <div key={store.id} className="flex flex-col gap-3 rounded-xl border border-slate-200 p-3 md:flex-row md:items-center md:justify-between">
+                        <div>
+                          <h3 className="text-xl font-bold text-slate-900">{store.name}</h3>
+                          <p className="text-sm text-slate-600">
+                            {store.distance} • <span className="font-semibold text-emerald-600">Open</span> • {store.openHours}
+                          </p>
+                        </div>
+                        <div className="flex gap-2">
+                          <Button variant="outline" size="sm">
+                            <Navigation className="h-4 w-4" /> Direction
+                          </Button>
+                          <Button variant="outline" size="sm">
+                            <Phone className="h-4 w-4" /> Call
+                          </Button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </section>
+            </main>
+
+
+          </div>
         </div>
       </div>
     </div>

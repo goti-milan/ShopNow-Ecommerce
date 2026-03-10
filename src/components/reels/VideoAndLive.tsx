@@ -20,7 +20,6 @@ import {
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Input } from "@/components/ui/input"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
 
@@ -666,24 +665,92 @@ function LivePlayerModal({ stream, isOpen, onClose }: LivePlayerModalProps) {
     )
 }
 
-interface VideoAndLiveProps {
+interface VideoGalleryProps {
     videos?: VideoReel[]
+}
+
+interface LiveGalleryProps {
     streams?: LiveStream[]
 }
 
-export default function VideoAndLive({
-    videos = videosData,
-    streams = liveStreamsData
-}: VideoAndLiveProps) {
+export function VideoGallery({ videos = videosData }: VideoGalleryProps) {
     const [selectedVideo, setSelectedVideo] = useState<VideoReel | null>(null)
-    const [selectedStream, setSelectedStream] = useState<LiveStream | null>(null)
     const [videoModalOpen, setVideoModalOpen] = useState(false)
-    const [liveModalOpen, setLiveModalOpen] = useState(false)
 
     const handlePlayVideo = (video: VideoReel) => {
         setSelectedVideo(video)
         setVideoModalOpen(true)
     }
+
+    return (
+        <div className="min-h-screen bg-background">
+            <div className="container mx-auto px-4 py-12">
+                <div className="text-center mb-12">
+                    <h1 className="text-4xl font-bold mb-4">Latest Videos</h1>
+                    <p className="text-muted-foreground">Watch product demos, collections, and creator highlights.</p>
+                </div>
+
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {videos.map((video) => (
+                        <article
+                            key={video.id}
+                            className="group border rounded-xl overflow-hidden bg-card hover:shadow-lg transition-shadow cursor-pointer"
+                            onClick={() => handlePlayVideo(video)}
+                        >
+                            <div className="relative h-48 overflow-hidden">
+                                <img
+                                    src={video.thumbnail}
+                                    alt={video.caption}
+                                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                />
+                                <span className="absolute top-4 left-4 bg-primary text-primary-foreground text-xs font-bold px-3 py-1 rounded-full">
+                                    {video.tags[0] ?? "Video"}
+                                </span>
+                                <span className="absolute bottom-3 right-3 bg-black/70 text-white text-xs font-semibold px-2 py-1 rounded">
+                                    {video.duration}
+                                </span>
+                            </div>
+
+                            <div className="p-6">
+                                <div className="flex items-center gap-4 text-xs text-muted-foreground mb-3">
+                                    <div className="flex items-center gap-2">
+                                        <Avatar className="h-6 w-6">
+                                            <AvatarImage src={video.userAvatar} />
+                                            <AvatarFallback>{video.username[0]}</AvatarFallback>
+                                        </Avatar>
+                                        <span>@{video.username}</span>
+                                    </div>
+                                    <div className="flex items-center gap-1">
+                                        <Eye className="w-3 h-3" />
+                                        {video.views} views
+                                    </div>
+                                </div>
+
+                                <h2 className="text-lg font-bold mb-3 group-hover:text-primary transition-colors line-clamp-2">
+                                    {video.caption}
+                                </h2>
+
+                                <Button variant="link" className="p-0 h-auto gap-1 text-primary">
+                                    Watch Now <Play className="w-3 h-3" />
+                                </Button>
+                            </div>
+                        </article>
+                    ))}
+                </div>
+            </div>
+
+            <VideoPlayerModal
+                video={selectedVideo}
+                isOpen={videoModalOpen}
+                onClose={() => setVideoModalOpen(false)}
+            />
+        </div>
+    )
+}
+
+export function LiveGallery({ streams = liveStreamsData }: LiveGalleryProps) {
+    const [selectedStream, setSelectedStream] = useState<LiveStream | null>(null)
+    const [liveModalOpen, setLiveModalOpen] = useState(false)
 
     const handleWatchStream = (stream: LiveStream) => {
         setSelectedStream(stream)
@@ -692,105 +759,61 @@ export default function VideoAndLive({
 
     return (
         <div className="min-h-screen bg-background">
-            <div className="container mx-auto px-4 py-8">
-                <Tabs defaultValue="video" className="w-full">
-                    <TabsList className="mb-6 w-full max-w-md mx-auto grid grid-cols-2">
-                        <TabsTrigger value="video" className="flex items-center gap-2">
-                            <Play className="w-4 h-4" />
-                            Video
-                        </TabsTrigger>
-                        <TabsTrigger value="live" className="flex items-center gap-2">
-                            <Radio className="w-4 h-4" />
-                            Live
-                        </TabsTrigger>
-                    </TabsList>
+            <div className="container mx-auto px-4 py-12">
+                <div className="text-center mb-12">
+                    <h1 className="text-4xl font-bold mb-4">Live Streams</h1>
+                    <p className="text-muted-foreground">Join live shopping shows, launches, and creator Q&A.</p>
+                </div>
 
-                    <TabsContent value="video" className="mt-0">
-                        {/* Featured Video */}
-                        {videos.length > 0 && (
-                            <div className="mb-8">
-                                <h2 className="text-xl font-bold mb-4">Featured</h2>
-                                <div
-                                    className="relative aspect-video rounded-xl overflow-hidden cursor-pointer group"
-                                    onClick={() => handlePlayVideo(videos[0])}
-                                >
-                                    <img
-                                        src={videos[0].thumbnail}
-                                        alt={videos[0].caption}
-                                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                                    />
-                                    <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent" />
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {streams.map((stream) => (
+                        <article
+                            key={stream.id}
+                            className="group border rounded-xl overflow-hidden bg-card hover:shadow-lg transition-shadow cursor-pointer"
+                            onClick={() => handleWatchStream(stream)}
+                        >
+                            <div className="relative h-48 overflow-hidden">
+                                <img
+                                    src={stream.thumbnail}
+                                    alt={stream.title}
+                                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                />
+                                <span className="absolute top-4 left-4 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full">
+                                    Live
+                                </span>
+                                <span className="absolute top-4 right-4 bg-black/70 text-white text-xs font-semibold px-2 py-1 rounded">
+                                    {stream.category}
+                                </span>
+                            </div>
 
-                                    <div className="absolute bottom-0 left-0 right-0 p-6">
-                                        <div className="flex items-center gap-3 mb-3">
-                                            <Avatar className="h-10 w-10 border-2 border-white">
-                                                <AvatarImage src={videos[0].userAvatar} />
-                                                <AvatarFallback>{videos[0].username[0]}</AvatarFallback>
-                                            </Avatar>
-                                            <div>
-                                                <p className="text-white font-semibold">@{videos[0].username}</p>
-                                                <p className="text-white/70 text-xs">{videos[0].views} views</p>
-                                            </div>
-                                        </div>
-                                        <p className="text-white text-lg font-medium line-clamp-2">{videos[0].caption}</p>
-                                        <Button className="mt-4 bg-white text-black hover:bg-white/90">
-                                            <Play className="w-4 h-4 mr-2 fill-black" />
-                                            Watch Now
-                                        </Button>
+                            <div className="p-6">
+                                <div className="flex items-center gap-4 text-xs text-muted-foreground mb-3">
+                                    <div className="flex items-center gap-2">
+                                        <Avatar className="h-6 w-6">
+                                            <AvatarImage src={stream.streamerAvatar} />
+                                            <AvatarFallback>{stream.streamerName[0]}</AvatarFallback>
+                                        </Avatar>
+                                        <span>@{stream.streamerName}</span>
                                     </div>
-
-                                    <div className="absolute top-4 right-4">
-                                        <Badge className="bg-red-600 hover:bg-red-700">
-                                            <Play className="w-3 h-3 mr-1 fill-current" />
-                                            Featured
-                                        </Badge>
+                                    <div className="flex items-center gap-1">
+                                        <Users className="w-3 h-3" />
+                                        {stream.viewers.toLocaleString()} watching
                                     </div>
                                 </div>
-                            </div>
-                        )}
 
-                        {/* Video Grid */}
-                        <div>
-                            <h2 className="text-xl font-bold mb-4">Latest Videos</h2>
-                            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-                                {videos.slice(1).map((video) => (
-                                    <VideoCard
-                                        key={video.id}
-                                        video={video}
-                                        onPlay={handlePlayVideo}
-                                    />
-                                ))}
-                            </div>
-                        </div>
-                    </TabsContent>
+                                <h2 className="text-lg font-bold mb-3 group-hover:text-primary transition-colors line-clamp-2">
+                                    {stream.title}
+                                </h2>
 
-                    <TabsContent value="live" className="mt-0">
-                        {/* Live Now Section */}
-                        <div className="mb-8">
-                            <div className="flex items-center gap-2 mb-4">
-                                <div className="w-2 h-2 bg-red-600 rounded-full animate-pulse" />
-                                <h2 className="text-xl font-bold">Live Now</h2>
+                                <Button variant="link" className="p-0 h-auto gap-1 text-primary">
+                                    Watch Live <Radio className="w-3 h-3" />
+                                </Button>
                             </div>
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                {streams.map((stream) => (
-                                    <LiveCard
-                                        key={stream.id}
-                                        stream={stream}
-                                        onWatch={handleWatchStream}
-                                    />
-                                ))}
-                            </div>
-                        </div>
-                    </TabsContent>
-                </Tabs>
+                        </article>
+                    ))}
+                </div>
             </div>
 
-            {/* Modals */}
-            <VideoPlayerModal
-                video={selectedVideo}
-                isOpen={videoModalOpen}
-                onClose={() => setVideoModalOpen(false)}
-            />
             <LivePlayerModal
                 stream={selectedStream}
                 isOpen={liveModalOpen}
@@ -798,4 +821,8 @@ export default function VideoAndLive({
             />
         </div>
     )
+}
+
+export default function VideoAndLive({ videos = videosData }: VideoGalleryProps) {
+    return <VideoGallery videos={videos} />
 }
