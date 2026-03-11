@@ -4,6 +4,7 @@ import { useState, useMemo } from "react"
 import { useRouter } from "next/navigation"
 import Image from "next/image"
 import { useCart } from "@/context/CartContext"
+import HighlightGroups, { HighlightGroup } from "@/components/common/HighlightGroups"
 import {
     Search,
     Star,
@@ -840,6 +841,52 @@ export default function BookingPage() {
         return list
     }, [activeCategory, search, sortBy, priceRange, minRating])
 
+    const highlightGroups: HighlightGroup[] = useMemo(() => {
+        const latest = [...SERVICES].sort((a, b) => b.id - a.id).slice(0, 3)
+        const trending = [...SERVICES].sort((a, b) => b.rating - a.rating).slice(0, 3)
+        const popular = [...SERVICES].sort((a, b) => b.reviewCount - a.reviewCount).slice(0, 3)
+
+        return [
+            {
+                id: "latest",
+                label: "Latest",
+                description: "Newly added services",
+                items: latest.map((service) => ({
+                    id: service.id,
+                    title: service.name,
+                    subtitle: service.provider,
+                    image: service.image,
+                    meta: `${service.duration} · ₹${service.price}`,
+                })),
+            },
+            {
+                id: "trending",
+                label: "Trending",
+                description: "Highest rated picks",
+                items: trending.map((service) => ({
+                    id: `${service.id}-t`,
+                    title: service.name,
+                    subtitle: service.provider,
+                    image: service.image,
+                    meta: `${service.rating}★ · ${service.reviewCount} reviews`,
+                    tag: "Hot",
+                })),
+            },
+            {
+                id: "popular",
+                label: "Popular",
+                description: "Most booked",
+                items: popular.map((service) => ({
+                    id: `${service.id}-p`,
+                    title: service.name,
+                    subtitle: service.provider,
+                    image: service.image,
+                    meta: `${service.reviewCount} bookings`,
+                })),
+            },
+        ]
+    }, [])
+
     return (
         <div className="min-h-screen bg-gray-50">
             {/* Hero Banner */}
@@ -883,6 +930,10 @@ export default function BookingPage() {
                         ))}
                     </div>
                 </div>
+            </div>
+
+            <div className="container mx-auto px-4 py-10">
+                <HighlightGroups groups={highlightGroups} />
             </div>
 
             {/* Category Tabs */}

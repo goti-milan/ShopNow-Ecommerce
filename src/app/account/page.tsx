@@ -3,9 +3,11 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Textarea } from "@/components/ui/textarea";
 import {
     LogOut,
     MapPin,
@@ -27,6 +29,10 @@ import {
     Eye,
     EyeOff,
     Camera,
+    ArrowLeft,
+    Map,
+    MapPinned,
+    Check,
 } from "lucide-react";
 
 // ─── MOCK DATA ────────────────────────────────────────────────────────────────
@@ -93,6 +99,8 @@ function StarRating({ rating }: { rating: number }) {
 // ─── MAIN PAGE ────────────────────────────────────────────────────────────────
 export default function AccountPage() {
     const [showPassword, setShowPassword] = useState(false);
+    const [isAddressModalOpen, setIsAddressModalOpen] = useState(false);
+    const [addressType, setAddressType] = useState<"home" | "office" | "other">("home");
 
     // Notification preferences
     const [notifOrderUpdates, setNotifOrderUpdates] = useState(true);
@@ -337,7 +345,9 @@ export default function AccountPage() {
                             <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
                                 <div className="flex items-center justify-between mb-6">
                                     <h2 className="text-xl font-bold text-gray-900">My Addresses</h2>
-                                    <Button variant="outline" size="sm" className="rounded-xl">Add New Address</Button>
+                                    <Button variant="outline" size="sm" className="rounded-xl" onClick={() => setIsAddressModalOpen(true)}>
+                                        Add New Address
+                                    </Button>
                                 </div>
                                 <div className="border border-primary/30 bg-primary/5 rounded-xl p-4 relative">
                                     <span className="absolute top-4 right-4 text-xs font-bold bg-primary/10 text-primary px-2 py-0.5 rounded-full">Default</span>
@@ -466,6 +476,150 @@ export default function AccountPage() {
                     </div>
                 </Tabs>
             </div>
+
+            {isAddressModalOpen && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center px-4 py-8">
+                    <button
+                        type="button"
+                        onClick={() => setIsAddressModalOpen(false)}
+                        className="absolute inset-0 bg-black/40 backdrop-blur-sm"
+                        aria-label="Close address modal"
+                    />
+                    <div className="relative w-full max-w-3xl rounded-3xl border border-violet-100 bg-gradient-to-br from-white via-white to-violet-50 shadow-2xl">
+                        <div className="flex items-center justify-between border-b border-violet-100 px-6 py-4">
+                            <div className="flex items-center gap-3">
+                                <button
+                                    type="button"
+                                    onClick={() => setIsAddressModalOpen(false)}
+                                    className="flex h-10 w-10 items-center justify-center rounded-full border border-violet-200 bg-white text-violet-600 hover:bg-violet-50"
+                                    aria-label="Go back"
+                                >
+                                    <ArrowLeft className="h-4 w-4" />
+                                </button>
+                                <div>
+                                    <p className="text-xs uppercase tracking-[0.3em] text-violet-500">New address</p>
+                                    <h3 className="text-xl font-bold text-slate-900">Add New Address</h3>
+                                </div>
+                            </div>
+                            <div className="flex items-center gap-2">
+                                <span className="hidden text-sm text-slate-500 md:inline">Save &amp; continue</span>
+                                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-500 text-white">
+                                    <Check className="h-5 w-5" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="grid gap-6 px-6 py-6 lg:grid-cols-[1.1fr_1fr]">
+                            <div className="space-y-5">
+                                <div className="grid grid-cols-3 gap-3 rounded-2xl border border-violet-100 bg-white p-2">
+                                    {[
+                                        { key: "home", label: "Home", icon: MapPinned },
+                                        { key: "office", label: "Office", icon: Map },
+                                        { key: "other", label: "Other", icon: MapPin },
+                                    ].map((item) => (
+                                        <button
+                                            key={item.key}
+                                            type="button"
+                                            onClick={() => setAddressType(item.key as typeof addressType)}
+                                            className={`flex items-center justify-center gap-2 rounded-xl px-3 py-2 text-sm font-semibold transition ${
+                                                addressType === item.key
+                                                    ? "bg-violet-500 text-white shadow-sm"
+                                                    : "text-slate-500 hover:bg-violet-50"
+                                            }`}
+                                        >
+                                            <item.icon className="h-4 w-4" />
+                                            {item.label}
+                                        </button>
+                                    ))}
+                                </div>
+
+                                <div className="rounded-2xl border border-violet-100 bg-white p-4 shadow-sm">
+                                    <h4 className="text-sm font-semibold text-slate-800">Address Information</h4>
+                                    <div className="mt-4 space-y-4">
+                                        <div>
+                                            <Label className="text-xs uppercase text-slate-500">Recipient Name *</Label>
+                                            <Input className="mt-2 rounded-xl" placeholder="Rahul Sharma" />
+                                        </div>
+                                        <div className="grid gap-3 sm:grid-cols-2">
+                                            <div>
+                                                <Label className="text-xs uppercase text-slate-500">Phone Number</Label>
+                                                <Input className="mt-2 rounded-xl" placeholder="+91 9876543210" />
+                                            </div>
+                                            <div>
+                                                <Label className="text-xs uppercase text-slate-500">Country</Label>
+                                                <Input className="mt-2 rounded-xl" placeholder="India" />
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <Label className="text-xs uppercase text-slate-500">Full Address</Label>
+                                            <Textarea className="mt-2 min-h-[120px] rounded-xl" placeholder="Street, building, landmark..." />
+                                        </div>
+                                        <div className="grid gap-3 sm:grid-cols-2">
+                                            <div>
+                                                <Label className="text-xs uppercase text-slate-500">City</Label>
+                                                <Input className="mt-2 rounded-xl" placeholder="Mumbai" />
+                                            </div>
+                                            <div>
+                                                <Label className="text-xs uppercase text-slate-500">Postal Code</Label>
+                                                <Input className="mt-2 rounded-xl" placeholder="400050" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="space-y-4">
+                                <div className="flex items-center justify-between">
+                                    <div className="flex items-center gap-2 text-sm font-semibold text-slate-700">
+                                        <MapPinned className="h-4 w-4 text-violet-500" />
+                                        Address Details
+                                    </div>
+                                    <Button variant="outline" size="sm" className="rounded-full">
+                                        Detect Current Location
+                                    </Button>
+                                </div>
+                                <div className="relative h-56 overflow-hidden rounded-2xl border border-violet-100">
+                                    <img
+                                        src="https://images.unsplash.com/photo-1465447142348-e9952c393450?auto=format&fit=crop&w=1200&q=80"
+                                        alt="Map preview"
+                                        className="h-full w-full object-cover"
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-white/70 via-transparent to-transparent" />
+                                    <div className="absolute bottom-3 left-3 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-slate-600 shadow">
+                                        Latitude: 19.1138 • Longitude: 72.8688
+                                    </div>
+                                </div>
+                                <p className="text-xs text-slate-500">Drag the pin on the map to select your exact location.</p>
+
+                                <div className="rounded-2xl border border-violet-100 bg-white p-4">
+                                    <div className="grid gap-3 sm:grid-cols-2">
+                                        {[
+                                            { id: "default", label: "Set as default address" },
+                                            { id: "delivery", label: "Use for delivery" },
+                                            { id: "services", label: "Use for services" },
+                                            { id: "billing", label: "Use for billing" },
+                                        ].map((item) => (
+                                            <label key={item.id} className="flex items-center gap-2 text-sm text-slate-600">
+                                                <Checkbox id={`address-${item.id}`} defaultChecked />
+                                                {item.label}
+                                            </label>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                <div className="flex flex-col gap-3 sm:flex-row">
+                                    <Button variant="outline" className="w-full rounded-xl" onClick={() => setIsAddressModalOpen(false)}>
+                                        Cancel
+                                    </Button>
+                                    <Button className="w-full rounded-xl bg-emerald-600 text-white hover:bg-emerald-700">
+                                        Save Address
+                                    </Button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
