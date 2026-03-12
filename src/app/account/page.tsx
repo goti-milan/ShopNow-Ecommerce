@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
+import OrderHistory from "@/components/account/OrderHistory";
 import {
     LogOut,
     MapPin,
@@ -18,10 +19,16 @@ import {
     Bell,
     Shield,
     Trash2,
-    ChevronRight,
     CheckCircle2,
     Clock,
     Star,
+    Heart,
+    Tag,
+    LifeBuoy,
+    CreditCard,
+    Share2,
+    Link2,
+    QrCode,
     CalendarDays,
     MailCheck,
     Smartphone,
@@ -36,18 +43,37 @@ import {
 } from "lucide-react";
 
 // ─── MOCK DATA ────────────────────────────────────────────────────────────────
-const ORDERS = [
-    { id: 1001, date: "Feb 20, 2026", items: 3, amount: 4599, status: "Delivered", statusColor: "bg-green-100 text-green-700" },
-    { id: 1002, date: "Feb 14, 2026", items: 1, amount: 12999, status: "Shipped", statusColor: "bg-blue-100 text-blue-700" },
-    { id: 1003, date: "Jan 30, 2026", items: 5, amount: 2350, status: "Delivered", statusColor: "bg-green-100 text-green-700" },
-    { id: 1004, date: "Jan 10, 2026", items: 2, amount: 899, status: "Cancelled", statusColor: "bg-red-100 text-red-700" },
-];
-
 const SERVICE_BOOKINGS = [
     { id: "SB001", name: "Deep Home Cleaning", provider: "CleanPro Services", date: "Mar 5, 2026", time: "10:00 AM", amount: 1499, status: "Upcoming", statusColor: "bg-blue-100 text-blue-700", rating: null },
     { id: "SB002", name: "Personal Training Session", provider: "FitLife Pro", date: "Feb 22, 2026", time: "07:00 AM", amount: 999, status: "Completed", statusColor: "bg-green-100 text-green-700", rating: 5 },
     { id: "SB003", name: "Hair Cut & Styling", provider: "StyleHub", date: "Feb 15, 2026", time: "02:00 PM", amount: 599, status: "Completed", statusColor: "bg-green-100 text-green-700", rating: 4 },
     { id: "SB004", name: "Laptop/PC Repair", provider: "TechFix", date: "Jan 28, 2026", time: "11:00 AM", amount: 599, status: "Cancelled", statusColor: "bg-red-100 text-red-700", rating: null },
+];
+
+const FAVOURITES = [
+    { id: "FAV-001", name: "Noise Cancelling Headphones", category: "Electronics", price: 8999, rating: 5 },
+    { id: "FAV-002", name: "Minimalist Leather Wallet", category: "Accessories", price: 1299, rating: 4 },
+    { id: "FAV-003", name: "Smart Home Security Camera", category: "Home", price: 3499, rating: 4 },
+    { id: "FAV-004", name: "Ergonomic Office Chair", category: "Furniture", price: 12499, rating: 5 },
+];
+
+const DISCOUNTS = [
+    { id: "DISC-1", code: "SHOPNOW15", title: "15% off on electronics", expiry: "Apr 30, 2026", minSpend: 4999, status: "Active" },
+    { id: "DISC-2", code: "FREESHIP", title: "Free shipping on orders over ₹999", expiry: "May 15, 2026", minSpend: 999, status: "Active" },
+    { id: "DISC-3", code: "WELCOME250", title: "₹250 off on first purchase", expiry: "Mar 31, 2026", minSpend: 1499, status: "Active" },
+    { id: "DISC-4", code: "SERVE10", title: "10% off on service bookings", expiry: "Feb 28, 2026", minSpend: 799, status: "Expired" },
+];
+
+const SUPPORT_CARDS = [
+    { id: "sup-1", title: "Order & Delivery", description: "Track shipments, change delivery dates, or report delays." },
+    { id: "sup-2", title: "Returns & Refunds", description: "Start a return, check refund status, or update pickup details." },
+    { id: "sup-3", title: "Payments & Billing", description: "Payment issues, invoices, and billing address updates." },
+];
+
+const PAYMENT_METHODS = [
+    { id: "pm-1", type: "Visa", last4: "4521", expiry: "08/28", default: true },
+    { id: "pm-2", type: "Mastercard", last4: "9912", expiry: "11/27", default: false },
+    { id: "pm-3", type: "UPI", last4: "john@upi", expiry: "Auto-pay", default: false },
 ];
 
 // ─── SWITCH COMPONENT ─────────────────────────────────────────────────────────
@@ -142,7 +168,12 @@ export default function AccountPage() {
                                     { value: "profile", label: "Profile", icon: User },
                                     { value: "orders", label: "Orders", icon: Package },
                                     { value: "services", label: "My Services", icon: Wrench },
+                                    { value: "favourites", label: "Favourites", icon: Heart },
+                                    { value: "discounts", label: "Discounts", icon: Tag },
+                                    { value: "payments", label: "Payment Methods", icon: CreditCard },
                                     { value: "address", label: "Addresses", icon: MapPin },
+                                    { value: "support", label: "Support", icon: LifeBuoy },
+                                    { value: "share", label: "Share Profile", icon: Share2 },
                                     { value: "settings", label: "Settings", icon: Settings },
                                 ].map(({ value, label, icon: Icon }) => (
                                     <TabsTrigger
@@ -225,45 +256,7 @@ export default function AccountPage() {
                         {/* ── ORDERS TAB ── */}
                         <TabsContent value="orders" className="mt-0">
                             <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
-                                <div className="flex items-center justify-between mb-6">
-                                    <h2 className="text-xl font-bold text-gray-900">Order History</h2>
-                                    <Link href="/shop">
-                                        <Button variant="outline" size="sm" className="rounded-xl">Shop More</Button>
-                                    </Link>
-                                </div>
-
-                                <div className="space-y-4">
-                                    {ORDERS.map((order) => (
-                                        <div key={order.id} className="border border-gray-100 rounded-xl p-4 hover:border-primary/30 hover:shadow-sm transition-all duration-200 group">
-                                            <div className="flex items-center justify-between flex-wrap gap-3">
-                                                <div className="flex items-center gap-3">
-                                                    <div className="w-11 h-11 bg-primary/10 rounded-xl flex items-center justify-center">
-                                                        <Package className="w-5 h-5 text-primary" />
-                                                    </div>
-                                                    <div>
-                                                        <p className="font-bold text-gray-900">Order #{order.id}</p>
-                                                        <p className="text-xs text-gray-500">{order.date} · {order.items} item{order.items > 1 ? "s" : ""}</p>
-                                                    </div>
-                                                </div>
-                                                <div className="flex items-center gap-3">
-                                                    <span className={`text-xs font-semibold px-3 py-1 rounded-full ${order.statusColor}`}>{order.status}</span>
-                                                    <p className="font-bold text-gray-900">₹{order.amount.toLocaleString()}</p>
-                                                    <Button variant="ghost" size="icon" className="h-8 w-8 rounded-xl group-hover:text-primary">
-                                                        <ChevronRight className="h-4 w-4" />
-                                                    </Button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-
-                                {ORDERS.length === 0 && (
-                                    <div className="text-center py-16">
-                                        <Package className="w-12 h-12 text-gray-300 mx-auto mb-3" />
-                                        <p className="text-gray-500 font-medium">No orders yet</p>
-                                        <Link href="/shop"><Button className="mt-4 bg-primary hover:bg-primary/90 text-white">Start Shopping</Button></Link>
-                                    </div>
-                                )}
+                                <OrderHistory />
                             </div>
                         </TabsContent>
 
@@ -279,52 +272,75 @@ export default function AccountPage() {
                                     </Link>
                                 </div>
 
-                                <div className="space-y-4">
+                                <div className="space-y-5">
                                     {SERVICE_BOOKINGS.map((s) => (
-                                        <div key={s.id} className="border border-gray-100 rounded-xl p-4 hover:border-primary/30 hover:shadow-sm transition-all duration-200 group">
-                                            <div className="flex items-start justify-between flex-wrap gap-3">
+                                        <div key={s.id} className="border border-gray-100 rounded-3xl p-5 hover:border-primary/30 hover:shadow-sm transition-all duration-200">
+                                            <div className="flex items-start justify-between gap-4 flex-wrap">
                                                 <div className="flex items-start gap-3">
-                                                    <div className="w-11 h-11 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                                                    <div className="w-12 h-12 bg-primary/10 rounded-2xl flex items-center justify-center flex-shrink-0">
                                                         <Wrench className="w-5 h-5 text-primary" />
                                                     </div>
                                                     <div>
-                                                        <p className="font-bold text-gray-900">{s.name}</p>
-                                                        <p className="text-xs text-gray-500 mt-0.5">{s.provider}</p>
-                                                        <div className="flex items-center gap-3 mt-2 flex-wrap">
-                                                            <span className="flex items-center gap-1 text-xs text-gray-500">
-                                                                <CalendarDays className="h-3.5 w-3.5" /> {s.date}
+                                                        <p className="text-lg font-bold text-gray-900">{s.name}</p>
+                                                        <p className="text-sm text-gray-500 mt-1">{s.provider}</p>
+                                                        <div className="flex items-center gap-4 mt-3 flex-wrap text-sm text-gray-500">
+                                                            <span className="flex items-center gap-1">
+                                                                <CalendarDays className="h-4 w-4" /> {s.date}
                                                             </span>
-                                                            <span className="flex items-center gap-1 text-xs text-gray-500">
-                                                                <Clock className="h-3.5 w-3.5" /> {s.time}
+                                                            <span className="flex items-center gap-1">
+                                                                <Clock className="h-4 w-4" /> {s.time}
+                                                            </span>
+                                                            <span className="flex items-center gap-1">
+                                                                <CheckCircle2 className="h-4 w-4 text-emerald-500" />
+                                                                Booking ID: {s.id}
                                                             </span>
                                                         </div>
-                                                        {s.rating && (
-                                                            <div className="flex items-center gap-1.5 mt-2">
-                                                                <StarRating rating={s.rating} />
-                                                                <span className="text-xs text-gray-400">Your rating</span>
-                                                            </div>
-                                                        )}
                                                     </div>
                                                 </div>
-
-                                                <div className="flex flex-col items-end gap-2">
+                                                <div className="flex items-center gap-3">
                                                     <span className={`text-xs font-semibold px-3 py-1 rounded-full ${s.statusColor}`}>
                                                         {s.status === "Upcoming" && <Clock className="h-3 w-3 inline mr-1" />}
                                                         {s.status === "Completed" && <CheckCircle2 className="h-3 w-3 inline mr-1" />}
                                                         {s.status}
                                                     </span>
-                                                    <p className="font-bold text-gray-900">₹{s.amount.toLocaleString()}</p>
-                                                    {s.status === "Upcoming" && (
-                                                        <Button variant="outline" size="sm" className="h-7 text-xs rounded-lg border-red-200 text-red-500 hover:bg-red-50">
-                                                            Cancel
-                                                        </Button>
-                                                    )}
-                                                    {s.status === "Completed" && !s.rating && (
-                                                        <Button variant="outline" size="sm" className="h-7 text-xs rounded-lg">
-                                                            Rate Service
-                                                        </Button>
+                                                    <p className="text-lg font-bold text-gray-900">₹{s.amount.toLocaleString()}</p>
+                                                </div>
+                                            </div>
+
+                                            <div className="mt-4 border border-gray-100 rounded-2xl p-4 bg-gray-50/60">
+                                                <div className="flex items-center justify-between">
+                                                    <div>
+                                                        <p className="text-sm font-semibold text-gray-900">Service Summary</p>
+                                                        <p className="text-xs text-gray-500 mt-1">Professional assigned · On-time guarantee</p>
+                                                    </div>
+                                                    {s.rating && (
+                                                        <div className="flex items-center gap-2">
+                                                            <StarRating rating={s.rating} />
+                                                            <span className="text-xs text-gray-400">Your rating</span>
+                                                        </div>
                                                     )}
                                                 </div>
+                                            </div>
+
+                                            <div className="mt-5 flex flex-wrap gap-2 justify-end">
+                                                {s.status === "Upcoming" && (
+                                                    <>
+                                                        <Button variant="outline" size="sm" className="rounded-xl">
+                                                            Reschedule
+                                                        </Button>
+                                                        <Button variant="outline" size="sm" className="rounded-xl border-red-200 text-red-500 hover:bg-red-50">
+                                                            Cancel
+                                                        </Button>
+                                                    </>
+                                                )}
+                                                {s.status === "Completed" && !s.rating && (
+                                                    <Button variant="outline" size="sm" className="rounded-xl">
+                                                        Rate Service
+                                                    </Button>
+                                                )}
+                                                <Button size="sm" className="rounded-xl bg-primary hover:bg-primary/90 text-white">
+                                                    View Details
+                                                </Button>
                                             </div>
                                         </div>
                                     ))}
@@ -337,6 +353,177 @@ export default function AccountPage() {
                                         <Link href="/booking"><Button className="mt-4 bg-primary hover:bg-primary/90 text-white">Browse Services</Button></Link>
                                     </div>
                                 )}
+                            </div>
+                        </TabsContent>
+
+                        {/* ── FAVOURITES TAB ── */}
+                        <TabsContent value="favourites" className="mt-0">
+                            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
+                                <div className="flex items-center justify-between mb-6">
+                                    <h2 className="text-xl font-bold text-gray-900">My Favourites</h2>
+                                    <Link href="/shop">
+                                        <Button variant="outline" size="sm" className="rounded-xl">Explore More</Button>
+                                    </Link>
+                                </div>
+
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    {FAVOURITES.map((item) => (
+                                        <div key={item.id} className="border border-gray-100 rounded-xl p-4 hover:border-primary/30 hover:shadow-sm transition-all duration-200 group">
+                                            <div className="flex items-start justify-between gap-3">
+                                                <div className="flex items-start gap-3">
+                                                    <div className="w-11 h-11 bg-rose-50 rounded-xl flex items-center justify-center">
+                                                        <Heart className="w-5 h-5 text-rose-500" />
+                                                    </div>
+                                                    <div>
+                                                        <p className="font-bold text-gray-900">{item.name}</p>
+                                                        <p className="text-xs text-gray-500 mt-0.5">{item.category}</p>
+                                                        <div className="mt-2">
+                                                            <StarRating rating={item.rating} />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div className="text-right">
+                                                    <p className="font-bold text-gray-900">₹{item.price.toLocaleString()}</p>
+                                                    <Button size="sm" className="mt-2 h-7 rounded-lg text-xs bg-primary hover:bg-primary/90 text-white">
+                                                        Add to Cart
+                                                    </Button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+
+                                {FAVOURITES.length === 0 && (
+                                    <div className="text-center py-16">
+                                        <Heart className="w-12 h-12 text-gray-300 mx-auto mb-3" />
+                                        <p className="text-gray-500 font-medium">No favourites yet</p>
+                                        <Link href="/shop"><Button className="mt-4 bg-primary hover:bg-primary/90 text-white">Browse Products</Button></Link>
+                                    </div>
+                                )}
+                            </div>
+                        </TabsContent>
+
+                        {/* ── DISCOUNTS TAB ── */}
+                        <TabsContent value="discounts" className="mt-0">
+                            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 space-y-5">
+                                <div className="flex items-center justify-between">
+                                    <div>
+                                        <h2 className="text-xl font-bold text-gray-900">Discounts & Coupons</h2>
+                                        <p className="text-sm text-gray-500">Save more with your available offers.</p>
+                                    </div>
+                                    <Link href="/shop">
+                                        <Button variant="outline" size="sm" className="rounded-xl">Use Discounts</Button>
+                                    </Link>
+                                </div>
+
+                                <div className="grid gap-4">
+                                    {DISCOUNTS.map((coupon) => (
+                                        <div key={coupon.id} className="border border-gray-100 rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                                            <div className="flex items-start gap-3">
+                                                <div className={`w-11 h-11 rounded-xl flex items-center justify-center ${coupon.status === "Active" ? "bg-emerald-50" : "bg-gray-100"}`}>
+                                                    <Tag className={`w-5 h-5 ${coupon.status === "Active" ? "text-emerald-600" : "text-gray-400"}`} />
+                                                </div>
+                                                <div>
+                                                    <p className="text-xs uppercase tracking-widest text-gray-400">Coupon Code</p>
+                                                    <p className="text-lg font-extrabold text-gray-900">{coupon.code}</p>
+                                                    <p className="text-sm text-gray-600 mt-1">{coupon.title}</p>
+                                                    <p className="text-xs text-gray-500 mt-2">Min spend ₹{coupon.minSpend.toLocaleString()} · Expires {coupon.expiry}</p>
+                                                </div>
+                                            </div>
+                                            <div className="flex items-center gap-3">
+                                                <span className={`text-xs font-semibold px-3 py-1 rounded-full ${coupon.status === "Active" ? "bg-emerald-100 text-emerald-700" : "bg-gray-100 text-gray-500"}`}>
+                                                    {coupon.status}
+                                                </span>
+                                                <Button
+                                                    size="sm"
+                                                    variant={coupon.status === "Active" ? "primary" : "outline"}
+                                                    className={`rounded-xl ${coupon.status === "Active" ? "bg-primary hover:bg-primary/90 text-white" : "cursor-not-allowed"}`}
+                                                    disabled={coupon.status !== "Active"}
+                                                >
+                                                    Apply
+                                                </Button>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </TabsContent>
+
+                        {/* ── PAYMENTS TAB ── */}
+                        <TabsContent value="payments" className="mt-0 space-y-5">
+                            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
+                                <div className="flex items-center justify-between mb-6">
+                                    <div>
+                                        <h2 className="text-xl font-bold text-gray-900">Payment Methods</h2>
+                                        <p className="text-sm text-gray-500">Manage your saved cards and UPI IDs.</p>
+                                    </div>
+                                    <Button className="rounded-xl bg-primary hover:bg-primary/90 text-white">
+                                        Add New Method
+                                    </Button>
+                                </div>
+
+                                <div className="grid gap-4">
+                                    {PAYMENT_METHODS.map((pm) => (
+                                        <div key={pm.id} className="border border-gray-100 rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                                            <div className="flex items-start gap-3">
+                                                <div className="w-11 h-11 rounded-xl bg-indigo-50 flex items-center justify-center">
+                                                    <CreditCard className="w-5 h-5 text-indigo-600" />
+                                                </div>
+                                                <div>
+                                                    <p className="font-semibold text-gray-900">{pm.type}</p>
+                                                    <p className="text-sm text-gray-500">•••• {pm.last4}</p>
+                                                    <p className="text-xs text-gray-400 mt-1">{pm.expiry}</p>
+                                                </div>
+                                            </div>
+                                            <div className="flex items-center gap-3">
+                                                {pm.default && (
+                                                    <span className="text-xs font-semibold px-3 py-1 rounded-full bg-emerald-100 text-emerald-700">
+                                                        Default
+                                                    </span>
+                                                )}
+                                                <Button variant="outline" size="sm" className="rounded-xl">Edit</Button>
+                                                <Button variant="outline" size="sm" className="rounded-xl border-red-200 text-red-500 hover:bg-red-50">
+                                                    Remove
+                                                </Button>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+
+                                {PAYMENT_METHODS.length === 0 && (
+                                    <div className="text-center py-16">
+                                        <CreditCard className="w-12 h-12 text-gray-300 mx-auto mb-3" />
+                                        <p className="text-gray-500 font-medium">No payment methods saved</p>
+                                        <Button className="mt-4 bg-primary hover:bg-primary/90 text-white">Add a Payment Method</Button>
+                                    </div>
+                                )}
+                            </div>
+
+                            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
+                                <h3 className="text-lg font-bold text-gray-900 mb-4">Add New Payment Method</h3>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                    <div className="space-y-2 md:col-span-2">
+                                        <Label htmlFor="card-name">Cardholder Name</Label>
+                                        <Input id="card-name" placeholder="John Doe" />
+                                    </div>
+                                    <div className="space-y-2 md:col-span-2">
+                                        <Label htmlFor="card-number">Card Number</Label>
+                                        <Input id="card-number" placeholder="1234 5678 9012 3456" />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <Label htmlFor="card-expiry">Expiry Date</Label>
+                                        <Input id="card-expiry" placeholder="MM/YY" />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <Label htmlFor="card-cvv">CVV</Label>
+                                        <Input id="card-cvv" placeholder="***" />
+                                    </div>
+                                </div>
+
+                                <div className="mt-6 flex flex-col sm:flex-row gap-3">
+                                    <Button className="bg-primary hover:bg-primary/90 text-white">Save Payment Method</Button>
+                                    <Button variant="outline">Cancel</Button>
+                                </div>
                             </div>
                         </TabsContent>
 
@@ -362,6 +549,120 @@ export default function AccountPage() {
                                         <span className="text-gray-300">|</span>
                                         <Button variant="link" size="sm" className="h-auto p-0 text-red-500">Delete</Button>
                                     </div>
+                                </div>
+                            </div>
+                        </TabsContent>
+
+                        {/* ── SUPPORT TAB ── */}
+                        <TabsContent value="support" className="mt-0 space-y-5">
+                            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
+                                <div className="flex items-center justify-between mb-6">
+                                    <div>
+                                        <h2 className="text-xl font-bold text-gray-900">Support Center</h2>
+                                        <p className="text-sm text-gray-500">We&apos;re here 24/7 to help you with anything.</p>
+                                    </div>
+                                    <Button className="rounded-xl bg-primary hover:bg-primary/90 text-white">
+                                        Start Live Chat
+                                    </Button>
+                                </div>
+
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                    {SUPPORT_CARDS.map((card) => (
+                                        <div key={card.id} className="border border-gray-100 rounded-2xl p-4 hover:border-primary/30 hover:shadow-sm transition-all">
+                                            <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center mb-3">
+                                                <LifeBuoy className="w-4 h-4 text-primary" />
+                                            </div>
+                                            <p className="font-semibold text-gray-900">{card.title}</p>
+                                            <p className="text-xs text-gray-500 mt-1">{card.description}</p>
+                                            <Button variant="link" className="px-0 text-primary mt-2 h-auto">View Help</Button>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+
+                            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
+                                <h3 className="text-lg font-bold text-gray-900 mb-4">Submit a Support Request</h3>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                    <div className="space-y-2">
+                                        <Label htmlFor="support-name">Full Name</Label>
+                                        <Input id="support-name" placeholder="John Doe" />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <Label htmlFor="support-email">Email Address</Label>
+                                        <Input id="support-email" placeholder="john.doe@example.com" />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <Label htmlFor="support-topic">Topic</Label>
+                                        <Input id="support-topic" placeholder="Order delayed / Payment issue / Return" />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <Label htmlFor="support-order">Order or Booking ID (optional)</Label>
+                                        <Input id="support-order" placeholder="ORD-1001 / SB001" />
+                                    </div>
+                                    <div className="space-y-2 md:col-span-2">
+                                        <Label htmlFor="support-message">Message</Label>
+                                        <Textarea id="support-message" placeholder="Tell us what happened and how we can help." />
+                                    </div>
+                                </div>
+
+                                <div className="mt-6 flex flex-col sm:flex-row gap-3">
+                                    <Button className="bg-primary hover:bg-primary/90 text-white">Submit Request</Button>
+                                    <Button variant="outline">Clear</Button>
+                                </div>
+                            </div>
+                        </TabsContent>
+
+                        {/* ── SHARE TAB ── */}
+                        <TabsContent value="share" className="mt-0 space-y-5">
+                            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
+                                <div className="flex items-start justify-between gap-4 flex-wrap mb-6">
+                                    <div>
+                                        <h2 className="text-xl font-bold text-gray-900">Share Your Profile</h2>
+                                        <p className="text-sm text-gray-500">Let others view your reviews and public activity.</p>
+                                    </div>
+                                    <Button className="rounded-xl bg-primary hover:bg-primary/90 text-white">
+                                        Generate Share Link
+                                    </Button>
+                                </div>
+
+                                <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-6">
+                                    <div className="rounded-2xl border border-gray-100 p-4">
+                                        <div className="flex items-center gap-2 text-sm font-semibold text-gray-700">
+                                            <Link2 className="h-4 w-4 text-primary" />
+                                            Shareable Link
+                                        </div>
+                                        <div className="mt-3 flex flex-col sm:flex-row gap-3">
+                                            <Input
+                                                readOnly
+                                                value="https://shopnow.com/u/john-doe"
+                                                className="rounded-xl bg-gray-50"
+                                            />
+                                            <Button variant="outline" className="rounded-xl">
+                                                Copy Link
+                                            </Button>
+                                        </div>
+                                        <p className="text-xs text-gray-500 mt-3">
+                                            Anyone with this link can view your public profile details.
+                                        </p>
+                                    </div>
+
+                                    <div className="rounded-2xl border border-gray-100 p-4 flex flex-col items-center text-center">
+                                        <div className="w-28 h-28 rounded-2xl border border-dashed border-primary/30 flex items-center justify-center bg-primary/5">
+                                            <QrCode className="h-10 w-10 text-primary" />
+                                        </div>
+                                        <p className="text-sm font-semibold text-gray-900 mt-3">Scan to view profile</p>
+                                        <p className="text-xs text-gray-500">Share this QR with your friends.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
+                                <h3 className="text-lg font-bold text-gray-900 mb-4">Quick Share</h3>
+                                <div className="flex flex-wrap gap-3">
+                                    <Button variant="outline" className="rounded-xl">Share via WhatsApp</Button>
+                                    <Button variant="outline" className="rounded-xl">Share via Email</Button>
+                                    <Button variant="outline" className="rounded-xl">Share via SMS</Button>
+                                    <Button variant="outline" className="rounded-xl">Share via X</Button>
                                 </div>
                             </div>
                         </TabsContent>
@@ -554,10 +855,14 @@ export default function AccountPage() {
                                             <Label className="text-xs uppercase text-slate-500">Full Address</Label>
                                             <Textarea className="mt-2 min-h-[120px] rounded-xl" placeholder="Street, building, landmark..." />
                                         </div>
-                                        <div className="grid gap-3 sm:grid-cols-2">
+                                        <div className="grid gap-3 sm:grid-cols-3">
                                             <div>
                                                 <Label className="text-xs uppercase text-slate-500">City</Label>
                                                 <Input className="mt-2 rounded-xl" placeholder="Mumbai" />
+                                            </div>
+                                            <div>
+                                                <Label className="text-xs uppercase text-slate-500">State</Label>
+                                                <Input className="mt-2 rounded-xl" placeholder="Maharashtra" />
                                             </div>
                                             <div>
                                                 <Label className="text-xs uppercase text-slate-500">Postal Code</Label>
