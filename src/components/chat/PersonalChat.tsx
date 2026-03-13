@@ -79,8 +79,8 @@ export default function PersonalChat() {
                         <h3 className="font-semibold">@{selectedUser.username}</h3>
                         <p className="text-xs text-muted-foreground">
                             {selectedUser.isOnline ? (
-                                <span className="text-green-500 flex items-center gap-1">
-                                    <span className="w-2 h-2 bg-green-500 rounded-full" />
+                                <span className="text-primary flex items-center gap-1">
+                                    <span className="w-2 h-2 bg-accent0 rounded-full" />
                                     Online
                                 </span>
                             ) : (
@@ -138,7 +138,7 @@ export default function PersonalChat() {
                                     </span>
                                     {message.isMine && (
                                         message.isRead ? (
-                                            <CheckCheck className="w-3 h-3 text-blue-500" />
+                                            <CheckCheck className="w-3 h-3 text-primary" />
                                         ) : (
                                             <Check className="w-3 h-3 text-muted-foreground" />
                                         )

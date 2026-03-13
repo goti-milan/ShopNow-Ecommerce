@@ -18,7 +18,7 @@ export default function ComboOffers() {
     };
 
     return (
-        <section className="py-16 bg-white overflow-hidden">
+        <section className="py-16 bg-background overflow-hidden">
             <div className="container mx-auto px-4 max-w-7xl">
                 {/* Section Header */}
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
@@ -74,7 +74,7 @@ export default function ComboOffers() {
                 </div>
 
                 {/* Promo Banner */}
-                <div className="mt-4 bg-[#2d3139] rounded-3xl p-8 md:p-12 relative overflow-hidden group">
+                <div className="mt-4 bg-secondary rounded-3xl p-8 md:p-12 relative overflow-hidden group">
                     <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-primary/20 rounded-full blur-[100px] -mr-48 -mt-48 group-hover:bg-primary/30 transition-all duration-700" />
                     <div className="relative z-10 flex flex-col md:flex-row items-center gap-12 justify-between">
                         <div className="space-y-4 text-center md:text-left">
@@ -82,11 +82,11 @@ export default function ComboOffers() {
                                 LIMITED COMBO DEALS
                             </div>
                             <h2 className="text-4xl md:text-6xl font-bold text-white leading-tight">BUY 1 GET 1 FREE!</h2>
-                            <p className="text-gray-400 text-base max-w-lg leading-relaxed">
+                            <p className="text-muted-foreground text-base max-w-lg leading-relaxed">
                                 Mix and match any two items from our selected accessories category. Limited time offer ending soon.
                             </p>
                         </div>
-                        <Button className="bg-white text-gray-900 hover:bg-gray-100 font-bold px-10 py-8 rounded-2xl text-lg transition-all transform hover:scale-105 active:scale-95 shadow-2xl flex items-center gap-3 shrink-0">
+                        <Button className="bg-background text-foreground hover:bg-muted font-bold px-10 py-8 rounded-2xl text-lg transition-all transform hover:scale-105 active:scale-95 shadow-2xl flex items-center gap-3 shrink-0">
                             CLAIM COMBO OFFER <ArrowRight className="w-6 h-6" />
                         </Button>
                     </div>

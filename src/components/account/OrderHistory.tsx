@@ -7,7 +7,7 @@ const ORDERS = [
         id: 1001,
         date: "Feb 20, 2026",
         status: "Delivered",
-        statusColor: "bg-emerald-100 text-emerald-700",
+        statusColor: "bg-accent text-primary-dark",
         total: 4599,
         items: [
             {
@@ -32,7 +32,7 @@ const ORDERS = [
         id: 1002,
         date: "Feb 14, 2026",
         status: "Processing",
-        statusColor: "bg-amber-100 text-amber-700",
+        statusColor: "bg-accent text-primary-dark",
         total: 12999,
         items: [
             {
@@ -54,8 +54,8 @@ export default function OrderHistory({ showHeader = true }: { showHeader?: boole
             {showHeader && (
                 <div className="flex items-center justify-between gap-4">
                     <div>
-                        <h2 className="text-xl font-bold text-gray-900">Order History</h2>
-                        <p className="text-sm text-gray-500">Track and manage your recent orders.</p>
+                        <h2 className="text-xl font-bold text-foreground">Order History</h2>
+                        <p className="text-sm text-muted-foreground">Track and manage your recent orders.</p>
                     </div>
                     <Link href="/shop">
                         <Button variant="outline" className="rounded-xl gap-2">
@@ -66,46 +66,46 @@ export default function OrderHistory({ showHeader = true }: { showHeader?: boole
             )}
 
             {ORDERS.map((order) => (
-                <div key={order.id} className="bg-white border border-gray-100 rounded-3xl p-6 shadow-sm">
+                <div key={order.id} className="bg-background border border-border rounded-3xl p-6 shadow-sm">
                     <div className="flex items-start justify-between gap-4 flex-wrap">
                         <div>
-                            <p className="text-2xl font-bold text-gray-900">Order #{order.id}</p>
-                            <p className="text-sm text-gray-500 mt-1">{order.date}</p>
+                            <p className="text-2xl font-bold text-foreground">Order #{order.id}</p>
+                            <p className="text-sm text-muted-foreground mt-1">{order.date}</p>
                         </div>
                         <span className={`text-sm font-semibold px-4 py-1.5 rounded-full ${order.statusColor}`}>
                             {order.status}
                         </span>
                     </div>
 
-                    <div className="mt-6 border border-gray-100 rounded-2xl p-4">
+                    <div className="mt-6 border border-border rounded-2xl p-4">
                         <div className="space-y-4">
                             {order.items.map((item, index) => (
-                                <div key={item.id} className={`flex items-center justify-between gap-4 ${index !== order.items.length - 1 ? "border-b border-gray-100 pb-4" : ""}`}>
+                                <div key={item.id} className={`flex items-center justify-between gap-4 ${index !== order.items.length - 1 ? "border-b border-border pb-4" : ""}`}>
                                     <div className="flex items-center gap-4">
-                                        <div className="h-16 w-16 rounded-xl bg-gray-50 border border-gray-100 overflow-hidden">
+                                        <div className="h-16 w-16 rounded-xl bg-muted border border-border overflow-hidden">
                                             <img src={item.image} alt={item.name} className="h-full w-full object-cover" />
                                         </div>
                                         <div>
-                                            <p className="font-semibold text-gray-900">{item.name}</p>
-                                            <p className="text-sm text-gray-500">Qty: {item.qty}</p>
+                                            <p className="font-semibold text-foreground">{item.name}</p>
+                                            <p className="text-sm text-muted-foreground">Qty: {item.qty}</p>
                                         </div>
                                     </div>
                                     {item.price > 0 ? (
-                                        <p className="font-semibold text-gray-900">₹{item.price.toLocaleString()}</p>
+                                        <p className="font-semibold text-foreground">₹{item.price.toLocaleString()}</p>
                                     ) : (
-                                        <p className="text-sm text-gray-500">Qty: {item.qty}</p>
+                                        <p className="text-sm text-muted-foreground">Qty: {item.qty}</p>
                                     )}
                                 </div>
                             ))}
                         </div>
 
-                        <div className="flex items-center justify-between mt-4 pt-4 border-t border-gray-100">
-                            <p className="text-sm text-gray-500">Total: <span className="font-semibold text-gray-900">₹{order.total.toLocaleString()}</span></p>
-                            <p className="text-sm text-gray-500">Total: <span className="font-semibold text-gray-900">₹{order.total.toLocaleString()}</span></p>
+                        <div className="flex items-center justify-between mt-4 pt-4 border-t border-border">
+                            <p className="text-sm text-muted-foreground">Total: <span className="font-semibold text-foreground">₹{order.total.toLocaleString()}</span></p>
+                            <p className="text-sm text-muted-foreground">Total: <span className="font-semibold text-foreground">₹{order.total.toLocaleString()}</span></p>
                         </div>
                     </div>
 
-                    <div className="mt-5 text-sm text-gray-500 space-y-1">
+                    <div className="mt-5 text-sm text-muted-foreground space-y-1">
                         <p>{order.note}</p>
                         <p>{order.noteSecondary}</p>
                     </div>
@@ -115,15 +115,15 @@ export default function OrderHistory({ showHeader = true }: { showHeader?: boole
                             <>
                                 <Button variant="outline" className="rounded-xl">Return</Button>
                                 <Button variant="outline" className="rounded-xl">Review</Button>
-                                <Button className="rounded-xl bg-orange-500 hover:bg-orange-600 text-white">Buy Again</Button>
+                                <Button className="rounded-xl bg-accent0 hover:bg-primary-dark text-white">Buy Again</Button>
                             </>
                         )}
                         {order.status === "Processing" && (
-                            <Button variant="outline" className="rounded-xl border-red-200 text-red-500 hover:bg-red-50">
+                            <Button variant="outline" className="rounded-xl border-primary/30 text-primary hover:bg-accent">
                                 Cancel Order
                             </Button>
                         )}
-                        <Button variant="outline" className="rounded-xl gap-2 text-blue-600 border-blue-100 hover:bg-blue-50">
+                        <Button variant="outline" className="rounded-xl gap-2 text-primary border-primary/20 hover:bg-accent">
                             View Order <ChevronRight className="h-4 w-4" />
                         </Button>
                     </div>
@@ -131,8 +131,8 @@ export default function OrderHistory({ showHeader = true }: { showHeader?: boole
             ))}
 
             {ORDERS.length === 0 && (
-                <div className="text-center py-16 bg-white rounded-3xl border border-gray-100">
-                    <p className="text-gray-500 font-medium">No orders yet</p>
+                <div className="text-center py-16 bg-background rounded-3xl border border-border">
+                    <p className="text-muted-foreground font-medium">No orders yet</p>
                     <Link href="/shop">
                         <Button className="mt-4 rounded-xl">Start Shopping</Button>
                     </Link>

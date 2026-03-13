@@ -5,13 +5,13 @@ import { Button } from "@/components/ui/button";
 
 export default function Footer() {
     return (
-        <footer className="bg-black text-white mt-16">
+        <footer className="bg-secondary text-white mt-16">
             <div className="container mx-auto px-4 py-12">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
                     {/* Company Info */}
                     <div>
                         <div className="flex items-center gap-2 mb-4">
-                            <div className="w-10 h-10 rounded-lg bg-white/20 flex items-center justify-center text-xl font-bold">
+                            <div className="w-10 h-10 rounded-lg bg-background/20 flex items-center justify-center text-xl font-bold">
                                 🛒
                             </div>
                             <span className="text-xl font-bold">ShopNow</span>
@@ -53,7 +53,7 @@ export default function Footer() {
                         <h4 className="font-bold mb-4">Support</h4>
                         <ul className="space-y-2 text-white/70 text-sm">
                             <li><Link href="/contactus" className="hover:text-white transition">Contact Us</Link></li>
-                            <li><Link href="/faq" className="hover:text-white transition">FAQ</Link></li>
+
                             <li><Link href="/policy" className="hover:text-white transition">Privacy Policy</Link></li>
                             <li><Link href="/policy" className="hover:text-white transition">Terms & Conditions</Link></li>
                             <li><Link href="/policy" className="hover:text-white transition">Return Policy</Link></li>
@@ -71,9 +71,9 @@ export default function Footer() {
                             <Input
                                 type="email"
                                 placeholder="Enter your email"
-                                className="bg-white/10 border-white/20 text-white placeholder:text-white/50"
+                                className="bg-background/10 border-white/20 text-white placeholder:text-white/50"
                             />
-                            <Button size="icon" className="bg-white text-primary hover:bg-white/90">
+                            <Button size="icon" className="bg-background text-primary hover:bg-background/90">
                                 <Send className="w-4 h-4" />
                             </Button>
                         </div>

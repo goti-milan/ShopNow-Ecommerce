@@ -35,15 +35,15 @@ export default function FlashSale() {
     };
 
     return (
-        <section className="py-16 bg-white overflow-hidden">
+        <section className="py-16 bg-background overflow-hidden">
             <div className="container mx-auto px-4 max-w-7xl">
                 {/* Flash Sale Banner */}
-                <div className="bg-gradient-to-r from-orange-500 to-red-600 rounded-3xl p-8 md:p-12 mb-12 text-white shadow-2xl relative overflow-hidden">
+                <div className="bg-gradient-to-r from-primary to-primary-dark rounded-3xl p-8 md:p-12 mb-12 text-white shadow-2xl relative overflow-hidden">
                     <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-10">
                         <div className="text-center lg:text-left space-y-4">
                             <div className="flex items-center justify-center lg:justify-start gap-2">
-                                <Zap className="w-6 h-6 fill-yellow-300 text-yellow-300 animate-pulse" />
-                                <span className="text-yellow-200 font-semibold tracking-widest uppercase text-xs">Limited Time Deal</span>
+                                <Zap className="w-6 h-6 fill-primary text-primary-foreground animate-pulse" />
+                                <span className="text-primary-foreground font-semibold tracking-widest uppercase text-xs">Limited Time Deal</span>
                             </div>
                             <h2 className="text-4xl md:text-6xl font-bold leading-tight">
                                 Super Flash Sale
@@ -51,13 +51,13 @@ export default function FlashSale() {
                             <p className="text-lg font-medium opacity-90 max-w-xl">
                                 Up to 70% off on premium products. Hurry up!
                             </p>
-                            <Button className="bg-white text-orange-600 hover:bg-orange-50 font-bold px-8 py-5 rounded-xl text-base transition-all transform hover:scale-105 active:scale-95 shadow-lg gap-2">
+                            <Button className="bg-background text-primary-dark hover:bg-accent font-bold px-8 py-5 rounded-xl text-base transition-all transform hover:scale-105 active:scale-95 shadow-lg gap-2">
                                 Shop the Sale <ArrowRight className="w-4 h-4" />
                             </Button>
                         </div>
 
-                        <div className="flex flex-col items-center gap-3 bg-black/20 backdrop-blur-xl p-6 rounded-2xl border border-white/10 shadow-inner">
-                            <p className="text-xs font-semibold uppercase tracking-widest text-orange-200">Limited Time Remaining</p>
+                        <div className="flex flex-col items-center gap-3 bg-secondary/20 backdrop-blur-xl p-6 rounded-2xl border border-white/10 shadow-inner">
+                            <p className="text-xs font-semibold uppercase tracking-widest text-primary-foreground">Limited Time Remaining</p>
                             <div className="flex items-center gap-4">
                                 <div className="flex flex-col items-center gap-1">
                                     <div className="text-4xl md:text-5xl font-bold tracking-tight">{timeLeft.hours.toString().padStart(2, '0')}</div>
@@ -78,8 +78,8 @@ export default function FlashSale() {
                     </div>
 
                     {/* Decorative Elements */}
-                    <div className="absolute top-0 left-0 w-96 h-96 bg-white opacity-10 rounded-full blur-[100px] -ml-40 -mt-40"></div>
-                    <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-black opacity-20 rounded-full blur-[120px] -mr-60 -mb-60"></div>
+                    <div className="absolute top-0 left-0 w-96 h-96 bg-background opacity-10 rounded-full blur-[100px] -ml-40 -mt-40"></div>
+                    <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-secondary opacity-20 rounded-full blur-[120px] -mr-60 -mb-60"></div>
                 </div>
 
                 {/* Section Header */}

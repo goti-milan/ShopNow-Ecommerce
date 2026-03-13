@@ -32,7 +32,7 @@ export const RelatedProducts = ({ products }: RelatedProductsProps) => {
     if (products.length === 0) return null;
 
     return (
-        <div className="mt-32 pt-16 border-t border-slate-100">
+        <div className="mt-32 pt-16 border-t border-border">
             <SectionHeader
                 title="Related Products"
                 subtitle="Complete your collection with these handpicked items"
@@ -51,7 +51,7 @@ export const RelatedProducts = ({ products }: RelatedProductsProps) => {
 
             {/* Explore More Button for desktop */}
             <div className="mt-12 flex justify-center lg:justify-end">
-                <button className="text-slate-900 font-bold hover:text-primary transition-colors flex items-center gap-2 group">
+                <button className="text-foreground font-bold hover:text-primary transition-colors flex items-center gap-2 group">
                     View all products
                     <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />

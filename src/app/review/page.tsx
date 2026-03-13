@@ -34,7 +34,7 @@ export default function ReviewPage() {
             <div className="text-center mb-12">
                 <h1 className="text-4xl font-bold mb-4">Customer Reviews</h1>
                 <div className="flex justify-center items-center gap-2 mb-2">
-                    <div className="flex text-yellow-500">
+                    <div className="flex text-primary">
                         <Star className="w-6 h-6 fill-current" />
                         <Star className="w-6 h-6 fill-current" />
                         <Star className="w-6 h-6 fill-current" />
@@ -59,11 +59,11 @@ export default function ReviewPage() {
                                     <p className="text-xs text-muted-foreground">{review.date}</p>
                                 </div>
                             </div>
-                            <div className="flex text-yellow-500">
+                            <div className="flex text-primary">
                                 {[...Array(5)].map((_, i) => (
                                     <Star
                                         key={i}
-                                        className={`w-4 h-4 ${i < review.rating ? 'fill-current' : 'text-gray-300'}`}
+                                        className={`w-4 h-4 ${i < review.rating ? 'fill-current' : 'text-muted-foreground'}`}
                                     />
                                 ))}
                             </div>

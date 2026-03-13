@@ -404,10 +404,10 @@ export default function SearchPage() {
                             onClick={() => setMinRating(rating)}
                         >
                             <div className={`w-4 h-4 rounded-full border flex items-center justify-center ${minRating === rating ? 'bg-primary border-primary' : 'border-input'}`}>
-                                {minRating === rating && <div className="w-1.5 h-1.5 bg-white rounded-full" />}
+                                {minRating === rating && <div className="w-1.5 h-1.5 bg-background rounded-full" />}
                             </div>
                             <div className="flex items-center gap-1 text-sm text-muted-foreground group-hover:text-primary transition-colors">
-                                {rating}+ <Star className="w-3.5 h-3.5 fill-yellow-400 text-yellow-400" />
+                                {rating}+ <Star className="w-3.5 h-3.5 fill-primary text-primary" />
                             </div>
                         </div>
                     ))}
@@ -416,7 +416,7 @@ export default function SearchPage() {
                         onClick={() => setMinRating(0)}
                     >
                         <div className={`w-4 h-4 rounded-full border flex items-center justify-center ${minRating === 0 ? 'bg-primary border-primary' : 'border-input'}`}>
-                            {minRating === 0 && <div className="w-1.5 h-1.5 bg-white rounded-full" />}
+                            {minRating === 0 && <div className="w-1.5 h-1.5 bg-background rounded-full" />}
                         </div>
                         <span className="text-sm text-muted-foreground group-hover:text-primary transition-colors">All Ratings</span>
                     </div>

@@ -83,7 +83,7 @@ export default function AuthPage() {
                             <Github className="w-4 h-4" /> Github
                         </Button>
                         <Button variant="outline" className="gap-2">
-                            <Facebook className="w-4 h-4 text-blue-600" /> Facebook
+                            <Facebook className="w-4 h-4 text-primary" /> Facebook
                         </Button>
                     </div>
                 </div>

@@ -60,7 +60,7 @@ const ProductCard = ({ item, showActions = true, className }: { item: Product; s
 
                 {/* Wishlist Button */}
                 <button
-                    className={`absolute right-2 top-2 z-10 rounded-full bg-white/80 p-1.5 backdrop-blur-sm transition-colors shadow-sm ${inWishlist ? 'text-red-500 hover:text-red-600' : 'text-muted-foreground hover:text-red-500 hover:bg-white'}`}
+                    className={`absolute right-2 top-2 z-10 rounded-full bg-background/80 p-1.5 backdrop-blur-sm transition-colors shadow-sm ${inWishlist ? 'text-primary hover:text-primary-dark' : 'text-muted-foreground hover:text-primary hover:bg-background'}`}
                     onClick={handleWishlist}
                 >
                     <Heart className={`h-4 w-4 ${inWishlist ? 'fill-current' : ''}`} />
@@ -98,7 +98,7 @@ const ProductCard = ({ item, showActions = true, className }: { item: Product; s
 
                         {/* Discount */}
                         {discountPercent && (
-                            <p className="text-xs font-bold text-green-600 bg-green-50 px-1.5 py-0.5 rounded-sm">
+                            <p className="text-xs font-bold text-primary bg-accent px-1.5 py-0.5 rounded-sm">
                                 {discountPercent}% OFF
                             </p>
                         )}

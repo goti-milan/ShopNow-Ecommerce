@@ -80,13 +80,13 @@ export function ProductImageModal({
     if (!isOpen || !mounted) return null;
 
     return createPortal(
-        <div className="fixed inset-0 z-[10000] flex flex-col bg-black/95 backdrop-blur-md">
+        <div className="fixed inset-0 z-[10000] flex flex-col bg-secondary/95 backdrop-blur-md">
             {/* Header: Title and Close */}
             <div className="flex items-center justify-between p-4 md:p-6 text-white border-b border-white/10 relative z-[10001]">
                 <h2 className="text-lg md:text-xl font-medium truncate pr-8">{title}</h2>
                 <button
                     onClick={onClose}
-                    className="p-2 hover:bg-white/10 rounded-full transition-colors flex-shrink-0"
+                    className="p-2 hover:bg-background/10 rounded-full transition-colors flex-shrink-0"
                     aria-label="Close modal"
                 >
                     <X className="w-6 h-6 md:w-8 md:h-8" />
@@ -98,7 +98,7 @@ export function ProductImageModal({
                 {/* Previous Button */}
                 <button
                     onClick={goToPrevious}
-                    className="absolute left-4 md:left-8 z-20 p-3 md:p-4 bg-white/10 hover:bg-white/20 text-white rounded-full backdrop-blur-md transition-all active:scale-95"
+                    className="absolute left-4 md:left-8 z-20 p-3 md:p-4 bg-background/10 hover:bg-background/20 text-white rounded-full backdrop-blur-md transition-all active:scale-95"
                     aria-label="Previous image"
                 >
                     <ChevronLeft className="w-6 h-6 md:w-8 md:h-8" />
@@ -131,20 +131,20 @@ export function ProductImageModal({
                 {/* Next Button */}
                 <button
                     onClick={goToNext}
-                    className="absolute right-4 md:right-8 z-20 p-3 md:p-4 bg-white/10 hover:bg-white/20 text-white rounded-full backdrop-blur-md transition-all active:scale-95"
+                    className="absolute right-4 md:right-8 z-20 p-3 md:p-4 bg-background/10 hover:bg-background/20 text-white rounded-full backdrop-blur-md transition-all active:scale-95"
                     aria-label="Next image"
                 >
                     <ChevronRight className="w-6 h-6 md:w-8 md:h-8" />
                 </button>
 
                 {/* Image Counter */}
-                <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 bg-black/50 text-white/90 px-4 py-1.5 rounded-full text-sm backdrop-blur-sm border border-white/10">
+                <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 bg-secondary/50 text-white/90 px-4 py-1.5 rounded-full text-sm backdrop-blur-sm border border-white/10">
                     {selectedIndex + 1} / {galleryImages.length}
                 </div>
             </div>
 
             {/* Footer: Thumbnails */}
-            <div className="h-24 md:h-32 bg-black/40 border-t border-white/10 p-4 md:p-6 flex items-center justify-center gap-2 md:gap-4 overflow-x-auto no-scrollbar relative z-[10001]">
+            <div className="h-24 md:h-32 bg-secondary/40 border-t border-white/10 p-4 md:p-6 flex items-center justify-center gap-2 md:gap-4 overflow-x-auto no-scrollbar relative z-[10001]">
                 {galleryImages.map((img, index) => (
                     <button
                         key={index}

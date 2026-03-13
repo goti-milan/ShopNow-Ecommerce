@@ -184,7 +184,7 @@ export default function CategoryClient({ slug }: { slug: string }) {
     }, [productCategory]);
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-violet-50 via-white to-purple-100">
+        <div className="min-h-screen bg-gradient-to-br from-accent via-white to-muted">
             <div className="container mx-auto px-4 py-8">
                 <div className="mb-6 flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
                     <Link href="/" className="hover:text-foreground">Home</Link>
@@ -200,7 +200,7 @@ export default function CategoryClient({ slug }: { slug: string }) {
                     )}
                 </div>
 
-                <div className="relative overflow-hidden rounded-3xl border bg-white/70 p-6 shadow-xl backdrop-blur">
+                <div className="relative overflow-hidden rounded-3xl border bg-background/70 p-6 shadow-xl backdrop-blur">
                     <div className="absolute inset-0">
                         <Image
                             src={categoryData.heroImage}
@@ -212,15 +212,15 @@ export default function CategoryClient({ slug }: { slug: string }) {
                     </div>
                     <div className="relative flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                         <div>
-                            <p className="text-xs uppercase tracking-[0.3em] text-violet-500">Shop now</p>
-                            <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">{categoryData.title}</h1>
-                            <p className="max-w-2xl text-sm text-slate-600 md:text-base">{categoryData.description}</p>
+                            <p className="text-xs uppercase tracking-[0.3em] text-primary">Shop now</p>
+                            <h1 className="text-3xl font-bold text-foreground md:text-4xl">{categoryData.title}</h1>
+                            <p className="max-w-2xl text-sm text-muted-foreground md:text-base">{categoryData.description}</p>
                         </div>
-                        <div className="w-full max-w-md rounded-full border bg-white/80 px-4 py-2 shadow-sm">
+                        <div className="w-full max-w-md rounded-full border bg-background/80 px-4 py-2 shadow-sm">
                             <input
                                 type="search"
                                 placeholder="Search products, brands..."
-                                className="w-full bg-transparent text-sm outline-none placeholder:text-slate-400"
+                                className="w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground"
                             />
                         </div>
                     </div>
@@ -234,8 +234,8 @@ export default function CategoryClient({ slug }: { slug: string }) {
                             onClick={() => setActiveTrail(trailMap.get(subcategory.id) ?? [subcategory.id])}
                             className={`rounded-full border px-4 py-2 text-sm font-medium transition ${
                                 activeTrail[0] === subcategory.id
-                                    ? "border-violet-400 bg-violet-100 text-violet-700"
-                                    : "border-transparent bg-white/80 text-slate-600 hover:border-violet-200"
+                                    ? "border-primary bg-accent text-primary-dark"
+                                    : "border-transparent bg-background/80 text-muted-foreground hover:border-primary/30"
                             }`}
                         >
                             {subcategory.name}
@@ -245,8 +245,8 @@ export default function CategoryClient({ slug }: { slug: string }) {
 
                 <div className="mt-8 grid gap-8 lg:grid-cols-[280px_1fr]">
                     <aside className="space-y-6">
-                        <div className="rounded-2xl border bg-white/80 p-4 shadow-sm">
-                            <h2 className="text-sm font-semibold text-slate-700">All Categories</h2>
+                        <div className="rounded-2xl border bg-background/80 p-4 shadow-sm">
+                            <h2 className="text-sm font-semibold text-foreground">All Categories</h2>
                             <div className="mt-4 space-y-2">
                                 {CATEGORY_SHELL.map((item) => (
                                     <Link
@@ -254,24 +254,24 @@ export default function CategoryClient({ slug }: { slug: string }) {
                                         href={`/category/${item.slug}`}
                                         className={`flex items-center justify-between rounded-xl px-3 py-2 text-sm font-medium transition ${
                                             item.slug === slug
-                                                ? "bg-violet-100 text-violet-700"
-                                                : "text-slate-600 hover:bg-slate-50"
+                                                ? "bg-accent text-primary-dark"
+                                                : "text-muted-foreground hover:bg-muted"
                                         }`}
                                     >
                                         {item.name}
-                                        <ChevronRight className="h-4 w-4 text-slate-400" />
+                                        <ChevronRight className="h-4 w-4 text-muted-foreground" />
                                     </Link>
                                 ))}
                             </div>
                         </div>
 
-                        <div className="rounded-2xl border bg-white/80 p-4 shadow-sm">
-                            <div className="flex items-center gap-2 text-sm font-semibold text-slate-700">
+                        <div className="rounded-2xl border bg-background/80 p-4 shadow-sm">
+                            <div className="flex items-center gap-2 text-sm font-semibold text-foreground">
                                 <SlidersHorizontal className="h-4 w-4" />
                                 Filters
                             </div>
-                            <div className="mt-4 space-y-4 text-sm text-slate-600">
-                                <details open className="rounded-xl border bg-white/70 px-4 py-3">
+                            <div className="mt-4 space-y-4 text-sm text-muted-foreground">
+                                <details open className="rounded-xl border bg-background/70 px-4 py-3">
                                     <summary className="cursor-pointer font-medium">Brand</summary>
                                     <div className="mt-3 space-y-2">
                                         {FILTERS.brands.map((brand) => (
@@ -282,7 +282,7 @@ export default function CategoryClient({ slug }: { slug: string }) {
                                         ))}
                                     </div>
                                 </details>
-                                <details className="rounded-xl border bg-white/70 px-4 py-3">
+                                <details className="rounded-xl border bg-background/70 px-4 py-3">
                                     <summary className="cursor-pointer font-medium">Price</summary>
                                     <div className="mt-3 space-y-2">
                                         {FILTERS.price.map((price) => (
@@ -293,7 +293,7 @@ export default function CategoryClient({ slug }: { slug: string }) {
                                         ))}
                                     </div>
                                 </details>
-                                <details className="rounded-xl border bg-white/70 px-4 py-3">
+                                <details className="rounded-xl border bg-background/70 px-4 py-3">
                                     <summary className="cursor-pointer font-medium">Rating</summary>
                                     <div className="mt-3 space-y-2">
                                         {FILTERS.rating.map((rating) => (
@@ -301,7 +301,7 @@ export default function CategoryClient({ slug }: { slug: string }) {
                                                 <input type="checkbox" className="accent-violet-500" />
                                                 <span className="flex items-center gap-1">
                                                     {Array.from({ length: rating }).map((_, index) => (
-                                                        <Star key={`${rating}-${index}`} className="h-3.5 w-3.5 text-amber-400" />
+                                                        <Star key={`${rating}-${index}`} className="h-3.5 w-3.5 text-primary" />
                                                     ))}
                                                     <span>&amp; up</span>
                                                 </span>
@@ -315,14 +315,14 @@ export default function CategoryClient({ slug }: { slug: string }) {
 
                     <section className="space-y-8">
                         {displayedNodes.length > 0 && (
-                            <div className="rounded-2xl border bg-white/80 p-6 shadow-sm">
+                            <div className="rounded-2xl border bg-background/80 p-6 shadow-sm">
                                 <div className="mb-4 flex items-center justify-between">
-                                    <h2 className="text-lg font-semibold text-slate-800">Explore Categories</h2>
+                                    <h2 className="text-lg font-semibold text-foreground">Explore Categories</h2>
                                     {activeTrail.length > 0 && (
                                         <button
                                             type="button"
                                             onClick={() => setActiveTrail([])}
-                                            className="text-sm font-medium text-violet-600 hover:text-violet-700"
+                                            className="text-sm font-medium text-primary hover:text-primary-dark"
                                         >
                                             View all
                                         </button>
@@ -334,18 +334,18 @@ export default function CategoryClient({ slug }: { slug: string }) {
                                             key={node.id}
                                             type="button"
                                             onClick={() => setActiveTrail(trailMap.get(node.id) ?? [node.id])}
-                                            className="group rounded-2xl border bg-white/70 p-4 text-left transition hover:-translate-y-1 hover:border-violet-200 hover:shadow-lg"
+                                            className="group rounded-2xl border bg-background/70 p-4 text-left transition hover:-translate-y-1 hover:border-primary/30 hover:shadow-lg"
                                         >
                                             <div className="flex items-center justify-between">
                                                 <div>
-                                                    <p className="text-sm font-semibold text-slate-800">{node.name}</p>
-                                                    <p className="text-xs text-slate-500">
+                                                    <p className="text-sm font-semibold text-foreground">{node.name}</p>
+                                                    <p className="text-xs text-muted-foreground">
                                                         {node.children?.length
                                                             ? `${node.children.length} sub categories`
                                                             : "Shop products"}
                                                     </p>
                                                 </div>
-                                                <ChevronRight className="h-4 w-4 text-slate-400 transition group-hover:text-violet-500" />
+                                                <ChevronRight className="h-4 w-4 text-muted-foreground transition group-hover:text-primary" />
                                             </div>
                                         </button>
                                     ))}
@@ -353,23 +353,23 @@ export default function CategoryClient({ slug }: { slug: string }) {
                             </div>
                         )}
 
-                        <div className="rounded-2xl border bg-white/80 p-6 shadow-sm">
+                        <div className="rounded-2xl border bg-background/80 p-6 shadow-sm">
                             <div className="mb-4 flex items-center justify-between">
-                                <h2 className="text-lg font-semibold text-slate-800">
+                                <h2 className="text-lg font-semibold text-foreground">
                                     {activeNode?.name ? `${activeNode.name} Products` : `${categoryData.title} Products`}
                                 </h2>
                                 {activeTrail.length > 0 && activeNode?.children?.length && (
                                     <button
                                         type="button"
                                         onClick={() => setActiveTrail([])}
-                                        className="text-sm font-medium text-violet-600 hover:text-violet-700"
+                                        className="text-sm font-medium text-primary hover:text-primary-dark"
                                     >
                                         Back to {categoryData.title}
                                     </button>
                                 )}
                             </div>
                             {products.length === 0 ? (
-                                <div className="rounded-2xl border border-dashed bg-white/60 p-8 text-center text-sm text-slate-500">
+                                <div className="rounded-2xl border border-dashed bg-background/60 p-8 text-center text-sm text-muted-foreground">
                                     Select a sub category to view products.
                                 </div>
                             ) : (

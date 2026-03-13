@@ -14,13 +14,13 @@ export default function CollectionGrid() {
             fill
             className="object-cover transition-transform duration-700 group-hover:scale-110"
           />
-          <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors" />
+          <div className="absolute inset-0 bg-secondary/30 group-hover:bg-secondary/40 transition-colors" />
           <div className="absolute inset-0 flex flex-col justify-center items-start p-8 lg:p-12">
             <h2 className="text-3xl lg:text-4xl font-bold text-white tracking-wide mb-2 drop-shadow-md">
               WOMEN COLLECTION
             </h2>
             <p className="text-white/90 mb-6 max-w-sm drop-shadow-sm">Discover the latest trends in women&apos;s fashion.</p>
-            <div className="rounded-full bg-white px-8 py-3 text-sm font-bold text-black hover:bg-gray-100 transition-all shadow-lg">
+            <div className="rounded-full bg-background px-8 py-3 text-sm font-bold text-foreground hover:bg-muted transition-all shadow-lg">
               Shop Now
             </div>
           </div>
@@ -36,12 +36,12 @@ export default function CollectionGrid() {
               fill
               className="object-cover transition-transform duration-700 group-hover:scale-110"
             />
-            <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors" />
+            <div className="absolute inset-0 bg-secondary/30 group-hover:bg-secondary/40 transition-colors" />
             <div className="absolute inset-0 flex flex-col justify-center items-start p-6">
               <h2 className="text-2xl font-bold text-white tracking-wide drop-shadow-md">
                 MEN COLLECTION
               </h2>
-              <div className="mt-4 rounded-full bg-white px-6 py-2 text-xs font-bold text-black hover:bg-gray-100 transition-all shadow-lg">
+              <div className="mt-4 rounded-full bg-background px-6 py-2 text-xs font-bold text-foreground hover:bg-muted transition-all shadow-lg">
                 Shop Now
               </div>
             </div>
@@ -57,7 +57,7 @@ export default function CollectionGrid() {
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-110"
               />
-              <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors" />
+              <div className="absolute inset-0 bg-secondary/30 group-hover:bg-secondary/40 transition-colors" />
               <div className="absolute inset-0 flex flex-col justify-end p-4">
                 <h2 className="text-lg font-bold text-white tracking-wide drop-shadow-md">
                   KIDS
@@ -76,7 +76,7 @@ export default function CollectionGrid() {
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-110"
               />
-              <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors" />
+              <div className="absolute inset-0 bg-secondary/30 group-hover:bg-secondary/40 transition-colors" />
               <div className="absolute inset-0 flex flex-col justify-end p-4">
                 <h2 className="text-lg font-bold text-white tracking-wide drop-shadow-md">
                   ACCESSORIES

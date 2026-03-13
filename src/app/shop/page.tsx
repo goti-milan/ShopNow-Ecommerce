@@ -47,26 +47,26 @@ function FilterSidebar({
     };
 
     return (
-        <div className="w-full lg:w-64 space-y-6 bg-white p-5 rounded-lg border border-gray-200 h-fit sticky top-4">
-            <h2 className="text-lg font-bold text-gray-900">FILTERS</h2>
+        <div className="w-full lg:w-64 space-y-6 bg-background p-5 rounded-lg border border-border h-fit sticky top-4">
+            <h2 className="text-lg font-bold text-foreground">FILTERS</h2>
 
             {/* Search */}
             <div>
                 <div className="relative">
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                     <input
                         type="text"
                         placeholder="Search products, brands..."
-                        className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
+                        className="w-full pl-10 pr-4 py-2 rounded-lg border border-border text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
                     />
                 </div>
             </div>
 
             {/* Categories */}
             <div>
-                <h3 className="text-sm font-bold text-gray-900 mb-3 flex items-center gap-2">
+                <h3 className="text-sm font-bold text-foreground mb-3 flex items-center gap-2">
                     <span>Categories</span>
-                    <ChevronRight className="h-4 w-4 text-gray-400" />
+                    <ChevronRight className="h-4 w-4 text-muted-foreground" />
                 </h3>
                 <div className="space-y-2 pl-2">
                     {SHOP_CATEGORIES.slice(1, 7).map(cat => (
@@ -77,7 +77,7 @@ function FilterSidebar({
                                 className="rounded w-4 h-4 cursor-pointer"
                                 onChange={(e) => onFilterChange("category", e.target.checked ? cat.id : null)}
                             />
-                            <label htmlFor={`cat-${cat.id}`} className="text-sm text-gray-600 cursor-pointer">
+                            <label htmlFor={`cat-${cat.id}`} className="text-sm text-muted-foreground cursor-pointer">
                                 {cat.label}
                             </label>
                         </div>
@@ -87,7 +87,7 @@ function FilterSidebar({
 
             {/* Price Range */}
             <div>
-                <h3 className="text-sm font-bold text-gray-900 mb-3 flex items-center gap-2">
+                <h3 className="text-sm font-bold text-foreground mb-3 flex items-center gap-2">
                     <span>Price Range</span>
                 </h3>
                 <div className="space-y-3">
@@ -101,15 +101,15 @@ function FilterSidebar({
                         className="w-full"
                     />
                     <div className="flex items-center justify-between text-sm">
-                        <span className="text-gray-600">₹{filters.priceRange[0].toLocaleString()}</span>
-                        <span className="text-gray-600">₹{filters.priceRange[1].toLocaleString()}</span>
+                        <span className="text-muted-foreground">₹{filters.priceRange[0].toLocaleString()}</span>
+                        <span className="text-muted-foreground">₹{filters.priceRange[1].toLocaleString()}</span>
                     </div>
                 </div>
             </div>
 
             {/* Brand */}
             <div>
-                <h3 className="text-sm font-bold text-gray-900 mb-3 flex items-center gap-2">
+                <h3 className="text-sm font-bold text-foreground mb-3 flex items-center gap-2">
                     <span>Brand</span>
                     <div className="ml-auto w-8 h-5 bg-gray-300 rounded-full"></div>
                 </h3>
@@ -123,7 +123,7 @@ function FilterSidebar({
                                 onChange={() => handleBrandToggle(brand)}
                                 className="rounded w-4 h-4 cursor-pointer"
                             />
-                            <label htmlFor={`brand-${brand}`} className="text-sm text-gray-600 cursor-pointer">
+                            <label htmlFor={`brand-${brand}`} className="text-sm text-muted-foreground cursor-pointer">
                                 {brand}
                             </label>
                         </div>
@@ -133,7 +133,7 @@ function FilterSidebar({
 
             {/* Rating */}
             <div>
-                <h3 className="text-sm font-bold text-gray-900 mb-3 flex items-center gap-2">
+                <h3 className="text-sm font-bold text-foreground mb-3 flex items-center gap-2">
                     <span>Rating</span>
                     <div className="ml-auto w-8 h-5 bg-gray-300 rounded-full"></div>
                 </h3>
@@ -147,7 +147,7 @@ function FilterSidebar({
                                 onChange={(e) => onFilterChange("minRating", e.target.checked ? rating : 0)}
                                 className="rounded w-4 h-4 cursor-pointer"
                             />
-                            <label htmlFor={`rating-${rating}`} className="text-sm text-gray-600 cursor-pointer">
+                            <label htmlFor={`rating-${rating}`} className="text-sm text-muted-foreground cursor-pointer">
                                 {rating}+ Rating
                             </label>
                         </div>
@@ -157,7 +157,7 @@ function FilterSidebar({
 
             {/* Discount */}
             <div>
-                <h3 className="text-sm font-bold text-gray-900 mb-3">Discount</h3>
+                <h3 className="text-sm font-bold text-foreground mb-3">Discount</h3>
                 <div className="space-y-2">
                     {DISCOUNT_OPTIONS.map(discount => (
                         <div key={discount} className="flex items-center gap-2">
@@ -169,7 +169,7 @@ function FilterSidebar({
                                 onChange={() => onFilterChange("discount", filters.discount === discount ? null : discount)}
                                 className="w-4 h-4 cursor-pointer"
                             />
-                            <label htmlFor={`discount-${discount}`} className="text-sm text-gray-600 cursor-pointer">
+                            <label htmlFor={`discount-${discount}`} className="text-sm text-muted-foreground cursor-pointer">
                                 {discount}% or more
                             </label>
                         </div>
@@ -179,7 +179,7 @@ function FilterSidebar({
 
             {/* Availability */}
             <div>
-                <h3 className="text-sm font-bold text-gray-900 mb-3">Availability</h3>
+                <h3 className="text-sm font-bold text-foreground mb-3">Availability</h3>
                 <div className="space-y-2">
                     {["In Stock", "Out of Stock"].map(option => (
                         <div key={option} className="flex items-center gap-2">
@@ -190,7 +190,7 @@ function FilterSidebar({
                                 onChange={(e) => onFilterChange("availability", e.target.checked ? option : null)}
                                 className="rounded w-4 h-4 cursor-pointer"
                             />
-                            <label htmlFor={`avail-${option}`} className="text-sm text-gray-600 cursor-pointer">
+                            <label htmlFor={`avail-${option}`} className="text-sm text-muted-foreground cursor-pointer">
                                 {option}
                             </label>
                         </div>
@@ -290,9 +290,9 @@ function ShopContent() {
     };
 
     return (
-        <div className="min-h-screen bg-gray-50">
+        <div className="min-h-screen bg-muted">
             {/* Category Tabs */}
-            <div className="bg-white border-b border-gray-200 sticky top-0 z-20 shadow-sm">
+            <div className="bg-background border-b border-border sticky top-0 z-20 shadow-sm">
                 <div className="container mx-auto px-4">
                     <div className="flex items-center gap-2 overflow-x-auto py-3 no-scrollbar">
                         {SHOP_CATEGORIES.map(cat => (
@@ -301,7 +301,7 @@ function ShopContent() {
                                 onClick={() => setSelectedCategory(cat.id)}
                                 className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-200 shrink-0 ${selectedCategory === cat.id
                                         ? "bg-primary text-white shadow-md"
-                                        : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                                        : "bg-muted text-muted-foreground hover:bg-muted"
                                     }`}
                             >
                                 {cat.label}
@@ -325,11 +325,11 @@ function ShopContent() {
                         <div className="mb-8">
                             {/* Title */}
                             <div className="mb-6">
-                                <h1 className="text-3xl font-bold text-gray-900">
+                                <h1 className="text-3xl font-bold text-foreground">
                                     {initialSearch ? `Search Results for "${initialSearch}"` : "Products"}
                                 </h1>
-                                <p className="text-gray-600 text-sm mt-1">
-                                    Showing <span className="font-semibold text-gray-900">{filteredProducts.length}</span> products
+                                <p className="text-muted-foreground text-sm mt-1">
+                                    Showing <span className="font-semibold text-foreground">{filteredProducts.length}</span> products
                                 </p>
                             </div>
 
@@ -338,19 +338,19 @@ function ShopContent() {
                                 {/* Search Bar */}
                                 <form onSubmit={handleSearch} className="flex-1">
                                     <div className="relative">
-                                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+                                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                                         <input
                                             type="text"
                                             placeholder="Search products..."
                                             value={searchQuery}
                                             onChange={(e) => setSearchQuery(e.target.value)}
-                                            className="w-full pl-10 pr-10 py-2.5 rounded-lg border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary focus:bg-gray-50"
+                                            className="w-full pl-10 pr-10 py-2.5 rounded-lg border border-border text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary focus:bg-muted"
                                         />
                                         {searchQuery && (
                                             <button
                                                 type="button"
                                                 onClick={clearSearch}
-                                                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                                                className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-muted-foreground"
                                             >
                                                 <X className="h-4 w-4" />
                                             </button>
@@ -362,7 +362,7 @@ function ShopContent() {
                                 <select
                                     value={sortBy}
                                     onChange={(e) => setSortBy(e.target.value)}
-                                    className="px-4 py-2.5 rounded-lg border border-gray-200 bg-white text-sm font-medium text-gray-700 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
+                                    className="px-4 py-2.5 rounded-lg border border-border bg-background text-sm font-medium text-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
                                 >
                                     <option value="featured">Sort: Featured</option>
                                     <option value="price-low">Price: Low to High</option>
@@ -383,11 +383,11 @@ function ShopContent() {
                             </div>
                         ) : (
                             <div className="text-center py-16">
-                                <div className="w-20 h-20 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-6">
-                                    <Search className="w-10 h-10 text-gray-400" />
+                                <div className="w-20 h-20 bg-muted rounded-full flex items-center justify-center mx-auto mb-6">
+                                    <Search className="w-10 h-10 text-muted-foreground" />
                                 </div>
-                                <h2 className="text-2xl font-bold text-gray-900 mb-2">No products found</h2>
-                                <p className="text-gray-600 mb-6">
+                                <h2 className="text-2xl font-bold text-foreground mb-2">No products found</h2>
+                                <p className="text-muted-foreground mb-6">
                                     Try adjusting your filters or search terms
                                 </p>
                                 <Button onClick={clearSearch} className="bg-primary hover:bg-primary/90">Clear Filters</Button>
@@ -414,15 +414,15 @@ function ShopContent() {
 export default function ShopPage() {
     return (
         <Suspense fallback={
-            <div className="min-h-screen bg-gray-50">
-                <div className="h-12 bg-white border-b border-gray-200"></div>
+            <div className="min-h-screen bg-muted">
+                <div className="h-12 bg-background border-b border-border"></div>
                 <div className="container mx-auto px-4 py-8">
                     <div className="animate-pulse">
-                        <div className="h-10 w-64 bg-gray-200 rounded mb-4"></div>
-                        <div className="h-6 w-32 bg-gray-200 rounded mb-8"></div>
+                        <div className="h-10 w-64 bg-muted rounded mb-4"></div>
+                        <div className="h-6 w-32 bg-muted rounded mb-8"></div>
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
                             {[...Array(8)].map((_, i) => (
-                                <div key={i} className="h-80 bg-gray-200 rounded-lg"></div>
+                                <div key={i} className="h-80 bg-muted rounded-lg"></div>
                             ))}
                         </div>
                     </div>

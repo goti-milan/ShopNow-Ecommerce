@@ -16,7 +16,7 @@ interface BreadcrumbProps {
 
 export const Breadcrumb = ({ items, className }: BreadcrumbProps) => {
     return (
-        <nav className={cn("flex flex-wrap items-center gap-2 text-[10px] md:text-xs font-bold uppercase tracking-widest text-slate-400", className)}>
+        <nav className={cn("flex flex-wrap items-center gap-2 text-[10px] md:text-xs font-bold uppercase tracking-widest text-muted-foreground", className)}>
             <Link
                 href="/"
                 className="flex items-center gap-1.5 hover:text-primary transition-colors py-1"
@@ -27,7 +27,7 @@ export const Breadcrumb = ({ items, className }: BreadcrumbProps) => {
 
             {items.map((item, index) => (
                 <div key={index} className="flex items-center gap-2">
-                    <ChevronRight className="w-3 h-3 text-slate-300 flex-shrink-0" />
+                    <ChevronRight className="w-3 h-3 text-muted-foreground flex-shrink-0" />
                     {item.href ? (
                         <Link
                             href={item.href}
@@ -36,7 +36,7 @@ export const Breadcrumb = ({ items, className }: BreadcrumbProps) => {
                             {item.label}
                         </Link>
                     ) : (
-                        <span className="text-slate-900 truncate max-w-[120px] md:max-w-xs">{item.label}</span>
+                        <span className="text-foreground truncate max-w-[120px] md:max-w-xs">{item.label}</span>
                     )}
                 </div>
             ))}

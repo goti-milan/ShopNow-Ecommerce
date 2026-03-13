@@ -256,20 +256,20 @@ function VideoCard({ video, onPlay }: VideoCardProps) {
 
                 {/* Play button on hover */}
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="w-16 h-16 rounded-full bg-white/30 backdrop-blur-sm flex items-center justify-center">
+                    <div className="w-16 h-16 rounded-full bg-background/30 backdrop-blur-sm flex items-center justify-center">
                         <Play className="w-8 h-8 text-white fill-white ml-1" />
                     </div>
                 </div>
 
                 {/* Duration badge */}
-                <Badge className="absolute bottom-2 right-2 bg-black/60 text-white hover:bg-black/70 text-xs">
+                <Badge className="absolute bottom-2 right-2 bg-secondary/60 text-white hover:bg-secondary/70 text-xs">
                     {video.duration}
                 </Badge>
 
                 {/* Live indicator */}
                 {video.isLiked && (
                     <div className="absolute top-2 left-2">
-                        <Heart className="w-5 h-5 text-red-500 fill-red-500" />
+                        <Heart className="w-5 h-5 text-primary fill-primary" />
                     </div>
                 )}
             </div>
@@ -297,7 +297,7 @@ function VideoCard({ video, onPlay }: VideoCardProps) {
             <CardFooter className="p-3 pt-0 flex items-center justify-between text-xs text-muted-foreground">
                 <div className="flex items-center gap-3">
                     <span className="flex items-center gap-1">
-                        <Heart className={`w-3 h-3 ${isLiked ? 'text-red-500 fill-red-500' : ''}`} />
+                        <Heart className={`w-3 h-3 ${isLiked ? 'text-primary fill-primary' : ''}`} />
                         {video.likes.toLocaleString()}
                     </span>
                     <span className="flex items-center gap-1">
@@ -337,13 +337,13 @@ function LiveCard({ stream, onWatch }: LiveCardProps) {
                 />
 
                 {/* Live badge */}
-                <div className="absolute top-2 left-2 flex items-center gap-1.5 bg-red-600 text-white px-2 py-0.5 rounded text-xs font-bold animate-pulse">
+                <div className="absolute top-2 left-2 flex items-center gap-1.5 bg-primary text-white px-2 py-0.5 rounded text-xs font-bold animate-pulse">
                     <Radio className="w-3 h-3 fill-current" />
                     LIVE
                 </div>
 
                 {/* Viewers badge */}
-                <div className="absolute top-2 right-2 flex items-center gap-1 bg-black/60 text-white px-2 py-0.5 rounded text-xs">
+                <div className="absolute top-2 right-2 flex items-center gap-1 bg-secondary/60 text-white px-2 py-0.5 rounded text-xs">
                     <Users className="w-3 h-3" />
                     {stream.viewers.toLocaleString()}
                 </div>
@@ -353,7 +353,7 @@ function LiveCard({ stream, onWatch }: LiveCardProps) {
 
                 {/* Watch button on hover */}
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <Button className="bg-red-600 hover:bg-red-700 text-white rounded-full px-6">
+                    <Button className="bg-primary hover:bg-primary-dark text-white rounded-full px-6">
                         <Eye className="w-4 h-4 mr-2" />
                         Watch Live
                     </Button>
@@ -362,7 +362,7 @@ function LiveCard({ stream, onWatch }: LiveCardProps) {
 
             <CardContent className="p-3">
                 <div className="flex gap-2">
-                    <Avatar className="h-9 w-9 shrink-0 ring-2 ring-red-500">
+                    <Avatar className="h-9 w-9 shrink-0 ring-2 ring-primary">
                         <AvatarImage src={stream.streamerAvatar} />
                         <AvatarFallback>{stream.streamerName[0]}</AvatarFallback>
                     </Avatar>
@@ -443,11 +443,11 @@ function VideoPlayerModal({ video, isOpen, onClose }: VideoPlayerModalProps) {
     if (!isOpen || !video) return null
 
     return (
-        <div className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center">
+        <div className="fixed inset-0 z-50 bg-secondary/90 flex items-center justify-center">
             <Button
                 variant="ghost"
                 size="icon"
-                className="absolute top-4 right-4 text-white hover:bg-white/20 z-10"
+                className="absolute top-4 right-4 text-white hover:bg-background/20 z-10"
                 onClick={onClose}
             >
                 <X className="w-6 h-6" />
@@ -467,9 +467,9 @@ function VideoPlayerModal({ video, isOpen, onClose }: VideoPlayerModalProps) {
 
                 {/* Progress bar */}
                 <div className="absolute bottom-20 left-0 right-0 px-4">
-                    <div className="h-1 bg-white/30 rounded-full overflow-hidden">
+                    <div className="h-1 bg-background/30 rounded-full overflow-hidden">
                         <div
-                            className="h-full bg-white rounded-full transition-all duration-100"
+                            className="h-full bg-background rounded-full transition-all duration-100"
                             style={{ width: `${progress}%` }}
                         />
                     </div>
@@ -482,7 +482,7 @@ function VideoPlayerModal({ video, isOpen, onClose }: VideoPlayerModalProps) {
                             <Button
                                 variant="ghost"
                                 size="icon"
-                                className="text-white hover:bg-white/20"
+                                className="text-white hover:bg-background/20"
                                 onClick={togglePlay}
                             >
                                 {isPlaying ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5" />}
@@ -490,7 +490,7 @@ function VideoPlayerModal({ video, isOpen, onClose }: VideoPlayerModalProps) {
                             <Button
                                 variant="ghost"
                                 size="icon"
-                                className="text-white hover:bg-white/20"
+                                className="text-white hover:bg-background/20"
                                 onClick={toggleMute}
                             >
                                 {isMuted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
@@ -499,7 +499,7 @@ function VideoPlayerModal({ video, isOpen, onClose }: VideoPlayerModalProps) {
                         <Button
                             variant="ghost"
                             size="icon"
-                            className="text-white hover:bg-white/20"
+                            className="text-white hover:bg-background/20"
                             onClick={toggleFullscreen}
                         >
                             {isFullscreen ? <Minimize2 className="w-5 h-5" /> : <Maximize2 className="w-5 h-5" />}
@@ -509,13 +509,13 @@ function VideoPlayerModal({ video, isOpen, onClose }: VideoPlayerModalProps) {
 
                 {/* Side actions */}
                 <div className="absolute right-4 top-1/2 -translate-y-1/2 flex flex-col gap-4">
-                    <Button variant="ghost" size="icon" className="text-white hover:bg-white/20 h-12 w-12">
+                    <Button variant="ghost" size="icon" className="text-white hover:bg-background/20 h-12 w-12">
                         <Heart className="w-6 h-6" />
                     </Button>
-                    <Button variant="ghost" size="icon" className="text-white hover:bg-white/20 h-12 w-12">
+                    <Button variant="ghost" size="icon" className="text-white hover:bg-background/20 h-12 w-12">
                         <MessageCircle className="w-6 h-6" />
                     </Button>
-                    <Button variant="ghost" size="icon" className="text-white hover:bg-white/20 h-12 w-12">
+                    <Button variant="ghost" size="icon" className="text-white hover:bg-background/20 h-12 w-12">
                         <Share2 className="w-6 h-6" />
                     </Button>
                 </div>
@@ -561,19 +561,19 @@ function LivePlayerModal({ stream, isOpen, onClose }: LivePlayerModalProps) {
     if (!isOpen || !stream) return null
 
     return (
-        <div className="fixed inset-0 z-50 bg-black flex flex-col lg:flex-row">
+        <div className="fixed inset-0 z-50 bg-secondary flex flex-col lg:flex-row">
             {/* Close button */}
             <Button
                 variant="ghost"
                 size="icon"
-                className="absolute top-4 right-4 text-white hover:bg-white/20 z-10"
+                className="absolute top-4 right-4 text-white hover:bg-background/20 z-10"
                 onClick={onClose}
             >
                 <X className="w-6 h-6" />
             </Button>
 
             {/* Video area */}
-            <div className="flex-1 relative flex items-center justify-center bg-black">
+            <div className="flex-1 relative flex items-center justify-center bg-secondary">
                 {/* Placeholder for live stream video */}
                 <div className="relative w-full aspect-video max-h-screen">
                     <img
@@ -584,11 +584,11 @@ function LivePlayerModal({ stream, isOpen, onClose }: LivePlayerModalProps) {
 
                     {/* Live indicator */}
                     <div className="absolute top-4 left-4 flex items-center gap-2">
-                        <div className="flex items-center gap-1.5 bg-red-600 text-white px-3 py-1 rounded-full text-sm font-bold animate-pulse">
+                        <div className="flex items-center gap-1.5 bg-primary text-white px-3 py-1 rounded-full text-sm font-bold animate-pulse">
                             <Radio className="w-4 h-4 fill-current" />
                             LIVE
                         </div>
-                        <div className="flex items-center gap-1 bg-black/60 text-white px-2 py-1 rounded text-sm">
+                        <div className="flex items-center gap-1 bg-secondary/60 text-white px-2 py-1 rounded text-sm">
                             <Users className="w-4 h-4" />
                             {stream.viewers.toLocaleString()}
                         </div>
@@ -600,7 +600,7 @@ function LivePlayerModal({ stream, isOpen, onClose }: LivePlayerModalProps) {
                             <Button
                                 variant="ghost"
                                 size="icon"
-                                className="text-white hover:bg-white/20 bg-black/40"
+                                className="text-white hover:bg-background/20 bg-secondary/40"
                                 onClick={toggleMute}
                             >
                                 {isMuted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
@@ -609,7 +609,7 @@ function LivePlayerModal({ stream, isOpen, onClose }: LivePlayerModalProps) {
                         <Button
                             variant="ghost"
                             size="sm"
-                            className="text-white hover:bg-white/20 bg-black/40"
+                            className="text-white hover:bg-background/20 bg-secondary/40"
                             onClick={() => setShowChat(!showChat)}
                         >
                             {showChat ? "Hide Chat" : "Show Chat"}
@@ -706,7 +706,7 @@ export function VideoGallery({ videos = videosData }: VideoGalleryProps) {
                                 <span className="absolute top-4 left-4 bg-primary text-primary-foreground text-xs font-bold px-3 py-1 rounded-full">
                                     {video.tags[0] ?? "Video"}
                                 </span>
-                                <span className="absolute bottom-3 right-3 bg-black/70 text-white text-xs font-semibold px-2 py-1 rounded">
+                                <span className="absolute bottom-3 right-3 bg-secondary/70 text-white text-xs font-semibold px-2 py-1 rounded">
                                     {video.duration}
                                 </span>
                             </div>
@@ -778,10 +778,10 @@ export function LiveGallery({ streams = liveStreamsData }: LiveGalleryProps) {
                                     alt={stream.title}
                                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                                 />
-                                <span className="absolute top-4 left-4 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full">
+                                <span className="absolute top-4 left-4 bg-primary text-white text-xs font-bold px-3 py-1 rounded-full">
                                     Live
                                 </span>
-                                <span className="absolute top-4 right-4 bg-black/70 text-white text-xs font-semibold px-2 py-1 rounded">
+                                <span className="absolute top-4 right-4 bg-secondary/70 text-white text-xs font-semibold px-2 py-1 rounded">
                                     {stream.category}
                                 </span>
                             </div>

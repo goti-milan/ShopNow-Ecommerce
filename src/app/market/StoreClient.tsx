@@ -10,7 +10,7 @@ export default function StoreClient() {
   return (
     <div>
       {/* Store Header */}
-      <div className="relative h-64 bg-slate-900">
+      <div className="relative h-64 bg-secondary">
         <Image
           src="https://picsum.photos/seed/cover/1200/400"
           alt="Cover"
@@ -33,11 +33,11 @@ export default function StoreClient() {
             <div className="flex-1 text-white mb-2">
               <div className="flex items-center gap-2 mb-1">
                 <h1 className="text-3xl font-bold">Tech Haven</h1>
-                <Verified className="w-5 h-5 text-blue-400" />
+                <Verified className="w-5 h-5 text-primary" />
               </div>
-              <p className="text-slate-300 mb-2">Premium Electronics & Gadgets</p>
-              <div className="flex gap-4 text-sm text-slate-300">
-                <span className="flex items-center gap-1"><Star className="w-4 h-4 fill-yellow-400 text-yellow-400" /> 4.9 (1.2k Reviews)</span>
+              <p className="text-muted-foreground mb-2">Premium Electronics & Gadgets</p>
+              <div className="flex gap-4 text-sm text-muted-foreground">
+                <span className="flex items-center gap-1"><Star className="w-4 h-4 fill-primary text-primary" /> 4.9 (1.2k Reviews)</span>
                 <span className="flex items-center gap-1"><MapPin className="w-4 h-4" /> New York, USA</span>
               </div>
             </div>

@@ -4,37 +4,40 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  /* Brand Colors */
-  --color-primary: #e54e32;
+  /* Brand Colors (Orange + Charcoal) */
+  --color-primary: #f47424;
   --color-primary-foreground: #ffffff;
-  --color-primary-light: #ff6b4a;
-  --color-primary-dark: #c43d26;
+  --color-primary-light: #ff8a3d;
+  --color-primary-dark: #d85f17;
 
-  --color-secondary: #0f172a;
+  --color-secondary: #111315;
   --color-secondary-foreground: #ffffff;
 
-  --color-accent: #f97316;
-  --color-accent-foreground: #ffffff;
+  --color-accent: #fff1e6;
+  --color-accent-foreground: #f47424;
 
   --color-destructive: #ef4444;
   --color-destructive-foreground: #ffffff;
 
   /* UI Colors */
   --color-background: #ffffff;
-  --color-foreground: #0f172a;
+  --color-foreground: #1a1d21;
 
   --color-card: #ffffff;
-  --color-card-foreground: #0f172a;
+  --color-card-foreground: #1a1d21;
 
   --color-popover: #ffffff;
-  --color-popover-foreground: #0f172a;
+  --color-popover-foreground: #1a1d21;
 
-  --color-muted: #f8fafc;
-  --color-muted-foreground: #64748b;
+  --color-muted: #f5f6f8;
+  --color-muted-foreground: #6b7280;
 
-  --color-border: #e2e8f0;
-  --color-input: #e2e8f0;
-  --color-ring: #e54e32;
+  --color-border: #e4e6eb;
+  --color-input: #e4e6eb;
+  --color-ring: #f47424;
+
+  /* Surfaces */
+  --color-surface: #f1f2f4;
 
   --radius-lg: 0.5rem;
   --radius-md: calc(0.5rem - 2px);
@@ -82,4 +85,3 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
-

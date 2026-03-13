@@ -22,14 +22,14 @@ export default function HighlightGroups({ groups }: { groups: HighlightGroup[] }
             {groups.map((group) => (
                 <section
                     key={group.id}
-                    className="rounded-3xl border border-slate-100 bg-white/90 p-5 shadow-sm"
+                    className="rounded-3xl border border-border bg-background/90 p-5 shadow-sm"
                 >
                     <div className="mb-4 flex items-center justify-between">
                         <div>
-                            <p className="text-xs uppercase tracking-[0.3em] text-slate-400">{group.label}</p>
-                            <h3 className="text-lg font-semibold text-slate-900">{group.description ?? "Curated picks"}</h3>
+                            <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">{group.label}</p>
+                            <h3 className="text-lg font-semibold text-foreground">{group.description ?? "Curated picks"}</h3>
                         </div>
-                        <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-500">
+                        <span className="rounded-full bg-muted px-3 py-1 text-xs font-semibold text-muted-foreground">
                             {group.items.length} items
                         </span>
                     </div>
@@ -38,22 +38,22 @@ export default function HighlightGroups({ groups }: { groups: HighlightGroup[] }
                         {group.items.map((item) => (
                             <article
                                 key={item.id}
-                                className="flex items-center gap-3 rounded-2xl border border-transparent bg-slate-50/80 p-3 transition hover:border-slate-200 hover:bg-white"
+                                className="flex items-center gap-3 rounded-2xl border border-transparent bg-muted/80 p-3 transition hover:border-border hover:bg-background"
                             >
                                 <div className="relative h-14 w-14 overflow-hidden rounded-2xl">
                                     <Image src={item.image} alt={item.title} fill className="object-cover" />
                                 </div>
                                 <div className="min-w-0 flex-1">
                                     <div className="flex items-center justify-between gap-3">
-                                        <p className="truncate text-sm font-semibold text-slate-900">{item.title}</p>
+                                        <p className="truncate text-sm font-semibold text-foreground">{item.title}</p>
                                         {item.tag && (
-                                            <span className="rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] font-semibold uppercase text-emerald-600">
+                                            <span className="rounded-full bg-accent px-2 py-0.5 text-[10px] font-semibold uppercase text-primary">
                                                 {item.tag}
                                             </span>
                                         )}
                                     </div>
-                                    <p className="truncate text-xs text-slate-500">{item.subtitle}</p>
-                                    {item.meta && <p className="text-[11px] text-slate-400">{item.meta}</p>}
+                                    <p className="truncate text-xs text-muted-foreground">{item.subtitle}</p>
+                                    {item.meta && <p className="text-[11px] text-muted-foreground">{item.meta}</p>}
                                 </div>
                             </article>
                         ))}

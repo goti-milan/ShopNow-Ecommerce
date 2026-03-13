@@ -29,11 +29,11 @@ export function ImageViewerModal({ item, onClose, onNavigate, items }: ImageView
     }, [onClose, onNavigate]);
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm transition-all duration-300">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-secondary/90 backdrop-blur-sm transition-all duration-300">
             <Button
                 variant="ghost"
                 size="icon"
-                className="absolute top-4 right-4 text-white hover:bg-white/10 z-50"
+                className="absolute top-4 right-4 text-white hover:bg-background/10 z-50"
                 onClick={onClose}
             >
                 <X className="h-6 w-6" />
@@ -41,11 +41,11 @@ export function ImageViewerModal({ item, onClose, onNavigate, items }: ImageView
 
             <div className="flex h-full w-full flex-col md:flex-row max-w-7xl mx-auto overflow-hidden bg-background md:rounded-2xl shadow-2xl">
                 {/* Image Section */}
-                <div className="relative flex-1 bg-neutral-950 flex items-center justify-center group overflow-hidden">
+                <div className="relative flex-1 bg-secondary flex items-center justify-center group overflow-hidden">
                     <Button
                         variant="ghost"
                         size="icon"
-                        className="absolute left-4 text-white hover:bg-white/10 z-10 opacity-0 group-hover:opacity-100 transition-opacity"
+                        className="absolute left-4 text-white hover:bg-background/10 z-10 opacity-0 group-hover:opacity-100 transition-opacity"
                         onClick={() => onNavigate('prev')}
                     >
                         <ChevronLeft className="h-8 w-8" />
@@ -69,7 +69,7 @@ export function ImageViewerModal({ item, onClose, onNavigate, items }: ImageView
                     <Button
                         variant="ghost"
                         size="icon"
-                        className="absolute right-4 text-white hover:bg-white/10 z-10 opacity-0 group-hover:opacity-100 transition-opacity"
+                        className="absolute right-4 text-white hover:bg-background/10 z-10 opacity-0 group-hover:opacity-100 transition-opacity"
                         onClick={() => onNavigate('next')}
                     >
                         <ChevronRight className="h-8 w-8" />

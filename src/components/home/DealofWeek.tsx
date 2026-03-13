@@ -25,10 +25,10 @@ export default function DealOfWeek() {
                         </p>
 
                         <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                            <Button size="lg" className="h-14 px-10 text-lg rounded-full bg-white text-primary hover:bg-white/90 shadow-lg transition-all duration-300">
+                            <Button size="lg" className="h-14 px-10 text-lg rounded-full bg-background text-primary hover:bg-background/90 shadow-lg transition-all duration-300">
                                 Buy Now - $299
                             </Button>
-                            <Button variant="outline" size="lg" className="h-14 px-10 text-lg rounded-full bg-primary text-white hover:bg-white hover:text-black transition-all duration-300">
+                            <Button variant="outline" size="lg" className="h-14 px-10 text-lg rounded-full bg-primary text-white hover:bg-background hover:text-foreground transition-all duration-300">
                                 View Details
                             </Button>
                         </div>
@@ -38,7 +38,7 @@ export default function DealOfWeek() {
                                 <p className="text-3xl font-bold text-white">40h</p>
                                 <p className="text-sm text-white/70">Battery Life</p>
                             </div>
-                            <div className="w-px h-12 bg-white/30"></div>
+                            <div className="w-px h-12 bg-background/30"></div>
                             <div>
                                 <p className="text-3xl font-bold text-white">0.2s</p>
                                 <p className="text-sm text-white/70">Latency</p>
@@ -47,8 +47,8 @@ export default function DealOfWeek() {
                     </div>
 
                     {/* Image Side */}
-                    <div className="relative h-[500px] lg:h-[700px] w-full flex items-center justify-center bg-white/10 backdrop-blur-sm rounded-3xl overflow-hidden group border border-white/20">
-                        <div className="absolute inset-0 bg-white/5 rounded-full blur-3xl transform scale-75 animate-pulse"></div>
+                    <div className="relative h-[500px] lg:h-[700px] w-full flex items-center justify-center bg-background/10 backdrop-blur-sm rounded-3xl overflow-hidden group border border-white/20">
+                        <div className="absolute inset-0 bg-background/5 rounded-full blur-3xl transform scale-75 animate-pulse"></div>
                         <Image
                             src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
                             alt="Premium Headphones"

@@ -16,11 +16,11 @@ import {
 import { useState, useRef, useEffect } from "react";
 
 const TABS = [
-    { id: "new-arrivals", label: "New Arrivals", icon: Sparkles, color: "text-blue-500", bg: "bg-blue-50" },
-    { id: "featured", label: "Featured Products", icon: Star, color: "text-amber-500", bg: "bg-amber-50" },
-    { id: "flash-sale", label: "Flash Sale", icon: Flame, color: "text-red-500", bg: "bg-red-50" },
-    { id: "today-deals", label: "Today Deals", icon: Clock, color: "text-emerald-500", bg: "bg-emerald-50" },
-    { id: "combo-offers", label: "Combo Offers", icon: Layers, color: "text-purple-500", bg: "bg-purple-50" },
+    { id: "new-arrivals", label: "New Arrivals", icon: Sparkles, color: "text-primary", bg: "bg-accent" },
+    { id: "featured", label: "Featured Products", icon: Star, color: "text-primary", bg: "bg-accent" },
+    { id: "flash-sale", label: "Flash Sale", icon: Flame, color: "text-primary", bg: "bg-accent" },
+    { id: "today-deals", label: "Today Deals", icon: Clock, color: "text-primary", bg: "bg-accent" },
+    { id: "combo-offers", label: "Combo Offers", icon: Layers, color: "text-primary", bg: "bg-accent" },
 ];
 
 export default function HomeNewFeatures() {
@@ -56,7 +56,7 @@ export default function HomeNewFeatures() {
     const filteredProducts = PRODUCTS.slice(0, 8); // Just using all for demo, in real app would filter
 
     return (
-        <section className="py-16 bg-white overflow-hidden">
+        <section className="py-16 bg-background overflow-hidden">
             <div className="container mx-auto px-4 max-w-7xl">
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
                     <div className="space-y-4">
@@ -64,7 +64,7 @@ export default function HomeNewFeatures() {
                             <span className="h-px w-8 bg-primary rounded-full" />
                             <span className="text-primary font-bold tracking-widest uppercase text-xs">Shop the Best</span>
                         </div>
-                        <h2 className="text-4xl md:text-5xl font-black text-gray-900 tracking-tight">Exclusive Collections</h2>
+                        <h2 className="text-4xl md:text-5xl font-black text-foreground tracking-tight">Exclusive Collections</h2>
                     </div>
 
                     <div className="flex items-center gap-2">
@@ -72,7 +72,7 @@ export default function HomeNewFeatures() {
                             variant="outline"
                             size="icon"
                             onClick={() => scroll("left")}
-                            className="rounded-full border-gray-200 hover:border-primary hover:text-primary transition-all"
+                            className="rounded-full border-border hover:border-primary hover:text-primary transition-all"
                         >
                             <ChevronLeft className="w-5 h-5" />
                         </Button>
@@ -80,7 +80,7 @@ export default function HomeNewFeatures() {
                             variant="outline"
                             size="icon"
                             onClick={() => scroll("right")}
-                            className="rounded-full border-gray-200 hover:border-primary hover:text-primary transition-all"
+                            className="rounded-full border-border hover:border-primary hover:text-primary transition-all"
                         >
                             <ChevronRight className="w-5 h-5" />
                         </Button>
@@ -98,7 +98,7 @@ export default function HomeNewFeatures() {
                                 onClick={() => setActiveTab(tab.id)}
                                 className={`flex items-center gap-3 px-6 py-3.5 rounded-2xl whitespace-nowrap transition-all duration-300 font-bold border-2 ${isActive
                                     ? `${tab.bg} ${tab.color} border-current shadow-lg shadow-current/5 scale-105`
-                                    : "bg-white text-gray-400 border-gray-100 hover:border-gray-200 hover:text-gray-600"
+                                    : "bg-background text-muted-foreground border-border hover:border-border hover:text-muted-foreground"
                                     }`}
                             >
                                 <Icon className={`w-5 h-5 ${isActive ? "animate-pulse" : ""}`} />
@@ -109,14 +109,14 @@ export default function HomeNewFeatures() {
                 </div>
 
                 {/* Tab-specific Content Bar */}
-                <div className="mt-8 mb-10 min-h-12 flex flex-col sm:flex-row items-center justify-between gap-4 p-6 rounded-3xl bg-gray-50 border border-gray-100 italic">
+                <div className="mt-8 mb-10 min-h-12 flex flex-col sm:flex-row items-center justify-between gap-4 p-6 rounded-3xl bg-muted border border-border italic">
                     {activeTab === "flash-sale" ? (
                         <div className="flex items-center gap-4">
-                            <span className="font-black text-red-500 uppercase tracking-tighter text-xl">Ends In:</span>
+                            <span className="font-black text-primary uppercase tracking-tighter text-xl">Ends In:</span>
                             <div className="flex gap-2">
                                 {[timeLeft.hours, timeLeft.minutes, timeLeft.seconds].map((t, i) => (
                                     <div key={i} className="flex flex-col items-center">
-                                        <div className="bg-red-500 text-white w-10 h-10 flex items-center justify-center rounded-xl font-black text-lg shadow-lg shadow-red-500/20">
+                                        <div className="bg-accent0 text-white w-10 h-10 flex items-center justify-center rounded-xl font-black text-lg shadow-lg shadow-red-500/20">
                                             {t.toString().padStart(2, '0')}
                                         </div>
                                     </div>
@@ -124,7 +124,7 @@ export default function HomeNewFeatures() {
                             </div>
                         </div>
                     ) : (
-                        <p className="text-gray-500 font-medium">
+                        <p className="text-muted-foreground font-medium">
                             Displaying the latest <span className="text-primary font-bold">{(TABS.find(t => t.id === activeTab))?.label}</span> Curated just for you.
                         </p>
                     )}
@@ -146,13 +146,13 @@ export default function HomeNewFeatures() {
 
                     {/* View More Card */}
                     <div className="min-w-[240px] md:min-w-[280px] snap-start group cursor-pointer">
-                        <div className="h-full bg-gray-50 rounded-3xl border-2 border-dashed border-gray-200 flex flex-col items-center justify-center p-8 text-center gap-4 group-hover:bg-primary/5 group-hover:border-primary/30 transition-all">
-                            <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center shadow-sm group-hover:scale-110 transition-all">
+                        <div className="h-full bg-muted rounded-3xl border-2 border-dashed border-border flex flex-col items-center justify-center p-8 text-center gap-4 group-hover:bg-primary/5 group-hover:border-primary/30 transition-all">
+                            <div className="w-16 h-16 rounded-full bg-background flex items-center justify-center shadow-sm group-hover:scale-110 transition-all">
                                 <ArrowRight className="w-8 h-8 text-primary" />
                             </div>
                             <div>
-                                <h4 className="font-black text-gray-900">View More</h4>
-                                <p className="text-sm text-gray-500 font-medium">Check all items in this collection</p>
+                                <h4 className="font-black text-foreground">View More</h4>
+                                <p className="text-sm text-muted-foreground font-medium">Check all items in this collection</p>
                             </div>
                         </div>
                     </div>
@@ -160,15 +160,15 @@ export default function HomeNewFeatures() {
 
                 {/* Bottom Banner for Combo Offers */}
                 {activeTab === "combo-offers" && (
-                    <div className="mt-12 bg-[#2d3139] rounded-[40px] p-8 md:p-12 relative overflow-hidden group">
+                    <div className="mt-12 bg-secondary rounded-[40px] p-8 md:p-12 relative overflow-hidden group">
                         <div className="absolute top-0 right-0 w-64 h-64 bg-primary/20 rounded-full blur-3xl -mr-32 -mt-32 group-hover:bg-primary/30 transition-all duration-700" />
                         <div className="relative z-10 flex flex-col md:flex-row items-center gap-8 justify-between">
                             <div className="space-y-4 text-center md:text-left">
                                 <Badge className="bg-primary hover:bg-primary text-white font-black px-4 py-1">Limited Combo Deals</Badge>
                                 <h2 className="text-4xl font-black text-white italic tracking-tighter">Buy 1 Get 1 Free!</h2>
-                                <p className="text-gray-400 font-medium max-w-sm">Mix and match any two items from our selected accessories category.</p>
+                                <p className="text-muted-foreground font-medium max-w-sm">Mix and match any two items from our selected accessories category.</p>
                             </div>
-                            <Button className="bg-white text-gray-900 hover:bg-gray-100 font-black px-10 py-8 rounded-2xl text-xl transition-all transform hover:scale-105 active:scale-95">
+                            <Button className="bg-background text-foreground hover:bg-muted font-black px-10 py-8 rounded-2xl text-xl transition-all transform hover:scale-105 active:scale-95">
                                 Claim Offer
                             </Button>
                         </div>

@@ -18,7 +18,7 @@ export default function NewArrivals() {
     };
 
     return (
-        <section className="py-16 bg-white overflow-hidden">
+        <section className="py-16 bg-background overflow-hidden">
             <div className="container mx-auto px-4 max-w-7xl">
                 {/* Section Header */}
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">

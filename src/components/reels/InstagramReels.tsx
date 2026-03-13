@@ -99,7 +99,7 @@ function FullscreenReelPlayer({ reels, startIndex, onClose, onLike, onSave, onFo
     const formatCount = (n: number) => n >= 1000 ? `${(n / 1000).toFixed(1)}K` : n.toString()
 
     return (
-        <div className="fixed inset-0 z-[100] bg-black flex items-center justify-center">
+        <div className="fixed inset-0 z-[100] bg-secondary flex items-center justify-center">
             {/* Backdrop – click outside the card to close */}
             <div className="absolute inset-0" onClick={onClose} />
 
@@ -110,7 +110,7 @@ function FullscreenReelPlayer({ reels, startIndex, onClose, onLike, onSave, onFo
                 {currentIndex > 0 && (
                     <button
                         onClick={goPrev}
-                        className="absolute left-2 top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white transition-all"
+                        className="absolute left-2 top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-background/10 hover:bg-background/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white transition-all"
                     >
                         <ChevronUp className="w-5 h-5" />
                     </button>
@@ -120,7 +120,7 @@ function FullscreenReelPlayer({ reels, startIndex, onClose, onLike, onSave, onFo
                 {currentIndex < reels.length - 1 && (
                     <button
                         onClick={goNext}
-                        className="absolute right-2 top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white transition-all lg:right-auto lg:left-[calc(50%-220px-56px)]"
+                        className="absolute right-2 top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-background/10 hover:bg-background/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white transition-all lg:right-auto lg:left-[calc(50%-220px-56px)]"
                     >
                         <ChevronDown className="w-5 h-5" />
                     </button>
@@ -130,7 +130,7 @@ function FullscreenReelPlayer({ reels, startIndex, onClose, onLike, onSave, onFo
                 <div className="flex items-end gap-3 h-full py-6 justify-center">
                     {/* ── Video panel ── */}
                     <div
-                        className="relative rounded-2xl overflow-hidden bg-black shadow-2xl"
+                        className="relative rounded-2xl overflow-hidden bg-secondary shadow-2xl"
                         style={{ aspectRatio: "9/16", height: "min(calc(100vh - 48px), 780px)" }}
                         onClick={togglePlay}
                     >
@@ -153,9 +153,9 @@ function FullscreenReelPlayer({ reels, startIndex, onClose, onLike, onSave, onFo
 
                         {/* Progress bar */}
                         <div className="absolute top-0 left-0 right-0 px-3 pt-3 z-10">
-                            <div className="h-0.5 bg-white/30 rounded-full overflow-hidden">
+                            <div className="h-0.5 bg-background/30 rounded-full overflow-hidden">
                                 <div
-                                    className="h-full bg-white rounded-full transition-all duration-100"
+                                    className="h-full bg-background rounded-full transition-all duration-100"
                                     style={{ width: `${progress}%` }}
                                 />
                             </div>
@@ -165,13 +165,13 @@ function FullscreenReelPlayer({ reels, startIndex, onClose, onLike, onSave, onFo
                         <div className="absolute top-4 right-4 z-10 flex flex-col gap-2">
                             <button
                                 onClick={(e) => { e.stopPropagation(); onClose() }}
-                                className="w-9 h-9 bg-black/40 hover:bg-black/60 backdrop-blur-sm rounded-full flex items-center justify-center text-white transition-all"
+                                className="w-9 h-9 bg-secondary/40 hover:bg-secondary/60 backdrop-blur-sm rounded-full flex items-center justify-center text-white transition-all"
                             >
                                 <X className="w-4 h-4" />
                             </button>
                             <button
                                 onClick={toggleMute}
-                                className="w-9 h-9 bg-black/40 hover:bg-black/60 backdrop-blur-sm rounded-full flex items-center justify-center text-white transition-all"
+                                className="w-9 h-9 bg-secondary/40 hover:bg-secondary/60 backdrop-blur-sm rounded-full flex items-center justify-center text-white transition-all"
                             >
                                 {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
                             </button>
@@ -179,8 +179,8 @@ function FullscreenReelPlayer({ reels, startIndex, onClose, onLike, onSave, onFo
 
                         {/* Play/Pause center overlay */}
                         {!isPlaying && (
-                            <div className="absolute inset-0 flex items-center justify-center bg-black/20 z-10 pointer-events-none">
-                                <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                            <div className="absolute inset-0 flex items-center justify-center bg-secondary/20 z-10 pointer-events-none">
+                                <div className="w-16 h-16 rounded-full bg-background/20 backdrop-blur-sm flex items-center justify-center">
                                     <Play className="w-8 h-8 text-white fill-white ml-1" />
                                 </div>
                             </div>
@@ -196,7 +196,7 @@ function FullscreenReelPlayer({ reels, startIndex, onClose, onLike, onSave, onFo
                                 <span className="text-white font-semibold text-sm drop-shadow">@{currentReel.username}</span>
                                 {!currentReel.isFollowing && (
                                     <button
-                                        className="pointer-events-auto ml-1 text-white text-xs border border-white/60 rounded-full px-2 py-0.5 hover:bg-white/20 transition-all"
+                                        className="pointer-events-auto ml-1 text-white text-xs border border-white/60 rounded-full px-2 py-0.5 hover:bg-background/20 transition-all"
                                         onClick={(e) => { e.stopPropagation(); onFollow(currentReel.id) }}
                                     >
                                         Follow
@@ -218,8 +218,8 @@ function FullscreenReelPlayer({ reels, startIndex, onClose, onLike, onSave, onFo
                             onClick={(e) => { e.stopPropagation(); onLike(currentReel.id) }}
                             className="flex flex-col items-center gap-1 group"
                         >
-                            <div className={`w-12 h-12 rounded-full flex items-center justify-center transition-all duration-200 ${currentReel.isLiked ? 'bg-red-500/20' : 'bg-white/10 hover:bg-white/20'}`}>
-                                <Heart className={`w-6 h-6 transition-all ${currentReel.isLiked ? 'text-red-500 fill-red-500 scale-110' : 'text-white'}`} />
+                            <div className={`w-12 h-12 rounded-full flex items-center justify-center transition-all duration-200 ${currentReel.isLiked ? 'bg-accent0/20' : 'bg-background/10 hover:bg-background/20'}`}>
+                                <Heart className={`w-6 h-6 transition-all ${currentReel.isLiked ? 'text-primary fill-primary scale-110' : 'text-white'}`} />
                             </div>
                             <span className="text-white text-xs font-medium">{formatCount(currentReel.likes)}</span>
                         </button>
@@ -229,7 +229,7 @@ function FullscreenReelPlayer({ reels, startIndex, onClose, onLike, onSave, onFo
                             onClick={(e) => { e.stopPropagation(); setShowComments(true) }}
                             className="flex flex-col items-center gap-1 group"
                         >
-                            <div className="w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-all">
+                            <div className="w-12 h-12 rounded-full bg-background/10 hover:bg-background/20 flex items-center justify-center transition-all">
                                 <MessageCircle className="w-6 h-6 text-white" />
                             </div>
                             <span className="text-white text-xs font-medium">{formatCount(currentReel.comments)}</span>
@@ -240,7 +240,7 @@ function FullscreenReelPlayer({ reels, startIndex, onClose, onLike, onSave, onFo
                             onClick={(e) => { e.stopPropagation() }}
                             className="flex flex-col items-center gap-1 group"
                         >
-                            <div className="w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-all">
+                            <div className="w-12 h-12 rounded-full bg-background/10 hover:bg-background/20 flex items-center justify-center transition-all">
                                 <Send className="w-6 h-6 text-white" />
                             </div>
                             <span className="text-white text-xs font-medium">{formatCount(currentReel.shares)}</span>
@@ -251,8 +251,8 @@ function FullscreenReelPlayer({ reels, startIndex, onClose, onLike, onSave, onFo
                             onClick={(e) => { e.stopPropagation(); onSave(currentReel.id) }}
                             className="flex flex-col items-center gap-1 group"
                         >
-                            <div className={`w-12 h-12 rounded-full flex items-center justify-center transition-all ${currentReel.isSaved ? 'bg-yellow-500/20' : 'bg-white/10 hover:bg-white/20'}`}>
-                                <Bookmark className={`w-6 h-6 transition-all ${currentReel.isSaved ? 'text-yellow-400 fill-yellow-400' : 'text-white'}`} />
+                            <div className={`w-12 h-12 rounded-full flex items-center justify-center transition-all ${currentReel.isSaved ? 'bg-primary/20' : 'bg-background/10 hover:bg-background/20'}`}>
+                                <Bookmark className={`w-6 h-6 transition-all ${currentReel.isSaved ? 'text-primary fill-primary' : 'text-white'}`} />
                             </div>
                             <span className="text-white text-xs font-medium">{formatCount(currentReel.saves)}</span>
                         </button>
@@ -262,7 +262,7 @@ function FullscreenReelPlayer({ reels, startIndex, onClose, onLike, onSave, onFo
                             onClick={(e) => { e.stopPropagation() }}
                             className="flex flex-col items-center gap-1"
                         >
-                            <div className="w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-all">
+                            <div className="w-12 h-12 rounded-full bg-background/10 hover:bg-background/20 flex items-center justify-center transition-all">
                                 <MoreHorizontal className="w-6 h-6 text-white" />
                             </div>
                         </button>
@@ -354,7 +354,7 @@ function ReelCard({ reel, isActive, onClick }: ReelCardProps) {
 
     return (
         <div
-            className="relative w-full h-full bg-black flex items-center justify-center cursor-pointer"
+            className="relative w-full h-full bg-secondary flex items-center justify-center cursor-pointer"
             onClick={onClick}
         >
             {/* Video Element */}
@@ -381,8 +381,8 @@ function ReelCard({ reel, isActive, onClick }: ReelCardProps) {
 
             {/* Play/Pause Overlay */}
             {!isPlaying && (
-                <div className="absolute inset-0 flex items-center justify-center bg-black/20">
-                    <div className="w-20 h-20 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                <div className="absolute inset-0 flex items-center justify-center bg-secondary/20">
+                    <div className="w-20 h-20 rounded-full bg-background/20 backdrop-blur-sm flex items-center justify-center">
                         <Play className="w-10 h-10 text-white fill-white ml-1" />
                     </div>
                 </div>
@@ -390,9 +390,9 @@ function ReelCard({ reel, isActive, onClick }: ReelCardProps) {
 
             {/* Progress bar */}
             <div className="absolute top-0 left-0 right-0 px-2 pt-2">
-                <div className="h-0.5 bg-white/30 rounded-full overflow-hidden">
+                <div className="h-0.5 bg-background/30 rounded-full overflow-hidden">
                     <div
-                        className="h-full bg-white rounded-full transition-all duration-100"
+                        className="h-full bg-background rounded-full transition-all duration-100"
                         style={{ width: `${progress}%` }}
                     />
                 </div>
@@ -403,7 +403,7 @@ function ReelCard({ reel, isActive, onClick }: ReelCardProps) {
                 <Button
                     variant="ghost"
                     size="icon"
-                    className="text-white bg-black/20 hover:bg-black/40 h-10 w-10 rounded-full backdrop-blur-sm shadow-sm"
+                    className="text-white bg-secondary/20 hover:bg-secondary/40 h-10 w-10 rounded-full backdrop-blur-sm shadow-sm"
                     onClick={toggleMute}
                 >
                     {isMuted ? <VolumeX className="h-5 w-5" /> : <Volume2 className="h-5 w-5" />}
@@ -412,7 +412,7 @@ function ReelCard({ reel, isActive, onClick }: ReelCardProps) {
 
             {/* Expand hint */}
             <div className="absolute bottom-20 right-4 z-10">
-                <div className="bg-black/30 backdrop-blur-sm text-white text-[10px] font-medium px-2 py-1 rounded-full border border-white/20">
+                <div className="bg-secondary/30 backdrop-blur-sm text-white text-[10px] font-medium px-2 py-1 rounded-full border border-white/20">
                     Tap to expand
                 </div>
             </div>
@@ -523,7 +523,7 @@ export default function InstagramReels({ initialReels = reelsData }: InstagramRe
                         {/* Video Column – vertical scroll */}
                         <div
                             ref={containerRef}
-                            className="w-full lg:w-[450px] h-full overflow-y-auto snap-y snap-mandatory no-scrollbar rounded-xl shadow-2xl bg-black shrink-0 relative"
+                            className="w-full lg:w-[450px] h-full overflow-y-auto snap-y snap-mandatory no-scrollbar rounded-xl shadow-2xl bg-secondary shrink-0 relative"
                         >
                             {reels.map((reel, index) => (
                                 <div
@@ -554,7 +554,7 @@ export default function InstagramReels({ initialReels = reelsData }: InstagramRe
                         </div>
 
                         {/* Comments & Info Column (desktop) */}
-                        <div className="hidden lg:flex flex-1 w-full bg-white rounded-xl border border-border shadow-sm flex-col h-full lg:h-[800px] overflow-hidden sticky top-24">
+                        <div className="hidden lg:flex flex-1 w-full bg-background rounded-xl border border-border shadow-sm flex-col h-full lg:h-[800px] overflow-hidden sticky top-24">
                             {/* Author Header */}
                             <div className="p-4 border-b border-border flex items-center justify-between">
                                 <div className="flex items-center gap-3">
@@ -618,7 +618,7 @@ export default function InstagramReels({ initialReels = reelsData }: InstagramRe
                                         <Button
                                             variant="ghost"
                                             size="icon"
-                                            className={`h-10 w-10 hover:bg-primary/10 ${currentReel.isLiked ? 'text-red-500 hover:text-red-600' : 'text-foreground hover:text-primary'}`}
+                                            className={`h-10 w-10 hover:bg-primary/10 ${currentReel.isLiked ? 'text-primary hover:text-primary-dark' : 'text-foreground hover:text-primary'}`}
                                             onClick={() => handleLike(currentReel.id)}
                                         >
                                             <Heart className={`h-6 w-6 ${currentReel.isLiked ? 'fill-current' : ''}`} />
@@ -633,7 +633,7 @@ export default function InstagramReels({ initialReels = reelsData }: InstagramRe
                                     <Button
                                         variant="ghost"
                                         size="icon"
-                                        className={`h-10 w-10 hover:bg-primary/10 ${currentReel.isSaved ? 'text-yellow-500 hover:text-yellow-600' : 'text-foreground hover:text-primary'}`}
+                                        className={`h-10 w-10 hover:bg-primary/10 ${currentReel.isSaved ? 'text-primary hover:text-primary-dark' : 'text-foreground hover:text-primary'}`}
                                         onClick={() => handleSave(currentReel.id)}
                                     >
                                         <Bookmark className={`h-6 w-6 ${currentReel.isSaved ? 'fill-current' : ''}`} />

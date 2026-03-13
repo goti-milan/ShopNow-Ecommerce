@@ -72,7 +72,7 @@ const SERVICES: Service[] = [
         reviewCount: 1240,
         location: "At Your Home",
         badge: "Top Rated",
-        badgeColor: "bg-amber-500",
+        badgeColor: "bg-accent0",
         highlights: ["Eco-friendly supplies", "Background-verified staff", "100% satisfaction guarantee"],
         image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80&fit=crop",
         provider: "CleanPro Services",
@@ -104,7 +104,7 @@ const SERVICES: Service[] = [
         reviewCount: 670,
         location: "At Your Home",
         badge: "Popular",
-        badgeColor: "bg-blue-500",
+        badgeColor: "bg-accent0",
         highlights: ["ISI-certified electricians", "Safety audit included", "Insured service"],
         image: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=600&q=80&fit=crop",
         provider: "Volt Masters",
@@ -138,7 +138,7 @@ const SERVICES: Service[] = [
         reviewCount: 2100,
         location: "At Home / In Salon",
         badge: "Best Seller",
-        badgeColor: "bg-rose-500",
+        badgeColor: "bg-accent0",
         highlights: ["Certified therapists", "Premium aroma oils", "Post-massage wellness tips"],
         image: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=600&q=80&fit=crop",
         provider: "ZenTouch Spa",
@@ -170,7 +170,7 @@ const SERVICES: Service[] = [
         reviewCount: 3400,
         location: "At Home / Salon",
         badge: "Popular",
-        badgeColor: "bg-blue-500",
+        badgeColor: "bg-accent0",
         highlights: ["Expert stylists", "All hair types", "Products included"],
         image: "https://images.unsplash.com/photo-1562322140-8baeababf5db?w=600&q=80&fit=crop",
         provider: "StyleHub",
@@ -189,7 +189,7 @@ const SERVICES: Service[] = [
         reviewCount: 1540,
         location: "At Home / Gym",
         badge: "Top Rated",
-        badgeColor: "bg-amber-500",
+        badgeColor: "bg-accent0",
         highlights: ["Certified ISSA trainer", "Custom plan", "Progress tracking"],
         image: "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=600&q=80&fit=crop",
         provider: "FitLife Pro",
@@ -221,7 +221,7 @@ const SERVICES: Service[] = [
         reviewCount: 980,
         location: "At Your Home",
         badge: "Trusted",
-        badgeColor: "bg-green-600",
+        badgeColor: "bg-primary",
         highlights: ["Registered MBBS doctors", "Prescription included", "Available on weekends"],
         image: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=600&q=80&fit=crop",
         provider: "MediCare Home",
@@ -255,7 +255,7 @@ const SERVICES: Service[] = [
         reviewCount: 430,
         location: "At Your Home",
         badge: "New",
-        badgeColor: "bg-purple-500",
+        badgeColor: "bg-accent0",
         highlights: ["Google & Alexa compatible", "WiFi optimisation", "Training included"],
         image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80&fit=crop",
         provider: "SmartNest",
@@ -274,7 +274,7 @@ const SERVICES: Service[] = [
         reviewCount: 1890,
         location: "At Your Location",
         badge: "Popular",
-        badgeColor: "bg-blue-500",
+        badgeColor: "bg-accent0",
         highlights: ["Waterless option available", "Premium shampoo", "Tyre shine included"],
         image: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=600&q=80&fit=crop",
         provider: "AutoGlam",
@@ -308,7 +308,7 @@ const SERVICES: Service[] = [
         reviewCount: 540,
         location: "At Your Venue",
         badge: "Premium",
-        badgeColor: "bg-rose-500",
+        badgeColor: "bg-accent0",
         highlights: ["Custom theme decor", "Cake included", "Photography optional add-on"],
         image: "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=600&q=80&fit=crop",
         provider: "CelebrationCo",
@@ -342,7 +342,7 @@ const SERVICES: Service[] = [
         reviewCount: 3200,
         location: "At Home / Online",
         badge: "Top Rated",
-        badgeColor: "bg-amber-500",
+        badgeColor: "bg-accent0",
         highlights: ["CBSE / ICSE / State boards", "Progress reports", "Flexible scheduling"],
         image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&q=80&fit=crop",
         provider: "EduHome",
@@ -376,7 +376,7 @@ const SERVICES: Service[] = [
         reviewCount: 1400,
         location: "At Your Home",
         badge: "Pet Favourite",
-        badgeColor: "bg-teal-500",
+        badgeColor: "bg-primary",
         highlights: ["Vet-approved products", "Breed-specific cuts", "Stress-free experience"],
         image: "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=600&q=80&fit=crop",
         provider: "PawPerfect",
@@ -407,7 +407,7 @@ function StarRating({ rating }: { rating: number }) {
             {[1, 2, 3, 4, 5].map((star) => (
                 <Star
                     key={star}
-                    className={`h-3.5 w-3.5 ${star <= Math.round(rating) ? "fill-amber-400 text-amber-400" : "fill-gray-200 text-gray-200"}`}
+                    className={`h-3.5 w-3.5 ${star <= Math.round(rating) ? "fill-primary text-primary" : "fill-gray-200 text-gray-200"}`}
                 />
             ))}
         </div>
@@ -416,7 +416,7 @@ function StarRating({ rating }: { rating: number }) {
 
 function ServiceCard({ service, onBook }: { service: Service; onBook: (s: Service) => void }) {
     return (
-        <div className="group bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col">
+        <div className="group bg-background rounded-2xl shadow-sm border border-border overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col">
             {/* Image */}
             <div className="relative h-44 overflow-hidden">
                 <Image
@@ -427,11 +427,11 @@ function ServiceCard({ service, onBook }: { service: Service; onBook: (s: Servic
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-                <button className="absolute top-2 right-2 text-white hover:text-red-500 transition-colors">
+                <button className="absolute top-2 right-2 text-white hover:text-primary transition-colors">
                     <Heart className="h-5 w-5" />
                 </button>
                 {service.badge && (
-                    <span className={`absolute top-2 left-2 text-white text-xs font-semibold px-2 py-1 rounded-full ${service.badgeColor || 'bg-red-500'}`}>
+                    <span className={`absolute top-2 left-2 text-white text-xs font-semibold px-2 py-1 rounded-full ${service.badgeColor || 'bg-accent0'}`}>
                         {service.badge}
                     </span>
                 )}
@@ -441,38 +441,38 @@ function ServiceCard({ service, onBook }: { service: Service; onBook: (s: Servic
             <div className="p-4 flex flex-col gap-2">
                 {/* Title */}
                 <div>
-                    <h3 className="font-bold text-gray-900 text-lg leading-tight">{service.provider}</h3>
-                    <p className="text-gray-600 text-sm">{service.name}</p>
+                    <h3 className="font-bold text-foreground text-lg leading-tight">{service.provider}</h3>
+                    <p className="text-muted-foreground text-sm">{service.name}</p>
                 </div>
 
                 {/* Price */}
-                <p className="text-lg font-semibold text-gray-900">₹{service.price}/hrs</p>
+                <p className="text-lg font-semibold text-foreground">₹{service.price}/hrs</p>
 
                 {/* Rating */}
                 <div className="flex items-center gap-2">
-                    <span className="text-yellow-500">⭐</span>
-                    <span className="text-sm font-semibold text-gray-700">{service.rating}</span>
-                    <span className="text-xs text-gray-400">({service.reviewCount.toLocaleString()} reviews)</span>
+                    <span className="text-primary">⭐</span>
+                    <span className="text-sm font-semibold text-foreground">{service.rating}</span>
+                    <span className="text-xs text-muted-foreground">({service.reviewCount.toLocaleString()} reviews)</span>
                 </div>
 
                 {/* Highlights */}
                 <ul className="space-y-1">
                     {service.highlights.map((h) => (
-                        <li key={h} className="flex items-center gap-1.5 text-xs text-gray-600">
-                            <CheckCircle2 className="h-3.5 w-3.5 text-green-500 shrink-0" />
+                        <li key={h} className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                            <CheckCircle2 className="h-3.5 w-3.5 text-primary shrink-0" />
                             {h}
                         </li>
                     ))}
                 </ul>
 
                 {/* Availability */}
-                <div className="flex items-center gap-1.5 text-xs text-gray-600">
-                    <span className="text-green-500">🟢</span>
+                <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                    <span className="text-primary">🟢</span>
                     <span>Available Today • 9 AM – 2 PM</span>
                 </div>
 
                 {/* Distance and Time */}
-                <div className="flex items-center justify-between text-xs text-gray-500">
+                <div className="flex items-center justify-between text-xs text-muted-foreground">
                     <span>Distance: 2.1 km</span>
                     <span>⏱ 2 Hours</span>
                 </div>
@@ -485,7 +485,7 @@ function ServiceCard({ service, onBook }: { service: Service; onBook: (s: Servic
                     >
                         Book Now
                     </button>
-                    <button className="flex-1 border border-gray-300 hover:border-gray-400 text-gray-700 text-sm font-semibold px-3 py-2 rounded-lg transition-all duration-200">
+                    <button className="flex-1 border border-border hover:border-gray-400 text-foreground text-sm font-semibold px-3 py-2 rounded-lg transition-all duration-200">
                         Add to Cart
                     </button>
                 </div>
@@ -518,8 +518,8 @@ function BookingModal({
 
     return (
         <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4">
-            <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={onClose} />
-            <div className="relative bg-white w-full sm:max-w-lg rounded-t-3xl sm:rounded-2xl shadow-2xl max-h-[95vh] overflow-y-auto">
+            <div className="absolute inset-0 bg-secondary/60 backdrop-blur-sm" onClick={onClose} />
+            <div className="relative bg-background w-full sm:max-w-lg rounded-t-3xl sm:rounded-2xl shadow-2xl max-h-[95vh] overflow-y-auto">
                 {/* Handle */}
                 <div className="flex justify-center pt-3 pb-1 sm:hidden">
                     <div className="w-10 h-1 bg-gray-300 rounded-full" />
@@ -530,13 +530,13 @@ function BookingModal({
                     <div className="flex items-center gap-3">
                         <Image src={service.image} alt={service.name} width={56} height={56} className="w-14 h-14 rounded-xl object-cover" />
                         <div>
-                            <h2 className="font-bold text-gray-900">{service.name}</h2>
-                            <p className="text-sm text-gray-500">{service.provider}</p>
+                            <h2 className="font-bold text-foreground">{service.name}</h2>
+                            <p className="text-sm text-muted-foreground">{service.provider}</p>
                             <p className="text-lg font-bold text-primary">₹{service.price.toLocaleString()}</p>
                         </div>
                     </div>
-                    <button onClick={onClose} className="p-2 rounded-full hover:bg-gray-100 transition-colors">
-                        <X className="h-5 w-5 text-gray-500" />
+                    <button onClick={onClose} className="p-2 rounded-full hover:bg-muted transition-colors">
+                        <X className="h-5 w-5 text-muted-foreground" />
                     </button>
                 </div>
 
@@ -544,16 +544,16 @@ function BookingModal({
                 <form onSubmit={handleSubmit} className="p-5 space-y-4">
                     {/* Date & Time */}
                     <div className="space-y-3">
-                        <h3 className="text-sm font-semibold text-gray-700 uppercase tracking-wide">Schedule</h3>
+                        <h3 className="text-sm font-semibold text-foreground uppercase tracking-wide">Schedule</h3>
                         <div className="relative">
-                            <CalendarDays className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+                            <CalendarDays className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                             <input
                                 type="date"
                                 required
                                 min={today}
                                 value={form.date}
                                 onChange={e => setForm(f => ({ ...f, date: e.target.value }))}
-                                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
+                                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-border text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
                             />
                         </div>
 
@@ -566,7 +566,7 @@ function BookingModal({
                                     onClick={() => setForm(f => ({ ...f, time: slot }))}
                                     className={`py-1.5 rounded-lg text-xs font-medium border transition-all ${form.time === slot
                                         ? "bg-primary text-white border-primary shadow-md"
-                                        : "border-gray-200 text-gray-600 hover:border-primary hover:text-primary"
+                                        : "border-border text-muted-foreground hover:border-primary hover:text-primary"
                                         }`}
                                 >
                                     {slot}
@@ -577,19 +577,19 @@ function BookingModal({
 
                     {/* Notes */}
                     <div>
-                        <h3 className="text-sm font-semibold text-gray-700 uppercase tracking-wide mb-2">Special Instructions</h3>
+                        <h3 className="text-sm font-semibold text-foreground uppercase tracking-wide mb-2">Special Instructions</h3>
                         <textarea
                             placeholder="Any specific requirements or notes for the service provider..."
                             value={form.notes}
                             onChange={e => setForm(f => ({ ...f, notes: e.target.value }))}
                             rows={2}
-                            className="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary resize-none"
+                            className="w-full px-4 py-2.5 rounded-xl border border-border text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary resize-none"
                         />
                     </div>
 
                     {/* Trust Row */}
-                    <div className="flex items-center gap-4 py-3 px-4 bg-green-50 rounded-xl text-xs text-green-700">
-                        <ShieldCheck className="h-5 w-5 text-green-600 shrink-0" />
+                    <div className="flex items-center gap-4 py-3 px-4 bg-accent rounded-xl text-xs text-primary-dark">
+                        <ShieldCheck className="h-5 w-5 text-primary shrink-0" />
                         <span>100% secure booking. Verified professionals only. Cancel anytime before service date.</span>
                     </div>
 
@@ -602,7 +602,7 @@ function BookingModal({
                         <ShoppingCart className="h-4 w-4" />
                         Add to Cart — ₹{service.price.toLocaleString()}
                     </button>
-                    <p className="text-center text-xs text-gray-400">You&apos;ll review and pay in the cart</p>
+                    <p className="text-center text-xs text-muted-foreground">You&apos;ll review and pay in the cart</p>
                 </form>
             </div>
         </div>
@@ -647,26 +647,26 @@ function FilterSidebar({
             {/* Search */}
             <div>
                 <div className="relative">
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                     <input
                         type="text"
                         placeholder="Search by Service..."
-                        className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
+                        className="w-full pl-10 pr-4 py-2 rounded-lg border border-border text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
                     />
                 </div>
             </div>
 
             {/* Categories */}
             <div>
-                <h3 className="text-sm font-bold text-gray-900 mb-3 flex items-center gap-2">
+                <h3 className="text-sm font-bold text-foreground mb-3 flex items-center gap-2">
                     <span>Categories</span>
-                    <ChevronRight className="h-4 w-4 text-gray-400" />
+                    <ChevronRight className="h-4 w-4 text-muted-foreground" />
                 </h3>
                 <div className="space-y-2 pl-2">
                     {CATEGORIES.slice(1, 7).map(cat => (
                         <div key={cat.id} className="flex items-center gap-2">
                             <input type="checkbox" id={cat.id} className="rounded w-4 h-4" />
-                            <label htmlFor={cat.id} className="text-sm text-gray-600 cursor-pointer">
+                            <label htmlFor={cat.id} className="text-sm text-muted-foreground cursor-pointer">
                                 {cat.label}
                             </label>
                         </div>
@@ -676,7 +676,7 @@ function FilterSidebar({
 
             {/* Price Range */}
             <div>
-                <h3 className="text-sm font-bold text-gray-900 mb-3">Price Range</h3>
+                <h3 className="text-sm font-bold text-foreground mb-3">Price Range</h3>
                 <div className="space-y-3">
                     <div className="flex items-center gap-2">
                         <input
@@ -690,15 +690,15 @@ function FilterSidebar({
                         />
                     </div>
                     <div className="flex items-center justify-between text-sm">
-                        <span className="text-gray-600">₹{priceRange[0]}</span>
-                        <span className="text-gray-600">₹{priceRange[1]}</span>
+                        <span className="text-muted-foreground">₹{priceRange[0]}</span>
+                        <span className="text-muted-foreground">₹{priceRange[1]}</span>
                     </div>
                 </div>
             </div>
 
             {/* Rating */}
             <div>
-                <h3 className="text-sm font-bold text-gray-900 mb-3">Rating</h3>
+                <h3 className="text-sm font-bold text-foreground mb-3">Rating</h3>
                 <div className="space-y-2">
                     {[4, 3, 2, 1].map(rating => (
                         <div key={rating} className="flex items-center gap-2">
@@ -711,9 +711,9 @@ function FilterSidebar({
                                 className="w-4 h-4"
                             />
                             <label htmlFor={`rating-${rating}`} className="flex items-center gap-1 cursor-pointer">
-                                <span className="text-sm text-gray-600">{rating}</span>
-                                <Star className="h-3.5 w-3.5 fill-amber-400 text-amber-400" />
-                                <span className="text-xs text-gray-400">& above</span>
+                                <span className="text-sm text-muted-foreground">{rating}</span>
+                                <Star className="h-3.5 w-3.5 fill-primary text-primary" />
+                                <span className="text-xs text-muted-foreground">& above</span>
                             </label>
                         </div>
                     ))}
@@ -722,7 +722,7 @@ function FilterSidebar({
 
             {/* Availability */}
             <div>
-                <h3 className="text-sm font-bold text-gray-900 mb-3">Availability</h3>
+                <h3 className="text-sm font-bold text-foreground mb-3">Availability</h3>
                 <div className="space-y-2">
                     {["Available Now", "Available Today", "Tomorrow", "This Week"].map(option => (
                         <div key={option} className="flex items-center gap-2">
@@ -733,7 +733,7 @@ function FilterSidebar({
                                 onChange={() => toggleAvailability(option)}
                                 className="rounded w-4 h-4"
                             />
-                            <label htmlFor={option} className="text-sm text-gray-600 cursor-pointer">
+                            <label htmlFor={option} className="text-sm text-muted-foreground cursor-pointer">
                                 {option}
                             </label>
                         </div>
@@ -743,7 +743,7 @@ function FilterSidebar({
 
             {/* Distance */}
             <div>
-                <h3 className="text-sm font-bold text-gray-900 mb-3">Distance</h3>
+                <h3 className="text-sm font-bold text-foreground mb-3">Distance</h3>
                 <div className="space-y-2">
                     {[1, 3, 5].map(d => (
                         <div key={d} className="flex items-center gap-2">
@@ -755,7 +755,7 @@ function FilterSidebar({
                                 onChange={() => setDistance(distance === d ? null : d)}
                                 className="w-4 h-4"
                             />
-                            <label htmlFor={`distance-${d}`} className="text-sm text-gray-600 cursor-pointer">
+                            <label htmlFor={`distance-${d}`} className="text-sm text-muted-foreground cursor-pointer">
                                 {d} km
                             </label>
                         </div>
@@ -765,7 +765,7 @@ function FilterSidebar({
 
             {/* Duration */}
             <div>
-                <h3 className="text-sm font-bold text-gray-900 mb-3">Duration</h3>
+                <h3 className="text-sm font-bold text-foreground mb-3">Duration</h3>
                 <div className="space-y-2">
                     {["30 min", "1 hour", "2 hours"].map(dur => (
                         <div key={dur} className="flex items-center gap-2">
@@ -777,7 +777,7 @@ function FilterSidebar({
                                 onChange={() => setDuration(duration === dur ? null : dur)}
                                 className="w-4 h-4"
                             />
-                            <label htmlFor={`duration-${dur}`} className="text-sm text-gray-600 cursor-pointer">
+                            <label htmlFor={`duration-${dur}`} className="text-sm text-muted-foreground cursor-pointer">
                                 {dur}
                             </label>
                         </div>
@@ -888,17 +888,17 @@ export default function BookingPage() {
     }, [])
 
     return (
-        <div className="min-h-screen bg-gray-50">
+        <div className="min-h-screen bg-muted">
             {/* Hero Banner */}
-            <div className="relative overflow-hidden bg-gradient-to-br from-primary via-primary/90 to-indigo-700 text-white">
+            <div className="relative overflow-hidden bg-gradient-to-br from-primary via-primary/90 to-primary-dark text-white">
                 <div className="absolute inset-0 opacity-10" style={{ backgroundImage: "radial-gradient(circle at 20% 50%, white 1px, transparent 1px), radial-gradient(circle at 80% 20%, white 1px, transparent 1px)", backgroundSize: "60px 60px" }} />
                 <div className="relative container mx-auto px-4 py-14 text-center space-y-4">
-                    <span className="inline-block bg-white/20 backdrop-blur-sm px-4 py-1 rounded-full text-sm font-semibold tracking-wide">
+                    <span className="inline-block bg-background/20 backdrop-blur-sm px-4 py-1 rounded-full text-sm font-semibold tracking-wide">
                         ✨ 500+ Verified Service Professionals
                     </span>
                     <h1 className="text-4xl sm:text-5xl font-extrabold leading-tight">
                         Book a Service <br className="sm:hidden" />
-                        <span className="text-yellow-300">You Can Trust</span>
+                        <span className="text-primary-foreground">You Can Trust</span>
                     </h1>
                     <p className="text-white/80 text-lg max-w-xl mx-auto">
                         From home care to beauty, health, tech & more — we bring expert professionals to your doorstep.
@@ -907,17 +907,17 @@ export default function BookingPage() {
                     {/* Search Bar */}
                     <div className="max-w-lg mx-auto mt-6">
                         <div className="relative">
-                            <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                            <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
                             <input
                                 type="text"
                                 placeholder="Search services (e.g. cleaning, massage, yoga...)"
                                 value={search}
                                 onChange={e => setSearch(e.target.value)}
-                                className="w-full pl-12 pr-4 py-4 rounded-2xl text-gray-900 text-sm font-medium shadow-2xl focus:outline-none focus:ring-4 focus:ring-white/30 placeholder:text-gray-400"
+                                className="w-full pl-12 pr-4 py-4 rounded-2xl text-foreground text-sm font-medium shadow-2xl focus:outline-none focus:ring-4 focus:ring-white/30 placeholder:text-muted-foreground"
                             />
                             {search && (
                                 <button onClick={() => setSearch("")} className="absolute right-4 top-1/2 -translate-y-1/2">
-                                    <X className="h-4 w-4 text-gray-400 hover:text-gray-600" />
+                                    <X className="h-4 w-4 text-muted-foreground hover:text-muted-foreground" />
                                 </button>
                             )}
                         </div>
@@ -937,7 +937,7 @@ export default function BookingPage() {
             </div>
 
             {/* Category Tabs */}
-            <div className="bg-white border-b border-gray-100 sticky top-0 z-30 shadow-sm">
+            <div className="bg-background border-b border-border sticky top-0 z-30 shadow-sm">
                 <div className="container mx-auto px-4">
                     <div className="flex items-center gap-2 overflow-x-auto py-3 no-scrollbar">
                         {CATEGORIES.map(cat => {
@@ -948,7 +948,7 @@ export default function BookingPage() {
                                     onClick={() => setActiveCategory(cat.id)}
                                     className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-200 shrink-0 ${activeCategory === cat.id
                                         ? "bg-primary text-white shadow-md shadow-primary/30"
-                                        : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                                        : "bg-muted text-muted-foreground hover:bg-muted"
                                         }`}
                                 >
                                     <Icon className="h-4 w-4" />
@@ -983,8 +983,8 @@ export default function BookingPage() {
                     <div className="flex-1">
                         {/* Results Row */}
                         <div className="flex items-center justify-between mb-6">
-                            <p className="text-gray-600 text-sm">
-                                <span className="font-semibold text-gray-900">{filtered.length}</span> services found
+                            <p className="text-muted-foreground text-sm">
+                                <span className="font-semibold text-foreground">{filtered.length}</span> services found
                                 {activeCategory !== "all" && (
                                     <span> in <span className="text-primary font-medium">{CATEGORIES.find(c => c.id === activeCategory)?.label}</span></span>
                                 )}
@@ -992,7 +992,7 @@ export default function BookingPage() {
                             <select
                                 value={sortBy}
                                 onChange={e => setSortBy(e.target.value as typeof sortBy)}
-                                className="text-sm border border-gray-200 rounded-xl px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-primary/30 bg-white"
+                                className="text-sm border border-border rounded-xl px-3 py-2 text-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 bg-background"
                             >
                                 <option value="rating">Sort: Top Rated</option>
                                 <option value="price_asc">Sort: Price ↑</option>
@@ -1003,9 +1003,9 @@ export default function BookingPage() {
                         {/* Grid */}
                         {filtered.length === 0 ? (
                             <div className="flex flex-col items-center justify-center py-20 gap-4 text-center">
-                                <Search className="h-12 w-12 text-gray-300" />
-                                <h3 className="text-xl font-semibold text-gray-700">No services found</h3>
-                                <p className="text-gray-400">Try a different keyword or category</p>
+                                <Search className="h-12 w-12 text-muted-foreground" />
+                                <h3 className="text-xl font-semibold text-foreground">No services found</h3>
+                                <p className="text-muted-foreground">Try a different keyword or category</p>
                                 <button onClick={() => { setSearch(""); setActiveCategory("all") }} className="px-5 py-2 bg-primary text-white rounded-xl text-sm font-medium hover:bg-primary/90">
                                     Clear Filters
                                 </button>

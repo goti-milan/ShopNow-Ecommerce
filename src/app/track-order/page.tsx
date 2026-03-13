@@ -53,8 +53,8 @@ export default function TrackOrderPage() {
     return (
         <div className="container mx-auto px-4 py-12 max-w-4xl">
             <div className="text-center mb-10">
-                <h1 className="text-3xl font-bold text-text-primary mb-2">Track Your Order</h1>
-                <p className="text-text-muted">Enter your order details below to see the current status of your shipment.</p>
+                <h1 className="text-3xl font-bold text-foreground mb-2">Track Your Order</h1>
+                <p className="text-muted-foreground">Enter your order details below to see the current status of your shipment.</p>
             </div>
 
             <Card className="mb-8 border-border shadow-sm">
@@ -67,7 +67,7 @@ export default function TrackOrderPage() {
                         <div className="space-y-2">
                             <Label htmlFor="orderId">Order ID</Label>
                             <div className="relative">
-                                <Package className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-text-muted" />
+                                <Package className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                                 <Input
                                     id="orderId"
                                     placeholder="e.g. ORD-12345"
@@ -81,7 +81,7 @@ export default function TrackOrderPage() {
                         <div className="space-y-2">
                             <Label htmlFor="emailOrPhone">Email or Phone Number</Label>
                             <div className="relative">
-                                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-text-muted" />
+                                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                                 <Input
                                     id="emailOrPhone"
                                     placeholder="Email or phone used at checkout"
@@ -111,19 +111,19 @@ export default function TrackOrderPage() {
                         <CardContent className="pt-6">
                             <div className="flex flex-col md:flex-row justify-between gap-4">
                                 <div>
-                                    <p className="text-sm text-text-muted uppercase tracking-wider font-semibold">Order ID</p>
+                                    <p className="text-sm text-muted-foreground uppercase tracking-wider font-semibold">Order ID</p>
                                     <p className="text-xl font-bold text-primary">{trackingData.orderId}</p>
                                 </div>
                                 <div>
-                                    <p className="text-sm text-text-muted uppercase tracking-wider font-semibold">Current Status</p>
+                                    <p className="text-sm text-muted-foreground uppercase tracking-wider font-semibold">Current Status</p>
                                     <div className="flex items-center gap-2 text-primary">
                                         <Truck className="h-5 w-5" />
                                         <p className="text-xl font-bold">{trackingData.status}</p>
                                     </div>
                                 </div>
                                 <div>
-                                    <p className="text-sm text-text-muted uppercase tracking-wider font-semibold">Estimated Delivery</p>
-                                    <p className="text-xl font-bold text-text-primary">{trackingData.estimatedDelivery}</p>
+                                    <p className="text-sm text-muted-foreground uppercase tracking-wider font-semibold">Estimated Delivery</p>
+                                    <p className="text-xl font-bold text-foreground">{trackingData.estimatedDelivery}</p>
                                 </div>
                             </div>
                         </CardContent>
@@ -131,23 +131,23 @@ export default function TrackOrderPage() {
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <div className="md:col-span-2 space-y-4">
-                            <h3 className="text-xl font-bold text-text-primary">Shipment Timeline</h3>
+                            <h3 className="text-xl font-bold text-foreground">Shipment Timeline</h3>
                             <div className="space-y-8 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-primary before:via-border before:to-border">
                                 {trackingData.timeline.map((step, index) => (
                                     <div key={index} className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
-                                        <div className="flex items-center justify-center w-10 h-10 rounded-full border border-white bg-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
+                                        <div className="flex items-center justify-center w-10 h-10 rounded-full border border-white bg-background shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
                                             {step.completed ? (
                                                 <CheckCircle2 className="h-6 w-6 text-primary" />
                                             ) : (
                                                 <div className={`h-3 w-3 rounded-full ${index === 3 ? 'bg-primary animate-pulse' : 'bg-border'}`} />
                                             )}
                                         </div>
-                                        <div className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-4 rounded border border-border bg-white shadow-sm">
+                                        <div className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-4 rounded border border-border bg-background shadow-sm">
                                             <div className="flex items-center justify-between space-x-2 mb-1">
-                                                <div className="font-bold text-text-primary">{step.status}</div>
+                                                <div className="font-bold text-foreground">{step.status}</div>
                                                 <time className="text-xs font-medium text-primary bg-primary/10 px-2 py-0.5 rounded-full">{step.date.split(',')[0]}</time>
                                             </div>
-                                            <div className="text-sm text-text-muted">{step.date}</div>
+                                            <div className="text-sm text-muted-foreground">{step.date}</div>
                                         </div>
                                     </div>
                                 ))}
@@ -159,7 +159,7 @@ export default function TrackOrderPage() {
                                 <CardHeader>
                                     <CardTitle className="text-lg">Delivery Address</CardTitle>
                                 </CardHeader>
-                                <CardContent className="text-sm text-text-muted space-y-2">
+                                <CardContent className="text-sm text-muted-foreground space-y-2">
                                     <div className="flex gap-2">
                                         <MapPin className="h-4 w-4 text-primary shrink-0" />
                                         <p>
@@ -178,7 +178,7 @@ export default function TrackOrderPage() {
                                     <CardTitle className="text-lg">Help & Support</CardTitle>
                                 </CardHeader>
                                 <CardContent className="text-sm space-y-4">
-                                    <p className="text-text-muted">Need help with your shipment? Contact our support team.</p>
+                                    <p className="text-muted-foreground">Need help with your shipment? Contact our support team.</p>
                                     <Button variant="outline" className="w-full">Contact Support</Button>
                                 </CardContent>
                             </Card>
@@ -189,23 +189,23 @@ export default function TrackOrderPage() {
 
             {/* FAQs or helpful notes */}
             <div className="mt-16 pt-8 border-t border-border">
-                <h3 className="text-xl font-bold text-text-primary mb-6">Frequently Asked Questions</h3>
+                <h3 className="text-xl font-bold text-foreground mb-6">Frequently Asked Questions</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div>
                         <h4 className="font-bold mb-2">When will my order ship?</h4>
-                        <p className="text-sm text-text-muted">Orders are typically processed within 1-2 business days. You&apos;ll receive an email with your tracking number once it&apos;s on its way.</p>
+                        <p className="text-sm text-muted-foreground">Orders are typically processed within 1-2 business days. You&apos;ll receive an email with your tracking number once it&apos;s on its way.</p>
                     </div>
                     <div>
                         <h4 className="font-bold mb-2">Can I change my delivery address?</h4>
-                        <p className="text-sm text-text-muted">If your order hasn&apos;t shipped yet, we might be able to update it. Please contact support as soon as possible.</p>
+                        <p className="text-sm text-muted-foreground">If your order hasn&apos;t shipped yet, we might be able to update it. Please contact support as soon as possible.</p>
                     </div>
                     <div>
                         <h4 className="font-bold mb-2">My tracking hasn&apos;t updated in days.</h4>
-                        <p className="text-sm text-text-muted">Tracking information may not update every day as the package moves between hubs. If it hasn&apos;t moved in more than 5 days, please contact us.</p>
+                        <p className="text-sm text-muted-foreground">Tracking information may not update every day as the package moves between hubs. If it hasn&apos;t moved in more than 5 days, please contact us.</p>
                     </div>
                     <div>
                         <h4 className="font-bold mb-2">What if my package is lost?</h4>
-                        <p className="text-sm text-text-muted">If your package is marked as delivered but you haven&apos;t received it, or if it&apos;s significantly delayed, we&apos;ll open an investigation with the carrier.</p>
+                        <p className="text-sm text-muted-foreground">If your package is marked as delivered but you haven&apos;t received it, or if it&apos;s significantly delayed, we&apos;ll open an investigation with the carrier.</p>
                     </div>
                 </div>
             </div>

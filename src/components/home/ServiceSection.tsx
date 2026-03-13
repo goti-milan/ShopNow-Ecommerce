@@ -29,7 +29,7 @@ const services = [
 
 export default function ServicesSection() {
     return (
-        <section className="w-full py-24 bg-white">
+        <section className="w-full py-24 bg-background">
             <div className="max-w-7xl mx-auto px-6">
                 <div className="grid grid-cols-1 gap-16">
 
@@ -78,7 +78,7 @@ export default function ServicesSection() {
                                             </p>
 
                                             {item.subtitle && (
-                                                <p className="text-xs text-green-600 font-medium">
+                                                <p className="text-xs text-primary font-medium">
                                                     {item.subtitle}
                                                 </p>
                                             )}

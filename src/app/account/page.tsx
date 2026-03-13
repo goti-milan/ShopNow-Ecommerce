@@ -44,10 +44,10 @@ import {
 
 // ─── MOCK DATA ────────────────────────────────────────────────────────────────
 const SERVICE_BOOKINGS = [
-    { id: "SB001", name: "Deep Home Cleaning", provider: "CleanPro Services", date: "Mar 5, 2026", time: "10:00 AM", amount: 1499, status: "Upcoming", statusColor: "bg-blue-100 text-blue-700", rating: null },
-    { id: "SB002", name: "Personal Training Session", provider: "FitLife Pro", date: "Feb 22, 2026", time: "07:00 AM", amount: 999, status: "Completed", statusColor: "bg-green-100 text-green-700", rating: 5 },
-    { id: "SB003", name: "Hair Cut & Styling", provider: "StyleHub", date: "Feb 15, 2026", time: "02:00 PM", amount: 599, status: "Completed", statusColor: "bg-green-100 text-green-700", rating: 4 },
-    { id: "SB004", name: "Laptop/PC Repair", provider: "TechFix", date: "Jan 28, 2026", time: "11:00 AM", amount: 599, status: "Cancelled", statusColor: "bg-red-100 text-red-700", rating: null },
+    { id: "SB001", name: "Deep Home Cleaning", provider: "CleanPro Services", date: "Mar 5, 2026", time: "10:00 AM", amount: 1499, status: "Upcoming", statusColor: "bg-accent text-primary-dark", rating: null },
+    { id: "SB002", name: "Personal Training Session", provider: "FitLife Pro", date: "Feb 22, 2026", time: "07:00 AM", amount: 999, status: "Completed", statusColor: "bg-accent text-primary-dark", rating: 5 },
+    { id: "SB003", name: "Hair Cut & Styling", provider: "StyleHub", date: "Feb 15, 2026", time: "02:00 PM", amount: 599, status: "Completed", statusColor: "bg-accent text-primary-dark", rating: 4 },
+    { id: "SB004", name: "Laptop/PC Repair", provider: "TechFix", date: "Jan 28, 2026", time: "11:00 AM", amount: 599, status: "Cancelled", statusColor: "bg-accent text-primary-dark", rating: null },
 ];
 
 const FAVOURITES = [
@@ -84,10 +84,10 @@ function Toggle({ checked, onChange, id }: { checked: boolean; onChange: (v: boo
             role="switch"
             aria-checked={checked}
             onClick={() => onChange(!checked)}
-            className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary/40 ${checked ? "bg-primary" : "bg-gray-200"}`}
+            className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary/40 ${checked ? "bg-primary" : "bg-muted"}`}
         >
             <span
-                className={`inline-block h-5 w-5 transform rounded-full bg-white shadow-md transition-transform duration-200 ${checked ? "translate-x-5" : "translate-x-0"}`}
+                className={`inline-block h-5 w-5 transform rounded-full bg-background shadow-md transition-transform duration-200 ${checked ? "translate-x-5" : "translate-x-0"}`}
             />
         </button>
     );
@@ -96,14 +96,14 @@ function Toggle({ checked, onChange, id }: { checked: boolean; onChange: (v: boo
 // ─── SETTINGS ROW ─────────────────────────────────────────────────────────────
 function SettingRow({ icon: Icon, label, description, children }: { icon: React.ElementType; label: string; description?: string; children: React.ReactNode }) {
     return (
-        <div className="flex items-center justify-between py-4 border-b border-gray-100 last:border-0 gap-4">
+        <div className="flex items-center justify-between py-4 border-b border-border last:border-0 gap-4">
             <div className="flex items-start gap-3 flex-1 min-w-0">
                 <div className="w-9 h-9 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
                     <Icon className="w-4 h-4 text-primary" />
                 </div>
                 <div className="min-w-0">
-                    <p className="text-sm font-semibold text-gray-800">{label}</p>
-                    {description && <p className="text-xs text-gray-500 mt-0.5 leading-relaxed">{description}</p>}
+                    <p className="text-sm font-semibold text-foreground">{label}</p>
+                    {description && <p className="text-xs text-muted-foreground mt-0.5 leading-relaxed">{description}</p>}
                 </div>
             </div>
             <div className="flex-shrink-0">{children}</div>
@@ -116,7 +116,7 @@ function StarRating({ rating }: { rating: number }) {
     return (
         <div className="flex items-center gap-0.5">
             {[1, 2, 3, 4, 5].map((s) => (
-                <Star key={s} className={`h-3.5 w-3.5 ${s <= rating ? "fill-amber-400 text-amber-400" : "text-gray-200 fill-gray-200"}`} />
+                <Star key={s} className={`h-3.5 w-3.5 ${s <= rating ? "fill-primary text-primary" : "text-gray-200 fill-gray-200"}`} />
             ))}
         </div>
     );
@@ -139,15 +139,15 @@ export default function AccountPage() {
     const [publicProfile, setPublicProfile] = useState(false);
 
     return (
-        <div className="bg-gray-50 min-h-screen">
+        <div className="bg-muted min-h-screen">
             <div className="container mx-auto px-4 py-8">
-                <h1 className="text-3xl font-bold mb-8 text-gray-900">My Account</h1>
+                <h1 className="text-3xl font-bold mb-8 text-foreground">My Account</h1>
 
                 <Tabs defaultValue="profile" className="flex flex-col md:flex-row gap-6">
                     {/* ── Sidebar ────────────────────────────── */}
                     <div className="w-full md:w-60 flex-shrink-0 space-y-3">
                         {/* Avatar Card */}
-                        <div className="bg-white rounded-2xl p-5 text-center border border-gray-100 shadow-sm">
+                        <div className="bg-background rounded-2xl p-5 text-center border border-border shadow-sm">
                             <div className="relative w-20 h-20 mx-auto mb-3">
                                 <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center">
                                     <User className="w-10 h-10 text-primary" />
@@ -156,13 +156,13 @@ export default function AccountPage() {
                                     <Camera className="w-3.5 h-3.5 text-white" />
                                 </button>
                             </div>
-                            <h2 className="font-bold text-base text-gray-900">John Doe</h2>
-                            <p className="text-xs text-gray-500 mt-0.5">john.doe@example.com</p>
+                            <h2 className="font-bold text-base text-foreground">John Doe</h2>
+                            <p className="text-xs text-muted-foreground mt-0.5">john.doe@example.com</p>
                             <span className="inline-block mt-2 text-xs bg-primary/10 text-primary font-semibold px-2 py-0.5 rounded-full">Premium Member</span>
                         </div>
 
                         {/* Nav Tabs */}
-                        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+                        <div className="bg-background rounded-2xl border border-border shadow-sm overflow-hidden">
                             <TabsList className="flex flex-col w-full h-auto bg-transparent gap-0 p-2">
                                 {[
                                     { value: "profile", label: "Profile", icon: User },
@@ -179,7 +179,7 @@ export default function AccountPage() {
                                     <TabsTrigger
                                         key={value}
                                         value={value}
-                                        className="w-full justify-start gap-3 px-4 py-2.5 text-sm font-medium text-gray-600 rounded-xl data-[state=active]:bg-primary/10 data-[state=active]:text-primary data-[state=active]:font-semibold hover:bg-gray-50 transition-all"
+                                        className="w-full justify-start gap-3 px-4 py-2.5 text-sm font-medium text-muted-foreground rounded-xl data-[state=active]:bg-primary/10 data-[state=active]:text-primary data-[state=active]:font-semibold hover:bg-muted transition-all"
                                     >
                                         <Icon className="w-4 h-4" />
                                         {label}
@@ -190,7 +190,7 @@ export default function AccountPage() {
 
                         <Button
                             variant="outline"
-                            className="w-full gap-2 border-red-200 text-red-500 hover:bg-red-50 hover:text-red-600 rounded-xl font-medium"
+                            className="w-full gap-2 border-primary/30 text-primary hover:bg-accent hover:text-primary-dark rounded-xl font-medium"
                         >
                             <LogOut className="w-4 h-4" /> Sign Out
                         </Button>
@@ -201,8 +201,8 @@ export default function AccountPage() {
 
                         {/* ── PROFILE TAB ── */}
                         <TabsContent value="profile" className="mt-0">
-                            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
-                                <h2 className="text-xl font-bold mb-6 text-gray-900">Personal Information</h2>
+                            <div className="bg-background rounded-2xl border border-border shadow-sm p-6">
+                                <h2 className="text-xl font-bold mb-6 text-foreground">Personal Information</h2>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                                     <div className="space-y-2">
                                         <Label htmlFor="first-name">First Name</Label>
@@ -227,14 +227,14 @@ export default function AccountPage() {
                                 </div>
 
                                 {/* Change Password */}
-                                <div className="mt-8 pt-6 border-t border-gray-100">
-                                    <h3 className="font-semibold text-gray-800 mb-4">Change Password</h3>
+                                <div className="mt-8 pt-6 border-t border-border">
+                                    <h3 className="font-semibold text-foreground mb-4">Change Password</h3>
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                                         <div className="space-y-2">
                                             <Label htmlFor="current-password">Current Password</Label>
                                             <div className="relative">
                                                 <Input id="current-password" type={showPassword ? "text" : "password"} placeholder="••••••••" />
-                                                <button onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
+                                                <button onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-muted-foreground">
                                                     {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                                                 </button>
                                             </div>
@@ -255,16 +255,16 @@ export default function AccountPage() {
 
                         {/* ── ORDERS TAB ── */}
                         <TabsContent value="orders" className="mt-0">
-                            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
+                            <div className="bg-background rounded-2xl border border-border shadow-sm p-6">
                                 <OrderHistory />
                             </div>
                         </TabsContent>
 
                         {/* ── SERVICES TAB ── */}
                         <TabsContent value="services" className="mt-0">
-                            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
+                            <div className="bg-background rounded-2xl border border-border shadow-sm p-6">
                                 <div className="flex items-center justify-between mb-6">
-                                    <h2 className="text-xl font-bold text-gray-900">My Service Bookings</h2>
+                                    <h2 className="text-xl font-bold text-foreground">My Service Bookings</h2>
                                     <Link href="/booking">
                                         <Button size="sm" className="bg-primary hover:bg-primary/90 text-white rounded-xl">
                                             Book a Service
@@ -274,16 +274,16 @@ export default function AccountPage() {
 
                                 <div className="space-y-5">
                                     {SERVICE_BOOKINGS.map((s) => (
-                                        <div key={s.id} className="border border-gray-100 rounded-3xl p-5 hover:border-primary/30 hover:shadow-sm transition-all duration-200">
+                                        <div key={s.id} className="border border-border rounded-3xl p-5 hover:border-primary/30 hover:shadow-sm transition-all duration-200">
                                             <div className="flex items-start justify-between gap-4 flex-wrap">
                                                 <div className="flex items-start gap-3">
                                                     <div className="w-12 h-12 bg-primary/10 rounded-2xl flex items-center justify-center flex-shrink-0">
                                                         <Wrench className="w-5 h-5 text-primary" />
                                                     </div>
                                                     <div>
-                                                        <p className="text-lg font-bold text-gray-900">{s.name}</p>
-                                                        <p className="text-sm text-gray-500 mt-1">{s.provider}</p>
-                                                        <div className="flex items-center gap-4 mt-3 flex-wrap text-sm text-gray-500">
+                                                        <p className="text-lg font-bold text-foreground">{s.name}</p>
+                                                        <p className="text-sm text-muted-foreground mt-1">{s.provider}</p>
+                                                        <div className="flex items-center gap-4 mt-3 flex-wrap text-sm text-muted-foreground">
                                                             <span className="flex items-center gap-1">
                                                                 <CalendarDays className="h-4 w-4" /> {s.date}
                                                             </span>
@@ -291,7 +291,7 @@ export default function AccountPage() {
                                                                 <Clock className="h-4 w-4" /> {s.time}
                                                             </span>
                                                             <span className="flex items-center gap-1">
-                                                                <CheckCircle2 className="h-4 w-4 text-emerald-500" />
+                                                                <CheckCircle2 className="h-4 w-4 text-primary" />
                                                                 Booking ID: {s.id}
                                                             </span>
                                                         </div>
@@ -303,20 +303,20 @@ export default function AccountPage() {
                                                         {s.status === "Completed" && <CheckCircle2 className="h-3 w-3 inline mr-1" />}
                                                         {s.status}
                                                     </span>
-                                                    <p className="text-lg font-bold text-gray-900">₹{s.amount.toLocaleString()}</p>
+                                                    <p className="text-lg font-bold text-foreground">₹{s.amount.toLocaleString()}</p>
                                                 </div>
                                             </div>
 
-                                            <div className="mt-4 border border-gray-100 rounded-2xl p-4 bg-gray-50/60">
+                                            <div className="mt-4 border border-border rounded-2xl p-4 bg-muted/60">
                                                 <div className="flex items-center justify-between">
                                                     <div>
-                                                        <p className="text-sm font-semibold text-gray-900">Service Summary</p>
-                                                        <p className="text-xs text-gray-500 mt-1">Professional assigned · On-time guarantee</p>
+                                                        <p className="text-sm font-semibold text-foreground">Service Summary</p>
+                                                        <p className="text-xs text-muted-foreground mt-1">Professional assigned · On-time guarantee</p>
                                                     </div>
                                                     {s.rating && (
                                                         <div className="flex items-center gap-2">
                                                             <StarRating rating={s.rating} />
-                                                            <span className="text-xs text-gray-400">Your rating</span>
+                                                            <span className="text-xs text-muted-foreground">Your rating</span>
                                                         </div>
                                                     )}
                                                 </div>
@@ -328,7 +328,7 @@ export default function AccountPage() {
                                                         <Button variant="outline" size="sm" className="rounded-xl">
                                                             Reschedule
                                                         </Button>
-                                                        <Button variant="outline" size="sm" className="rounded-xl border-red-200 text-red-500 hover:bg-red-50">
+                                                        <Button variant="outline" size="sm" className="rounded-xl border-primary/30 text-primary hover:bg-accent">
                                                             Cancel
                                                         </Button>
                                                     </>
@@ -348,8 +348,8 @@ export default function AccountPage() {
 
                                 {SERVICE_BOOKINGS.length === 0 && (
                                     <div className="text-center py-16">
-                                        <Wrench className="w-12 h-12 text-gray-300 mx-auto mb-3" />
-                                        <p className="text-gray-500 font-medium">No service bookings yet</p>
+                                        <Wrench className="w-12 h-12 text-muted-foreground mx-auto mb-3" />
+                                        <p className="text-muted-foreground font-medium">No service bookings yet</p>
                                         <Link href="/booking"><Button className="mt-4 bg-primary hover:bg-primary/90 text-white">Browse Services</Button></Link>
                                     </div>
                                 )}
@@ -358,9 +358,9 @@ export default function AccountPage() {
 
                         {/* ── FAVOURITES TAB ── */}
                         <TabsContent value="favourites" className="mt-0">
-                            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
+                            <div className="bg-background rounded-2xl border border-border shadow-sm p-6">
                                 <div className="flex items-center justify-between mb-6">
-                                    <h2 className="text-xl font-bold text-gray-900">My Favourites</h2>
+                                    <h2 className="text-xl font-bold text-foreground">My Favourites</h2>
                                     <Link href="/shop">
                                         <Button variant="outline" size="sm" className="rounded-xl">Explore More</Button>
                                     </Link>
@@ -368,22 +368,22 @@ export default function AccountPage() {
 
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     {FAVOURITES.map((item) => (
-                                        <div key={item.id} className="border border-gray-100 rounded-xl p-4 hover:border-primary/30 hover:shadow-sm transition-all duration-200 group">
+                                        <div key={item.id} className="border border-border rounded-xl p-4 hover:border-primary/30 hover:shadow-sm transition-all duration-200 group">
                                             <div className="flex items-start justify-between gap-3">
                                                 <div className="flex items-start gap-3">
-                                                    <div className="w-11 h-11 bg-rose-50 rounded-xl flex items-center justify-center">
-                                                        <Heart className="w-5 h-5 text-rose-500" />
+                                                    <div className="w-11 h-11 bg-accent rounded-xl flex items-center justify-center">
+                                                        <Heart className="w-5 h-5 text-primary" />
                                                     </div>
                                                     <div>
-                                                        <p className="font-bold text-gray-900">{item.name}</p>
-                                                        <p className="text-xs text-gray-500 mt-0.5">{item.category}</p>
+                                                        <p className="font-bold text-foreground">{item.name}</p>
+                                                        <p className="text-xs text-muted-foreground mt-0.5">{item.category}</p>
                                                         <div className="mt-2">
                                                             <StarRating rating={item.rating} />
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div className="text-right">
-                                                    <p className="font-bold text-gray-900">₹{item.price.toLocaleString()}</p>
+                                                    <p className="font-bold text-foreground">₹{item.price.toLocaleString()}</p>
                                                     <Button size="sm" className="mt-2 h-7 rounded-lg text-xs bg-primary hover:bg-primary/90 text-white">
                                                         Add to Cart
                                                     </Button>
@@ -395,8 +395,8 @@ export default function AccountPage() {
 
                                 {FAVOURITES.length === 0 && (
                                     <div className="text-center py-16">
-                                        <Heart className="w-12 h-12 text-gray-300 mx-auto mb-3" />
-                                        <p className="text-gray-500 font-medium">No favourites yet</p>
+                                        <Heart className="w-12 h-12 text-muted-foreground mx-auto mb-3" />
+                                        <p className="text-muted-foreground font-medium">No favourites yet</p>
                                         <Link href="/shop"><Button className="mt-4 bg-primary hover:bg-primary/90 text-white">Browse Products</Button></Link>
                                     </div>
                                 )}
@@ -405,11 +405,11 @@ export default function AccountPage() {
 
                         {/* ── DISCOUNTS TAB ── */}
                         <TabsContent value="discounts" className="mt-0">
-                            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 space-y-5">
+                            <div className="bg-background rounded-2xl border border-border shadow-sm p-6 space-y-5">
                                 <div className="flex items-center justify-between">
                                     <div>
-                                        <h2 className="text-xl font-bold text-gray-900">Discounts & Coupons</h2>
-                                        <p className="text-sm text-gray-500">Save more with your available offers.</p>
+                                        <h2 className="text-xl font-bold text-foreground">Discounts & Coupons</h2>
+                                        <p className="text-sm text-muted-foreground">Save more with your available offers.</p>
                                     </div>
                                     <Link href="/shop">
                                         <Button variant="outline" size="sm" className="rounded-xl">Use Discounts</Button>
@@ -418,20 +418,20 @@ export default function AccountPage() {
 
                                 <div className="grid gap-4">
                                     {DISCOUNTS.map((coupon) => (
-                                        <div key={coupon.id} className="border border-gray-100 rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                                        <div key={coupon.id} className="border border-border rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                                             <div className="flex items-start gap-3">
-                                                <div className={`w-11 h-11 rounded-xl flex items-center justify-center ${coupon.status === "Active" ? "bg-emerald-50" : "bg-gray-100"}`}>
-                                                    <Tag className={`w-5 h-5 ${coupon.status === "Active" ? "text-emerald-600" : "text-gray-400"}`} />
+                                                <div className={`w-11 h-11 rounded-xl flex items-center justify-center ${coupon.status === "Active" ? "bg-accent" : "bg-muted"}`}>
+                                                    <Tag className={`w-5 h-5 ${coupon.status === "Active" ? "text-primary" : "text-muted-foreground"}`} />
                                                 </div>
                                                 <div>
-                                                    <p className="text-xs uppercase tracking-widest text-gray-400">Coupon Code</p>
-                                                    <p className="text-lg font-extrabold text-gray-900">{coupon.code}</p>
-                                                    <p className="text-sm text-gray-600 mt-1">{coupon.title}</p>
-                                                    <p className="text-xs text-gray-500 mt-2">Min spend ₹{coupon.minSpend.toLocaleString()} · Expires {coupon.expiry}</p>
+                                                    <p className="text-xs uppercase tracking-widest text-muted-foreground">Coupon Code</p>
+                                                    <p className="text-lg font-extrabold text-foreground">{coupon.code}</p>
+                                                    <p className="text-sm text-muted-foreground mt-1">{coupon.title}</p>
+                                                    <p className="text-xs text-muted-foreground mt-2">Min spend ₹{coupon.minSpend.toLocaleString()} · Expires {coupon.expiry}</p>
                                                 </div>
                                             </div>
                                             <div className="flex items-center gap-3">
-                                                <span className={`text-xs font-semibold px-3 py-1 rounded-full ${coupon.status === "Active" ? "bg-emerald-100 text-emerald-700" : "bg-gray-100 text-gray-500"}`}>
+                                                <span className={`text-xs font-semibold px-3 py-1 rounded-full ${coupon.status === "Active" ? "bg-accent text-primary-dark" : "bg-muted text-muted-foreground"}`}>
                                                     {coupon.status}
                                                 </span>
                                                 <Button
@@ -451,11 +451,11 @@ export default function AccountPage() {
 
                         {/* ── PAYMENTS TAB ── */}
                         <TabsContent value="payments" className="mt-0 space-y-5">
-                            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
+                            <div className="bg-background rounded-2xl border border-border shadow-sm p-6">
                                 <div className="flex items-center justify-between mb-6">
                                     <div>
-                                        <h2 className="text-xl font-bold text-gray-900">Payment Methods</h2>
-                                        <p className="text-sm text-gray-500">Manage your saved cards and UPI IDs.</p>
+                                        <h2 className="text-xl font-bold text-foreground">Payment Methods</h2>
+                                        <p className="text-sm text-muted-foreground">Manage your saved cards and UPI IDs.</p>
                                     </div>
                                     <Button className="rounded-xl bg-primary hover:bg-primary/90 text-white">
                                         Add New Method
@@ -464,25 +464,25 @@ export default function AccountPage() {
 
                                 <div className="grid gap-4">
                                     {PAYMENT_METHODS.map((pm) => (
-                                        <div key={pm.id} className="border border-gray-100 rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                                        <div key={pm.id} className="border border-border rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                                             <div className="flex items-start gap-3">
-                                                <div className="w-11 h-11 rounded-xl bg-indigo-50 flex items-center justify-center">
-                                                    <CreditCard className="w-5 h-5 text-indigo-600" />
+                                                <div className="w-11 h-11 rounded-xl bg-accent flex items-center justify-center">
+                                                    <CreditCard className="w-5 h-5 text-primary" />
                                                 </div>
                                                 <div>
-                                                    <p className="font-semibold text-gray-900">{pm.type}</p>
-                                                    <p className="text-sm text-gray-500">•••• {pm.last4}</p>
-                                                    <p className="text-xs text-gray-400 mt-1">{pm.expiry}</p>
+                                                    <p className="font-semibold text-foreground">{pm.type}</p>
+                                                    <p className="text-sm text-muted-foreground">•••• {pm.last4}</p>
+                                                    <p className="text-xs text-muted-foreground mt-1">{pm.expiry}</p>
                                                 </div>
                                             </div>
                                             <div className="flex items-center gap-3">
                                                 {pm.default && (
-                                                    <span className="text-xs font-semibold px-3 py-1 rounded-full bg-emerald-100 text-emerald-700">
+                                                    <span className="text-xs font-semibold px-3 py-1 rounded-full bg-accent text-primary-dark">
                                                         Default
                                                     </span>
                                                 )}
                                                 <Button variant="outline" size="sm" className="rounded-xl">Edit</Button>
-                                                <Button variant="outline" size="sm" className="rounded-xl border-red-200 text-red-500 hover:bg-red-50">
+                                                <Button variant="outline" size="sm" className="rounded-xl border-primary/30 text-primary hover:bg-accent">
                                                     Remove
                                                 </Button>
                                             </div>
@@ -492,15 +492,15 @@ export default function AccountPage() {
 
                                 {PAYMENT_METHODS.length === 0 && (
                                     <div className="text-center py-16">
-                                        <CreditCard className="w-12 h-12 text-gray-300 mx-auto mb-3" />
-                                        <p className="text-gray-500 font-medium">No payment methods saved</p>
+                                        <CreditCard className="w-12 h-12 text-muted-foreground mx-auto mb-3" />
+                                        <p className="text-muted-foreground font-medium">No payment methods saved</p>
                                         <Button className="mt-4 bg-primary hover:bg-primary/90 text-white">Add a Payment Method</Button>
                                     </div>
                                 )}
                             </div>
 
-                            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
-                                <h3 className="text-lg font-bold text-gray-900 mb-4">Add New Payment Method</h3>
+                            <div className="bg-background rounded-2xl border border-border shadow-sm p-6">
+                                <h3 className="text-lg font-bold text-foreground mb-4">Add New Payment Method</h3>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                                     <div className="space-y-2 md:col-span-2">
                                         <Label htmlFor="card-name">Cardholder Name</Label>
@@ -529,25 +529,25 @@ export default function AccountPage() {
 
                         {/* ── ADDRESS TAB ── */}
                         <TabsContent value="address" className="mt-0">
-                            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
+                            <div className="bg-background rounded-2xl border border-border shadow-sm p-6">
                                 <div className="flex items-center justify-between mb-6">
-                                    <h2 className="text-xl font-bold text-gray-900">My Addresses</h2>
+                                    <h2 className="text-xl font-bold text-foreground">My Addresses</h2>
                                     <Button variant="outline" size="sm" className="rounded-xl" onClick={() => setIsAddressModalOpen(true)}>
                                         Add New Address
                                     </Button>
                                 </div>
                                 <div className="border border-primary/30 bg-primary/5 rounded-xl p-4 relative">
                                     <span className="absolute top-4 right-4 text-xs font-bold bg-primary/10 text-primary px-2 py-0.5 rounded-full">Default</span>
-                                    <p className="font-bold mb-1 text-gray-900">🏠 Home</p>
-                                    <p className="text-sm text-gray-500 leading-relaxed">
+                                    <p className="font-bold mb-1 text-foreground">🏠 Home</p>
+                                    <p className="text-sm text-muted-foreground leading-relaxed">
                                         123 Main Street, Apt 4B<br />
                                         New York, NY 10001<br />
                                         United States
                                     </p>
                                     <div className="mt-4 flex gap-3">
                                         <Button variant="link" size="sm" className="h-auto p-0 text-primary">Edit</Button>
-                                        <span className="text-gray-300">|</span>
-                                        <Button variant="link" size="sm" className="h-auto p-0 text-red-500">Delete</Button>
+                                        <span className="text-muted-foreground">|</span>
+                                        <Button variant="link" size="sm" className="h-auto p-0 text-primary">Delete</Button>
                                     </div>
                                 </div>
                             </div>
@@ -555,11 +555,11 @@ export default function AccountPage() {
 
                         {/* ── SUPPORT TAB ── */}
                         <TabsContent value="support" className="mt-0 space-y-5">
-                            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
+                            <div className="bg-background rounded-2xl border border-border shadow-sm p-6">
                                 <div className="flex items-center justify-between mb-6">
                                     <div>
-                                        <h2 className="text-xl font-bold text-gray-900">Support Center</h2>
-                                        <p className="text-sm text-gray-500">We&apos;re here 24/7 to help you with anything.</p>
+                                        <h2 className="text-xl font-bold text-foreground">Support Center</h2>
+                                        <p className="text-sm text-muted-foreground">We&apos;re here 24/7 to help you with anything.</p>
                                     </div>
                                     <Button className="rounded-xl bg-primary hover:bg-primary/90 text-white">
                                         Start Live Chat
@@ -568,20 +568,20 @@ export default function AccountPage() {
 
                                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                                     {SUPPORT_CARDS.map((card) => (
-                                        <div key={card.id} className="border border-gray-100 rounded-2xl p-4 hover:border-primary/30 hover:shadow-sm transition-all">
+                                        <div key={card.id} className="border border-border rounded-2xl p-4 hover:border-primary/30 hover:shadow-sm transition-all">
                                             <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center mb-3">
                                                 <LifeBuoy className="w-4 h-4 text-primary" />
                                             </div>
-                                            <p className="font-semibold text-gray-900">{card.title}</p>
-                                            <p className="text-xs text-gray-500 mt-1">{card.description}</p>
+                                            <p className="font-semibold text-foreground">{card.title}</p>
+                                            <p className="text-xs text-muted-foreground mt-1">{card.description}</p>
                                             <Button variant="link" className="px-0 text-primary mt-2 h-auto">View Help</Button>
                                         </div>
                                     ))}
                                 </div>
                             </div>
 
-                            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
-                                <h3 className="text-lg font-bold text-gray-900 mb-4">Submit a Support Request</h3>
+                            <div className="bg-background rounded-2xl border border-border shadow-sm p-6">
+                                <h3 className="text-lg font-bold text-foreground mb-4">Submit a Support Request</h3>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                                     <div className="space-y-2">
                                         <Label htmlFor="support-name">Full Name</Label>
@@ -614,11 +614,11 @@ export default function AccountPage() {
 
                         {/* ── SHARE TAB ── */}
                         <TabsContent value="share" className="mt-0 space-y-5">
-                            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
+                            <div className="bg-background rounded-2xl border border-border shadow-sm p-6">
                                 <div className="flex items-start justify-between gap-4 flex-wrap mb-6">
                                     <div>
-                                        <h2 className="text-xl font-bold text-gray-900">Share Your Profile</h2>
-                                        <p className="text-sm text-gray-500">Let others view your reviews and public activity.</p>
+                                        <h2 className="text-xl font-bold text-foreground">Share Your Profile</h2>
+                                        <p className="text-sm text-muted-foreground">Let others view your reviews and public activity.</p>
                                     </div>
                                     <Button className="rounded-xl bg-primary hover:bg-primary/90 text-white">
                                         Generate Share Link
@@ -626,8 +626,8 @@ export default function AccountPage() {
                                 </div>
 
                                 <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-6">
-                                    <div className="rounded-2xl border border-gray-100 p-4">
-                                        <div className="flex items-center gap-2 text-sm font-semibold text-gray-700">
+                                    <div className="rounded-2xl border border-border p-4">
+                                        <div className="flex items-center gap-2 text-sm font-semibold text-foreground">
                                             <Link2 className="h-4 w-4 text-primary" />
                                             Shareable Link
                                         </div>
@@ -635,29 +635,29 @@ export default function AccountPage() {
                                             <Input
                                                 readOnly
                                                 value="https://shopnow.com/u/john-doe"
-                                                className="rounded-xl bg-gray-50"
+                                                className="rounded-xl bg-muted"
                                             />
                                             <Button variant="outline" className="rounded-xl">
                                                 Copy Link
                                             </Button>
                                         </div>
-                                        <p className="text-xs text-gray-500 mt-3">
+                                        <p className="text-xs text-muted-foreground mt-3">
                                             Anyone with this link can view your public profile details.
                                         </p>
                                     </div>
 
-                                    <div className="rounded-2xl border border-gray-100 p-4 flex flex-col items-center text-center">
+                                    <div className="rounded-2xl border border-border p-4 flex flex-col items-center text-center">
                                         <div className="w-28 h-28 rounded-2xl border border-dashed border-primary/30 flex items-center justify-center bg-primary/5">
                                             <QrCode className="h-10 w-10 text-primary" />
                                         </div>
-                                        <p className="text-sm font-semibold text-gray-900 mt-3">Scan to view profile</p>
-                                        <p className="text-xs text-gray-500">Share this QR with your friends.</p>
+                                        <p className="text-sm font-semibold text-foreground mt-3">Scan to view profile</p>
+                                        <p className="text-xs text-muted-foreground">Share this QR with your friends.</p>
                                     </div>
                                 </div>
                             </div>
 
-                            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
-                                <h3 className="text-lg font-bold text-gray-900 mb-4">Quick Share</h3>
+                            <div className="bg-background rounded-2xl border border-border shadow-sm p-6">
+                                <h3 className="text-lg font-bold text-foreground mb-4">Quick Share</h3>
                                 <div className="flex flex-wrap gap-3">
                                     <Button variant="outline" className="rounded-xl">Share via WhatsApp</Button>
                                     <Button variant="outline" className="rounded-xl">Share via Email</Button>
@@ -671,9 +671,9 @@ export default function AccountPage() {
                         <TabsContent value="settings" className="mt-0 space-y-5">
 
                             {/* Notifications & Subscriptions */}
-                            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
-                                <h2 className="text-xl font-bold text-gray-900 mb-1">Notifications & Subscriptions</h2>
-                                <p className="text-sm text-gray-500 mb-5">Control how and when we communicate with you.</p>
+                            <div className="bg-background rounded-2xl border border-border shadow-sm p-6">
+                                <h2 className="text-xl font-bold text-foreground mb-1">Notifications & Subscriptions</h2>
+                                <p className="text-sm text-muted-foreground mb-5">Control how and when we communicate with you.</p>
 
                                 <div className="divide-y divide-gray-50">
                                     <SettingRow
@@ -727,9 +727,9 @@ export default function AccountPage() {
 
                                 {/* Newsletter CTA when subscribed */}
                                 {notifNewsletter && (
-                                    <div className="mt-4 flex items-center gap-3 bg-green-50 border border-green-200 rounded-xl p-3">
-                                        <CheckCircle2 className="h-5 w-5 text-green-500 shrink-0" />
-                                        <p className="text-sm text-green-700 font-medium">
+                                    <div className="mt-4 flex items-center gap-3 bg-accent border border-primary/30 rounded-xl p-3">
+                                        <CheckCircle2 className="h-5 w-5 text-primary shrink-0" />
+                                        <p className="text-sm text-primary-dark font-medium">
                                             You&apos;re subscribed! Expect great deals in your inbox every week. 🎉
                                         </p>
                                     </div>
@@ -737,9 +737,9 @@ export default function AccountPage() {
                             </div>
 
                             {/* Security */}
-                            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
-                                <h2 className="text-xl font-bold text-gray-900 mb-1">Security</h2>
-                                <p className="text-sm text-gray-500 mb-5">Keep your account safe and secure.</p>
+                            <div className="bg-background rounded-2xl border border-border shadow-sm p-6">
+                                <h2 className="text-xl font-bold text-foreground mb-1">Security</h2>
+                                <p className="text-sm text-muted-foreground mb-5">Keep your account safe and secure.</p>
 
                                 <div className="divide-y divide-gray-50">
                                     <SettingRow
@@ -760,14 +760,14 @@ export default function AccountPage() {
                             </div>
 
                             {/* Danger Zone */}
-                            <div className="bg-white rounded-2xl border border-red-100 shadow-sm p-6">
-                                <h2 className="text-xl font-bold text-red-600 mb-1">Danger Zone</h2>
-                                <p className="text-sm text-gray-500 mb-5">These actions are permanent and cannot be undone.</p>
+                            <div className="bg-background rounded-2xl border border-primary/20 shadow-sm p-6">
+                                <h2 className="text-xl font-bold text-primary-dark mb-1">Danger Zone</h2>
+                                <p className="text-sm text-muted-foreground mb-5">These actions are permanent and cannot be undone.</p>
                                 <div className="flex flex-col sm:flex-row gap-3">
-                                    <Button variant="outline" className="border-red-200 text-red-500 hover:bg-red-50 gap-2 rounded-xl">
+                                    <Button variant="outline" className="border-primary/30 text-primary hover:bg-accent gap-2 rounded-xl">
                                         <LogOut className="h-4 w-4" /> Sign Out of All Devices
                                     </Button>
-                                    <Button variant="outline" className="border-red-300 text-red-600 hover:bg-red-50 gap-2 rounded-xl">
+                                    <Button variant="outline" className="border-primary/40 text-primary-dark hover:bg-accent gap-2 rounded-xl">
                                         <Trash2 className="h-4 w-4" /> Delete Account
                                     </Button>
                                 </div>
@@ -783,28 +783,28 @@ export default function AccountPage() {
                     <button
                         type="button"
                         onClick={() => setIsAddressModalOpen(false)}
-                        className="absolute inset-0 bg-black/40 backdrop-blur-sm"
+                        className="absolute inset-0 bg-secondary/40 backdrop-blur-sm"
                         aria-label="Close address modal"
                     />
-                    <div className="relative w-full max-w-3xl rounded-3xl border border-violet-100 bg-gradient-to-br from-white via-white to-violet-50 shadow-2xl">
-                        <div className="flex items-center justify-between border-b border-violet-100 px-6 py-4">
+                    <div className="relative w-full max-w-3xl rounded-3xl border border-primary/20 bg-gradient-to-br from-white via-white to-accent shadow-2xl">
+                        <div className="flex items-center justify-between border-b border-primary/20 px-6 py-4">
                             <div className="flex items-center gap-3">
                                 <button
                                     type="button"
                                     onClick={() => setIsAddressModalOpen(false)}
-                                    className="flex h-10 w-10 items-center justify-center rounded-full border border-violet-200 bg-white text-violet-600 hover:bg-violet-50"
+                                    className="flex h-10 w-10 items-center justify-center rounded-full border border-primary/30 bg-background text-primary hover:bg-accent"
                                     aria-label="Go back"
                                 >
                                     <ArrowLeft className="h-4 w-4" />
                                 </button>
                                 <div>
-                                    <p className="text-xs uppercase tracking-[0.3em] text-violet-500">New address</p>
-                                    <h3 className="text-xl font-bold text-slate-900">Add New Address</h3>
+                                    <p className="text-xs uppercase tracking-[0.3em] text-primary">New address</p>
+                                    <h3 className="text-xl font-bold text-foreground">Add New Address</h3>
                                 </div>
                             </div>
                             <div className="flex items-center gap-2">
-                                <span className="hidden text-sm text-slate-500 md:inline">Save &amp; continue</span>
-                                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-500 text-white">
+                                <span className="hidden text-sm text-muted-foreground md:inline">Save &amp; continue</span>
+                                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-accent0 text-white">
                                     <Check className="h-5 w-5" />
                                 </div>
                             </div>
@@ -812,7 +812,7 @@ export default function AccountPage() {
 
                         <div className="grid gap-6 px-6 py-6 lg:grid-cols-[1.1fr_1fr]">
                             <div className="space-y-5">
-                                <div className="grid grid-cols-3 gap-3 rounded-2xl border border-violet-100 bg-white p-2">
+                                <div className="grid grid-cols-3 gap-3 rounded-2xl border border-primary/20 bg-background p-2">
                                     {[
                                         { key: "home", label: "Home", icon: MapPinned },
                                         { key: "office", label: "Office", icon: Map },
@@ -824,8 +824,8 @@ export default function AccountPage() {
                                             onClick={() => setAddressType(item.key as typeof addressType)}
                                             className={`flex items-center justify-center gap-2 rounded-xl px-3 py-2 text-sm font-semibold transition ${
                                                 addressType === item.key
-                                                    ? "bg-violet-500 text-white shadow-sm"
-                                                    : "text-slate-500 hover:bg-violet-50"
+                                                    ? "bg-accent0 text-white shadow-sm"
+                                                    : "text-muted-foreground hover:bg-accent"
                                             }`}
                                         >
                                             <item.icon className="h-4 w-4" />
@@ -834,38 +834,38 @@ export default function AccountPage() {
                                     ))}
                                 </div>
 
-                                <div className="rounded-2xl border border-violet-100 bg-white p-4 shadow-sm">
-                                    <h4 className="text-sm font-semibold text-slate-800">Address Information</h4>
+                                <div className="rounded-2xl border border-primary/20 bg-background p-4 shadow-sm">
+                                    <h4 className="text-sm font-semibold text-foreground">Address Information</h4>
                                     <div className="mt-4 space-y-4">
                                         <div>
-                                            <Label className="text-xs uppercase text-slate-500">Recipient Name *</Label>
+                                            <Label className="text-xs uppercase text-muted-foreground">Recipient Name *</Label>
                                             <Input className="mt-2 rounded-xl" placeholder="Rahul Sharma" />
                                         </div>
                                         <div className="grid gap-3 sm:grid-cols-2">
                                             <div>
-                                                <Label className="text-xs uppercase text-slate-500">Phone Number</Label>
+                                                <Label className="text-xs uppercase text-muted-foreground">Phone Number</Label>
                                                 <Input className="mt-2 rounded-xl" placeholder="+91 9876543210" />
                                             </div>
                                             <div>
-                                                <Label className="text-xs uppercase text-slate-500">Country</Label>
+                                                <Label className="text-xs uppercase text-muted-foreground">Country</Label>
                                                 <Input className="mt-2 rounded-xl" placeholder="India" />
                                             </div>
                                         </div>
                                         <div>
-                                            <Label className="text-xs uppercase text-slate-500">Full Address</Label>
+                                            <Label className="text-xs uppercase text-muted-foreground">Full Address</Label>
                                             <Textarea className="mt-2 min-h-[120px] rounded-xl" placeholder="Street, building, landmark..." />
                                         </div>
                                         <div className="grid gap-3 sm:grid-cols-3">
                                             <div>
-                                                <Label className="text-xs uppercase text-slate-500">City</Label>
+                                                <Label className="text-xs uppercase text-muted-foreground">City</Label>
                                                 <Input className="mt-2 rounded-xl" placeholder="Mumbai" />
                                             </div>
                                             <div>
-                                                <Label className="text-xs uppercase text-slate-500">State</Label>
+                                                <Label className="text-xs uppercase text-muted-foreground">State</Label>
                                                 <Input className="mt-2 rounded-xl" placeholder="Maharashtra" />
                                             </div>
                                             <div>
-                                                <Label className="text-xs uppercase text-slate-500">Postal Code</Label>
+                                                <Label className="text-xs uppercase text-muted-foreground">Postal Code</Label>
                                                 <Input className="mt-2 rounded-xl" placeholder="400050" />
                                             </div>
                                         </div>
@@ -875,28 +875,28 @@ export default function AccountPage() {
 
                             <div className="space-y-4">
                                 <div className="flex items-center justify-between">
-                                    <div className="flex items-center gap-2 text-sm font-semibold text-slate-700">
-                                        <MapPinned className="h-4 w-4 text-violet-500" />
+                                    <div className="flex items-center gap-2 text-sm font-semibold text-foreground">
+                                        <MapPinned className="h-4 w-4 text-primary" />
                                         Address Details
                                     </div>
                                     <Button variant="outline" size="sm" className="rounded-full">
                                         Detect Current Location
                                     </Button>
                                 </div>
-                                <div className="relative h-56 overflow-hidden rounded-2xl border border-violet-100">
+                                <div className="relative h-56 overflow-hidden rounded-2xl border border-primary/20">
                                     <img
                                         src="https://images.unsplash.com/photo-1465447142348-e9952c393450?auto=format&fit=crop&w=1200&q=80"
                                         alt="Map preview"
                                         className="h-full w-full object-cover"
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-white/70 via-transparent to-transparent" />
-                                    <div className="absolute bottom-3 left-3 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-slate-600 shadow">
+                                    <div className="absolute bottom-3 left-3 rounded-full bg-background/90 px-3 py-1 text-xs font-semibold text-muted-foreground shadow">
                                         Latitude: 19.1138 • Longitude: 72.8688
                                     </div>
                                 </div>
-                                <p className="text-xs text-slate-500">Drag the pin on the map to select your exact location.</p>
+                                <p className="text-xs text-muted-foreground">Drag the pin on the map to select your exact location.</p>
 
-                                <div className="rounded-2xl border border-violet-100 bg-white p-4">
+                                <div className="rounded-2xl border border-primary/20 bg-background p-4">
                                     <div className="grid gap-3 sm:grid-cols-2">
                                         {[
                                             { id: "default", label: "Set as default address" },
@@ -904,7 +904,7 @@ export default function AccountPage() {
                                             { id: "services", label: "Use for services" },
                                             { id: "billing", label: "Use for billing" },
                                         ].map((item) => (
-                                            <label key={item.id} className="flex items-center gap-2 text-sm text-slate-600">
+                                            <label key={item.id} className="flex items-center gap-2 text-sm text-muted-foreground">
                                                 <Checkbox id={`address-${item.id}`} defaultChecked />
                                                 {item.label}
                                             </label>
@@ -916,7 +916,7 @@ export default function AccountPage() {
                                     <Button variant="outline" className="w-full rounded-xl" onClick={() => setIsAddressModalOpen(false)}>
                                         Cancel
                                     </Button>
-                                    <Button className="w-full rounded-xl bg-emerald-600 text-white hover:bg-emerald-700">
+                                    <Button className="w-full rounded-xl bg-primary text-white hover:bg-primary-dark">
                                         Save Address
                                     </Button>
                                 </div>

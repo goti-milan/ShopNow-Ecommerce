@@ -23,21 +23,21 @@ export const QuantitySelector = ({ quantity, onChange, maxStock = 99 }: Quantity
     };
 
     return (
-        <div className="flex items-center gap-4 border border-slate-200 rounded-lg p-1 w-fit">
+        <div className="flex items-center gap-4 border border-border rounded-lg p-1 w-fit">
             <Button
                 variant="ghost"
                 size="icon"
-                className="h-8 w-8 hover:bg-slate-100 transition-all"
+                className="h-8 w-8 hover:bg-muted transition-all"
                 onClick={decrement}
                 disabled={quantity <= 1}
             >
                 <Minus className="h-3 w-3" />
             </Button>
-            <span className="w-6 text-center text-xs font-bold text-slate-900">{quantity}</span>
+            <span className="w-6 text-center text-xs font-bold text-foreground">{quantity}</span>
             <Button
                 variant="ghost"
                 size="icon"
-                className="h-8 w-8 hover:bg-slate-100 transition-all"
+                className="h-8 w-8 hover:bg-muted transition-all"
                 onClick={increment}
                 disabled={quantity >= maxStock}
             >

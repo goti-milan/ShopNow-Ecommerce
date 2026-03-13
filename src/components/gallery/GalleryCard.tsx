@@ -21,7 +21,7 @@ export function GalleryCard({ item, onView }: GalleryCardProps) {
                     fill
                     className="object-cover transition-transform duration-500 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-black/40 opacity-0 transition-opacity duration-300 group-hover:opacity-100 flex items-center justify-center">
+                <div className="absolute inset-0 bg-secondary/40 opacity-0 transition-opacity duration-300 group-hover:opacity-100 flex items-center justify-center">
                     <Button
                         variant="secondary"
                         size="sm"
