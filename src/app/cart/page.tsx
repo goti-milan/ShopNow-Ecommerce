@@ -160,7 +160,7 @@ function CartContent() {
                 <nav className="flex items-center gap-2 text-sm text-muted-foreground mb-6">
                     <Link href="/">Home</Link>
                     <span>&gt;</span>
-                    <Link href="/categories">Categories</Link>
+                    <Link href="/category">Categories</Link>
                     <span>&gt;</span>
                     <span className="text-foreground font-medium">Shopping Cart</span>
                 </nav>

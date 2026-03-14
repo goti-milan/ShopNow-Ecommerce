@@ -53,10 +53,11 @@ export default function Footer() {
                         <h4 className="font-bold mb-4">Support</h4>
                         <ul className="space-y-2 text-white/70 text-sm">
                             <li><Link href="/contactus" className="hover:text-white transition">Contact Us</Link></li>
-
-                            <li><Link href="/policy" className="hover:text-white transition">Privacy Policy</Link></li>
-                            <li><Link href="/policy" className="hover:text-white transition">Terms & Conditions</Link></li>
-                            <li><Link href="/policy" className="hover:text-white transition">Return Policy</Link></li>
+                            <li><Link href="/policy" className="hover:text-white transition">All Policies</Link></li>
+                            <li><Link href="/policy/privacy" className="hover:text-white transition">Privacy Policy</Link></li>
+                            <li><Link href="/policy/terms" className="hover:text-white transition">Terms & Conditions</Link></li>
+                            <li><Link href="/policy/refund" className="hover:text-white transition">Return & Refund Policy</Link></li>
+                            <li><Link href="/policy/payment" className="hover:text-white transition">Payment Policy</Link></li>
                             <li><Link href="/track-order" className="hover:text-white transition">Track Order</Link></li>
                         </ul>
                     </div>
@@ -92,4 +93,3 @@ export default function Footer() {
         </footer>
     );
 }
-

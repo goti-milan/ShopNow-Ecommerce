@@ -16,15 +16,15 @@ export default function PolicyHub() {
                     </Link>
                 </li>
                 <li>
-                    <Link href="/policy/return" className="text-primary hover:underline">
-                        Return Policy
+                    <Link href="/policy/refund" className="text-primary hover:underline">
+                        Return & Refund Policy
                     </Link>
                 </li>
                 <li>
                     <Link href="/policy/payment" className="text-primary hover:underline">
                         Payment Policy
-                    </Link>     
-            </li>
+                    </Link>
+                </li>
             </ul>
         </div>
     );
