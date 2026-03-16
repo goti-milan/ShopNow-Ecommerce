@@ -195,12 +195,6 @@ const Header = () => {
               <span className="sr-only">Notifications</span>
             </Button>
 
-            {/* Booking */}
-            <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-primary hover:bg-primary/10">
-              <Calendar className="h-5 w-5" />
-              <span className="sr-only">Booking</span>
-            </Button>
-
             {/* Wishlist */}
             <Button
               variant="ghost"

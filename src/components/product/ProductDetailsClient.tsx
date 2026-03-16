@@ -90,6 +90,7 @@ export default function ProductDetailsClient({ product }: { product: Product }) 
                             originalPrice={product.originalPrice}
                             discountPercent={product.discountPercent} // Fixed typo here
                             description={product.description || ""}
+                            sharePath={`/product/${product.id}`}
                         />
 
                         <div className="flex items-center justify-between">

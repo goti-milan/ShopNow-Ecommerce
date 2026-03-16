@@ -30,7 +30,6 @@ export default function Home() {
       <TrendingProduct />
       <RecentlyReviewed />
       <DealOfWeek />
-      <ServicesSection />
     </>
   );
 }

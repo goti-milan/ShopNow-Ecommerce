@@ -48,14 +48,7 @@ export default function ReelsPage() {
 
     return (
         <div className="min-h-screen bg-muted">
-            <div className="container mx-auto px-4 py-10">
-                <div className="mb-10 text-center">
-                    <h1 className="text-4xl font-bold text-foreground">ShopNow Reels</h1>
-                    <p className="text-sm text-muted-foreground">Discover the latest drops, creators, and trends.</p>
-                </div>
-                <HighlightGroups groups={highlightGroups} />
-            </div>
-            <InstagramReels />
+From home care to beauty, health, tech & more — we bring expert professionals to your doorstep.            <InstagramReels />
         </div>
     )
 }

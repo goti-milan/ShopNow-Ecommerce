@@ -145,7 +145,7 @@ export default function StoreDetailClient({ storeId }: { storeId: string }) {
                         </div>
                     </div>
 
-                    <div className="grid gap-4 lg:grid-cols-[1fr_280px]">
+                    <div className="grid gap-4 ">
                         <div className="rounded-2xl border border-border p-4">
                             <div className="flex flex-col gap-4 md:flex-row md:items-start">
                                 <div className="flex-1 space-y-3">
@@ -200,7 +200,7 @@ export default function StoreDetailClient({ storeId }: { storeId: string }) {
                             </div>
                         </div>
 
-                        <aside className="rounded-2xl border border-border p-4">
+                        {/* <aside className="rounded-2xl border border-border p-4">
                             <h2 className="mb-4 text-2xl font-bold text-foreground">Filter & Search</h2>
                             <div className="space-y-3">
                                 <label className="text-sm font-semibold text-foreground">Search Store</label>
@@ -236,7 +236,7 @@ export default function StoreDetailClient({ storeId }: { storeId: string }) {
 
                                 <Button className="w-full rounded-xl bg-primary hover:bg-primary-dark">Apply Filters</Button>
                             </div>
-                        </aside>
+                        </aside> */}
                     </div>
                 </section>
 

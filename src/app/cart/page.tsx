@@ -362,12 +362,9 @@ function CartContent() {
                                     <span className="text-primary">₹{totalSavings.toLocaleString()}</span>
                                 </div>
 
-                                <div className="relative overflow-hidden group">
-                                    <div className="bg-secondary p-6 rounded-2xl flex justify-between items-center relative z-10">
-                                        <div className="bg-primary text-white text-[10px] px-2.5 py-1 rounded font-black uppercase tracking-widest">Total</div>
-                                        <div className="text-3xl font-black text-white italic tracking-tighter">₹{total.toLocaleString()}</div>
-                                    </div>
-                                    <div className="absolute top-0 right-0 w-32 h-32 bg-primary/20 rounded-full -translate-y-1/2 translate-x-1/2 blur-2xl group-hover:bg-primary/30 transition-all duration-700" />
+                                <div className="flex justify-between items-center text-lg font-black text-foreground">
+                                    <span>Total</span>
+                                    <span className="text-primary">₹{total.toLocaleString().toLocaleString()}</span>
                                 </div>
 
                                 <Link href="/order-confirmation?status=success">
@@ -538,18 +535,6 @@ function ProductSection({ items, selectedIds, onSelect, onSelectAll, onRemove, o
                             </div>
 
                             <div className="flex items-center justify-between border-t border-border pt-6 mt-6">
-                                <div className="flex items-center gap-3">
-                                    <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center border border-border shadow-inner overflow-hidden">
-                                        <Image src="https://images.unsplash.com/photo-1610819013583-2947a164c017?q=80&w=100&h=100&auto=format&fit=crop" alt="Store" width={40} height={40} className="object-cover" />
-                                    </div>
-                                    <div>
-                                        <div className="text-sm font-black text-foreground">Apple Official Store</div>
-                                        <div className="flex items-center gap-1">
-                                            <Star className="w-3 h-3 fill-primary text-primary" />
-                                            <span className="text-xs text-muted-foreground font-bold">4.9 <span className="font-normal">(50,000+ Sales)</span></span>
-                                        </div>
-                                    </div>
-                                </div>
                                 <div className="flex items-center gap-3">
                                     <Button variant="outline" size="sm" className="h-10 px-5 text-muted-foreground border-border font-bold rounded-xl hover:bg-accent hover:text-primary hover:border-primary/20 transition-all" onClick={() => onRemove(item.id)}>
                                         <Trash2 className="w-4 h-4 mr-2" /> Remove

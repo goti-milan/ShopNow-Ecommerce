@@ -1,6 +1,7 @@
 "use client";
 
-import ProductCard from "@/components/common/Product";
+import BrowseProducts from "@/components/shop/BrowseProducts";
+import { SHOP_CATEGORIES } from "@/components/shop/constants";
 import { Button } from "@/components/ui/button";
 import { PRODUCTS } from "@/utils/static-data";
 import { MapPin, Star, Verified } from "lucide-react";
@@ -50,55 +51,12 @@ export default function StoreClient() {
         </div>
       </div>
 
-      {/* Store Content */}
-      <div className="container mx-auto px-4 py-12">
-        <div className="flex flex-col md:flex-row gap-8">
-          {/* Sidebar */}
-          <aside className="w-full md:w-64 space-y-8">
-            <div>
-              <h3 className="font-bold mb-4">Categories</h3>
-              <ul className="space-y-2 text-sm">
-                <li><a href="#" className="text-primary font-medium">All Products</a></li>
-                <li><a href="#" className="text-muted-foreground hover:text-foreground">Smartphones</a></li>
-                <li><a href="#" className="text-muted-foreground hover:text-foreground">Laptops</a></li>
-                <li><a href="#" className="text-muted-foreground hover:text-foreground">Accessories</a></li>
-                <li><a href="#" className="text-muted-foreground hover:text-foreground">Audio</a></li>
-              </ul>
-            </div>
-
-            <div className="bg-muted/30 p-4 rounded-lg">
-              <h3 className="font-bold mb-2">Store Info</h3>
-              <p className="text-xs text-muted-foreground leading-relaxed">
-                Tech Haven is your one-stop shop for all things tech. We offer the latest gadgets at competitive prices with full warranty support.
-              </p>
-            </div>
-          </aside>
-
-          {/* Product Grid */}
-          <div className="flex-1">
-            <div className="flex justify-between items-center mb-6">
-              <h2 className="text-xl font-bold">All Products</h2>
-              <select className="text-sm border rounded px-2 py-1 bg-background">
-                <option>Sort by: Popular</option>
-                <option>Newest</option>
-                <option>Price: Low to High</option>
-              </select>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {[...PRODUCTS, ...PRODUCTS].slice(0, 8).map((product, index) => (
-                <div key={`${product.id}-${index}`} className="flex justify-center">
-                  <ProductCard item={product} />
-                </div>
-              ))}
-            </div>
-
-            <div className="mt-8 text-center">
-              <Button variant="outline">Load More</Button>
-            </div>
-          </div>
-        </div>
-      </div>
+      <BrowseProducts
+        basePath="/market"
+        products={PRODUCTS}
+        categories={SHOP_CATEGORIES}
+        title="Products"
+      />
     </div>
   );
 }

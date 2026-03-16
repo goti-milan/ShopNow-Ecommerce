@@ -2,7 +2,7 @@
 
 import { Product } from "@/utils/types";
 import Image from "next/image";
-import { Heart, ShoppingCart, Loader2 } from "lucide-react";
+import { Heart, ShoppingCart, Loader2, Share2, Check } from "lucide-react";
 import Link from "next/link";
 
 import { Button } from "../ui/button";
@@ -17,9 +17,27 @@ const ProductCard = ({ item, showActions = true, className }: { item: Product; s
     const { addItem } = useCart();
     const { isInWishlist, toggleItem } = useWishlist();
     const [isAddingToCart, setIsAddingToCart] = useState(false);
+    const [didCopyShareLink, setDidCopyShareLink] = useState(false);
     const router = useRouter();
 
     const inWishlist = isInWishlist(id);
+
+    const copyText = async (text: string) => {
+        if (navigator.clipboard?.writeText) {
+            await navigator.clipboard.writeText(text);
+            return;
+        }
+
+        const textarea = document.createElement("textarea");
+        textarea.value = text;
+        textarea.setAttribute("readonly", "true");
+        textarea.style.position = "fixed";
+        textarea.style.top = "-9999px";
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textarea);
+    };
 
     const handleAddToCart = (e: React.MouseEvent) => {
         e.preventDefault();
@@ -42,6 +60,25 @@ const ProductCard = ({ item, showActions = true, className }: { item: Product; s
         toggleItem(item);
     };
 
+    const handleShare = async (e: React.MouseEvent) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        const url = `${window.location.origin}/product/${id}`;
+
+        try {
+            if (navigator.share) {
+                await navigator.share({ title, url });
+                return;
+            }
+            await copyText(url);
+            setDidCopyShareLink(true);
+            window.setTimeout(() => setDidCopyShareLink(false), 1200);
+        } catch {
+            // no-op: sharing is best-effort
+        }
+    };
+
     return (
         <Link
             href={`/product/${id}`}
@@ -58,13 +95,25 @@ const ProductCard = ({ item, showActions = true, className }: { item: Product; s
                     </span>
                 )}
 
-                {/* Wishlist Button */}
-                <button
-                    className={`absolute right-2 top-2 z-10 rounded-full bg-background/80 p-1.5 backdrop-blur-sm transition-colors shadow-sm ${inWishlist ? 'text-primary hover:text-primary-dark' : 'text-muted-foreground hover:text-primary hover:bg-background'}`}
-                    onClick={handleWishlist}
-                >
-                    <Heart className={`h-4 w-4 ${inWishlist ? 'fill-current' : ''}`} />
-                </button>
+                {/* Top-right actions */}
+                <div className="absolute right-2 top-2 z-10 flex flex-col gap-2">
+                    <button
+                        className={`rounded-full bg-background/80 p-1.5 backdrop-blur-sm transition-colors shadow-sm ${inWishlist ? "text-primary hover:text-primary-dark" : "text-muted-foreground hover:text-primary hover:bg-background"}`}
+                        onClick={handleWishlist}
+                        aria-label={inWishlist ? "Remove from wishlist" : "Add to wishlist"}
+                        title={inWishlist ? "Wishlisted" : "Add to wishlist"}
+                    >
+                        <Heart className={`h-4 w-4 ${inWishlist ? "fill-current" : ""}`} />
+                    </button>
+                    <button
+                        className="rounded-full bg-background/80 p-1.5 backdrop-blur-sm transition-colors shadow-sm text-muted-foreground hover:text-primary hover:bg-background"
+                        onClick={handleShare}
+                        aria-label="Share product"
+                        title={didCopyShareLink ? "Link copied" : "Share"}
+                    >
+                        {didCopyShareLink ? <Check className="h-4 w-4" /> : <Share2 className="h-4 w-4" />}
+                    </button>
+                </div>
 
                 <Image
                     src={image || "https://picsum.photos/seed/picsum/600/800"}
@@ -142,4 +191,3 @@ const ProductCard = ({ item, showActions = true, className }: { item: Product; s
 };
 
 export default ProductCard;
-

@@ -43,7 +43,7 @@ export const SellerInfo = () => {
                 </div>
 
                 <div className="grid grid-cols-2 gap-3">
-                    <Button variant="outline" className="h-10 rounded-xl border-primary text-primary-dark hover:bg-accent font-black text-xs uppercase bg-accent0 text-white border-none hover:bg-primary-dark">
+                    <Button variant="primary" className="h-10 rounded-xl font-black text-xs uppercase hover:bg-primary-dark">
                         Visit Shop
                     </Button>
                     <Button variant="outline" className="h-10 rounded-xl border-border text-muted-foreground hover:bg-muted font-black text-xs uppercase flex items-center gap-2">

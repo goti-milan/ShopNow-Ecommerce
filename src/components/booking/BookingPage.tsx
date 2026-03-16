@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation"
 import Image from "next/image"
 import { useCart } from "@/context/CartContext"
 import HighlightGroups, { HighlightGroup } from "@/components/common/HighlightGroups"
+import ShareButton from "@/components/common/ShareButton"
 import {
     Search,
     Star,
@@ -26,6 +27,7 @@ import {
     ShieldCheck,
     CalendarDays,
 } from "lucide-react"
+import Banner from "../home/Banner"
 
 // ─── DATA ───────────────────────────────────────────────────────────────────
 
@@ -427,9 +429,18 @@ function ServiceCard({ service, onBook }: { service: Service; onBook: (s: Servic
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-                <button className="absolute top-2 right-2 text-white hover:text-primary transition-colors">
-                    <Heart className="h-5 w-5" />
-                </button>
+                <div className="absolute top-2 right-2 flex items-center gap-2 text-white">
+                    <ShareButton
+                        path={`/booking?service=${service.id}`}
+                        title={service.name}
+                        className="hover:text-primary transition-colors"
+                        iconClassName="h-5 w-5"
+                        shareTitle="Share service"
+                    />
+                    <button className="hover:text-primary transition-colors" aria-label="Add to wishlist" title="Add to wishlist">
+                        <Heart className="h-5 w-5" />
+                    </button>
+                </div>
                 {service.badge && (
                     <span className={`absolute top-2 left-2 text-white text-xs font-semibold px-2 py-1 rounded-full ${service.badgeColor || 'bg-accent0'}`}>
                         {service.badge}
@@ -890,48 +901,7 @@ export default function BookingPage() {
     return (
         <div className="min-h-screen bg-muted">
             {/* Hero Banner */}
-            <div className="relative overflow-hidden bg-gradient-to-br from-primary via-primary/90 to-primary-dark text-white">
-                <div className="absolute inset-0 opacity-10" style={{ backgroundImage: "radial-gradient(circle at 20% 50%, white 1px, transparent 1px), radial-gradient(circle at 80% 20%, white 1px, transparent 1px)", backgroundSize: "60px 60px" }} />
-                <div className="relative container mx-auto px-4 py-14 text-center space-y-4">
-                    <span className="inline-block bg-background/20 backdrop-blur-sm px-4 py-1 rounded-full text-sm font-semibold tracking-wide">
-                        ✨ 500+ Verified Service Professionals
-                    </span>
-                    <h1 className="text-4xl sm:text-5xl font-extrabold leading-tight">
-                        Book a Service <br className="sm:hidden" />
-                        <span className="text-primary-foreground">You Can Trust</span>
-                    </h1>
-                    <p className="text-white/80 text-lg max-w-xl mx-auto">
-                        From home care to beauty, health, tech & more — we bring expert professionals to your doorstep.
-                    </p>
-
-                    {/* Search Bar */}
-                    <div className="max-w-lg mx-auto mt-6">
-                        <div className="relative">
-                            <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-                            <input
-                                type="text"
-                                placeholder="Search services (e.g. cleaning, massage, yoga...)"
-                                value={search}
-                                onChange={e => setSearch(e.target.value)}
-                                className="w-full pl-12 pr-4 py-4 rounded-2xl text-foreground text-sm font-medium shadow-2xl focus:outline-none focus:ring-4 focus:ring-white/30 placeholder:text-muted-foreground"
-                            />
-                            {search && (
-                                <button onClick={() => setSearch("")} className="absolute right-4 top-1/2 -translate-y-1/2">
-                                    <X className="h-4 w-4 text-muted-foreground hover:text-muted-foreground" />
-                                </button>
-                            )}
-                        </div>
-                    </div>
-
-                    {/* Trust Badges */}
-                    <div className="flex flex-wrap justify-center gap-6 pt-2 text-sm text-white/80">
-                        {[["🛡️", "Verified Pros"], ["⭐", "Avg. 4.7 Rating"], ["📅", "Flexible Scheduling"], ["💳", "Secure Payment"]].map(([icon, label]) => (
-                            <span key={label} className="flex items-center gap-1.5">{icon} {label}</span>
-                        ))}
-                    </div>
-                </div>
-            </div>
-
+          <Banner />
             <div className="container mx-auto px-4 py-10">
                 <HighlightGroups groups={highlightGroups} />
             </div>

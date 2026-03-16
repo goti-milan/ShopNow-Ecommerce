@@ -2,11 +2,13 @@
 
 import { Star } from "lucide-react";
 import { cn } from "@/lib/utils";
+import ShareButton from "@/components/common/ShareButton";
 
 interface ProductInfoProps {
     title: string;
     brand?: string;
     productId?: string;
+    sharePath?: string;
     price: number;
     originalPrice?: number;
     discountPercent?: number;
@@ -21,6 +23,7 @@ export const ProductInfo = ({
     title,
     brand = "Apple",
     productId = "#APL14PM",
+    sharePath,
     price,
     originalPrice,
     discountPercent,
@@ -47,6 +50,15 @@ export const ProductInfo = ({
                     <h1 className="text-2xl md:text-3xl font-extrabold text-foreground leading-tight tracking-tight max-w-[85%]">
                         {title}
                     </h1>
+                    {sharePath && (
+                        <ShareButton
+                            path={sharePath}
+                            title={title}
+                            className="shrink-0 rounded-full border border-border bg-background p-2 text-muted-foreground hover:text-primary hover:border-primary/40 transition-colors"
+                            iconClassName="h-5 w-5"
+                            shareTitle="Share product"
+                        />
+                    )}
                 </div>
 
                 {/* Rating & Reviews Section */}

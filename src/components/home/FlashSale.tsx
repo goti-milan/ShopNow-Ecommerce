@@ -94,7 +94,10 @@ export default function FlashSale() {
                     </div>
 
                     <div className="flex items-center gap-3">
-                        
+                        <Button variant="outline" className="rounded-full px-12 py-6 text-base border-2 border-foreground/10 hover:bg-foreground hover:text-background transition-colors duration-300 gap-2">
+                            View All  <ArrowRight className="w-4 h-4" />
+                        </Button>
+
                         <div className="flex items-center gap-2">
                             <Button variant="outline" size="icon" onClick={() => scroll("left")} className="rounded-full border-foreground/20 hover:border-primary hover:text-primary transition-all">
                                 <ChevronLeft className="w-5 h-5" />

@@ -10,6 +10,9 @@
   --color-primary-light: #ff8a3d;
   --color-primary-dark: #d85f17;
 
+  /* Legacy/extra token used across UI */
+  --color-accent0: var(--color-primary);
+
   --color-secondary: #111315;
   --color-secondary-foreground: #ffffff;
 
