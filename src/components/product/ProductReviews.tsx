@@ -46,7 +46,7 @@ export const ProductReviews = ({ reviews = mockReviews }: ProductReviewsProps) =
         <section className="mt-24">
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
                 <div>
-                    <h2 className="text-3xl font-black text-foreground uppercase tracking-tight mb-4">Customer Reviews</h2>
+                    <h2 className="text-3xl font-semibold text-foreground uppercase tracking-tight mb-4">Customer Reviews</h2>
                     <div className="flex items-center gap-4">
                         <div className="flex items-center gap-1">
                             {[1, 2, 3, 4, 5].map((star) => (
@@ -82,7 +82,7 @@ export const ProductReviews = ({ reviews = mockReviews }: ProductReviewsProps) =
                                     <p className="text-xs text-muted-foreground font-semibold uppercase">{review.date}</p>
                                 </div>
                             </div>
-                            <div className="bg-accent text-primary-dark px-2 py-1 rounded-lg text-xs font-black flex items-center gap-1">
+                            <div className="bg-accent text-primary-dark px-2 py-1 rounded-lg text-xs font-semibold flex items-center gap-1">
                                 {review.rating}.0 <Star className="w-3 h-3 fill-primary" />
                             </div>
                         </div>

@@ -152,7 +152,7 @@ export default function AccountPage() {
                                 <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center">
                                     <User className="w-10 h-10 text-primary" />
                                 </div>
-                                <button className="absolute bottom-0 right-0 w-7 h-7 bg-primary rounded-full flex items-center justify-center shadow-md hover:bg-primary/90 transition-colors">
+                                <button className="absolute bottom-0 right-0 w-7 h-7 bg-primary rounded-full flex items-center justify-center shadow-md hover:bg-primary-hover transition-colors">
                                     <Camera className="w-3.5 h-3.5 text-white" />
                                 </button>
                             </div>
@@ -247,7 +247,7 @@ export default function AccountPage() {
                                 </div>
 
                                 <div className="mt-6 flex gap-3">
-                                    <Button className="bg-primary hover:bg-primary/90 text-white">Save Changes</Button>
+                                    <Button className="bg-primary hover:bg-primary-hover text-white">Save Changes</Button>
                                     <Button variant="outline">Cancel</Button>
                                 </div>
                             </div>
@@ -266,7 +266,7 @@ export default function AccountPage() {
                                 <div className="flex items-center justify-between mb-6">
                                     <h2 className="text-xl font-bold text-foreground">My Service Bookings</h2>
                                     <Link href="/booking">
-                                        <Button size="sm" className="bg-primary hover:bg-primary/90 text-white rounded-xl">
+                                        <Button size="sm" className="bg-primary hover:bg-primary-hover text-white rounded-xl">
                                             Book a Service
                                         </Button>
                                     </Link>
@@ -338,7 +338,7 @@ export default function AccountPage() {
                                                         Rate Service
                                                     </Button>
                                                 )}
-                                                <Button size="sm" className="rounded-xl bg-primary hover:bg-primary/90 text-white">
+                                                <Button size="sm" className="rounded-xl bg-primary hover:bg-primary-hover text-white">
                                                     View Details
                                                 </Button>
                                             </div>
@@ -350,7 +350,7 @@ export default function AccountPage() {
                                     <div className="text-center py-16">
                                         <Wrench className="w-12 h-12 text-muted-foreground mx-auto mb-3" />
                                         <p className="text-muted-foreground font-medium">No service bookings yet</p>
-                                        <Link href="/booking"><Button className="mt-4 bg-primary hover:bg-primary/90 text-white">Browse Services</Button></Link>
+                                        <Link href="/booking"><Button className="mt-4 bg-primary hover:bg-primary-hover text-white">Browse Services</Button></Link>
                                     </div>
                                 )}
                             </div>
@@ -384,7 +384,7 @@ export default function AccountPage() {
                                                 </div>
                                                 <div className="text-right">
                                                     <p className="font-bold text-foreground">₹{item.price.toLocaleString()}</p>
-                                                    <Button size="sm" className="mt-2 h-7 rounded-lg text-xs bg-primary hover:bg-primary/90 text-white">
+                                                    <Button size="sm" className="mt-2 h-7 rounded-lg text-xs bg-primary hover:bg-primary-hover text-white">
                                                         Add to Cart
                                                     </Button>
                                                 </div>
@@ -397,7 +397,7 @@ export default function AccountPage() {
                                     <div className="text-center py-16">
                                         <Heart className="w-12 h-12 text-muted-foreground mx-auto mb-3" />
                                         <p className="text-muted-foreground font-medium">No favourites yet</p>
-                                        <Link href="/shop"><Button className="mt-4 bg-primary hover:bg-primary/90 text-white">Browse Products</Button></Link>
+                                        <Link href="/shop"><Button className="mt-4 bg-primary hover:bg-primary-hover text-white">Browse Products</Button></Link>
                                     </div>
                                 )}
                             </div>
@@ -437,7 +437,7 @@ export default function AccountPage() {
                                                 <Button
                                                     size="sm"
                                                     variant={coupon.status === "Active" ? "primary" : "outline"}
-                                                    className={`rounded-xl ${coupon.status === "Active" ? "bg-primary hover:bg-primary/90 text-white" : "cursor-not-allowed"}`}
+                                                    className={`rounded-xl ${coupon.status === "Active" ? "bg-primary hover:bg-primary-hover text-white" : "cursor-not-allowed"}`}
                                                     disabled={coupon.status !== "Active"}
                                                 >
                                                     Apply
@@ -457,7 +457,7 @@ export default function AccountPage() {
                                         <h2 className="text-xl font-bold text-foreground">Payment Methods</h2>
                                         <p className="text-sm text-muted-foreground">Manage your saved cards and UPI IDs.</p>
                                     </div>
-                                    <Button className="rounded-xl bg-primary hover:bg-primary/90 text-white">
+                                    <Button className="rounded-xl bg-primary hover:bg-primary-hover text-white">
                                         Add New Method
                                     </Button>
                                 </div>
@@ -494,7 +494,7 @@ export default function AccountPage() {
                                     <div className="text-center py-16">
                                         <CreditCard className="w-12 h-12 text-muted-foreground mx-auto mb-3" />
                                         <p className="text-muted-foreground font-medium">No payment methods saved</p>
-                                        <Button className="mt-4 bg-primary hover:bg-primary/90 text-white">Add a Payment Method</Button>
+                                        <Button className="mt-4 bg-primary hover:bg-primary-hover text-white">Add a Payment Method</Button>
                                     </div>
                                 )}
                             </div>
@@ -521,7 +521,7 @@ export default function AccountPage() {
                                 </div>
 
                                 <div className="mt-6 flex flex-col sm:flex-row gap-3">
-                                    <Button className="bg-primary hover:bg-primary/90 text-white">Save Payment Method</Button>
+                                    <Button className="bg-primary hover:bg-primary-hover text-white">Save Payment Method</Button>
                                     <Button variant="outline">Cancel</Button>
                                 </div>
                             </div>
@@ -561,7 +561,7 @@ export default function AccountPage() {
                                         <h2 className="text-xl font-bold text-foreground">Support Center</h2>
                                         <p className="text-sm text-muted-foreground">We&apos;re here 24/7 to help you with anything.</p>
                                     </div>
-                                    <Button className="rounded-xl bg-primary hover:bg-primary/90 text-white">
+                                    <Button className="rounded-xl bg-primary hover:bg-primary-hover text-white">
                                         Start Live Chat
                                     </Button>
                                 </div>
@@ -606,7 +606,7 @@ export default function AccountPage() {
                                 </div>
 
                                 <div className="mt-6 flex flex-col sm:flex-row gap-3">
-                                    <Button className="bg-primary hover:bg-primary/90 text-white">Submit Request</Button>
+                                    <Button className="bg-primary hover:bg-primary-hover text-white">Submit Request</Button>
                                     <Button variant="outline">Clear</Button>
                                 </div>
                             </div>
@@ -620,7 +620,7 @@ export default function AccountPage() {
                                         <h2 className="text-xl font-bold text-foreground">Share Your Profile</h2>
                                         <p className="text-sm text-muted-foreground">Let others view your reviews and public activity.</p>
                                     </div>
-                                    <Button className="rounded-xl bg-primary hover:bg-primary/90 text-white">
+                                    <Button className="rounded-xl bg-primary hover:bg-primary-hover text-white">
                                         Generate Share Link
                                     </Button>
                                 </div>

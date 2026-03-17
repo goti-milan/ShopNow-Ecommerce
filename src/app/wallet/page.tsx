@@ -76,7 +76,7 @@ export default function WalletPage() {
                             <div className="flex items-center justify-between gap-6">
                                 <div>
                                     <p className="text-xs uppercase tracking-widest text-muted-foreground font-semibold">Available Balance</p>
-                                    <p className="text-4xl font-black text-foreground mt-2">₹12,640</p>
+                                    <p className="text-4xl font-semibold text-foreground mt-2">₹12,640</p>
                                     <p className="text-sm text-muted-foreground mt-1">Updated a few seconds ago</p>
                                 </div>
                                 <div className="hidden md:flex items-center gap-2 rounded-full bg-accent text-primary px-4 py-2 text-xs font-semibold">

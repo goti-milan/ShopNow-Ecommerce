@@ -64,7 +64,7 @@ export default function HomeNewFeatures() {
                             <span className="h-px w-8 bg-primary rounded-full" />
                             <span className="text-primary font-bold tracking-widest uppercase text-xs">Shop the Best</span>
                         </div>
-                        <h2 className="text-4xl md:text-5xl font-black text-foreground tracking-tight">Exclusive Collections</h2>
+                        <h2 className="text-4xl md:text-5xl font-semibold text-foreground tracking-tight">Exclusive Collections</h2>
                     </div>
 
                     <div className="flex items-center gap-2">
@@ -112,11 +112,11 @@ export default function HomeNewFeatures() {
                 <div className="mt-8 mb-10 min-h-12 flex flex-col sm:flex-row items-center justify-between gap-4 p-6 rounded-3xl bg-muted border border-border italic">
                     {activeTab === "flash-sale" ? (
                         <div className="flex items-center gap-4">
-                            <span className="font-black text-primary uppercase tracking-tighter text-xl">Ends In:</span>
+                            <span className="font-semibold text-primary uppercase tracking-tighter text-xl">Ends In:</span>
                             <div className="flex gap-2">
                                 {[timeLeft.hours, timeLeft.minutes, timeLeft.seconds].map((t, i) => (
                                     <div key={i} className="flex flex-col items-center">
-                                        <div className="bg-accent0 text-white w-10 h-10 flex items-center justify-center rounded-xl font-black text-lg shadow-lg shadow-red-500/20">
+                                        <div className="bg-accent0 text-white w-10 h-10 flex items-center justify-center rounded-xl font-semibold text-lg shadow-lg shadow-red-500/20">
                                             {t.toString().padStart(2, '0')}
                                         </div>
                                     </div>
@@ -128,7 +128,7 @@ export default function HomeNewFeatures() {
                             Displaying the latest <span className="text-primary font-bold">{(TABS.find(t => t.id === activeTab))?.label}</span> Curated just for you.
                         </p>
                     )}
-                    <Button variant="ghost" className="text-primary font-black hover:bg-primary/5 gap-2 uppercase tracking-tighter">
+                    <Button variant="ghost" className="text-primary font-semibold hover:bg-primary/5 gap-2 uppercase tracking-tighter">
                         Explore All <ArrowRight className="w-4 h-4" />
                     </Button>
                 </div>
@@ -151,7 +151,7 @@ export default function HomeNewFeatures() {
                                 <ArrowRight className="w-8 h-8 text-primary" />
                             </div>
                             <div>
-                                <h4 className="font-black text-foreground">View More</h4>
+                                <h4 className="font-semibold text-foreground">View More</h4>
                                 <p className="text-sm text-muted-foreground font-medium">Check all items in this collection</p>
                             </div>
                         </div>
@@ -164,11 +164,11 @@ export default function HomeNewFeatures() {
                         <div className="absolute top-0 right-0 w-64 h-64 bg-primary/20 rounded-full blur-3xl -mr-32 -mt-32 group-hover:bg-primary/30 transition-all duration-700" />
                         <div className="relative z-10 flex flex-col md:flex-row items-center gap-8 justify-between">
                             <div className="space-y-4 text-center md:text-left">
-                                <Badge className="bg-primary hover:bg-primary text-white font-black px-4 py-1">Limited Combo Deals</Badge>
-                                <h2 className="text-4xl font-black text-white italic tracking-tighter">Buy 1 Get 1 Free!</h2>
+                                <Badge className="bg-primary hover:bg-primary text-white font-semibold px-4 py-1">Limited Combo Deals</Badge>
+                                <h2 className="text-4xl font-semibold text-white italic tracking-tighter">Buy 1 Get 1 Free!</h2>
                                 <p className="text-muted-foreground font-medium max-w-sm">Mix and match any two items from our selected accessories category.</p>
                             </div>
-                            <Button className="bg-background text-foreground hover:bg-muted font-black px-10 py-8 rounded-2xl text-xl transition-all transform hover:scale-105 active:scale-95">
+                            <Button className="bg-background text-foreground hover:bg-muted font-semibold px-10 py-8 rounded-2xl text-xl transition-all transform hover:scale-105 active:scale-95">
                                 Claim Offer
                             </Button>
                         </div>

@@ -223,7 +223,7 @@ function FilterSidebar({
         </div>
       </div>
 
-      <Button className="w-full bg-primary hover:bg-primary/90 text-white font-semibold py-2 rounded-lg transition-all duration-200">
+      <Button className="w-full bg-primary hover:bg-primary-hover text-white font-semibold py-2 rounded-lg transition-all duration-200">
         Apply Filters
       </Button>
     </div>
@@ -424,7 +424,7 @@ export default function BrowseProducts({
                 </p>
                 <Button
                   onClick={clearSearch}
-                  className="bg-primary hover:bg-primary/90"
+                  className="bg-primary hover:bg-primary-hover"
                 >
                   Clear Filters
                 </Button>
@@ -448,4 +448,3 @@ export default function BrowseProducts({
     </div>
   );
 }
-

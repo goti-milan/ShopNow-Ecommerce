@@ -11,10 +11,10 @@ export default function Footer() {
                     {/* Company Info */}
                     <div>
                         <div className="flex items-center gap-2 mb-4">
-                            <div className="w-10 h-10 rounded-lg bg-background/20 flex items-center justify-center text-xl font-bold">
+                            <div className="w-10 h-10 rounded-lg bg-background/20 flex items-center justify-center text-xl font-semibold">
                                 🛒
                             </div>
-                            <span className="text-xl font-bold">ShopNow</span>
+                            <span className="text-xl font-semibold">ShopNow</span>
                         </div>
                         <p className="text-white/70 text-sm mb-4">
                             Your one-stop shop for everything you need. Quality products, best prices, and fast delivery.
@@ -37,7 +37,7 @@ export default function Footer() {
 
                     {/* Quick Links */}
                     <div>
-                        <h4 className="font-bold mb-4">Quick Links</h4>
+                        <h4 className="font-semibold mb-4">Quick Links</h4>
                         <ul className="space-y-2 text-white/70 text-sm">
                             <li><Link href="/aboutus" className="hover:text-white transition">About Us</Link></li>
                             <li><Link href="/shop" className="hover:text-white transition">Shop</Link></li>
@@ -50,7 +50,7 @@ export default function Footer() {
 
                     {/* Support */}
                     <div>
-                        <h4 className="font-bold mb-4">Support</h4>
+                        <h4 className="font-semibold mb-4">Support</h4>
                         <ul className="space-y-2 text-white/70 text-sm">
                             <li><Link href="/contactus" className="hover:text-white transition">Contact Us</Link></li>
                             <li><Link href="/policy" className="hover:text-white transition">All Policies</Link></li>
@@ -64,7 +64,7 @@ export default function Footer() {
 
                     {/* Newsletter */}
                     <div>
-                        <h4 className="font-bold mb-4">Stay Connected</h4>
+                        <h4 className="font-semibold mb-4">Stay Connected</h4>
                         <p className="text-white/70 text-sm mb-4">
                             Subscribe to get special offers, free giveaways, and once-in-a-lifetime deals.
                         </p>

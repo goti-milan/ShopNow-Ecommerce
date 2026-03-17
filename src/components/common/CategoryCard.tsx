@@ -33,7 +33,7 @@ const CategoryCard = ({ title, discount, image, slug }: CategoryCardProps) => {
                     {discount}
                 </h3>
 
-                <div className="mt-4 inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2 text-sm font-medium text-primary-foreground transition hover:bg-primary/90">
+                <div className="mt-4 inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2 text-sm font-medium text-primary-foreground transition hover:bg-primary-hover">
                     Shop Now
                     <span className="text-base">→</span>
                 </div>
@@ -43,4 +43,3 @@ const CategoryCard = ({ title, discount, image, slug }: CategoryCardProps) => {
 };
 
 export default CategoryCard;
-

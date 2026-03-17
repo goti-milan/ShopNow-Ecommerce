@@ -30,7 +30,7 @@ export const ActionButtons = ({
                 </Button>
 
                 <Button
-                    className="h-12 text-sm font-bold rounded-lg bg-primary text-white hover:bg-primary/90 shadow-md shadow-orange-200 transition-all active:scale-[0.98]"
+                    className="h-12 text-sm font-bold rounded-lg bg-primary text-white hover:bg-primary-hover shadow-md shadow-orange-200 transition-all active:scale-[0.98]"
                     onClick={onBuyNow}
                 >
                     Buy Now
@@ -59,4 +59,3 @@ export const ActionButtons = ({
         </div>
     );
 };
-

@@ -89,7 +89,7 @@ export const ProductInfo = ({
             {/* Price Section */}
             <div className="space-y-1">
                 <div className="flex items-baseline gap-3">
-                    <span className="text-3xl font-black text-foreground">
+                    <span className="text-3xl font-semibold text-foreground">
                         ₹{price.toLocaleString()}
                     </span>
                     {originalPrice && (
@@ -98,12 +98,12 @@ export const ProductInfo = ({
                         </span>
                     )}
                     {discountPercent && (
-                        <span className="text-primary font-black text-lg italic">
+                        <span className="text-primary font-semibold text-lg italic">
                             {discountPercent}% OFF
                         </span>
                     )}
                 </div>
-                <div className="text-[10px] font-black text-muted-foreground uppercase tracking-widest flex items-center gap-1">
+                <div className="text-[10px] font-semibold text-muted-foreground uppercase tracking-widest flex items-center gap-1">
                     Inclusive of all taxes
                 </div>
             </div>
@@ -111,7 +111,7 @@ export const ProductInfo = ({
             {/* In context description snippet */}
             {description && (
                 <div className="pt-2 border-t border-border">
-                    <h4 className="text-[10px] font-black text-foreground uppercase tracking-widest mb-3">Key Features:</h4>
+                    <h4 className="text-[10px] font-semibold text-foreground uppercase tracking-widest mb-3">Key Features:</h4>
                     <div className="grid grid-cols-2 gap-4">
                         <div className="flex items-center gap-2">
                             <div className="w-1.5 h-1.5 rounded-full bg-accent0" />

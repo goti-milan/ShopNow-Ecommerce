@@ -24,12 +24,12 @@ const SectionHeader = ({ label, heading, description, align = 'center', title, s
   return (
     <div className={`flex flex-col gap-2 mb-10 ${alignClass}`}>
       {resolvedLabel && (
-        <span className="text-primary font-semibold tracking-widest uppercase text-xs">
+        <span className="text-primary font-medium tracking-widest uppercase text-xs">
           {resolvedLabel}
         </span>
       )}
       {resolvedHeading && (
-        <h2 className="text-3xl md:text-4xl font-bold text-foreground tracking-tight">
+        <h2 className="text-3xl md:text-4xl font-semibold text-foreground tracking-tight">
           {resolvedHeading}
         </h2>
       )}

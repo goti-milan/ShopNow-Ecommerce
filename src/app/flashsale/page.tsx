@@ -33,7 +33,7 @@ export default function FlashSalePage() {
                         <Zap className="w-8 h-8 fill-primary text-primary-foreground animate-pulse" />
                         <span className="text-lg font-bold tracking-widest uppercase">Flash Deals</span>
                     </div>
-                    <h1 className="text-4xl md:text-6xl font-black mb-6 drop-shadow-md">
+                    <h1 className="text-4xl md:text-6xl font-semibold mb-6 drop-shadow-md">
                         SUPER FLASH SALE
                     </h1>
                     <p className="text-xl md:text-2xl font-medium mb-8 opacity-90">

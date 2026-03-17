@@ -490,12 +490,12 @@ function ServiceCard({ service, onBook }: { service: Service; onBook: (s: Servic
 
                 {/* Buttons */}
                 <div className="flex gap-2 mt-2">
-                    <button
-                        onClick={() => onBook(service)}
-                        className="flex-1 bg-primary hover:bg-primary/90 text-white text-sm font-semibold px-3 py-2 rounded-lg transition-all duration-200"
-                    >
-                        Book Now
-                    </button>
+	                    <button
+	                        onClick={() => onBook(service)}
+	                        className="flex-1 bg-primary hover:bg-primary-hover text-white text-sm font-semibold px-3 py-2 rounded-lg transition-all duration-200"
+	                    >
+	                        Book Now
+	                    </button>
                     <button className="flex-1 border border-border hover:border-gray-400 text-foreground text-sm font-semibold px-3 py-2 rounded-lg transition-all duration-200">
                         Add to Cart
                     </button>
@@ -605,11 +605,11 @@ function BookingModal({
                     </div>
 
                     {/* Submit → Add to Cart */}
-                    <button
-                        type="submit"
-                        disabled={!form.date || !form.time}
-                        className="w-full py-3 bg-primary hover:bg-primary/90 disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-bold rounded-xl transition-all duration-200 hover:shadow-lg hover:shadow-primary/30 flex items-center justify-center gap-2"
-                    >
+	                    <button
+	                        type="submit"
+	                        disabled={!form.date || !form.time}
+	                        className="w-full py-3 bg-primary hover:bg-primary-hover disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-bold rounded-xl transition-all duration-200 hover:shadow-lg hover:shadow-primary/30 flex items-center justify-center gap-2"
+	                    >
                         <ShoppingCart className="h-4 w-4" />
                         Add to Cart — ₹{service.price.toLocaleString()}
                     </button>
@@ -797,9 +797,9 @@ function FilterSidebar({
             </div>
 
             {/* Apply Filters Button */}
-            <button className="w-full bg-primary hover:bg-primary/90 text-white font-semibold py-3 rounded-xl transition-all duration-200">
-                Apply Filters
-            </button>
+	            <button className="w-full bg-primary hover:bg-primary-hover text-white font-semibold py-3 rounded-xl transition-all duration-200">
+	                Apply Filters
+	            </button>
         </div>
     )
 }
@@ -976,9 +976,9 @@ export default function BookingPage() {
                                 <Search className="h-12 w-12 text-muted-foreground" />
                                 <h3 className="text-xl font-semibold text-foreground">No services found</h3>
                                 <p className="text-muted-foreground">Try a different keyword or category</p>
-                                <button onClick={() => { setSearch(""); setActiveCategory("all") }} className="px-5 py-2 bg-primary text-white rounded-xl text-sm font-medium hover:bg-primary/90">
-                                    Clear Filters
-                                </button>
+	                                <button onClick={() => { setSearch(""); setActiveCategory("all") }} className="px-5 py-2 bg-primary text-white rounded-xl text-sm font-medium hover:bg-primary-hover">
+	                                    Clear Filters
+	                                </button>
                             </div>
                         ) : (
                             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">

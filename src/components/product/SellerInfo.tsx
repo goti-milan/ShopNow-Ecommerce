@@ -8,7 +8,7 @@ export const SellerInfo = () => {
     return (
         <div className="flex flex-col gap-5 p-6 bg-background border border-border rounded-3xl shadow-sm mt-6">
             <div className="flex items-center justify-between">
-                <span className="text-[10px] font-black text-foreground uppercase tracking-widest">Seller Information</span>
+                <span className="text-[10px] font-semibold text-foreground uppercase tracking-widest">Seller Information</span>
                 <div className="flex items-center gap-1 bg-accent text-primary-dark px-2 py-0.5 rounded text-[10px] font-bold border border-primary/20 uppercase tracking-tighter">
                     <Star className="w-3 h-3 fill-primary text-primary" />
                     Top Rated Seller
@@ -21,9 +21,9 @@ export const SellerInfo = () => {
                 </div>
                 <div className="flex flex-col">
                     <div className="flex items-center gap-2">
-                        <h4 className="text-sm font-black text-foreground">TechWorld Electronics</h4>
+                        <h4 className="text-sm font-semibold text-foreground">TechWorld Electronics</h4>
                         <div className="flex items-center gap-1 text-primary">
-                            <span className="text-xs font-black">4.9</span>
+                            <span className="text-xs font-semibold">4.9</span>
                             <Star className="w-3 h-3 fill-current" />
                         </div>
                     </div>
@@ -43,10 +43,10 @@ export const SellerInfo = () => {
                 </div>
 
                 <div className="grid grid-cols-2 gap-3">
-                    <Button variant="primary" className="h-10 rounded-xl font-black text-xs uppercase hover:bg-primary-dark">
+                    <Button variant="primary" className="h-10 rounded-xl font-semibold text-xs uppercase hover:bg-primary-dark">
                         Visit Shop
                     </Button>
-                    <Button variant="outline" className="h-10 rounded-xl border-border text-muted-foreground hover:bg-muted font-black text-xs uppercase flex items-center gap-2">
+                    <Button variant="outline" className="h-10 rounded-xl border-border text-muted-foreground hover:bg-muted font-semibold text-xs uppercase flex items-center gap-2">
                         <MessageSquare className="w-3.5 h-3.5" />
                         Chat with Seller
                     </Button>
@@ -56,11 +56,11 @@ export const SellerInfo = () => {
             <div className="grid grid-cols-2 gap-4 pt-4 border-t border-slate-50">
                 <div className="flex items-center gap-2">
                     <Truck className="w-4 h-4 text-primary" />
-                    <span className="text-[10px] font-black text-foreground uppercase">Fast Delivery</span>
+                    <span className="text-[10px] font-semibold text-foreground uppercase">Fast Delivery</span>
                 </div>
                 <div className="flex items-center gap-2">
                     <Package className="w-4 h-4 text-primary" />
-                    <span className="text-[10px] font-black text-foreground uppercase">Great Packaging</span>
+                    <span className="text-[10px] font-semibold text-foreground uppercase">Great Packaging</span>
                 </div>
             </div>
 

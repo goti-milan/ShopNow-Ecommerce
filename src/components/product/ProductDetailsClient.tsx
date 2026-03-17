@@ -73,7 +73,7 @@ export default function ProductDetailsClient({ product }: { product: Product }) 
                     <div className="space-y-6 lg:sticky lg:top-24">
                         <div className="relative bg-muted rounded-[40px] p-8 border border-border shadow-sm overflow-hidden">
                             <div className="absolute top-6 left-6 z-30">
-                                <Badge className="bg-accent0 text-white border-none px-4 py-1.5 font-black text-xs uppercase rounded-full">Sale</Badge>
+                                <Badge className="bg-accent0 text-white border-none px-4 py-1.5 font-semibold text-xs uppercase rounded-full">Sale</Badge>
                             </div>
                             <ImageGallery
                                 images={[product.image, "https://picsum.photos/seed/iphone1/800/800", "https://picsum.photos/seed/iphone2/800/800", "https://picsum.photos/seed/iphone3/800/800"]}
@@ -94,7 +94,7 @@ export default function ProductDetailsClient({ product }: { product: Product }) 
                         />
 
                         <div className="flex items-center justify-between">
-                            <span className="text-xs font-black uppercase tracking-widest text-foreground">Quantity</span>
+                            <span className="text-xs font-semibold uppercase tracking-widest text-foreground">Quantity</span>
                             <QuantitySelector
                                 quantity={quantity}
                                 onChange={setQuantity}
@@ -104,14 +104,14 @@ export default function ProductDetailsClient({ product }: { product: Product }) 
                         <div className="flex flex-col sm:flex-row gap-4">
                             <button
                                 onClick={handleAddToCart}
-                                className="flex-1 h-16 rounded-2xl border-2 border-slate-900 bg-background text-foreground font-black text-sm uppercase tracking-widest hover:bg-secondary hover:text-white transition-all flex items-center justify-center gap-3 active:scale-95"
+                                className="flex-1 h-16 rounded-2xl border-2 border-slate-900 bg-background text-foreground font-semibold text-sm uppercase tracking-widest hover:bg-secondary hover:text-white transition-all flex items-center justify-center gap-3 active:scale-95"
                             >
                                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" /></svg>
                                 Add to Cart
                             </button>
                             <button
                                 onClick={handleBuyNow}
-                                className="flex-1 h-16 rounded-2xl bg-accent0 text-white font-black text-sm uppercase tracking-widest hover:bg-primary-dark transition-all flex items-center justify-center gap-3 shadow-lg shadow-orange-100 active:scale-95"
+                                className="flex-1 h-16 rounded-2xl bg-accent0 text-white font-semibold text-sm uppercase tracking-widest hover:bg-primary-dark transition-all flex items-center justify-center gap-3 shadow-lg shadow-orange-100 active:scale-95"
                             >
                                 <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
                                 Buy Now
@@ -121,7 +121,7 @@ export default function ProductDetailsClient({ product }: { product: Product }) 
                         {/* Colors */}
                         <div className="space-y-4">
                             <div className="flex items-center justify-between">
-                                <span className="text-xs font-black uppercase tracking-widest text-foreground">Select Color</span>
+                                <span className="text-xs font-semibold uppercase tracking-widest text-foreground">Select Color</span>
                                 <span className="text-[11px] font-bold text-muted-foreground capitalize">{selectedColor}</span>
                             </div>
                             <div className="flex flex-wrap gap-4">
@@ -152,14 +152,14 @@ export default function ProductDetailsClient({ product }: { product: Product }) 
 
                         {/* Size Variants */}
                         <div className="space-y-4 pt-6 border-t border-border">
-                            <span className="text-xs font-black uppercase tracking-widest text-foreground">Size Variant</span>
+                            <span className="text-xs font-semibold uppercase tracking-widest text-foreground">Size Variant</span>
                             <div className="flex flex-wrap gap-3">
                                 {sizeOptions.map((size) => (
                                     <button
                                         key={size}
                                         onClick={() => setSelectedSize(size)}
                                         className={cn(
-                                            "min-w-14 h-12 rounded-xl border-2 text-sm font-black transition-all flex items-center justify-center uppercase",
+                                            "min-w-14 h-12 rounded-xl border-2 text-sm font-semibold transition-all flex items-center justify-center uppercase",
                                             selectedSize === size ? "border-primary bg-background text-primary-dark shadow-sm" : "border-white bg-background text-muted-foreground hover:border-border"
                                         )}
                                     >
@@ -171,14 +171,14 @@ export default function ProductDetailsClient({ product }: { product: Product }) 
 
                         {/* Weight Variants */}
                         <div className="space-y-4 pt-6 border-t border-border">
-                            <span className="text-xs font-black uppercase tracking-widest text-foreground">Weight Variant</span>
+                            <span className="text-xs font-semibold uppercase tracking-widest text-foreground">Weight Variant</span>
                             <div className="flex flex-wrap gap-3">
                                 {weightOptions.map((weight) => (
                                     <button
                                         key={weight}
                                         onClick={() => setSelectedWeight(weight)}
                                         className={cn(
-                                            "px-6 h-12 rounded-xl border-2 text-[11px] font-black transition-all flex items-center justify-center uppercase tracking-tighter",
+                                            "px-6 h-12 rounded-xl border-2 text-[11px] font-semibold transition-all flex items-center justify-center uppercase tracking-tighter",
                                             selectedWeight === weight ? "border-primary bg-background text-primary-dark shadow-sm" : "border-white bg-background text-muted-foreground hover:border-border"
                                         )}
                                     >
@@ -191,7 +191,7 @@ export default function ProductDetailsClient({ product }: { product: Product }) 
                         {/* Delivery Options */}
                         <div className="space-y-6 pt-2">
                             <div className="space-y-3">
-                                <label className="text-[11px] font-black text-foreground uppercase tracking-widest">Check Delivery</label>
+                                <label className="text-[11px] font-semibold text-foreground uppercase tracking-widest">Check Delivery</label>
                                 <div className="relative group">
                                     <div className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground group-focus-within:text-primary transition-colors">
                                         <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
@@ -203,7 +203,7 @@ export default function ProductDetailsClient({ product }: { product: Product }) 
                                         placeholder="Enter Delivery Pincode"
                                         className="w-full h-14 pl-12 pr-24 rounded-2xl border-2 border-border bg-background focus:border-primary focus:outline-none font-bold text-sm transition-all"
                                     />
-                                    <button className="absolute right-3 top-1/2 -translate-y-1/2 px-4 py-2 bg-accent0 text-white font-black text-[10px] uppercase rounded-xl hover:bg-primary-dark transition-colors">
+                                    <button className="absolute right-3 top-1/2 -translate-y-1/2 px-4 py-2 bg-accent0 text-white font-semibold text-[10px] uppercase rounded-xl hover:bg-primary-dark transition-colors">
                                         Check
                                     </button>
                                 </div>
@@ -215,7 +215,7 @@ export default function ProductDetailsClient({ product }: { product: Product }) 
                                         <svg className="w-4 h-4 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
                                     </div>
                                     <div>
-                                        <p className="text-[10px] font-black text-foreground uppercase tracking-tighter">Delivery by</p>
+                                        <p className="text-[10px] font-semibold text-foreground uppercase tracking-tighter">Delivery by</p>
                                         <p className="text-xs font-bold text-muted-foreground">Monday, 3rd March</p>
                                     </div>
                                 </div>
@@ -224,7 +224,7 @@ export default function ProductDetailsClient({ product }: { product: Product }) 
                                         <svg className="w-4 h-4 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                                     </div>
                                     <div>
-                                        <p className="text-[10px] font-black text-foreground uppercase tracking-tighter">Fastest Delivery</p>
+                                        <p className="text-[10px] font-semibold text-foreground uppercase tracking-tighter">Fastest Delivery</p>
                                         <p className="text-xs font-bold text-muted-foreground">Tomorrow, by 10 PM</p>
                                     </div>
                                 </div>

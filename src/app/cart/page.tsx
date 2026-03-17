@@ -165,7 +165,7 @@ function CartContent() {
                     <span className="text-foreground font-medium">Shopping Cart</span>
                 </nav>
 
-                <h1 className="text-4xl font-black text-foreground mb-8">Cart List</h1>
+                <h1 className="text-4xl font-semibold text-foreground mb-8">Cart List</h1>
 
                 <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
                     <TabsList className="bg-transparent h-auto p-0 gap-4 mb-8">
@@ -233,7 +233,7 @@ function CartContent() {
                         <div className="lg:col-span-4 lg:sticky lg:top-24 h-fit space-y-6">
                             <div className="bg-background rounded-3xl border shadow-sm p-8 space-y-8">
                                 <div className="flex items-center justify-between">
-                                    <h2 className="text-2xl font-black text-foreground">Order Summary</h2>
+                                    <h2 className="text-2xl font-semibold text-foreground">Order Summary</h2>
                                     <div
                                         onClick={() => toggleSelectAll(currentTabItems)}
                                         className="flex items-center gap-2 cursor-pointer group"
@@ -249,7 +249,7 @@ function CartContent() {
                                 <div className="bg-muted p-6 rounded-2xl border border-dashed border-border space-y-4">
                                     <div className="flex items-center gap-2">
                                         <Badge className="bg-primary hover:bg-primary text-white">PROMO</Badge>
-                                        <span className="text-sm font-black text-foreground">Apply Promo Code</span>
+                                        <span className="text-sm font-semibold text-foreground">Apply Promo Code</span>
                                     </div>
                                     <div className="flex gap-2">
                                         <div className="relative flex-1">
@@ -269,7 +269,7 @@ function CartContent() {
                                         </div>
                                         <Button
                                             onClick={handleApplyCoupon}
-                                            className="bg-secondary hover:bg-secondary text-white px-6 rounded-xl font-black h-12 transition-all active:scale-95"
+                                            className="bg-secondary hover:bg-secondary text-white px-6 rounded-xl font-semibold h-12 transition-all active:scale-95"
                                         >
                                             Apply
                                         </Button>
@@ -283,12 +283,12 @@ function CartContent() {
                                     <div className="pt-2 flex flex-wrap gap-2">
                                         <button
                                             onClick={() => { setCouponCode("SAVE2000"); }}
-                                            className="text-[10px] font-black uppercase tracking-wider text-primary bg-accent px-2 py-1 rounded border border-primary/20 hover:bg-accent transition-colors"
+                                            className="text-[10px] font-semibold uppercase tracking-wider text-primary bg-accent px-2 py-1 rounded border border-primary/20 hover:bg-accent transition-colors"
                                         >
                                             SAVE2000
                                         </button>
                                         <button
-                                            className="text-[10px] font-black uppercase tracking-wider text-muted-foreground bg-muted px-2 py-1 rounded border border-border cursor-not-allowed"
+                                            className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground bg-muted px-2 py-1 rounded border border-border cursor-not-allowed"
                                             disabled
                                         >
                                             WELCOME50
@@ -353,22 +353,22 @@ function CartContent() {
                                     </div>
                                     <div className="flex justify-between items-center text-muted-foreground font-bold text-lg">
                                         <span>Delivery</span>
-                                        {deliveryCharges === 0 ? <span className="text-primary font-black">Free</span> : <span className="text-foreground">₹{deliveryCharges}</span>}
+                                        {deliveryCharges === 0 ? <span className="text-primary font-semibold">Free</span> : <span className="text-foreground">₹{deliveryCharges}</span>}
                                     </div>
                                 </div>
 
-                                <div className="flex justify-between items-center text-lg font-black text-foreground">
+                                <div className="flex justify-between items-center text-lg font-semibold text-foreground">
                                     <span>Total Savings</span>
                                     <span className="text-primary">₹{totalSavings.toLocaleString()}</span>
                                 </div>
 
-                                <div className="flex justify-between items-center text-lg font-black text-foreground">
+                                <div className="flex justify-between items-center text-lg font-semibold text-foreground">
                                     <span>Total</span>
                                     <span className="text-primary">₹{total.toLocaleString().toLocaleString()}</span>
                                 </div>
 
                                 <Link href="/order-confirmation?status=success">
-                                    <Button className="w-full bg-primary hover:bg-primary-dark text-white py-8 text-xl font-black rounded-2xl shadow-xl shadow-orange-100 transition-all transform hover:-translate-y-1 active:scale-95 uppercase tracking-tighter">
+                                    <Button className="w-full bg-primary hover:bg-primary-dark text-white py-8 text-xl font-semibold rounded-2xl shadow-xl shadow-orange-100 transition-all transform hover:-translate-y-1 active:scale-95 uppercase tracking-tighter">
                                         {activeTab === "service-cart" ? "Schedule & Pay" : "Proceed to Checkout"}
                                     </Button>
                                 </Link>
@@ -386,7 +386,7 @@ function CartContent() {
                 <div className="mt-20 space-y-8">
                     <div className="flex items-center gap-3">
                         <Heart className="w-6 h-6 text-primary fill-primary/20" />
-                        <h2 className="text-3xl font-black text-foreground">Item also like</h2>
+                        <h2 className="text-3xl font-semibold text-foreground">Item also like</h2>
                         <div className="flex-1 border-t border-border ml-4" />
                     </div>
 
@@ -398,7 +398,7 @@ function CartContent() {
                                 </div>
                                 <div className="space-y-3">
                                     <h3 className="font-bold text-foreground line-clamp-2 text-sm h-10 leading-snug">{product.title}</h3>
-                                    <div className="text-lg font-black text-foreground">₹{product.price.toLocaleString()}</div>
+                                    <div className="text-lg font-semibold text-foreground">₹{product.price.toLocaleString()}</div>
                                     <div className="pt-1 opacity-0 group-hover:opacity-100 transition-opacity translate-y-2 group-hover:translate-y-0 duration-300">
                                         <Button
                                             onClick={() => addItem(product)}
@@ -416,19 +416,19 @@ function CartContent() {
                 <div className="mt-20 border-t border-border py-10 grid grid-cols-2 md:grid-cols-4 gap-8 grayscale opacity-60">
                     <div className="flex items-center gap-3 justify-center">
                         <ShieldCheck className="w-8 h-8 text-foreground" />
-                        <span className="font-black text-xs uppercase tracking-widest text-foreground">Secure Payment</span>
+                        <span className="font-semibold text-xs uppercase tracking-widest text-foreground">Secure Payment</span>
                     </div>
                     <div className="flex items-center gap-3 justify-center">
                         <CheckCircle2 className="w-8 h-8 text-foreground" />
-                        <span className="font-black text-xs uppercase tracking-widest text-foreground">100% Original</span>
+                        <span className="font-semibold text-xs uppercase tracking-widest text-foreground">100% Original</span>
                     </div>
                     <div className="flex items-center gap-3 justify-center">
                         <Truck className="w-8 h-8 text-foreground" />
-                        <span className="font-black text-xs uppercase tracking-widest text-foreground">Free Shipping</span>
+                        <span className="font-semibold text-xs uppercase tracking-widest text-foreground">Free Shipping</span>
                     </div>
                     <div className="flex items-center gap-3 justify-center">
                         <RotateCcw className="w-8 h-8 text-foreground" />
-                        <span className="font-black text-xs uppercase tracking-widest text-foreground">Easy Returns</span>
+                        <span className="font-semibold text-xs uppercase tracking-widest text-foreground">Easy Returns</span>
                     </div>
                 </div>
             </div>
@@ -470,7 +470,7 @@ function ProductSection({ items, selectedIds, onSelect, onSelectAll, onRemove, o
                     <div className={`w-6 h-6 rounded border-2 flex items-center justify-center transition-colors ${isAllSelected ? 'bg-primary border-primary' : 'border-border'}`}>
                         {isAllSelected && <Check className="w-4 h-4 text-white" strokeWidth={3} />}
                     </div>
-                    <span className="font-black text-xl text-foreground">Shopping Cart <span className="text-muted-foreground font-medium text-sm ml-2">({items.length} items)</span></span>
+                    <span className="font-semibold text-xl text-foreground">Shopping Cart <span className="text-muted-foreground font-medium text-sm ml-2">({items.length} items)</span></span>
                 </div>
             </div>
 
@@ -493,7 +493,7 @@ function ProductSection({ items, selectedIds, onSelect, onSelectAll, onRemove, o
                             <div className="space-y-2">
                                 <div className="flex justify-between items-start gap-4">
                                     <div className="space-y-1">
-                                        <h3 className="text-2xl font-black text-foreground leading-tight line-clamp-1">{item.title}</h3>
+                                        <h3 className="text-2xl font-semibold text-foreground leading-tight line-clamp-1">{item.title}</h3>
                                         <div className="flex items-center gap-2">
                                             <span className="text-muted-foreground font-medium">Titanium Blue</span>
                                             <span className="w-1 h-1 rounded-full bg-gray-300" />
@@ -501,7 +501,7 @@ function ProductSection({ items, selectedIds, onSelect, onSelectAll, onRemove, o
                                         </div>
                                     </div>
                                     <div className="text-right flex-shrink-0">
-                                        <div className="text-3xl font-black text-foreground">₹{item.price.toLocaleString()}</div>
+                                        <div className="text-3xl font-semibold text-foreground">₹{item.price.toLocaleString()}</div>
                                         <div className="flex items-center justify-end gap-2 mt-1">
                                             <span className="text-sm text-muted-foreground line-through font-medium">₹{(item.price * 1.2).toLocaleString()}</span>
                                             <span className="text-sm text-primary font-bold bg-accent px-1.5 py-0.5 rounded">1.4% OFF</span>
@@ -514,7 +514,7 @@ function ProductSection({ items, selectedIds, onSelect, onSelectAll, onRemove, o
                                         {[1, 2, 3, 4, 5].map((s) => (
                                             <Star key={s} className="w-4 h-4 fill-primary text-primary" />
                                         ))}
-                                        <span className="text-sm font-black text-primary ml-1">4.8</span>
+                                        <span className="text-sm font-semibold text-primary ml-1">4.8</span>
                                     </div>
                                     <span className="text-sm text-muted-foreground font-medium">(1,248 Reviews)</span>
                                     <Badge className="bg-accent text-primary border-none font-bold text-[10px] uppercase tracking-wider">Best Seller</Badge>
@@ -574,7 +574,7 @@ function ServiceSection({ items, selectedIds, onSelect, onSelectAll, onRemove, o
                         {isAllSelected && <Check className="w-4 h-4 text-white" strokeWidth={3} />}
                     </div>
                     <div className="flex flex-col">
-                        <span className="font-black text-xl text-foreground">Service Cart <span className="text-muted-foreground font-medium text-sm ml-2">({items.length} bookings)</span></span>
+                        <span className="font-semibold text-xl text-foreground">Service Cart <span className="text-muted-foreground font-medium text-sm ml-2">({items.length} bookings)</span></span>
                     </div>
                 </div>
                 <Link href="/booking">
@@ -602,7 +602,7 @@ function ServiceSection({ items, selectedIds, onSelect, onSelectAll, onRemove, o
                             <div className="flex-1 min-w-0">
                                 <div className="flex items-start justify-between gap-4 flex-wrap">
                                     <div>
-                                        <h3 className="text-xl font-black text-foreground leading-tight">{item.title}</h3>
+                                        <h3 className="text-xl font-semibold text-foreground leading-tight">{item.title}</h3>
                                         {item.provider && (
                                             <div className="flex items-center gap-2 mt-1">
                                                 {item.providerAvatar && <Image src={item.providerAvatar} alt={item.provider} width={20} height={20} className="rounded-full object-cover" />}
@@ -611,7 +611,7 @@ function ServiceSection({ items, selectedIds, onSelect, onSelectAll, onRemove, o
                                             </div>
                                         )}
                                     </div>
-                                    <div className="text-2xl font-black text-foreground whitespace-nowrap">₹{item.price.toLocaleString()}</div>
+                                    <div className="text-2xl font-semibold text-foreground whitespace-nowrap">₹{item.price.toLocaleString()}</div>
                                 </div>
 
                                 <div className="flex flex-wrap gap-x-5 gap-y-2 mt-3">
@@ -681,7 +681,7 @@ function RescheduleModal({
             <div className="bg-background w-full max-w-md rounded-3xl shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200">
                 <div className="flex items-center justify-between px-6 py-4 border-b">
                     <div>
-                        <h2 className="text-lg font-black text-foreground">Reschedule Booking</h2>
+                        <h2 className="text-lg font-semibold text-foreground">Reschedule Booking</h2>
                         <p className="text-sm text-muted-foreground mt-0.5 line-clamp-1">{item.title}</p>
                     </div>
                     <button onClick={onClose} className="p-2 rounded-full hover:bg-muted transition-colors">

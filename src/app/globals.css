@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -9,15 +10,18 @@
   --color-primary-foreground: #ffffff;
   --color-primary-light: #ff8a3d;
   --color-primary-dark: #d85f17;
+  --color-primary-hover: var(--color-primary-dark);
 
   /* Legacy/extra token used across UI */
   --color-accent0: var(--color-primary);
 
   --color-secondary: #111315;
   --color-secondary-foreground: #ffffff;
+  --color-secondary-hover: #1b1f22;
 
   --color-accent: #fff1e6;
   --color-accent-foreground: #f47424;
+  --color-accent-hover: #ffe6d6;
 
   --color-destructive: #ef4444;
   --color-destructive-foreground: #ffffff;
@@ -52,17 +56,62 @@
     0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
 
   /* Font Family */
+  --font-sans-custom: Poppins;
   --font-sans:
-    Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+    var(--font-sans-custom), ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  --font-display: var(--font-sans);
 }
 
 @layer base {
   * {
     @apply border-border;
   }
+  html {
+    font-family: var(--font-sans);
+    text-rendering: optimizeLegibility;
+    -webkit-text-size-adjust: 100%;
+  }
   body {
-    @apply bg-background text-foreground antialiased;
+    @apply bg-background text-foreground antialiased leading-relaxed;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply text-foreground font-semibold;
+  }
+  strong,
+  b {
+    @apply font-semibold;
+  }
+  ::selection {
+    background: color-mix(in oklab, var(--color-primary) 25%, white);
+  }
+  a,
+  button,
+  [role="button"] {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background;
+  }
+}
+
+/* Consistent site container (Tailwind v4 utility override) */
+@utility container {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 80rem; /* ~7xl */
+  padding-inline: 1rem;
+}
+@media (min-width: 640px) {
+  .container {
+    padding-inline: 1.5rem;
+  }
+}
+@media (min-width: 1024px) {
+  .container {
+    padding-inline: 2rem;
   }
 }
 

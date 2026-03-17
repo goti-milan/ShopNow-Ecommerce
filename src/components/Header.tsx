@@ -90,11 +90,11 @@ const Header = () => {
           {/* LEFT: Logo */}
           <div className="flex items-center gap-4">
             <Link href="/" className="flex items-center gap-2">
-              <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center text-white font-bold text-xl">
+              <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center text-white font-semibold text-xl">
                 🛒
               </div>
               <div className="hidden sm:block">
-                <span className="text-xl font-bold text-primary">ShopNow</span>
+                <span className="text-xl font-semibold text-primary">ShopNow</span>
                 <p className="text-xs text-muted-foreground -mt-1">Your Store</p>
               </div>
             </Link>
@@ -114,7 +114,7 @@ const Header = () => {
               <Button
                 type="submit"
                 size="sm"
-                className="absolute right-1 top-1/2 -translate-y-1/2 h-8 bg-primary hover:bg-primary/90"
+                className="absolute right-1 top-1/2 -translate-y-1/2"
               >
                 Search
               </Button>
@@ -199,7 +199,7 @@ const Header = () => {
             <Button
               variant="ghost"
               size="icon"
-              className="relative text-muted-foreground hover:text-primary hover:bg-accent"
+              className="relative text-muted-foreground hover:text-primary"
               onClick={() => router.push("/wishlist")}
             >
               <Heart className="h-5 w-5" />
@@ -290,10 +290,10 @@ const Header = () => {
                 <SheetContent side="left" className="w-80">
                   <SheetHeader>
                     <SheetTitle className="flex items-center gap-2">
-                      <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center text-white font-bold text-xl">
+                      <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center text-white font-semibold text-xl">
                         🛒
                       </div>
-                      <span className="text-xl font-bold text-primary">ShopNow</span>
+                      <span className="text-xl font-semibold text-primary">ShopNow</span>
                     </SheetTitle>
                   </SheetHeader>
 
@@ -358,7 +358,7 @@ const Header = () => {
                         <Button variant="outline" size="sm" className="flex-1">Sign In</Button>
                       </Link>
                       <Link href="/auth">
-                        <Button size="sm" className="flex-1 bg-primary hover:bg-primary/90">Join Now</Button>
+                        <Button size="sm" className="flex-1">Join Now</Button>
                       </Link>
                     </div>
                   </div>

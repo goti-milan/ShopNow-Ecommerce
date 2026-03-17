@@ -8,17 +8,17 @@ import { cn } from "@/lib/utils"
 /* ================= Base Styles ================= */
 
 const baseStyles =
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all duration-200 active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all duration-200 active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
 
 /* ================= Variants ================= */
 
 export const buttonVariants = cva(baseStyles, {
   variants: {
     variant: {
-      primary: "bg-primary text-white hover:bg-primary/90",
-      secondary: "bg-secondary text-white hover:bg-secondary/80",
-      outline: "border border-input bg-background hover:bg-accent",
-      ghost: "hover:bg-accent",
+      primary: "bg-primary text-primary-foreground hover:bg-primary-hover",
+      secondary: "bg-secondary text-secondary-foreground hover:bg-secondary-hover",
+      outline: "border border-input bg-background hover:bg-accent-hover",
+      ghost: "hover:bg-accent-hover",
       destructive: "bg-destructive text-white hover:bg-destructive/90",
       link: "text-primary underline-offset-4 hover:underline",
     },

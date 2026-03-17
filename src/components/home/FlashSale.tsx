@@ -51,7 +51,7 @@ export default function FlashSale() {
                             <p className="text-lg font-medium opacity-90 max-w-xl">
                                 Up to 70% off on premium products. Hurry up!
                             </p>
-                            <Button className="bg-background text-primary-dark hover:bg-accent font-bold px-8 py-5 rounded-xl text-base transition-all transform hover:scale-105 active:scale-95 shadow-lg gap-2">
+                            <Button className="bg-background text-primary-dark hover:bg-accent-hover font-bold px-8 py-5 rounded-xl text-base transition-all transform hover:scale-105 active:scale-95 shadow-lg gap-2">
                                 Shop the Sale <ArrowRight className="w-4 h-4" />
                             </Button>
                         </div>

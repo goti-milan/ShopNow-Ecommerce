@@ -16,8 +16,8 @@ export const SimilarProductsList = ({ products }: SimilarProductsListProps) => {
     return (
         <div className="mt-8 pt-8 border-t border-border">
             <div className="flex items-center justify-between mb-6">
-                <h3 className="text-sm font-black text-foreground uppercase tracking-widest">Similar Products</h3>
-                <button className="text-[10px] font-black text-muted-foreground hover:text-primary uppercase tracking-tighter bg-muted px-3 py-1 rounded-full transition-colors">View All</button>
+                <h3 className="text-sm font-semibold text-foreground uppercase tracking-widest">Similar Products</h3>
+                <button className="text-[10px] font-semibold text-muted-foreground hover:text-primary uppercase tracking-tighter bg-muted px-3 py-1 rounded-full transition-colors">View All</button>
             </div>
 
             <div className="flex flex-col md:flex-row gap-6">
@@ -33,18 +33,18 @@ export const SimilarProductsList = ({ products }: SimilarProductsListProps) => {
                         </div>
                         <div className="flex flex-col justify-between flex-1">
                             <div>
-                                <h4 className="text-sm font-black text-foreground line-clamp-1 group-hover:text-primary-dark transition-colors uppercase tracking-tight">{product.title}</h4>
+                                <h4 className="text-sm font-semibold text-foreground line-clamp-1 group-hover:text-primary-dark transition-colors uppercase tracking-tight">{product.title}</h4>
                                 <div className="flex items-center gap-1.5 mt-1">
                                     <div className="flex">
                                         {[...Array(5)].map((_, i) => (
                                             <Star key={i} className="w-2.5 h-2.5 fill-primary text-primary" />
                                         ))}
                                     </div>
-                                    <span className="text-[10px] font-black text-muted-foreground uppercase tracking-tighter">1.2k</span>
+                                    <span className="text-[10px] font-semibold text-muted-foreground uppercase tracking-tighter">1.2k</span>
                                 </div>
-                                <div className="text-base font-black text-foreground mt-2">₹{product.price.toLocaleString()}</div>
+                                <div className="text-base font-semibold text-foreground mt-2">₹{product.price.toLocaleString()}</div>
                             </div>
-                            <Button className="mt-3 h-8 bg-accent0 hover:bg-primary-dark rounded-xl text-[10px] font-black uppercase tracking-tighter flex items-center gap-1.5">
+                            <Button className="mt-3 h-8 bg-accent0 hover:bg-primary-dark rounded-xl text-[10px] font-semibold uppercase tracking-tighter flex items-center gap-1.5">
                                 <ShoppingCart className="w-3 h-3" />
                                 Add to Cart
                             </Button>
