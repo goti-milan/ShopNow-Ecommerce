@@ -3,17 +3,24 @@
 import BrowseProducts from "@/components/shop/BrowseProducts";
 import { SHOP_CATEGORIES } from "@/components/shop/constants";
 import { Button } from "@/components/ui/button";
+import { getStoreById } from "@/lib/stores";
 import { PRODUCTS } from "@/utils/static-data";
 import { MapPin, Star, Verified } from "lucide-react";
 import Image from "next/image";
+import { useSearchParams } from "next/navigation";
 
 export default function StoreClient() {
+  const searchParams = useSearchParams();
+  const storeIdParam = searchParams.get("storeId");
+  const storeId = storeIdParam ? Number.parseInt(storeIdParam, 10) : 1;
+  const store = getStoreById(Number.isFinite(storeId) ? storeId : 1) ?? getStoreById(1);
+
   return (
     <div>
       {/* Store Header */}
       <div className="relative h-64 bg-secondary">
         <Image
-          src="https://picsum.photos/seed/cover/1200/400"
+          src={store?.cover ?? "https://picsum.photos/seed/cover/1200/400"}
           alt="Cover"
           fill
           className="object-cover opacity-60"
@@ -24,7 +31,7 @@ export default function StoreClient() {
           <div className="container mx-auto flex flex-col md:flex-row items-end gap-6">
             <div className="w-24 h-24 rounded-xl border-4 border-background bg-background overflow-hidden relative shadow-xl">
               <Image
-                src="https://picsum.photos/seed/shoplogo/200/200"
+                src={store?.logo ?? "https://picsum.photos/seed/shoplogo/200/200"}
                 alt="Logo"
                 fill
                 className="object-cover"
@@ -33,13 +40,16 @@ export default function StoreClient() {
 
             <div className="flex-1 text-white mb-2">
               <div className="flex items-center gap-2 mb-1">
-                <h1 className="text-3xl font-bold">Tech Haven</h1>
-                <Verified className="w-5 h-5 text-primary" />
+                <h1 className="text-3xl font-bold">{store?.name ?? "Tech Haven"}</h1>
+                {store?.verified && <Verified className="w-5 h-5 text-primary" />}
               </div>
-              <p className="text-muted-foreground mb-2">Premium Electronics & Gadgets</p>
+              <p className="text-muted-foreground mb-2">{store?.tagline ?? "Premium Electronics & Gadgets"}</p>
               <div className="flex gap-4 text-sm text-muted-foreground">
-                <span className="flex items-center gap-1"><Star className="w-4 h-4 fill-primary text-primary" /> 4.9 (1.2k Reviews)</span>
-                <span className="flex items-center gap-1"><MapPin className="w-4 h-4" /> New York, USA</span>
+                <span className="flex items-center gap-1">
+                  <Star className="w-4 h-4 fill-primary text-primary" /> {store?.rating ?? 4.9} (
+                  {store?.reviewsLabel ?? "1.2k"} Reviews)
+                </span>
+                <span className="flex items-center gap-1"><MapPin className="w-4 h-4" /> {store?.location ?? "New York, USA"}</span>
               </div>
             </div>
 

@@ -15,13 +15,39 @@ import {
     Wallet,
 } from "lucide-react";
 
-const TRANSACTIONS = [
+type Transaction = {
+    id: string;
+    title: string;
+    date: string;
+    amount: number;
+    type: "credit" | "debit";
+};
+
+const TRANSACTIONS: Transaction[] = [
     { id: "TXN-90821", title: "Order Refund", date: "Mar 10, 2026", amount: 1299, type: "credit" },
     { id: "TXN-90802", title: "Electronics Purchase", date: "Mar 09, 2026", amount: 4599, type: "debit" },
     { id: "TXN-90764", title: "Wallet Top-up", date: "Mar 07, 2026", amount: 2500, type: "credit" },
     { id: "TXN-90730", title: "Service Booking", date: "Mar 05, 2026", amount: 899, type: "debit" },
     { id: "TXN-90711", title: "Promo Cashback", date: "Mar 03, 2026", amount: 120, type: "credit" },
 ];
+
+function getTransactionStyles(type: "credit" | "debit") {
+    if (type === "credit") {
+        return {
+            amount: "text-emerald-600 dark:text-emerald-400",
+            badge: "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300",
+            label: "Credit",
+            sign: "+",
+        };
+    }
+
+    return {
+        amount: "text-red-600 dark:text-red-400",
+        badge: "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300",
+        label: "Debit",
+        sign: "-",
+    };
+}
 
 const SAVED_CARDS = [
     { id: "card-1", brand: "VISA", last4: "4521", expiry: "08/28", default: true },
@@ -148,18 +174,28 @@ export default function WalletPage() {
                             <div className="mt-4 divide-y divide-border">
                                 {TRANSACTIONS.map((t) => (
                                     <div key={t.id} className="flex items-center justify-between py-4">
-                                        <div>
-                                            <p className="text-sm font-semibold text-foreground">{t.title}</p>
-                                            <p className="text-xs text-muted-foreground">{t.date} • {t.id}</p>
-                                        </div>
-                                        <div className="text-right">
-                                            <p className={`text-sm font-bold ${t.type === "credit" ? "text-primary" : "text-foreground"}`}>
-                                                {t.type === "credit" ? "+" : "-"}₹{t.amount.toLocaleString()}
-                                            </p>
-                                            <span className="inline-flex items-center rounded-full bg-accent px-2 py-0.5 text-[10px] font-semibold text-primary uppercase">
-                                                {t.type === "credit" ? "Credit" : "Debit"}
-                                            </span>
-                                        </div>
+                                        {(() => {
+                                            const styles = getTransactionStyles(t.type);
+
+                                            return (
+                                                <>
+                                                    <div>
+                                                        <p className="text-sm font-semibold text-foreground">{t.title}</p>
+                                                        <p className="text-xs text-muted-foreground">{t.date} • {t.id}</p>
+                                                    </div>
+                                                    <div className="text-right">
+                                                        <p className={`text-sm font-bold ${styles.amount}`}>
+                                                            {styles.sign}₹{t.amount.toLocaleString()}
+                                                        </p>
+                                                        <span
+                                                            className={`inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase ${styles.badge}`}
+                                                        >
+                                                            {styles.label}
+                                                        </span>
+                                                    </div>
+                                                </>
+                                            )
+                                        })()}
                                     </div>
                                 ))}
                             </div>

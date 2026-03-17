@@ -7,6 +7,7 @@ import {
     Heart,
     MessageCircle,
     Share2,
+    Star,
     Users,
     Radio,
     Eye,
@@ -22,6 +23,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
+import Link from "next/link"
+import { getStoreById } from "@/lib/stores"
 
 export interface VideoReel {
     id: number
@@ -51,6 +54,7 @@ export interface LiveStream {
     category: string
     startedAt: string
     isFollowing: boolean
+    storeId?: number
 }
 
 // Sample video data
@@ -165,7 +169,8 @@ export const liveStreamsData: LiveStream[] = [
         isLive: true,
         category: "Shopping",
         startedAt: "30 min ago",
-        isFollowing: true
+        isFollowing: true,
+        storeId: 1,
     },
     {
         id: 2,
@@ -177,7 +182,8 @@ export const liveStreamsData: LiveStream[] = [
         isLive: true,
         category: "Technology",
         startedAt: "1 hour ago",
-        isFollowing: false
+        isFollowing: false,
+        storeId: 1,
     },
     {
         id: 3,
@@ -189,7 +195,8 @@ export const liveStreamsData: LiveStream[] = [
         isLive: true,
         category: "Beauty",
         startedAt: "15 min ago",
-        isFollowing: true
+        isFollowing: true,
+        storeId: 2,
     },
     {
         id: 4,
@@ -201,7 +208,8 @@ export const liveStreamsData: LiveStream[] = [
         isLive: true,
         category: "Fitness",
         startedAt: "45 min ago",
-        isFollowing: true
+        isFollowing: true,
+        storeId: 4,
     },
     {
         id: 5,
@@ -213,7 +221,8 @@ export const liveStreamsData: LiveStream[] = [
         isLive: true,
         category: "Food",
         startedAt: "20 min ago",
-        isFollowing: false
+        isFollowing: false,
+        storeId: 3,
     },
     {
         id: 6,
@@ -225,7 +234,8 @@ export const liveStreamsData: LiveStream[] = [
         isLive: true,
         category: "Home & Living",
         startedAt: "1 hour ago",
-        isFollowing: false
+        isFollowing: false,
+        storeId: 3,
     }
 ]
 
@@ -560,6 +570,8 @@ function LivePlayerModal({ stream, isOpen, onClose }: LivePlayerModalProps) {
 
     if (!isOpen || !stream) return null
 
+    const store = typeof stream.storeId === "number" ? getStoreById(stream.storeId) : undefined
+
     return (
         <div className="fixed inset-0 z-50 bg-secondary flex flex-col lg:flex-row">
             {/* Close button */}
@@ -593,6 +605,52 @@ function LivePlayerModal({ stream, isOpen, onClose }: LivePlayerModalProps) {
                             {stream.viewers.toLocaleString()}
                         </div>
                     </div>
+
+                    {/* Store card */}
+                    {store && (
+                        <div className="absolute left-4 bottom-20 w-[min(360px,calc(100%-2rem))]">
+                            <Link
+                                href={`/market?storeId=${store.id}`}
+                                onClick={onClose}
+                                className="block"
+                            >
+                                <Card className="border-white/10 bg-background/85 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+                                    <CardContent className="p-4">
+                                        <div className="flex items-start gap-3">
+                                            <Avatar className="h-10 w-10">
+                                                <AvatarImage src={store.logo} />
+                                                <AvatarFallback>{store.name[0]}</AvatarFallback>
+                                            </Avatar>
+
+                                            <div className="min-w-0 flex-1">
+                                                <div className="flex items-center justify-between gap-3">
+                                                    <div className="min-w-0">
+                                                        <p className="truncate text-sm font-semibold text-foreground">
+                                                            {store.name}
+                                                        </p>
+                                                        <p className="truncate text-xs text-muted-foreground">
+                                                            {store.tagline ?? store.category}
+                                                        </p>
+                                                    </div>
+                                                    <div className="shrink-0 text-right text-xs text-muted-foreground">
+                                                        <span className="inline-flex items-center gap-1 font-semibold text-foreground">
+                                                            <Star className="h-3.5 w-3.5 fill-primary text-primary" />
+                                                            {store.rating.toFixed(1)}
+                                                        </span>
+                                                        <div>({store.reviewsLabel})</div>
+                                                    </div>
+                                                </div>
+
+                                                <div className="mt-3 inline-flex items-center rounded-lg bg-primary px-3 py-1 text-xs font-semibold text-white">
+                                                    Open Market
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </CardContent>
+                                </Card>
+                            </Link>
+                        </div>
+                    )}
 
                     {/* Controls */}
                     <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">

@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Label } from "@/components/ui/label"
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 
 interface TimelineStep {
     status: string;
@@ -190,24 +191,40 @@ export default function TrackOrderPage() {
             {/* FAQs or helpful notes */}
             <div className="mt-16 pt-8 border-t border-border">
                 <h3 className="text-xl font-bold text-foreground mb-6">Frequently Asked Questions</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div>
-                        <h4 className="font-bold mb-2">When will my order ship?</h4>
-                        <p className="text-sm text-muted-foreground">Orders are typically processed within 1-2 business days. You&apos;ll receive an email with your tracking number once it&apos;s on its way.</p>
-                    </div>
-                    <div>
-                        <h4 className="font-bold mb-2">Can I change my delivery address?</h4>
-                        <p className="text-sm text-muted-foreground">If your order hasn&apos;t shipped yet, we might be able to update it. Please contact support as soon as possible.</p>
-                    </div>
-                    <div>
-                        <h4 className="font-bold mb-2">My tracking hasn&apos;t updated in days.</h4>
-                        <p className="text-sm text-muted-foreground">Tracking information may not update every day as the package moves between hubs. If it hasn&apos;t moved in more than 5 days, please contact us.</p>
-                    </div>
-                    <div>
-                        <h4 className="font-bold mb-2">What if my package is lost?</h4>
-                        <p className="text-sm text-muted-foreground">If your package is marked as delivered but you haven&apos;t received it, or if it&apos;s significantly delayed, we&apos;ll open an investigation with the carrier.</p>
-                    </div>
-                </div>
+                <Accordion
+                    type="single"
+                    collapsible
+                    className="w-full rounded-2xl border border-border bg-background px-4"
+                >
+                    <AccordionItem value="faq-1">
+                        <AccordionTrigger>When will my order ship?</AccordionTrigger>
+                        <AccordionContent>
+                            Orders are typically processed within 1-2 business days. You&apos;ll receive an email with your
+                            tracking number once it&apos;s on its way.
+                        </AccordionContent>
+                    </AccordionItem>
+                    <AccordionItem value="faq-2">
+                        <AccordionTrigger>Can I change my delivery address?</AccordionTrigger>
+                        <AccordionContent>
+                            If your order hasn&apos;t shipped yet, we might be able to update it. Please contact support as
+                            soon as possible.
+                        </AccordionContent>
+                    </AccordionItem>
+                    <AccordionItem value="faq-3">
+                        <AccordionTrigger>My tracking hasn&apos;t updated in days.</AccordionTrigger>
+                        <AccordionContent>
+                            Tracking information may not update every day as the package moves between hubs. If it
+                            hasn&apos;t moved in more than 5 days, please contact us.
+                        </AccordionContent>
+                    </AccordionItem>
+                    <AccordionItem value="faq-4">
+                        <AccordionTrigger>What if my package is lost?</AccordionTrigger>
+                        <AccordionContent>
+                            If your package is marked as delivered but you haven&apos;t received it, or if it&apos;s
+                            significantly delayed, we&apos;ll open an investigation with the carrier.
+                        </AccordionContent>
+                    </AccordionItem>
+                </Accordion>
             </div>
         </div>
     )

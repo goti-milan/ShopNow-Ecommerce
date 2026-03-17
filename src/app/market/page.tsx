@@ -1,9 +1,11 @@
-import React from 'react'
+import { Suspense } from "react"
 import StoreClient from './StoreClient'
 
 const page = () => {
   return (
-    <StoreClient />
+    <Suspense fallback={null}>
+      <StoreClient />
+    </Suspense>
   )
 }
 

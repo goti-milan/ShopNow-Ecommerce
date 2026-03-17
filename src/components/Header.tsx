@@ -25,6 +25,8 @@ import {
 import Link from "next/link"
 import { useCart } from "@/context/CartContext"
 import { useWishlist } from "@/context/WishlistContext"
+import LocationSheet from "@/components/location/LocationSheet"
+import { useLocation } from "@/context/LocationContext"
 
 // E-commerce menu items
 const navItems = [
@@ -54,7 +56,12 @@ const Header = () => {
   const router = useRouter()
   const { totalItems: cartCount } = useCart()
   const { totalItems: wishlistCount } = useWishlist()
+  const { location } = useLocation()
   const [searchQuery, setSearchQuery] = useState("")
+
+  const locationLabel = location?.address
+    ? location.address.split(",").slice(0, 2).join(",").trim()
+    : "Location"
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault()
@@ -117,27 +124,20 @@ const Header = () => {
           {/* RIGHT: Actions */}
           <div className="flex items-center gap-2">
             {/* Location */}
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="sm" className="hidden lg:flex gap-2 text-muted-foreground hover:text-foreground hover:bg-muted">
-                  <MapPin className="h-4 w-4 text-primary" />
-                  <span className="text-sm">Location</span>
+            <LocationSheet
+              trigger={
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="hidden lg:flex gap-2 text-muted-foreground hover:text-foreground hover:bg-muted max-w-[220px]"
+                >
+                  <MapPin className="h-4 w-4 text-primary shrink-0" />
+                  <span className="text-sm truncate">
+                    {locationLabel}
+                  </span>
                 </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-56">
-                <DropdownMenuLabel>Delivery Location</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem className="flex items-center gap-2">
-                  <MapPin className="h-4 w-4" />
-                  <span>Detect Current Location</span>
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>New York, NY</DropdownMenuItem>
-                <DropdownMenuItem>Los Angeles, CA</DropdownMenuItem>
-                <DropdownMenuItem>Chicago, IL</DropdownMenuItem>
-                <DropdownMenuItem>Miami, FL</DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+              }
+            />
 
             {/* Account */}
             <DropdownMenu>
@@ -384,4 +384,3 @@ const Header = () => {
 }
 
 export default Header
-
