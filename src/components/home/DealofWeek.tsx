@@ -5,8 +5,8 @@ import { Button } from "@/components/ui/button"
 
 export default function DealOfWeek() {
     return (
-        <section className="w-full py-24 bg-secondary overflow-hidden">
-            <div className="max-w-7xl mx-auto px-6">
+        <section className="w-full py-10 sm:py-12 md:py-16 lg:py-24 bg-secondary overflow-hidden">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
                     {/* Content Side */}
@@ -15,7 +15,7 @@ export default function DealOfWeek() {
                             <span className="text-white/90 font-bold tracking-widest text-sm uppercase mb-2 block">
                                 Limited Time Offer
                             </span>
-                            <h2 className="text-5xl md:text-7xl font-bold text-primary tracking-tight leading-none mb-4">
+                            <h2 className="text-4xl sm:text-5xl md:text-7xl font-bold text-primary tracking-tight leading-none mb-4">
                                 Future of <br /> <span className="text-white">Sound</span>
                             </h2>
                         </div>

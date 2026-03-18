@@ -2,9 +2,10 @@
 
 import ProductCard from "../common/Product";
 import { PRODUCTS } from "@/utils/static-data";
-import { Layers, ChevronLeft, ChevronRight, Gift, ArrowRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Gift, ArrowRight } from "lucide-react";
 import { useRef } from "react";
 import { Button } from "../ui/button";
+import HomeSectionHeader from "./HomeSectionHeader";
 
 export default function ComboOffers() {
     const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -18,61 +19,65 @@ export default function ComboOffers() {
     };
 
     return (
-        <section className="py-16 bg-background overflow-hidden">
+        <section className="py-8 sm:py-10 md:py-12 bg-background overflow-x-hidden">
             <div className="container mx-auto px-4 max-w-7xl">
-                {/* Section Header */}
-                <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
-                    <div className="space-y-2">
-                        <div className="flex items-center gap-2">
-                            <Layers className="w-4 h-4 text-primary" />
-                            <span className="text-primary font-semibold tracking-widest uppercase text-xs">Better Together</span>
-                        </div>
-                        <h2 className="text-3xl md:text-4xl font-bold text-foreground tracking-tight">Combo Offers</h2>
-                        <p className="text-muted-foreground text-sm max-w-md">Smart pairings designed to give you more for less. Save up to 40% when you buy together!</p>
-                    </div>
-
-                    <div className="flex items-center gap-3">
-                        <Button variant="outline" className="rounded-full px-12 py-6 text-base border-2 border-foreground/10 hover:bg-foreground hover:text-background transition-colors duration-300 gap-2">
-                            View All <ArrowRight className="w-4 h-4" />
+                <HomeSectionHeader
+                    label="Better Together"
+                    heading="Combo Offers"
+                    description="Smart pairings designed to give you more for less. Save up to 40% when you buy together!"
+                    action={
+                        <Button
+                            variant="outline"
+                            className="w-full sm:w-auto rounded-full px-6 py-3 text-sm md:text-base md:px-12 md:py-6 border-2 border-foreground/10 hover:bg-foreground hover:text-background transition-colors duration-300 gap-2"
+                            aria-label="View all combo offers"
+                        >
+                            View All
                         </Button>
-                        <div className="flex items-center gap-2">
-                            <Button
-                                variant="outline"
-                                size="icon"
-                                onClick={() => scroll("left")}
-                                className="rounded-full border-foreground/20 hover:border-primary hover:text-primary transition-all"
-                            >
-                                <ChevronLeft className="w-5 h-5" />
-                            </Button>
-                            <Button
-                                variant="outline"
-                                size="icon"
-                                onClick={() => scroll("right")}
-                                className="rounded-full border-foreground/20 hover:border-primary hover:text-primary transition-all"
-                            >
-                                <ChevronRight className="w-5 h-5" />
-                            </Button>
-                        </div>
-                    </div>
-                </div>
+                    }
+                />
 
-                <div
-                    ref={scrollContainerRef}
-                    className="flex gap-6 overflow-x-auto pb-12 snap-x snap-mandatory no-scrollbar -mx-2 px-2"
-                >
-                    {PRODUCTS.slice(3, 11).map((product) => (
-                        <div key={product.id} className="min-w-[240px] md:min-w-[280px] snap-start relative group">
-                            <div className="absolute -top-3 -right-3 z-10 scale-0 group-hover:scale-100 transition-transform duration-500">
-                                <div className="bg-primary text-primary-foreground p-2.5 rounded-2xl shadow-xl flex items-center gap-1.5">
-                                    <Gift className="w-4 h-4" />
-                                    <span className="font-semibold text-xs uppercase tracking-tight">Value Combo</span>
+                <div className="relative">
+                    <div className="hidden sm:block pointer-events-none absolute left-0 top-1/2 -translate-y-1/2 z-10">
+                        <Button
+                            variant="outline"
+                            size="icon"
+                            onClick={() => scroll("left")}
+                            className="pointer-events-auto ml-2 rounded-full border-foreground/20 bg-background/80 backdrop-blur hover:bg-background hover:border-primary hover:text-primary transition-all shadow-sm"
+                            aria-label="Scroll combo offers left"
+                        >
+                            <ChevronLeft className="w-5 h-5" />
+                        </Button>
+                    </div>
+                    <div className="hidden sm:block pointer-events-none absolute right-0 top-1/2 -translate-y-1/2 z-10">
+                        <Button
+                            variant="outline"
+                            size="icon"
+                            onClick={() => scroll("right")}
+                            className="pointer-events-auto mr-2 rounded-full border-foreground/20 bg-background/80 backdrop-blur hover:bg-background hover:border-primary hover:text-primary transition-all shadow-sm"
+                            aria-label="Scroll combo offers right"
+                        >
+                            <ChevronRight className="w-5 h-5" />
+                        </Button>
+                    </div>
+
+                    <div
+                        ref={scrollContainerRef}
+                        className="flex gap-6 overflow-x-auto overflow-y-visible pt-6 pb-12 snap-x snap-mandatory no-scrollbar -mx-4 px-4"
+                    >
+                        {PRODUCTS.slice(3, 11).map((product) => (
+                            <div key={product.id} className="min-w-[240px] md:min-w-[280px] snap-start relative group">
+                                <div className="absolute -top-3 -right-3 z-10 scale-0 group-hover:scale-100 transition-transform duration-500">
+                                    <div className="bg-primary text-primary-foreground p-2.5 rounded-2xl shadow-xl flex items-center gap-1.5">
+                                        <Gift className="w-4 h-4" />
+                                        <span className="font-semibold text-xs uppercase tracking-tight">Value Combo</span>
+                                    </div>
+                                </div>
+                                <div className="transform transition-transform duration-500 group-hover:-translate-y-2">
+                                    <ProductCard item={product} />
                                 </div>
                             </div>
-                            <div className="transform transition-transform duration-500 group-hover:-translate-y-2">
-                                <ProductCard item={product} />
-                            </div>
-                        </div>
-                    ))}
+                        ))}
+                    </div>
                 </div>
 
                 {/* Promo Banner */}
@@ -88,7 +93,7 @@ export default function ComboOffers() {
                                 Mix and match any two items from our selected accessories category. Limited time offer ending soon.
                             </p>
                         </div>
-                        <Button className="bg-background text-foreground hover:bg-muted font-bold px-10 py-8 rounded-2xl text-lg transition-all transform hover:scale-105 active:scale-95 shadow-2xl flex items-center gap-3 shrink-0">
+                        <Button className="w-full sm:w-auto bg-background text-foreground hover:bg-muted font-bold px-8 py-6 md:px-10 md:py-8 rounded-2xl text-base md:text-lg transition-all transform hover:scale-105 active:scale-95 shadow-2xl flex items-center justify-center gap-3 shrink-0">
                             CLAIM COMBO OFFER <ArrowRight className="w-6 h-6" />
                         </Button>
                     </div>

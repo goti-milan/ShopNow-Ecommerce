@@ -48,7 +48,7 @@ export default function ReelsPage() {
 
     return (
         <div className="min-h-screen bg-muted">
-From home care to beauty, health, tech & more — we bring expert professionals to your doorstep.            <InstagramReels />
+         <InstagramReels />
         </div>
     )
 }

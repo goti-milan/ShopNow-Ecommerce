@@ -2,9 +2,10 @@
 
 import ProductCard from "../common/Product";
 import { PRODUCTS } from "@/utils/static-data";
-import { Zap, ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
+import { Zap, ChevronLeft, ChevronRight } from "lucide-react";
 import { useEffect, useState, useRef } from "react";
 import { Button } from "../ui/button";
+import HomeSectionHeader from "./HomeSectionHeader";
 
 export default function FlashSale() {
     const [timeLeft, setTimeLeft] = useState({
@@ -35,7 +36,7 @@ export default function FlashSale() {
     };
 
     return (
-        <section className="py-16 bg-background overflow-hidden">
+        <section className="py-8 sm:py-10 md:py-12 bg-background overflow-x-hidden">
             <div className="container mx-auto px-4 max-w-7xl">
                 {/* Flash Sale Banner */}
                 <div className="bg-gradient-to-r from-primary to-primary-dark rounded-3xl p-8 md:p-12 mb-12 text-white shadow-2xl relative overflow-hidden">
@@ -51,8 +52,8 @@ export default function FlashSale() {
                             <p className="text-lg font-medium opacity-90 max-w-xl">
                                 Up to 70% off on premium products. Hurry up!
                             </p>
-                            <Button className="bg-background text-primary-dark hover:bg-accent-hover font-bold px-8 py-5 rounded-xl text-base transition-all transform hover:scale-105 active:scale-95 shadow-lg gap-2">
-                                Shop the Sale <ArrowRight className="w-4 h-4" />
+                            <Button className="w-full sm:w-auto bg-background text-primary-dark hover:bg-accent-hover font-bold px-8 py-5 rounded-xl text-base transition-all transform hover:scale-105 active:scale-95 shadow-lg gap-2">
+                                Shop the Sale
                             </Button>
                         </div>
 
@@ -82,49 +83,57 @@ export default function FlashSale() {
                     <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-secondary opacity-20 rounded-full blur-[120px] -mr-60 -mb-60"></div>
                 </div>
 
-                {/* Section Header */}
-                <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
-                    <div className="space-y-2">
-                        <div className="flex items-center gap-2">
-                            <Zap className="w-4 h-4 text-primary" />
-                            <span className="text-primary font-semibold tracking-widest uppercase text-xs">Flash Deals</span>
-                        </div>
-                        <h2 className="text-3xl md:text-4xl font-bold text-foreground tracking-tight">Flash Sale Items</h2>
-                        <p className="text-muted-foreground text-sm max-w-md">Grab these limited-time deals before they&apos;re gone!</p>
-                    </div>
-
-                    <div className="flex items-center gap-3">
-                        <Button variant="outline" className="rounded-full px-12 py-6 text-base border-2 border-foreground/10 hover:bg-foreground hover:text-background transition-colors duration-300 gap-2">
-                            View All  <ArrowRight className="w-4 h-4" />
+                <HomeSectionHeader
+                    label="Flash Deals"
+                    heading="Flash Sale Items"
+                    description="Grab these limited-time deals before they&apos;re gone!"
+                    action={
+                        <Button
+                            variant="outline"
+                            className="w-full sm:w-auto rounded-full px-6 py-3 text-sm md:text-base md:px-12 md:py-6 border-2 border-foreground/10 hover:bg-foreground hover:text-background transition-colors duration-300 gap-2"
+                            aria-label="View all flash sale items"
+                        >
+                            View All
                         </Button>
+                    }
+                />
 
-                        <div className="flex items-center gap-2">
-                            <Button variant="outline" size="icon" onClick={() => scroll("left")} className="rounded-full border-foreground/20 hover:border-primary hover:text-primary transition-all">
-                                <ChevronLeft className="w-5 h-5" />
-                            </Button>
-                            <Button variant="outline" size="icon" onClick={() => scroll("right")} className="rounded-full border-foreground/20 hover:border-primary hover:text-primary transition-all">
-                                <ChevronRight className="w-5 h-5" />
-                            </Button>
-                        </div>
+                <div className="relative">
+                    <div className="hidden sm:block pointer-events-none absolute left-0 top-1/2 -translate-y-1/2 z-10">
+                        <Button
+                            variant="outline"
+                            size="icon"
+                            onClick={() => scroll("left")}
+                            className="pointer-events-auto ml-2 rounded-full border-foreground/20 bg-background/80 backdrop-blur hover:bg-background hover:border-primary hover:text-primary transition-all shadow-sm"
+                            aria-label="Scroll flash sale items left"
+                        >
+                            <ChevronLeft className="w-5 h-5" />
+                        </Button>
+                    </div>
+                    <div className="hidden sm:block pointer-events-none absolute right-0 top-1/2 -translate-y-1/2 z-10">
+                        <Button
+                            variant="outline"
+                            size="icon"
+                            onClick={() => scroll("right")}
+                            className="pointer-events-auto mr-2 rounded-full border-foreground/20 bg-background/80 backdrop-blur hover:bg-background hover:border-primary hover:text-primary transition-all shadow-sm"
+                            aria-label="Scroll flash sale items right"
+                        >
+                            <ChevronRight className="w-5 h-5" />
+                        </Button>
+                    </div>
+
+                    <div
+                        ref={scrollContainerRef}
+                        className="flex gap-4 sm:gap-6 overflow-x-auto overflow-y-visible pt-4 sm:pt-6 pb-6 sm:pb-10 snap-x snap-mandatory no-scrollbar -mx-4 px-4"
+                    >
+                        {PRODUCTS.map((product) => (
+                            <div key={product.id} className="min-w-[240px] md:min-w-[280px] snap-start transform transition-transform duration-500 hover:-translate-y-2">
+                                <ProductCard item={{ ...product, badgeText: "FLASH DEAL", discountPercent: 50 }} />
+                            </div>
+                        ))}
                     </div>
                 </div>
 
-                <div
-                    ref={scrollContainerRef}
-                    className="flex gap-6 overflow-x-auto pb-8 snap-x snap-mandatory no-scrollbar -mx-2 px-2"
-                >
-                    {PRODUCTS.map((product) => (
-                        <div key={product.id} className="min-w-[240px] md:min-w-[280px] snap-start transform transition-transform duration-500 hover:-translate-y-2">
-                            <ProductCard item={{ ...product, badgeText: "FLASH DEAL", discountPercent: 50 }} />
-                        </div>
-                    ))}
-                </div>
-
-                <div className="pt-8 flex justify-center">
-                    <Button variant="outline" className="rounded-full px-12 py-6 text-base border-2 border-foreground/10 hover:bg-foreground hover:text-background transition-colors duration-300 gap-2">
-                        View All Flash Sale Items <ArrowRight className="w-4 h-4" />
-                    </Button>
-                </div>
             </div>
         </section>
     );

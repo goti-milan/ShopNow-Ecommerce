@@ -124,7 +124,7 @@ const ProductCard = ({ item, showActions = true, className }: { item: Product; s
             </div>
 
             {/* Content */}
-            <div className="p-4 space-y-3">
+            <div className="p-3 sm:p-4 space-y-2 sm:space-y-3">
                 <h4 className="line-clamp-2 h-10 text-sm font-medium text-foreground group-hover:text-primary transition-colors">
                     {title}
                 </h4>

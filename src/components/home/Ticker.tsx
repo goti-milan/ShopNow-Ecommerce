@@ -45,7 +45,7 @@ export default function Ticker() {
     const CurrentIcon = messages[currentIndex].icon;
 
     return (
-        <div className="bg-foreground text-background py-3 overflow-hidden relative">
+        <div className="bg-foreground text-background py-2 sm:py-3 overflow-hidden relative">
             <div className="max-w-7xl mx-auto px-4 flex items-center justify-center relative z-10">
                 <div
                     className={`flex items-center gap-3 transition-all duration-500 transform ${isAnimating ? "opacity-0 translate-y-4" : "opacity-100 translate-y-0"

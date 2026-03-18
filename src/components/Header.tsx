@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState } from "react"
-import { Heart, MapPin, Package, ShoppingCart, User, Search, Menu, Bell, Calendar } from "lucide-react"
+import { Heart, MapPin, Package, ShoppingCart, User, Search, Menu, Bell } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useRouter } from "next/navigation"
 import { Input } from "@/components/ui/input"
@@ -27,6 +27,8 @@ import { useCart } from "@/context/CartContext"
 import { useWishlist } from "@/context/WishlistContext"
 import LocationSheet from "@/components/location/LocationSheet"
 import { useLocation } from "@/context/LocationContext"
+import { cn } from "@/lib/utils"
+import { NOTIFICATIONS } from "@/utils/notifications"
 
 // E-commerce menu items
 const navItems = [
@@ -58,6 +60,7 @@ const Header = () => {
   const { totalItems: wishlistCount } = useWishlist()
   const { location } = useLocation()
   const [searchQuery, setSearchQuery] = useState("")
+  const unreadNotificationsCount = NOTIFICATIONS.filter((n) => !n.read).length
 
   const locationLabel = location?.address
     ? location.address.split(",").slice(0, 2).join(",").trim()
@@ -184,16 +187,84 @@ const Header = () => {
             </DropdownMenu>
 
             {/* Notification */}
-            <Button variant="ghost" size="icon" className="relative text-muted-foreground hover:text-primary hover:bg-primary/10">
-              <Bell className="h-5 w-5" />
-              <Badge
-                variant="destructive"
-                className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 text-[10px]"
-              >
-                3
-              </Badge>
-              <span className="sr-only">Notifications</span>
-            </Button>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="relative text-muted-foreground hover:text-primary hover:bg-primary/10"
+                >
+                  <Bell className="h-5 w-5" />
+                  {unreadNotificationsCount > 0 ? (
+                    <Badge
+                      variant="destructive"
+                      className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 text-[10px]"
+                    >
+                      {Math.min(9, unreadNotificationsCount)}
+                      {unreadNotificationsCount > 9 ? "+" : null}
+                    </Badge>
+                  ) : null}
+                  <span className="sr-only">Notifications</span>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-96 max-w-[90vw] p-0">
+                <div className="px-4 py-3 flex items-start justify-between gap-3">
+                  <div className="min-w-0">
+                    <p className="text-sm font-semibold text-foreground">Notifications</p>
+                    <p className="text-xs text-muted-foreground">
+                      {unreadNotificationsCount} unread
+                    </p>
+                  </div>
+                </div>
+                <DropdownMenuSeparator />
+                <div className="max-h-[320px] overflow-y-auto">
+                  {NOTIFICATIONS.slice(0, 5).map((n) => (
+                    <DropdownMenuItem key={n.id} asChild className="cursor-pointer p-0">
+                      <Link
+                        href={n.href || "/notifications"}
+                        className="w-full px-4 py-3 flex items-start gap-3"
+                      >
+                        <span
+                          className={cn(
+                            "mt-1.5 h-2 w-2 rounded-full shrink-0",
+                            n.read ? "bg-muted-foreground/30" : "bg-primary"
+                          )}
+                          aria-hidden="true"
+                        />
+                        <div className="min-w-0 flex-1">
+                          <div className="flex items-center justify-between gap-3">
+                            <p
+                              className={cn(
+                                "text-sm truncate",
+                                n.read ? "text-foreground" : "font-medium text-foreground"
+                              )}
+                            >
+                              {n.title}
+                            </p>
+                            <span className="text-[10px] text-muted-foreground shrink-0">
+                              {n.time}
+                            </span>
+                          </div>
+                          <p className="text-xs text-muted-foreground line-clamp-2">
+                            {n.message}
+                          </p>
+                        </div>
+                      </Link>
+                    </DropdownMenuItem>
+                  ))}
+                  {NOTIFICATIONS.length === 0 ? (
+                    <div className="px-4 py-10 text-center text-sm text-muted-foreground">
+                      You&apos;re all caught up.
+                    </div>
+                  ) : null}
+                </div>
+                <div className="p-3 border-t border-border">
+                  <Button asChild variant="outline" className="w-full">
+                    <Link href="/notifications">View all</Link>
+                  </Button>
+                </div>
+              </DropdownMenuContent>
+            </DropdownMenu>
 
             {/* Wishlist */}
             <Button

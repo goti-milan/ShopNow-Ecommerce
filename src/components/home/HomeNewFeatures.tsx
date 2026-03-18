@@ -56,7 +56,7 @@ export default function HomeNewFeatures() {
     const filteredProducts = PRODUCTS.slice(0, 8); // Just using all for demo, in real app would filter
 
     return (
-        <section className="py-16 bg-background overflow-hidden">
+        <section className="py-12 md:py-16 bg-background overflow-x-hidden">
             <div className="container mx-auto px-4 max-w-7xl">
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
                     <div className="space-y-4">
@@ -64,26 +64,7 @@ export default function HomeNewFeatures() {
                             <span className="h-px w-8 bg-primary rounded-full" />
                             <span className="text-primary font-bold tracking-widest uppercase text-xs">Shop the Best</span>
                         </div>
-                        <h2 className="text-4xl md:text-5xl font-semibold text-foreground tracking-tight">Exclusive Collections</h2>
-                    </div>
-
-                    <div className="flex items-center gap-2">
-                        <Button
-                            variant="outline"
-                            size="icon"
-                            onClick={() => scroll("left")}
-                            className="rounded-full border-border hover:border-primary hover:text-primary transition-all"
-                        >
-                            <ChevronLeft className="w-5 h-5" />
-                        </Button>
-                        <Button
-                            variant="outline"
-                            size="icon"
-                            onClick={() => scroll("right")}
-                            className="rounded-full border-border hover:border-primary hover:text-primary transition-all"
-                        >
-                            <ChevronRight className="w-5 h-5" />
-                        </Button>
+                        <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-foreground tracking-tight">Exclusive Collections</h2>
                     </div>
                 </div>
 
@@ -96,7 +77,7 @@ export default function HomeNewFeatures() {
                             <button
                                 key={tab.id}
                                 onClick={() => setActiveTab(tab.id)}
-                                className={`flex items-center gap-3 px-6 py-3.5 rounded-2xl whitespace-nowrap transition-all duration-300 font-bold border-2 ${isActive
+                                className={`flex items-center gap-3 px-4 sm:px-6 py-3 rounded-2xl whitespace-nowrap transition-all duration-300 font-bold text-sm sm:text-base border-2 ${isActive
                                     ? `${tab.bg} ${tab.color} border-current shadow-lg shadow-current/5 scale-105`
                                     : "bg-background text-muted-foreground border-border hover:border-border hover:text-muted-foreground"
                                     }`}
@@ -109,7 +90,7 @@ export default function HomeNewFeatures() {
                 </div>
 
                 {/* Tab-specific Content Bar */}
-                <div className="mt-8 mb-10 min-h-12 flex flex-col sm:flex-row items-center justify-between gap-4 p-6 rounded-3xl bg-muted border border-border italic">
+                <div className="mt-6 sm:mt-8 mb-8 sm:mb-10 min-h-12 flex flex-col sm:flex-row items-center justify-between gap-4 p-4 sm:p-6 rounded-3xl bg-muted border border-border italic">
                     {activeTab === "flash-sale" ? (
                         <div className="flex items-center gap-4">
                             <span className="font-semibold text-primary uppercase tracking-tighter text-xl">Ends In:</span>
@@ -129,30 +110,55 @@ export default function HomeNewFeatures() {
                         </p>
                     )}
                     <Button variant="ghost" className="text-primary font-semibold hover:bg-primary/5 gap-2 uppercase tracking-tighter">
-                        Explore All <ArrowRight className="w-4 h-4" />
+                        Explore All
                     </Button>
                 </div>
 
                 {/* Product Grid / Row */}
-                <div
-                    ref={scrollContainerRef}
-                    className="flex gap-8 overflow-x-auto pb-8 snap-x snap-mandatory no-scrollbar -mx-2 px-2"
-                >
-                    {filteredProducts.map((product) => (
-                        <div key={product.id} className="min-w-[240px] md:min-w-[280px] snap-start transform transition-transform duration-500 hover:-translate-y-2">
-                            <ProductCard item={product} />
-                        </div>
-                    ))}
+                <div className="relative">
+                    <div className="hidden sm:block pointer-events-none absolute left-0 top-1/2 -translate-y-1/2 z-10">
+                        <Button
+                            variant="outline"
+                            size="icon"
+                            onClick={() => scroll("left")}
+                            className="pointer-events-auto ml-2 rounded-full border-border bg-background/80 backdrop-blur hover:bg-background hover:border-primary hover:text-primary transition-all shadow-sm"
+                            aria-label="Scroll exclusive collections left"
+                        >
+                            <ChevronLeft className="w-5 h-5" />
+                        </Button>
+                    </div>
+                    <div className="hidden sm:block pointer-events-none absolute right-0 top-1/2 -translate-y-1/2 z-10">
+                        <Button
+                            variant="outline"
+                            size="icon"
+                            onClick={() => scroll("right")}
+                            className="pointer-events-auto mr-2 rounded-full border-border bg-background/80 backdrop-blur hover:bg-background hover:border-primary hover:text-primary transition-all shadow-sm"
+                            aria-label="Scroll exclusive collections right"
+                        >
+                            <ChevronRight className="w-5 h-5" />
+                        </Button>
+                    </div>
 
-                    {/* View More Card */}
-                    <div className="min-w-[240px] md:min-w-[280px] snap-start group cursor-pointer">
-                        <div className="h-full bg-muted rounded-3xl border-2 border-dashed border-border flex flex-col items-center justify-center p-8 text-center gap-4 group-hover:bg-primary/5 group-hover:border-primary/30 transition-all">
-                            <div className="w-16 h-16 rounded-full bg-background flex items-center justify-center shadow-sm group-hover:scale-110 transition-all">
-                                <ArrowRight className="w-8 h-8 text-primary" />
+                    <div
+                        ref={scrollContainerRef}
+                        className="flex gap-8 overflow-x-auto overflow-y-visible pt-6 pb-10 snap-x snap-mandatory no-scrollbar -mx-4 px-4"
+                    >
+                        {filteredProducts.map((product) => (
+                            <div key={product.id} className="min-w-[240px] md:min-w-[280px] snap-start transform transition-transform duration-500 hover:-translate-y-2">
+                                <ProductCard item={product} />
                             </div>
-                            <div>
-                                <h4 className="font-semibold text-foreground">View More</h4>
-                                <p className="text-sm text-muted-foreground font-medium">Check all items in this collection</p>
+                        ))}
+
+                        {/* View More Card */}
+                        <div className="min-w-[240px] md:min-w-[280px] snap-start group cursor-pointer">
+                            <div className="h-full bg-muted rounded-3xl border-2 border-dashed border-border flex flex-col items-center justify-center p-8 text-center gap-4 group-hover:bg-primary/5 group-hover:border-primary/30 transition-all">
+                                <div className="w-16 h-16 rounded-full bg-background flex items-center justify-center shadow-sm group-hover:scale-110 transition-all">
+                                    <ArrowRight className="w-8 h-8 text-primary" />
+                                </div>
+                                <div>
+                                    <h4 className="font-semibold text-foreground">View More</h4>
+                                    <p className="text-sm text-muted-foreground font-medium">Check all items in this collection</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -168,9 +174,9 @@ export default function HomeNewFeatures() {
                                 <h2 className="text-4xl font-semibold text-white italic tracking-tighter">Buy 1 Get 1 Free!</h2>
                                 <p className="text-muted-foreground font-medium max-w-sm">Mix and match any two items from our selected accessories category.</p>
                             </div>
-                            <Button className="bg-background text-foreground hover:bg-muted font-semibold px-10 py-8 rounded-2xl text-xl transition-all transform hover:scale-105 active:scale-95">
-                                Claim Offer
-                            </Button>
+                    <Button className="w-full sm:w-auto bg-background text-foreground hover:bg-muted font-semibold px-8 py-6 md:px-10 md:py-8 rounded-2xl text-lg md:text-xl transition-all transform hover:scale-105 active:scale-95">
+                        Claim Offer
+                    </Button>
                         </div>
                     </div>
                 )}

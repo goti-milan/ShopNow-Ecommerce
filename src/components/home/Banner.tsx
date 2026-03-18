@@ -68,34 +68,33 @@ export default function Banner() {
   };
 
   return (
-    <div className="relative w-full overflow-hidden rounded-2xl my-6">
+    <div className="relative w-full overflow-hidden rounded-2xl my-4 md:my-6  ">
       <div
-        className={`relative w-full px-6 py-12 md:py-20 transition-all duration-700 ease-in-out bg-gradient-to-r ${slides[currentSlide].bgGradient}`}
+        className={`relative w-full px-4 sm:px-6 py-8 sm:py-10 md:py-12 lg:py-20 transition-all duration-700 ease-in-out bg-gradient-to-r ${slides[currentSlide].bgGradient}`}
       >
-        <div className="container mx-auto">
+        <div className="mx-auto max-w-7xl">
           <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12">
 
             {/* Text Content */}
-            <div className={`flex-1 text-white z-10 transition-all duration-500 transform translate-x-0 opacity-100`}>
-              <div className="flex items-center gap-2 mb-4 bg-background/20 w-fit px-3 py-1 rounded-full backdrop-blur-sm">
+            <div className="flex-1 text-white z-10 text-center md:text-left transition-all duration-500 transform translate-x-0 opacity-100">
+              <div className="inline-flex items-center gap-2 mb-4 bg-background/20 w-fit px-3 py-1 rounded-full backdrop-blur-sm mx-auto md:mx-0">
                 <Zap className="w-4 h-4 text-primary-foreground fill-primary" />
                 <span className="text-sm font-semibold tracking-wide uppercase">{slides[currentSlide].badge}</span>
               </div>
 
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight drop-shadow-sm">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight drop-shadow-sm">
                 {slides[currentSlide].title}
               </h1>
 
-              <p className="text-lg md:text-xl text-white/90 mb-8 max-w-xl leading-relaxed">
+              <p className="text-base sm:text-lg md:text-xl text-white/90 mb-8 max-w-xl leading-relaxed mx-auto md:mx-0">
                 {slides[currentSlide].description}
               </p>
 
-              <div className="flex flex-wrap gap-4">
-                <button className="bg-background text-foreground px-8 py-3.5 rounded-full font-bold hover:bg-muted hover:scale-105 active:scale-95 transition-all duration-300 shadow-lg flex items-center gap-2">
+              <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 justify-center md:justify-start">
+                <button className="w-full sm:w-auto bg-background text-foreground px-6 sm:px-8 py-3 sm:py-3.5 rounded-full font-bold hover:bg-muted hover:scale-105 active:scale-95 transition-all duration-300 shadow-lg inline-flex items-center justify-center gap-2">
                   Shop Now
-                  <ChevronRight className="w-4 h-4 ml-1" />
                 </button>
-                <button className="bg-transparent border-2 border-white/30 text-white px-8 py-3.5 rounded-full font-bold hover:bg-background/10 transition-all duration-300">
+                <button className="w-full sm:w-auto bg-transparent border-2 border-white/30 text-white px-6 sm:px-8 py-3 sm:py-3.5 rounded-full font-bold hover:bg-background/10 transition-all duration-300">
                   View Collections
                 </button>
               </div>
@@ -121,25 +120,28 @@ export default function Banner() {
         {/* Navigation Arrows */}
         <button
           onClick={goToPrevious}
-          className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-secondary/20 text-white hover:bg-secondary/40 backdrop-blur-md flex items-center justify-center transition-all duration-300 border border-white/10 z-20 group"
+          className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-secondary/20 text-white hover:bg-secondary/40 backdrop-blur-md flex items-center justify-center transition-all duration-300 border border-white/10 z-20 group"
+          aria-label="Previous banner slide"
         >
-          <ChevronLeft className="w-6 h-6 group-hover:-translate-x-0.5 transition-transform" />
+          <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 group-hover:-translate-x-0.5 transition-transform" />
         </button>
         <button
           onClick={goToNext}
-          className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-secondary/20 text-white hover:bg-secondary/40 backdrop-blur-md flex items-center justify-center transition-all duration-300 border border-white/10 z-20 group"
+          className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-secondary/20 text-white hover:bg-secondary/40 backdrop-blur-md flex items-center justify-center transition-all duration-300 border border-white/10 z-20 group"
+          aria-label="Next banner slide"
         >
-          <ChevronRightIcon className="w-6 h-6 group-hover:translate-x-0.5 transition-transform" />
+          <ChevronRightIcon className="w-5 h-5 sm:w-6 sm:h-6 group-hover:translate-x-0.5 transition-transform" />
         </button>
 
         {/* Dots Navigation */}
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-3 z-20">
+        <div className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 flex gap-3 z-20">
           {slides.map((_, index) => (
             <button
               key={index}
               onClick={() => goToSlide(index)}
               className={`h-2 rounded-full transition-all duration-300 ${currentSlide === index ? "w-8 bg-background" : "w-2 bg-background/40 hover:bg-background/60"
                 }`}
+              aria-label={`Go to slide ${index + 1}`}
             />
           ))}
         </div>

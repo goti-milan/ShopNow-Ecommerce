@@ -3,11 +3,11 @@ import Image from "next/image";
 
 export default function CollectionGrid() {
   return (
-    <section className="w-full bg-transparent p-6 lg:p-12">
-      <div className="mx-auto grid grid-cols-1 gap-6 lg:grid-cols-3">
+    <section className="w-full bg-transparent px-4 sm:px-6 lg:px-12 py-6 sm:py-8 md:py-12">
+      <div className="mx-auto grid grid-cols-1 gap-4 sm:gap-6 lg:grid-cols-3 max-w-7xl">
 
         {/* Women Collection */}
-        <Link href="/category/fashion" className="lg:col-span-2 relative h-[300px] lg:h-[400px] overflow-hidden rounded-2xl group cursor-pointer block">
+        <Link href="/category/fashion" className="lg:col-span-2 relative h-[260px] sm:h-[300px] lg:h-[400px] overflow-hidden rounded-2xl group cursor-pointer block">
           <Image
             src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
             alt="Women Collection"
@@ -29,7 +29,7 @@ export default function CollectionGrid() {
         <div className="flex flex-col gap-6 h-full">
 
           {/* Men Collection */}
-          <Link href="/category/fashion" className="relative h-[200px] lg:flex-1 overflow-hidden rounded-2xl group cursor-pointer block">
+          <Link href="/category/fashion" className="relative h-[180px] sm:h-[200px] lg:flex-1 overflow-hidden rounded-2xl group cursor-pointer block">
             <Image
               src="https://images.unsplash.com/photo-1617137968427-85924c809a10?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
               alt="Men Collection"
@@ -47,7 +47,7 @@ export default function CollectionGrid() {
             </div>
           </Link>
 
-          <div className="grid grid-cols-2 gap-6 h-[200px]">
+          <div className="grid grid-cols-2 gap-6 h-[180px] sm:h-[200px]">
 
             {/* Kids Collection */}
             <Link href="/category/fashion" className="relative overflow-hidden rounded-2xl group cursor-pointer block">
@@ -94,4 +94,3 @@ export default function CollectionGrid() {
     </section>
   );
 }
-
