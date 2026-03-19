@@ -3,7 +3,14 @@
 import ProductCard from "@/components/common/Product";
 import { Button } from "@/components/ui/button";
 import { Product } from "@/utils/types";
-import { ChevronRight, Search, X } from "lucide-react";
+import { ChevronRight, Search, X, Filter } from "lucide-react";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import { useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
 
@@ -21,10 +28,14 @@ function FilterSidebar({
   onFilterChange,
   filters,
   categories,
+  className,
+  onApply,
 }: {
   onFilterChange: (filterKey: string, value: any) => void;
   filters: FiltersState;
   categories: Category[];
+  className?: string;
+  onApply?: () => void;
 }) {
   const BRANDS = ["Samsung", "iPhone", "Sony", "OnePlus", "Boat", "LG", "Apple"];
   const DISCOUNT_OPTIONS = [10, 20, 30, 50];
@@ -37,7 +48,7 @@ function FilterSidebar({
   };
 
   return (
-    <div className="w-full lg:w-64 space-y-6 bg-background p-5 rounded-lg border border-border h-fit sticky top-4">
+    <div className={`w-full lg:w-64 space-y-6 bg-background p-5 rounded-lg border-none lg:border lg:border-border h-fit lg:sticky lg:top-4 ${className}`}>
       <h2 className="text-lg font-bold text-foreground">FILTERS</h2>
 
       {/* Search */}
@@ -223,7 +234,10 @@ function FilterSidebar({
         </div>
       </div>
 
-      <Button className="w-full bg-primary hover:bg-primary-hover text-white font-semibold py-2 rounded-lg transition-all duration-200">
+      <Button
+        className="w-full bg-primary hover:bg-primary-hover text-white font-semibold py-2 rounded-lg transition-all duration-200"
+        onClick={onApply}
+      >
         Apply Filters
       </Button>
     </div>
@@ -256,6 +270,7 @@ export default function BrowseProducts({
     discount: null,
     availability: null,
   });
+  const [isFilterSheetOpen, setIsFilterSheetOpen] = useState(false);
 
   const filteredProducts = useMemo(() => {
     let list = [...products];
@@ -322,17 +337,16 @@ export default function BrowseProducts({
     <div className="min-h-screen bg-muted">
       {/* Category Tabs */}
       <div className="bg-background border-b border-border sticky top-0 z-20 shadow-sm">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto">
           <div className="flex items-center gap-2 overflow-x-auto py-3 no-scrollbar">
             {categories.map((cat) => (
               <button
                 key={cat.id}
                 onClick={() => setSelectedCategory(cat.id)}
-                className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-200 shrink-0 ${
-                  selectedCategory === cat.id
-                    ? "bg-primary text-white shadow-md"
-                    : "bg-muted text-muted-foreground hover:bg-muted"
-                }`}
+                className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-200 shrink-0 ${selectedCategory === cat.id
+                  ? "bg-primary text-white shadow-md"
+                  : "bg-muted text-muted-foreground hover:bg-muted"
+                  }`}
               >
                 {cat.label}
               </button>
@@ -342,7 +356,7 @@ export default function BrowseProducts({
       </div>
 
       {/* Main Content */}
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto py-6 sm:py-8">
         <div className="flex gap-6">
           <div className="hidden lg:block">
             <FilterSidebar
@@ -390,21 +404,45 @@ export default function BrowseProducts({
                   </div>
                 </form>
 
-                <select
-                  value={sortBy}
-                  onChange={(e) => setSortBy(e.target.value)}
-                  className="px-4 py-2.5 rounded-lg border border-border bg-background text-sm font-medium text-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
-                >
-                  <option value="featured">Sort: Featured</option>
-                  <option value="price-low">Price: Low to High</option>
-                  <option value="price-high">Price: High to Low</option>
-                  <option value="newest">Newest Arrivals</option>
-                </select>
+                <div className="flex gap-2">
+                  <Sheet open={isFilterSheetOpen} onOpenChange={setIsFilterSheetOpen}>
+                    <SheetTrigger asChild>
+                      <Button
+                        variant="outline"
+                        className="lg:hidden flex items-center gap-2 px-4 py-2.5 h-auto rounded-lg border-border text-sm font-medium"
+                      >
+                        <Filter className="h-4 w-4" />
+                        Filters
+                      </Button>
+                    </SheetTrigger>
+                    <SheetContent side="left" className="w-[300px] p-0 overflow-y-auto">
+                      <div className="p-0">
+                        <FilterSidebar
+                          onFilterChange={handleFilterChange}
+                          filters={filters}
+                          categories={categories}
+                          onApply={() => setIsFilterSheetOpen(false)}
+                        />
+                      </div>
+                    </SheetContent>
+                  </Sheet>
+
+                  <select
+                    value={sortBy}
+                    onChange={(e) => setSortBy(e.target.value)}
+                    className="flex-1 sm:flex-initial px-4 py-2.5 rounded-lg border border-border bg-background text-sm font-medium text-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
+                  >
+                    <option value="featured">Sort: Featured</option>
+                    <option value="price-low">Price: Low to High</option>
+                    <option value="price-high">Price: High to Low</option>
+                    <option value="newest">Newest Arrivals</option>
+                  </select>
+                </div>
               </div>
             </div>
 
             {filteredProducts.length > 0 ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-5">
                 {filteredProducts.map((product, index) => (
                   <div key={`${product.id}-${index}`} className="flex justify-center">
                     <ProductCard item={product} />

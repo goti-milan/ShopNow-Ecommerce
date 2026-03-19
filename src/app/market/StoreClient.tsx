@@ -18,7 +18,7 @@ export default function StoreClient() {
   return (
     <div>
       {/* Store Header */}
-      <div className="relative h-64 bg-secondary">
+      <div className="relative h-56 sm:h-64 bg-secondary">
         <Image
           src={store?.cover ?? "https://picsum.photos/seed/cover/1200/400"}
           alt="Cover"
@@ -27,9 +27,9 @@ export default function StoreClient() {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
 
-        <div className="absolute bottom-0 left-0 w-full p-8">
-          <div className="container mx-auto flex flex-col md:flex-row items-end gap-6">
-            <div className="w-24 h-24 rounded-xl border-4 border-background bg-background overflow-hidden relative shadow-xl">
+        <div className="absolute bottom-0 left-0 w-full p-4 sm:p-8">
+          <div className="container mx-auto flex flex-col md:flex-row items-center md:items-end gap-4 sm:gap-6">
+            <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-xl border-4 border-background bg-background overflow-hidden relative shadow-xl shrink-0">
               <Image
                 src={store?.logo ?? "https://picsum.photos/seed/shoplogo/200/200"}
                 alt="Logo"
@@ -38,13 +38,13 @@ export default function StoreClient() {
               />
             </div>
 
-            <div className="flex-1 text-white mb-2">
-              <div className="flex items-center gap-2 mb-1">
-                <h1 className="text-3xl font-bold">{store?.name ?? "Tech Haven"}</h1>
+            <div className="flex-1 text-white text-center md:text-left mb-2">
+              <div className="flex flex-col md:flex-row items-center gap-2 mb-1">
+                <h1 className="text-2xl sm:text-3xl font-bold">{store?.name ?? "Tech Haven"}</h1>
                 {store?.verified && <Verified className="w-5 h-5 text-primary" />}
               </div>
-              <p className="text-muted-foreground mb-2">{store?.tagline ?? "Premium Electronics & Gadgets"}</p>
-              <div className="flex gap-4 text-sm text-muted-foreground">
+              <p className="text-xs sm:text-sm text-muted-foreground mb-2">{store?.tagline ?? "Premium Electronics & Gadgets"}</p>
+              <div className="flex justify-center md:justify-start gap-4 text-xs sm:text-sm text-muted-foreground">
                 <span className="flex items-center gap-1">
                   <Star className="w-4 h-4 fill-primary text-primary" /> {store?.rating ?? 4.9} (
                   {store?.reviewsLabel ?? "1.2k"} Reviews)
@@ -53,9 +53,9 @@ export default function StoreClient() {
               </div>
             </div>
 
-            <div className="flex gap-4 mb-2">
-              <Button>Follow</Button>
-              <Button variant="secondary">Contact</Button>
+            <div className="flex flex-wrap justify-center md:justify-start gap-2 sm:gap-4 mb-2">
+              <Button size="sm" className="sm:h-10 px-4 sm:px-6">Follow</Button>
+              <Button variant="secondary" size="sm" className="sm:h-10 px-4 sm:px-6">Contact</Button>
             </div>
           </div>
         </div>

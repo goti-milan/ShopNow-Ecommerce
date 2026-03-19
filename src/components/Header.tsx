@@ -76,10 +76,10 @@ const Header = () => {
   return (
     <header className="sticky top-0 z-50 w-full bg-background border-b border-border">
       {/* Top Bar */}
-      <div className="bg-primary text-white text-sm py-2">
-        <div className="container mx-auto px-4 flex items-center justify-between">
+      <div className="bg-primary text-white text-[10px] sm:text-sm py-2">
+        <div className="container mx-auto flex flex-col sm:flex-row items-center justify-center sm:justify-between gap-2 sm:gap-4 overflow-hidden">
           <p className="hidden sm:block">Free shipping on orders over $50 🚚</p>
-          <div className="flex items-center gap-4 ml-auto">
+          <div className="flex items-center justify-center gap-3 sm:gap-6">
             <Link href="/faq" className="hover:text-primary-light transition-colors">Help</Link>
             <Link href="/track-order" className="hover:text-primary-light transition-colors">Track Order</Link>
           </div>
@@ -87,42 +87,161 @@ const Header = () => {
       </div>
 
       {/* Main Header */}
-      <div className="container mx-auto px-4">
-        <div className="flex h-16 items-center justify-between gap-4">
+      <div className="container mx-auto">
+        <div className="flex h-16 items-center justify-between gap-4 relative">
 
-          {/* LEFT: Logo */}
-          <div className="flex items-center gap-4">
-            <Link href="/" className="flex items-center gap-2">
+          {/* LEFT SECTION */}
+          <div className="flex items-center gap-2 lg:gap-4 lg:w-1/4">
+            {/* Mobile Menu Trigger (Visible only on mobile) */}
+            <div className="lg:hidden">
+              <Sheet>
+                <SheetTrigger asChild>
+                  <Button variant="ghost" size="icon" className="text-muted-foreground -ml-2">
+                    <Menu className="h-6 w-6" />
+                  </Button>
+                </SheetTrigger>
+                <SheetContent side="left" className="w-[85vw] sm:w-80">
+                  <SheetHeader>
+                    <SheetTitle className="flex items-center gap-2">
+                      <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center text-white font-semibold text-xl">
+                        🛒
+                      </div>
+                      <span className="text-xl font-semibold text-primary">ShopNow</span>
+                    </SheetTitle>
+                  </SheetHeader>
+
+                  {/* Mobile Search */}
+                  <form onSubmit={handleSearch} className="mt-4">
+                    <div className="relative">
+                      <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                      <Input
+                        type="search"
+                        placeholder="Search products..."
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        className="w-full pl-10 bg-muted/50"
+                      />
+                    </div>
+                  </form>
+
+                  {/* Mobile Navigation */}
+                  <nav className="mt-6 space-y-1">
+                    {navItems.map((item) => (
+                      <Link
+                        key={item.name}
+                        href={item.href}
+                        className="flex items-center justify-between px-3 py-2.5 text-sm font-medium text-muted-foreground hover:text-primary hover:bg-muted rounded-md transition-colors"
+                      >
+                        {item.name}
+                      </Link>
+                    ))}
+                    <Link
+                      href="/wishlist"
+                      className="flex items-center justify-between px-3 py-2.5 text-sm font-medium text-muted-foreground hover:text-primary hover:bg-muted rounded-md transition-colors"
+                    >
+                      <span className="flex items-center gap-3">
+                        <Heart className="h-4 w-4" />
+                        Wishlist
+                      </span>
+                      {wishlistCount > 0 && <Badge variant="secondary" className="h-5 min-w-5 flex items-center justify-center p-0 text-[10px]">{wishlistCount}</Badge>}
+                    </Link>
+                    <Link
+                      href="/notifications"
+                      className="flex items-center justify-between px-3 py-2.5 text-sm font-medium text-muted-foreground hover:text-primary hover:bg-muted rounded-md transition-colors"
+                    >
+                      <span className="flex items-center gap-3">
+                        <Bell className="h-4 w-4" />
+                        Notifications
+                      </span>
+                      {unreadNotificationsCount > 0 && <Badge variant="secondary" className="h-5 min-w-5 flex items-center justify-center p-0 text-[10px]">{unreadNotificationsCount}</Badge>}
+                    </Link>
+                  </nav>
+
+                  {/* Mobile Categories */}
+                  <div className="mt-6 pt-6 border-t font-sans">
+                    <h3 className="text-sm font-semibold mb-3">Categories</h3>
+                    <div className="grid grid-cols-2 gap-2">
+                      {shopCategories.map((cat) => (
+                        <Link
+                          key={cat.name}
+                          href={cat.href}
+                          className="px-3 py-2 text-sm text-muted-foreground bg-muted/50 rounded-md hover:text-primary transition-colors"
+                        >
+                          {cat.name}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Mobile Account */}
+                  <div className="mt-6 pt-6 border-t font-sans">
+                    <div className="flex items-center gap-3 px-3">
+                      <Avatar className="h-10 w-10">
+                        <AvatarFallback className="bg-primary/10 text-primary">
+                          <User className="h-5 w-5" />
+                        </AvatarFallback>
+                      </Avatar>
+                      <div>
+                        <p className="text-sm font-medium">Guest User</p>
+                        <p className="text-xs text-muted-foreground">Sign in for better experience</p>
+                      </div>
+                    </div>
+                    <div className="mt-4 flex gap-2">
+                      <Link href="/auth" className="flex-1">
+                        <Button variant="outline" size="sm" className="w-full">Sign In</Button>
+                      </Link>
+                      <Link href="/auth" className="flex-1">
+                        <Button size="sm" className="w-full">Join Now</Button>
+                      </Link>
+                    </div>
+                  </div>
+                </SheetContent>
+              </Sheet>
+            </div>
+
+            {/* Desktop Logo (Left aligned on lg) */}
+            <Link href="/" className="hidden lg:flex items-center gap-2">
               <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center text-white font-semibold text-xl">
                 🛒
               </div>
-              <div className="hidden sm:block">
+              <div>
                 <span className="text-xl font-semibold text-primary">ShopNow</span>
                 <p className="text-xs text-muted-foreground -mt-1">Your Store</p>
               </div>
             </Link>
           </div>
 
-          {/* CENTER: Search */}
-          <form onSubmit={handleSearch} className="flex-1 max-w-xl hidden md:block">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-              <Input
-                type="search"
-                placeholder="Search products, brands, categories..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 bg-muted/50 border-input focus:border-primary focus:ring-1 focus:ring-primary"
-              />
-              <Button
-                type="submit"
-                size="sm"
-                className="absolute right-1 top-1/2 -translate-y-1/2"
-              >
-                Search
-              </Button>
-            </div>
-          </form>
+          {/* CENTER SECTION: Logo on mobile, Search on desktop */}
+          <div className="flex-1 flex items-center justify-center md:max-w-xl">
+            {/* Mobile Logo (Absolute center on small screens) */}
+            <Link href="/" className="lg:hidden flex items-center gap-1.5 absolute left-1/2 -translate-x-1/2">
+              <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-white font-semibold text-lg">
+                🛒
+              </div>
+              <span className="text-lg font-bold text-primary tracking-tight">ShopNow</span>
+            </Link>
+
+            {/* Desktop Search */}
+            <form onSubmit={handleSearch} className="w-full hidden lg:block">
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                <Input
+                  type="search"
+                  placeholder="Search products, brands, categories..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full pl-10 pr-4 bg-muted/50 border-input focus:border-primary focus:ring-1 focus:ring-primary"
+                />
+                <Button
+                  type="submit"
+                  size="sm"
+                  className="absolute right-1 top-1/2 -translate-y-1/2"
+                >
+                  Search
+                </Button>
+              </div>
+            </form>
+          </div>
 
           {/* RIGHT: Actions */}
           <div className="flex items-center gap-2">
@@ -145,14 +264,14 @@ const Header = () => {
             {/* Account */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="sm" className="gap-2 text-muted-foreground hover:text-foreground hover:bg-muted">
+                <Button variant="ghost" size="sm" className="gap-2 text-muted-foreground hover:text-foreground hover:bg-muted hidden sm:flex">
                   <Avatar className="h-8 w-8">
                     <AvatarImage src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="User" />
                     <AvatarFallback className="bg-primary/10 text-primary text-sm">
                       <User className="h-4 w-4" />
                     </AvatarFallback>
                   </Avatar>
-                  <span className="hidden sm:block text-sm">Account</span>
+                  <span className="hidden md:block text-sm">Account</span>
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-56">
@@ -192,7 +311,7 @@ const Header = () => {
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="relative text-muted-foreground hover:text-primary hover:bg-primary/10"
+                  className="relative text-muted-foreground hover:text-primary hover:bg-primary/10 hidden md:flex"
                 >
                   <Bell className="h-5 w-5" />
                   {unreadNotificationsCount > 0 ? (
@@ -270,7 +389,7 @@ const Header = () => {
             <Button
               variant="ghost"
               size="icon"
-              className="relative text-muted-foreground hover:text-primary"
+              className="relative text-muted-foreground hover:text-primary hidden sm:flex"
               onClick={() => router.push("/wishlist")}
             >
               <Heart className="h-5 w-5" />
@@ -308,7 +427,7 @@ const Header = () => {
 
       {/* Navigation Bar */}
       <div className="border-t border-border bg-muted/50">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto">
           <div className="flex items-center justify-between">
             {/* Desktop Navigation */}
             <nav className="hidden lg:flex items-center gap-1 h-10">
@@ -344,98 +463,7 @@ const Header = () => {
               </nav>
             </nav>
 
-            {/* Mobile & Tablet Right Side */}
-            <div className="flex items-center gap-2 lg:hidden">
-              {/* Mobile Search Toggle */}
-              <Button variant="ghost" size="icon" className="text-muted-foreground">
-                <Search className="h-5 w-5" />
-              </Button>
 
-              {/* Mobile Menu */}
-              <Sheet>
-                <SheetTrigger asChild>
-                  <Button variant="ghost" size="icon" className="text-muted-foreground">
-                    <Menu className="h-5 w-5" />
-                  </Button>
-                </SheetTrigger>
-                <SheetContent side="left" className="w-80">
-                  <SheetHeader>
-                    <SheetTitle className="flex items-center gap-2">
-                      <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center text-white font-semibold text-xl">
-                        🛒
-                      </div>
-                      <span className="text-xl font-semibold text-primary">ShopNow</span>
-                    </SheetTitle>
-                  </SheetHeader>
-
-                  {/* Mobile Search */}
-                  <form onSubmit={handleSearch} className="mt-4">
-                    <div className="relative">
-                      <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                      <Input
-                        type="search"
-                        placeholder="Search products..."
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                        className="w-full pl-10 bg-muted/50"
-                      />
-                    </div>
-                  </form>
-
-                  {/* Mobile Navigation */}
-                  <nav className="mt-6 space-y-1">
-                    {navItems.map((item) => (
-                      <Link
-                        key={item.name}
-                        href={item.href}
-                        className="flex items-center justify-between px-3 py-2.5 text-sm font-medium text-muted-foreground hover:text-primary hover:bg-muted rounded-md transition-colors"
-                      >
-                        {item.name}
-                      </Link>
-                    ))}
-                  </nav>
-
-                  {/* Mobile Categories */}
-                  <div className="mt-6 pt-6 border-t">
-                    <h3 className="text-sm font-semibold mb-3">Categories</h3>
-                    <div className="grid grid-cols-2 gap-2">
-                      {shopCategories.map((cat) => (
-                        <Link
-                          key={cat.name}
-                          href={cat.href}
-                          className="px-3 py-2 text-sm text-muted-foreground bg-muted/50 rounded-md hover:text-primary transition-colors"
-                        >
-                          {cat.name}
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Mobile Account */}
-                  <div className="mt-6 pt-6 border-t">
-                    <div className="flex items-center gap-3 px-3">
-                      <Avatar className="h-10 w-10">
-                        <AvatarFallback className="bg-primary/10 text-primary">
-                          <User className="h-5 w-5" />
-                        </AvatarFallback>
-                      </Avatar>
-                      <div>
-                        <p className="text-sm font-medium">Guest User</p>
-                        <p className="text-xs text-muted-foreground">Sign in for better experience</p>
-                      </div>
-                    </div>
-                    <div className="mt-4 flex gap-2">
-                      <Link href="/auth">
-                        <Button variant="outline" size="sm" className="flex-1">Sign In</Button>
-                      </Link>
-                      <Link href="/auth">
-                        <Button size="sm" className="flex-1">Join Now</Button>
-                      </Link>
-                    </div>
-                  </div>
-                </SheetContent>
-              </Sheet>
-            </div>
 
             {/* Quick Links */}
             <div className="hidden lg:flex items-center gap-4 text-sm">

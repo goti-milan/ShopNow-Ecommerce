@@ -44,7 +44,7 @@ export default function ProductDetailsClient({ product }: { product: Product }) 
     };
 
     useEffect(() => {
-         
+
         setMounted(true);
     }, []);
 
@@ -62,11 +62,11 @@ export default function ProductDetailsClient({ product }: { product: Product }) 
     return (
         <div className="bg-background min-h-screen relative">
             {/* Breadcrumb */}
-            <div className="container mx-auto px-4 pt-6">
+            <div className="container mx-auto pt-4 sm:pt-6">
                 <Breadcrumb items={breadcrumbItems} className="mb-6" />
             </div>
 
-            <div className="container mx-auto px-4 pb-20 max-w-screen-xl">
+            <div className="container mx-auto pb-12 sm:pb-20 max-w-screen-xl">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
 
                     {/* Left Column: Image Gallery */}
