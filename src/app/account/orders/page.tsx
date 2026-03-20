@@ -9,17 +9,17 @@ export default function OrdersPage() {
     return (
         <div className="bg-muted min-h-screen">
             <div className="container mx-auto px-4 py-8">
-                <div className="flex items-center justify-between gap-4 mb-8">
-                    <div className="flex items-center gap-4">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 sm:mb-8">
+                    <div className="flex items-center gap-2 sm:gap-4">
                         <Link href="/account">
-                            <Button variant="ghost" size="icon" className="rounded-xl">
+                            <Button variant="ghost" size="icon" className="rounded-xl hover:bg-background">
                                 <ArrowLeft className="w-5 h-5" />
                             </Button>
                         </Link>
-                        <h1 className="text-3xl font-bold text-foreground">Order History</h1>
+                        <h1 className="text-2xl sm:text-3xl font-bold text-foreground">Order History</h1>
                     </div>
-                    <Link href="/shop">
-                        <Button variant="outline" className="rounded-xl gap-2">
+                    <Link href="/shop" className="w-full sm:w-auto">
+                        <Button variant="outline" className="w-full sm:w-auto rounded-xl gap-2 font-semibold">
                             Shop More <ChevronRight className="h-4 w-4" />
                         </Button>
                     </Link>

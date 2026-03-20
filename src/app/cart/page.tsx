@@ -168,16 +168,16 @@ function CartContent() {
                 <h1 className="text-4xl font-semibold text-foreground mb-8">Cart List</h1>
 
                 <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-                    <TabsList className="bg-transparent h-auto p-0 gap-4 mb-8">
+                    <TabsList className="bg-transparent h-auto p-0 flex flex-wrap gap-2 sm:gap-4 mb-8">
                         <TabsTrigger
                             value="shopping-cart"
-                            className="px-8 py-3 rounded-lg data-[state=active]:bg-primary data-[state=active]:text-white bg-secondary text-white transition-all font-bold text-lg"
+                            className="flex-1 sm:flex-none px-4 sm:px-8 py-2.5 sm:py-3 rounded-lg data-[state=active]:bg-primary data-[state=active]:text-white bg-secondary text-white transition-all font-bold text-base sm:text-lg"
                         >
                             Products ({productItems.length})
                         </TabsTrigger>
                         <TabsTrigger
                             value="service-cart"
-                            className="px-8 py-3 rounded-lg data-[state=active]:bg-primary data-[state=active]:text-white bg-secondary text-white transition-all font-bold text-lg"
+                            className="flex-1 sm:flex-none px-4 sm:px-8 py-2.5 sm:py-3 rounded-lg data-[state=active]:bg-primary data-[state=active]:text-white bg-secondary text-white transition-all font-bold text-base sm:text-lg"
                         >
                             Services ({serviceItems.length})
                         </TabsTrigger>
@@ -368,7 +368,7 @@ function CartContent() {
                                 </div>
 
                                 <Link href="/order-confirmation?status=success">
-                                    <Button className="w-full bg-primary hover:bg-primary-dark text-white py-8 text-xl font-semibold rounded-2xl shadow-xl shadow-orange-100 transition-all transform hover:-translate-y-1 active:scale-95 uppercase tracking-tighter">
+                                    <Button className="w-full bg-primary hover:bg-primary-dark text-white py-6 sm:py-8 text-lg sm:text-xl font-semibold rounded-2xl shadow-xl shadow-orange-100 transition-all transform hover:-translate-y-1 active:scale-95 uppercase tracking-tighter">
                                         {activeTab === "service-cart" ? "Schedule & Pay" : "Proceed to Checkout"}
                                     </Button>
                                 </Link>
@@ -474,73 +474,73 @@ function ProductSection({ items, selectedIds, onSelect, onSelectAll, onRemove, o
                 </div>
             </div>
 
-            <div className="space-y-6">
+            <div className="space-y-4 sm:space-y-6">
                 {items.map((item) => (
-                    <div key={item.id} className="bg-background p-6 rounded-2xl border flex gap-8 shadow-sm hover:shadow-lg transition-all relative group">
-                        <div className="flex items-start gap-4">
+                    <div key={item.id} className="bg-background p-4 sm:p-6 rounded-2xl border flex flex-col sm:flex-row gap-4 sm:gap-8 shadow-sm hover:shadow-lg transition-all relative group">
+                        <div className="flex items-start gap-3 sm:gap-4">
                             <div
                                 onClick={() => onSelect(item.id)}
-                                className={`w-5 h-5 mt-2 rounded border flex items-center justify-center cursor-pointer transition-colors ${selectedIds.has(item.id) ? 'bg-primary border-primary' : 'border-border'}`}
+                                className={`w-5 h-5 mt-2 rounded border flex items-center justify-center cursor-pointer transition-colors shrink-0 ${selectedIds.has(item.id) ? 'bg-primary border-primary' : 'border-border'}`}
                             >
                                 {selectedIds.has(item.id) && <Check className="w-3.5 h-3.5 text-white" strokeWidth={3} />}
                             </div>
-                            <div className="relative w-44 h-44 bg-muted rounded-2xl overflow-hidden flex-shrink-0 border border-border p-2">
-                                <Image src={item.image} alt={item.title} fill className="object-contain p-4 group-hover:scale-105 transition-transform duration-500" />
+                            <div className="relative w-28 h-28 sm:w-44 sm:h-44 bg-muted rounded-2xl overflow-hidden flex-shrink-0 border border-border p-2">
+                                <Image src={item.image} alt={item.title} fill className="object-contain p-2 sm:p-4 group-hover:scale-105 transition-transform duration-500" />
                             </div>
                         </div>
 
                         <div className="flex-1 flex flex-col justify-between py-1">
                             <div className="space-y-2">
-                                <div className="flex justify-between items-start gap-4">
+                                <div className="flex flex-col sm:flex-row justify-between items-start gap-2 sm:gap-4">
                                     <div className="space-y-1">
-                                        <h3 className="text-2xl font-semibold text-foreground leading-tight line-clamp-1">{item.title}</h3>
-                                        <div className="flex items-center gap-2">
-                                            <span className="text-muted-foreground font-medium">Titanium Blue</span>
+                                        <h3 className="text-xl sm:text-2xl font-semibold text-foreground leading-tight line-clamp-2 sm:line-clamp-1">{item.title}</h3>
+                                        <div className="flex items-center gap-2 flex-wrap">
+                                            <span className="text-muted-foreground font-medium text-xs sm:text-sm">Titanium Blue</span>
                                             <span className="w-1 h-1 rounded-full bg-gray-300" />
-                                            <span className="text-muted-foreground font-medium whitespace-nowrap">256GB</span>
+                                            <span className="text-muted-foreground font-medium whitespace-nowrap text-xs sm:text-sm">256GB</span>
                                         </div>
                                     </div>
-                                    <div className="text-right flex-shrink-0">
-                                        <div className="text-3xl font-semibold text-foreground">₹{item.price.toLocaleString()}</div>
-                                        <div className="flex items-center justify-end gap-2 mt-1">
-                                            <span className="text-sm text-muted-foreground line-through font-medium">₹{(item.price * 1.2).toLocaleString()}</span>
-                                            <span className="text-sm text-primary font-bold bg-accent px-1.5 py-0.5 rounded">1.4% OFF</span>
+                                    <div className="flex flex-row sm:flex-col items-center sm:items-end justify-between w-full sm:w-auto mt-2 sm:mt-0">
+                                        <div className="text-2xl sm:text-3xl font-semibold text-foreground">₹{item.price.toLocaleString()}</div>
+                                        <div className="flex items-center gap-2 mt-1">
+                                            <span className="text-xs sm:text-sm text-muted-foreground line-through font-medium">₹{(item.price * 1.2).toLocaleString()}</span>
+                                            <span className="text-[10px] sm:text-sm text-primary font-bold bg-accent px-1 sm:px-1.5 py-0.5 rounded">1.4% OFF</span>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div className="flex items-center gap-3">
+                                <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
                                     <div className="flex items-center gap-1">
                                         {[1, 2, 3, 4, 5].map((s) => (
-                                            <Star key={s} className="w-4 h-4 fill-primary text-primary" />
+                                            <Star key={s} className="w-3 h-3 sm:w-4 sm:h-4 fill-primary text-primary" />
                                         ))}
-                                        <span className="text-sm font-semibold text-primary ml-1">4.8</span>
+                                        <span className="text-xs sm:text-sm font-semibold text-primary ml-1">4.8</span>
                                     </div>
-                                    <span className="text-sm text-muted-foreground font-medium">(1,248 Reviews)</span>
-                                    <Badge className="bg-accent text-primary border-none font-bold text-[10px] uppercase tracking-wider">Best Seller</Badge>
+                                    <span className="text-[10px] sm:text-sm text-muted-foreground font-medium">(1,248 Reviews)</span>
+                                    <Badge className="bg-accent text-primary border-none font-bold text-[8px] sm:text-[10px] uppercase tracking-wider">Best Seller</Badge>
                                 </div>
 
-                                <div className="flex items-center gap-6 pt-2">
+                                <div className="flex flex-wrap items-center gap-4 sm:gap-6 pt-2">
                                     <QuantitySelector
                                         quantity={item.quantity}
                                         onChange={(val: number) => onUpdateQty(item.id, val)}
                                     />
-                                    <div className="flex items-center gap-1.5 text-primary text-sm font-bold">
-                                        <div className="w-5 h-5 rounded-full bg-accent flex items-center justify-center overflow-hidden">
-                                            <Check className="w-3 h-3" strokeWidth={4} />
+                                    <div className="flex items-center gap-1.5 text-primary text-xs sm:text-sm font-bold">
+                                        <div className="w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-accent flex items-center justify-center overflow-hidden">
+                                            <Check className="w-2.5 h-2.5 sm:w-3 sm:h-3" strokeWidth={4} />
                                         </div>
                                         In Stock
                                     </div>
                                 </div>
                             </div>
 
-                            <div className="flex items-center justify-between border-t border-border pt-6 mt-6">
-                                <div className="flex items-center gap-3">
-                                    <Button variant="outline" size="sm" className="h-10 px-5 text-muted-foreground border-border font-bold rounded-xl hover:bg-accent hover:text-primary hover:border-primary/20 transition-all" onClick={() => onRemove(item.id)}>
-                                        <Trash2 className="w-4 h-4 mr-2" /> Remove
+                            <div className="flex items-center justify-between border-t border-border pt-4 sm:pt-6 mt-4 sm:mt-6">
+                                <div className="flex items-center gap-2 sm:gap-3 w-full sm:w-auto">
+                                    <Button variant="outline" size="sm" className="flex-1 sm:flex-none h-9 sm:h-10 px-3 sm:px-5 text-muted-foreground border-border font-bold rounded-xl hover:bg-accent hover:text-primary hover:border-primary/20 transition-all text-xs sm:text-sm" onClick={() => onRemove(item.id)}>
+                                        <Trash2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 mr-1.5 sm:mr-2" /> Remove
                                     </Button>
-                                    <Button variant="outline" size="sm" className="h-10 px-5 text-muted-foreground border-border font-bold rounded-xl hover:bg-muted transition-all">
-                                        <Heart className="w-4 h-4 mr-2" /> Save for Later
+                                    <Button variant="outline" size="sm" className="flex-1 sm:flex-none h-9 sm:h-10 px-3 sm:px-5 text-muted-foreground border-border font-bold rounded-xl hover:bg-muted transition-all text-xs sm:text-sm">
+                                        <Heart className="w-3.5 h-3.5 sm:w-4 sm:h-4 mr-1.5 sm:mr-2" /> Save
                                     </Button>
                                 </div>
                             </div>
@@ -600,9 +600,9 @@ function ServiceSection({ items, selectedIds, onSelect, onSelectAll, onRemove, o
                             </div>
 
                             <div className="flex-1 min-w-0">
-                                <div className="flex items-start justify-between gap-4 flex-wrap">
+                                <div className="flex flex-col sm:flex-row items-start justify-between gap-2 sm:gap-4">
                                     <div>
-                                        <h3 className="text-xl font-semibold text-foreground leading-tight">{item.title}</h3>
+                                        <h3 className="text-lg sm:text-xl font-semibold text-foreground leading-tight">{item.title}</h3>
                                         {item.provider && (
                                             <div className="flex items-center gap-2 mt-1">
                                                 {item.providerAvatar && <Image src={item.providerAvatar} alt={item.provider} width={20} height={20} className="rounded-full object-cover" />}
@@ -611,38 +611,38 @@ function ServiceSection({ items, selectedIds, onSelect, onSelectAll, onRemove, o
                                             </div>
                                         )}
                                     </div>
-                                    <div className="text-2xl font-semibold text-foreground whitespace-nowrap">₹{item.price.toLocaleString()}</div>
+                                    <div className="text-xl sm:text-2xl font-semibold text-foreground whitespace-nowrap">₹{item.price.toLocaleString()}</div>
                                 </div>
 
-                                <div className="flex flex-wrap gap-x-5 gap-y-2 mt-3">
+                                <div className="flex flex-wrap gap-x-4 sm:gap-x-5 gap-y-2 mt-3">
                                     {item.bookingDate && (
-                                        <div className="flex items-center gap-1.5 text-sm font-semibold text-foreground">
-                                            <CalendarDays className="w-4 h-4 text-primary shrink-0" />
+                                        <div className="flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-foreground">
+                                            <CalendarDays className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-primary shrink-0" />
                                             {new Date(item.bookingDate).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}
                                         </div>
                                     )}
                                     {item.bookingTime && (
-                                        <div className="flex items-center gap-1.5 text-sm font-semibold text-foreground">
-                                            <Clock className="w-4 h-4 text-primary shrink-0" />
+                                        <div className="flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-foreground">
+                                            <Clock className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-primary shrink-0" />
                                             {item.bookingTime}
                                         </div>
                                     )}
                                 </div>
 
                                 {item.bookingNotes && (
-                                    <div className="mt-2 px-3 py-2 bg-accent border border-primary/20 rounded-lg text-xs text-primary-dark">
+                                    <div className="mt-2 px-3 py-2 bg-accent border border-primary/20 rounded-lg text-[10px] sm:text-xs text-primary-dark">
                                         📝 {item.bookingNotes}
                                     </div>
                                 )}
 
-                                <div className="flex items-center gap-3 mt-4 pt-4 border-t border-border">
-                                    <Button variant="outline" size="sm" className="h-9 px-4 text-primary border-primary/20 hover:bg-accent font-bold rounded-xl" onClick={() => onRemove(item.id)}>
-                                        <Trash2 className="w-3.5 h-3.5 mr-1.5" /> Remove
+                                <div className="flex flex-wrap items-center gap-2 sm:gap-3 mt-4 pt-4 border-t border-border">
+                                    <Button variant="outline" size="sm" className="h-8 sm:h-9 px-3 sm:px-4 text-primary border-primary/20 hover:bg-accent font-bold rounded-xl text-xs" onClick={() => onRemove(item.id)}>
+                                        <Trash2 className="w-3 h-3 sm:w-3.5 sm:h-3.5 mr-1 sm:mr-1.5" /> Remove
                                     </Button>
-                                    <Button variant="outline" size="sm" className="h-9 px-4 font-bold rounded-xl text-primary border-primary/20 hover:bg-accent" onClick={() => onReschedule(item)}>
-                                        <Calendar className="w-3.5 h-3.5 mr-1.5" /> Reschedule
+                                    <Button variant="outline" size="sm" className="h-8 sm:h-9 px-3 sm:px-4 font-bold rounded-xl text-primary border-primary/20 hover:bg-accent text-xs" onClick={() => onReschedule(item)}>
+                                        <Calendar className="w-3 h-3 sm:w-3.5 sm:h-3.5 mr-1 sm:mr-1.5" /> Reschedule
                                     </Button>
-                                    <span className="ml-auto flex items-center gap-1.5 text-xs text-muted-foreground font-medium">
+                                    <span className="ml-0 sm:ml-auto flex items-center gap-1.5 text-[10px] sm:text-xs text-muted-foreground font-medium w-full sm:w-auto mt-2 sm:mt-0">
                                         <User2 className="w-3.5 h-3.5" /> At-home service
                                     </span>
                                 </div>

@@ -161,7 +161,18 @@ function SearchContent() {
                                 <h2 className="text-lg font-bold">Filters</h2>
                                 <SlidersHorizontal className="w-4 h-4 text-muted-foreground" />
                             </div>
-                            <FilterSidebar  />
+                            <FilterSidebar
+                                selectedCategories={selectedCategories}
+                                toggleCategory={toggleCategory}
+                                selectedBrands={selectedBrands}
+                                toggleBrand={toggleBrand}
+                                priceRange={priceRange}
+                                setPriceRange={setPriceRange}
+                                allBrands={allBrands}
+                                minRating={minRating}
+                                setMinRating={setMinRating}
+                                clearFilters={clearFilters}
+                            />
                         </div>
                     </aside>
 
@@ -171,10 +182,10 @@ function SearchContent() {
                         <div className="flex flex-col gap-6 mb-8">
                             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                                 <div>
-                                    <h1 className="text-2xl font-bold text-foreground mb-1">
+                                    <h1 className="text-xl sm:text-2xl font-bold text-foreground mb-1">
                                         {initialSearch ? `Search Results for "${initialSearch}"` : "Discover Products"}
                                     </h1>
-                                    <p className="text-sm text-muted-foreground">
+                                    <p className="text-xs sm:text-sm text-muted-foreground">
                                         Showing <span className="text-foreground font-medium">{filteredProducts.length}</span> results
                                     </p>
                                 </div>
@@ -183,7 +194,7 @@ function SearchContent() {
                                     {/* Mobile Filter Trigger */}
                                     <Sheet>
                                         <SheetTrigger asChild>
-                                            <Button variant="outline" className="lg:hidden gap-2">
+                                            <Button variant="outline" className="lg:hidden gap-2 h-9 sm:h-10 text-xs sm:text-sm">
                                                 <Filter className="w-4 h-4" />
                                                 Filters
                                             </Button>
@@ -192,7 +203,18 @@ function SearchContent() {
                                             <SheetHeader className="mb-6">
                                                 <SheetTitle className="text-left">Filters</SheetTitle>
                                             </SheetHeader>
-                                            <FilterSidebar />
+                                            <FilterSidebar
+                                                selectedCategories={selectedCategories}
+                                                toggleCategory={toggleCategory}
+                                                selectedBrands={selectedBrands}
+                                                toggleBrand={toggleBrand}
+                                                priceRange={priceRange}
+                                                setPriceRange={setPriceRange}
+                                                allBrands={allBrands}
+                                                minRating={minRating}
+                                                setMinRating={setMinRating}
+                                                clearFilters={clearFilters}
+                                            />
                                         </SheetContent>
                                     </Sheet>
 
@@ -321,110 +343,110 @@ export default function SearchPage() {
     );
 }
 
-  const FilterSidebar = ({selectedCategories, toggleCategory, selectedBrands, toggleBrand, priceRange, setPriceRange, allBrands, minRating, setMinRating, clearFilters}:any) => (
-        <div className="space-y-8">
-            {/* Categories */}
-            <div>
-                <h3 className="text-sm font-bold uppercase tracking-wider text-foreground mb-4">Categories</h3>
-                <div className="space-y-2">
-                    {CATEGORIES.map((cat) => (
-                        <div key={cat.slug} className="flex items-center gap-2 group cursor-pointer" onClick={() => toggleCategory(cat.name)}>
-                            <Checkbox
-                                id={`cat-${cat.slug}`}
-                                checked={selectedCategories.includes(cat.name)}
-                                onCheckedChange={() => toggleCategory(cat.name)}
-                            />
-                            <label
-                                htmlFor={`cat-${cat.slug}`}
-                                className="text-sm text-muted-foreground group-hover:text-primary transition-colors cursor-pointer flex-1"
-                            >
-                                {cat.name}
-                            </label>
-                            <span className="text-xs text-muted-foreground/50">({PRODUCTS.filter(p => p.category === cat.name).length})</span>
-                        </div>
-                    ))}
-                </div>
-            </div>
-
-            {/* Brands */}
-            <div>
-                <h3 className="text-sm font-bold uppercase tracking-wider text-foreground mb-4">Brands</h3>
-                <div className="space-y-2 max-h-48 overflow-y-auto pr-2 scrollbar-thin">
-                    {allBrands.map((brand: any) => (
-                        <div key={brand} className="flex items-center gap-2 group cursor-pointer" onClick={() => toggleBrand(brand)}>
-                            <Checkbox
-                                id={`brand-${brand}`}
-                                checked={selectedBrands.includes(brand)}
-                                onCheckedChange={() => toggleBrand(brand)}
-                            />
-                            <label
-                                htmlFor={`brand-${brand}`}
-                                className="text-sm text-muted-foreground group-hover:text-primary transition-colors cursor-pointer flex-1"
-                            >
-                                {brand}
-                            </label>
-                        </div>
-                    ))}
-                </div>
-            </div>
-
-            {/* Price Range */}
-            <div>
-                <h3 className="text-sm font-bold uppercase tracking-wider text-foreground mb-4">Price Range</h3>
-                <div className="px-2">
-                    <Slider
-                        defaultValue={[0, 100000]}
-                        max={100000}
-                        step={1000}
-                        value={priceRange}
-                        onValueChange={setPriceRange}
-                        className="mb-4"
-                    />
-                    <div className="flex items-center justify-between gap-4">
-                        <div className="flex-1 p-2 bg-muted rounded text-xs">
-                            <span className="text-muted-foreground block mb-1">Min</span>
-                            ₹{priceRange[0].toLocaleString()}
-                        </div>
-                        <div className="flex-1 p-2 bg-muted rounded text-xs">
-                            <span className="text-muted-foreground block mb-1">Max</span>
-                            ₹{priceRange[1].toLocaleString()}
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            {/* Rating */}
-            <div>
-                <h3 className="text-sm font-bold uppercase tracking-wider text-foreground mb-4">Customer Rating</h3>
-                <div className="space-y-2">
-                    {[4, 3, 2, 1].map((rating) => (
-                        <div
-                            key={rating}
-                            className="flex items-center gap-2 group cursor-pointer"
-                            onClick={() => setMinRating(rating)}
+const FilterSidebar = ({ selectedCategories, toggleCategory, selectedBrands, toggleBrand, priceRange, setPriceRange, allBrands, minRating, setMinRating, clearFilters }: any) => (
+    <div className="space-y-8">
+        {/* Categories */}
+        <div>
+            <h3 className="text-sm font-bold uppercase tracking-wider text-foreground mb-4">Categories</h3>
+            <div className="space-y-2">
+                {CATEGORIES.map((cat) => (
+                    <div key={cat.slug} className="flex items-center gap-2 group cursor-pointer" onClick={() => toggleCategory(cat.name)}>
+                        <Checkbox
+                            id={`cat-${cat.slug}`}
+                            checked={selectedCategories.includes(cat.name)}
+                            onCheckedChange={() => toggleCategory(cat.name)}
+                        />
+                        <label
+                            htmlFor={`cat-${cat.slug}`}
+                            className="text-sm text-muted-foreground group-hover:text-primary transition-colors cursor-pointer flex-1"
                         >
-                            <div className={`w-4 h-4 rounded-full border flex items-center justify-center ${minRating === rating ? 'bg-primary border-primary' : 'border-input'}`}>
-                                {minRating === rating && <div className="w-1.5 h-1.5 bg-background rounded-full" />}
-                            </div>
-                            <div className="flex items-center gap-1 text-sm text-muted-foreground group-hover:text-primary transition-colors">
-                                {rating}+ <Star className="w-3.5 h-3.5 fill-primary text-primary" />
-                            </div>
-                        </div>
-                    ))}
-                    <div
-                        className="flex items-center gap-2 group cursor-pointer"
-                        onClick={() => setMinRating(0)}
-                    >
-                        <div className={`w-4 h-4 rounded-full border flex items-center justify-center ${minRating === 0 ? 'bg-primary border-primary' : 'border-input'}`}>
-                            {minRating === 0 && <div className="w-1.5 h-1.5 bg-background rounded-full" />}
-                        </div>
-                        <span className="text-sm text-muted-foreground group-hover:text-primary transition-colors">All Ratings</span>
+                            {cat.name}
+                        </label>
+                        <span className="text-xs text-muted-foreground/50">({PRODUCTS.filter(p => p.category === cat.name).length})</span>
+                    </div>
+                ))}
+            </div>
+        </div>
+
+        {/* Brands */}
+        <div>
+            <h3 className="text-sm font-bold uppercase tracking-wider text-foreground mb-4">Brands</h3>
+            <div className="space-y-2 max-h-48 overflow-y-auto pr-2 scrollbar-thin">
+                {allBrands.map((brand: any) => (
+                    <div key={brand} className="flex items-center gap-2 group cursor-pointer" onClick={() => toggleBrand(brand)}>
+                        <Checkbox
+                            id={`brand-${brand}`}
+                            checked={selectedBrands.includes(brand)}
+                            onCheckedChange={() => toggleBrand(brand)}
+                        />
+                        <label
+                            htmlFor={`brand-${brand}`}
+                            className="text-sm text-muted-foreground group-hover:text-primary transition-colors cursor-pointer flex-1"
+                        >
+                            {brand}
+                        </label>
+                    </div>
+                ))}
+            </div>
+        </div>
+
+        {/* Price Range */}
+        <div>
+            <h3 className="text-sm font-bold uppercase tracking-wider text-foreground mb-4">Price Range</h3>
+            <div className="px-2">
+                <Slider
+                    defaultValue={[0, 100000]}
+                    max={100000}
+                    step={1000}
+                    value={priceRange}
+                    onValueChange={setPriceRange}
+                    className="mb-4"
+                />
+                <div className="flex items-center justify-between gap-4">
+                    <div className="flex-1 p-2 bg-muted rounded text-xs">
+                        <span className="text-muted-foreground block mb-1">Min</span>
+                        ₹{priceRange[0].toLocaleString()}
+                    </div>
+                    <div className="flex-1 p-2 bg-muted rounded text-xs">
+                        <span className="text-muted-foreground block mb-1">Max</span>
+                        ₹{priceRange[1].toLocaleString()}
                     </div>
                 </div>
             </div>
-
-            <Button variant="outline" className="w-full text-xs h-9" onClick={clearFilters}>
-                Clear All Filters
-            </Button>
         </div>
-    );
+
+        {/* Rating */}
+        <div>
+            <h3 className="text-sm font-bold uppercase tracking-wider text-foreground mb-4">Customer Rating</h3>
+            <div className="space-y-2">
+                {[4, 3, 2, 1].map((rating) => (
+                    <div
+                        key={rating}
+                        className="flex items-center gap-2 group cursor-pointer"
+                        onClick={() => setMinRating(rating)}
+                    >
+                        <div className={`w-4 h-4 rounded-full border flex items-center justify-center ${minRating === rating ? 'bg-primary border-primary' : 'border-input'}`}>
+                            {minRating === rating && <div className="w-1.5 h-1.5 bg-background rounded-full" />}
+                        </div>
+                        <div className="flex items-center gap-1 text-sm text-muted-foreground group-hover:text-primary transition-colors">
+                            {rating}+ <Star className="w-3.5 h-3.5 fill-primary text-primary" />
+                        </div>
+                    </div>
+                ))}
+                <div
+                    className="flex items-center gap-2 group cursor-pointer"
+                    onClick={() => setMinRating(0)}
+                >
+                    <div className={`w-4 h-4 rounded-full border flex items-center justify-center ${minRating === 0 ? 'bg-primary border-primary' : 'border-input'}`}>
+                        {minRating === 0 && <div className="w-1.5 h-1.5 bg-background rounded-full" />}
+                    </div>
+                    <span className="text-sm text-muted-foreground group-hover:text-primary transition-colors">All Ratings</span>
+                </div>
+            </div>
+        </div>
+
+        <Button variant="outline" className="w-full text-xs h-9" onClick={clearFilters}>
+            Clear All Filters
+        </Button>
+    </div>
+);

@@ -143,27 +143,13 @@ export default function AccountPage() {
             <div className="container mx-auto px-4 py-8">
                 <h1 className="text-3xl font-bold mb-8 text-foreground">My Account</h1>
 
-                <Tabs defaultValue="profile" className="flex flex-col md:flex-row gap-6">
+                <Tabs defaultValue="profile" className="flex flex-col md:flex-row gap-2 md:gap-4">
                     {/* ── Sidebar ────────────────────────────── */}
-                    <div className="w-full md:w-60 flex-shrink-0 space-y-3">
-                        {/* Avatar Card */}
-                        <div className="bg-background rounded-2xl p-5 text-center border border-border shadow-sm">
-                            <div className="relative w-20 h-20 mx-auto mb-3">
-                                <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center">
-                                    <User className="w-10 h-10 text-primary" />
-                                </div>
-                                <button className="absolute bottom-0 right-0 w-7 h-7 bg-primary rounded-full flex items-center justify-center shadow-md hover:bg-primary-hover transition-colors">
-                                    <Camera className="w-3.5 h-3.5 text-white" />
-                                </button>
-                            </div>
-                            <h2 className="font-bold text-base text-foreground">John Doe</h2>
-                            <p className="text-xs text-muted-foreground mt-0.5">john.doe@example.com</p>
-                            <span className="inline-block mt-2 text-xs bg-primary/10 text-primary font-semibold px-2 py-0.5 rounded-full">Premium Member</span>
-                        </div>
-
-                        {/* Nav Tabs */}
-                        <div className="bg-background rounded-2xl border border-border shadow-sm overflow-hidden">
-                            <TabsList className="flex flex-col w-full h-auto bg-transparent gap-0 p-2">
+                    {/* ── Sidebar ────────────────────────────── */}
+                    <aside className="w-full md:w-72 flex-shrink-0 space-y-4 md:sticky md:top-24 h-fit flex flex-col">
+                        {/* Nav Tabs (Moves to top on mobile) */}
+                        <div className="bg-background rounded-2xl border border-border shadow-sm overflow-x-auto md:overflow-hidden no-scrollbar p-1.5 md:p-2 order-1 md:order-2">
+                            <TabsList className="flex flex-row md:flex-col w-max md:w-full h-auto bg-transparent gap-1 md:gap-0 p-0 snap-x">
                                 {[
                                     { value: "profile", label: "Profile", icon: User },
                                     { value: "orders", label: "Orders", icon: Package },
@@ -179,7 +165,7 @@ export default function AccountPage() {
                                     <TabsTrigger
                                         key={value}
                                         value={value}
-                                        className="w-full justify-start gap-3 px-4 py-2.5 text-sm font-medium text-muted-foreground rounded-xl data-[state=active]:bg-primary/10 data-[state=active]:text-primary data-[state=active]:font-semibold hover:bg-muted transition-all"
+                                        className="whitespace-nowrap flex-shrink-0 snap-align-start w-auto md:w-full justify-start gap-2.5 px-4 py-2.5 text-xs md:text-sm font-medium text-muted-foreground rounded-xl data-[state=active]:bg-primary/10 data-[state=active]:text-primary data-[state=active]:font-semibold hover:bg-muted transition-all"
                                     >
                                         <Icon className="w-4 h-4" />
                                         {label}
@@ -188,13 +174,32 @@ export default function AccountPage() {
                             </TabsList>
                         </div>
 
+                        {/* Avatar Card (Hidden on mobile) */}
+                        <div className="hidden md:block bg-background rounded-2xl p-6 text-center border border-border shadow-sm order-2 md:order-1">
+                            <div className="relative w-24 h-24 mx-auto mb-4">
+                                <div className="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center border-4 border-background shadow-inner">
+                                    <User className="w-12 h-12 text-primary" />
+                                </div>
+                                <button className="absolute bottom-0 right-0 w-8 h-8 bg-primary rounded-full flex items-center justify-center shadow-lg hover:bg-primary-hover transition-all transform hover:scale-110 active:scale-95 border-2 border-background">
+                                    <Camera className="w-4 h-4 text-white" />
+                                </button>
+                            </div>
+                            <h2 className="font-bold text-lg text-foreground">John Doe</h2>
+                            <p className="text-sm text-muted-foreground mt-0.5">john.doe@example.com</p>
+                            <div className="mt-3">
+                                <span className="inline-flex items-center gap-1.5 text-[10px] uppercase tracking-wider bg-primary/10 text-primary font-bold px-3 py-1 rounded-full border border-primary/20">
+                                    <Shield className="w-3 h-3" /> Premium Member
+                                </span>
+                            </div>
+                        </div>
+
                         <Button
                             variant="outline"
-                            className="w-full gap-2 border-primary/30 text-primary hover:bg-accent hover:text-primary-dark rounded-xl font-medium"
+                            className="hidden md:flex w-full gap-2 border-primary/30 text-primary hover:bg-accent hover:text-primary-dark rounded-xl font-medium order-3"
                         >
                             <LogOut className="w-4 h-4" /> Sign Out
                         </Button>
-                    </div>
+                    </aside>
 
                     {/* ── Main Content ───────────────────────── */}
                     <div className="flex-1 min-w-0">
@@ -255,7 +260,7 @@ export default function AccountPage() {
 
                         {/* ── ORDERS TAB ── */}
                         <TabsContent value="orders" className="mt-0">
-                            <div className="bg-background rounded-2xl border border-border shadow-sm p-6">
+                            <div className="bg-background rounded-2xl border border-border shadow-sm p-4 sm:p-6">
                                 <OrderHistory />
                             </div>
                         </TabsContent>
@@ -822,11 +827,10 @@ export default function AccountPage() {
                                             key={item.key}
                                             type="button"
                                             onClick={() => setAddressType(item.key as typeof addressType)}
-                                            className={`flex items-center justify-center gap-2 rounded-xl px-3 py-2 text-sm font-semibold transition ${
-                                                addressType === item.key
-                                                    ? "bg-accent0 text-white shadow-sm"
-                                                    : "text-muted-foreground hover:bg-accent"
-                                            }`}
+                                            className={`flex items-center justify-center gap-2 rounded-xl px-3 py-2 text-sm font-semibold transition ${addressType === item.key
+                                                ? "bg-accent0 text-white shadow-sm"
+                                                : "text-muted-foreground hover:bg-accent"
+                                                }`}
                                         >
                                             <item.icon className="h-4 w-4" />
                                             {item.label}
